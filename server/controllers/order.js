@@ -1,6 +1,7 @@
 import sendMail from "../middlewares/sendMail.js";
 import { Cart } from "../models/Cart.js";
-import { Order } from "../models/Order.js";
+// import { Order } from "./../models/Order.js";
+import { Order} from "./../models/Order.js"
 import { Product } from "../models/Product.js";
 import Razorpay from "razorpay";
 import dotenv from "dotenv";

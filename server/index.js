@@ -10,6 +10,7 @@ const app = express();
 // using middlewares
 app.use(express.json());
 app.use(cors());
+
 const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
 
@@ -35,7 +36,7 @@ app.use("/api", addressRoutes);
 app.use("/api", orderRoutes);
 
 
-
+app.use("/uploads", express.static("uploads")); //  this will help us to fetch image from server url
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
