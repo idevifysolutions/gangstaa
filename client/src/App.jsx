@@ -6,6 +6,7 @@ import Contact from "./views/Contact";
 import About from "./views/About";
 import Cart from "./views/Cart";
 import Footer from "./views/Footer";
+import Product_Details from "./views/ProductDetails/Product_Details";
 const App = () => {
   return (
     <>
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/aboutus" element={<About />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<Product_Details />} />
         </Routes>
         <Footer />
       </Router>
