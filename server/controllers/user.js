@@ -31,7 +31,7 @@ export const register = TryCatch(async (req, res) => {
     },
     process.env.Activation_Secret,
     {
-      expiresIn: "5m",
+      expiresIn: "10m",
     }
   );
 
@@ -50,6 +50,7 @@ export const register = TryCatch(async (req, res) => {
 
 export const verifyUser = TryCatch(async (req, res) => {
   const { otp, activationToken } = req.body;
+  if(!otp || !activationToken){console.log("No otp")}
 
   const verify = jwt.verify(activationToken, process.env.Activation_Secret);
 
@@ -57,11 +58,13 @@ export const verifyUser = TryCatch(async (req, res) => {
     return res.status(400).json({
       message: "Otp Expired",
     });
+    console.log("Otp Expired")
 
   if (verify.otp !== otp)
     return res.status(400).json({
       message: "Wrong Otp",
     });
+    console.log("wrong OTP")
 
   await User.create({
     name: verify.user.name,
@@ -73,6 +76,17 @@ export const verifyUser = TryCatch(async (req, res) => {
     message: "User Registered",
   });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 export const loginUser = TryCatch(async (req, res) => {
   const { email, password } = req.body;
