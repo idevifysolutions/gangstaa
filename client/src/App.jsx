@@ -10,7 +10,6 @@ import LogIn from "./views/LogIn";
 import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
 import VerifyingOTP from "./views/VerifyingOTP";
-
 const App = () => {
   return (
     <>
@@ -25,6 +24,7 @@ const App = () => {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
+          <Route path="/product/:id" element={<Product_Details />} />
         </Routes>
         <Footer />
       </Router>

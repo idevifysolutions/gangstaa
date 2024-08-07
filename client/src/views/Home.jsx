@@ -2,12 +2,12 @@ import React from "react";
 import HomeProductCard from "../components/HomeProductCard";
 import TrendingNow from "../components/TrendingNow";
 import Slider from "../components/Slider/Slider";
-// import Carousel from "../components/carousel/Carousel";
+import Banner from "../components/Banner/Bannercards";
 
 const Home = () => {
   return (
     <div>
-      {/* <Carousel /> */}
+      <Banner />
       <TrendingNow />
       <Slider />
       <HomeProductCard />
