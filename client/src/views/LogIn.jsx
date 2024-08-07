@@ -105,7 +105,7 @@ const Login = () => {
         </form>
         <div className="flex items-center justify-center pt-4 border-t-2 border-black mt-4">
           <Link
-            to="/register"
+            to="/signUp"
             className="text-gray-800 font-bold hover:text-blue-700 hover:underline"
           >
             Don't have an account? Register
