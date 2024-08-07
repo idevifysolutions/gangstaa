@@ -63,6 +63,7 @@ const shirtsProducts = [
 const ShirtsPage = () => {
   return (
     <TemplatePage>
+        <></>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {shirtsProducts.map((product) => (
           <div key={product.id} className="border p-4 rounded-lg shadow-lg transition-transform transform hover:scale-95">
