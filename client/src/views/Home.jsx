@@ -4,6 +4,8 @@ import TrendingNow from "../components/TrendingNow";
 import Slider from "../components/Slider/Slider";
 import Banner from "../components/Banner/Bannercards";
 
+
+
 const Home = () => {
   return (
     <div>
@@ -11,6 +13,8 @@ const Home = () => {
       <TrendingNow />
       <Slider />
       <HomeProductCard />
+    
+       
     </div>
   );
 };
