@@ -1,5 +1,6 @@
 import React from "react";
 import { trendingProducts } from "../data/trendingProducts";
+import { Link } from "react-router-dom";
 
 const TrendingNow = () => {
   return (
@@ -15,7 +16,7 @@ const TrendingNow = () => {
             key={product.id}
             className="border p-2 rounded-lg shadow-lg transition transform hover:scale-105"
           >
-            <img
+           <Link to={`/product/${product.id}`}> <img
               src={product.imageUrl}
               alt={product.name}
               className="w-full h-48 object-cover rounded-md mb-4  h-48 object-cover"
