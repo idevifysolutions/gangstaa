@@ -3,12 +3,16 @@ import HomeProductCard from "../components/HomeProductCard";
 import TrendingNow from "../components/TrendingNow";
 import Slider from "../components/Slider/Slider";
 
+
+
 const Home = () => {
   return (
     <div>
       <TrendingNow />
       <Slider />
       <HomeProductCard />
+    
+       
     </div>
   );
 };
