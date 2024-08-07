@@ -80,9 +80,12 @@ const Navigation = () => {
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <motion.div variants={iconVariants} whileHover="hover">
-              <FaUserAlt className="h-6 w-6" />
-            </motion.div>
+            <Link to="/login">
+              {" "}
+              <motion.div variants={iconVariants} whileHover="hover">
+                <FaUserAlt className="h-6 w-6" />
+              </motion.div>
+            </Link>
             <motion.div variants={iconVariants} whileHover="hover">
               <FaShoppingCart className="h-6 w-6" />
             </motion.div>
