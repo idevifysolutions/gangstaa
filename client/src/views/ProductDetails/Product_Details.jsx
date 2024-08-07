@@ -22,7 +22,7 @@ const Product_Details = () => {
     return (
         <div className='relative h-full mt-7'>
             <div className='flex flex-wrap gap-5 items-center justify-around sm:justify-center'>
-                <div className='flex justify-center items-center h-full w-[16rem] lg:w-[36rem] md:w-[100%] sm:w-[36rem]'>
+                <div className='flex justify-center items-center h-full w-[20rem] lg:w-[46rem] md:w-[100%] sm:w-[36rem]'>
                     <Swiper
                         style={{
                             '--swiper-navigation-color': '#fff',

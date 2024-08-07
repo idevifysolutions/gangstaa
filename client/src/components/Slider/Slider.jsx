@@ -85,7 +85,7 @@ const Slider = () => {
             modifier: 2.5,
           }}
           autoplay={{
-            delay: 5000,
+            delay: 3000,
             disableOnInteraction: false,
           }}
           modules={[EffectCoverflow, Autoplay, Pagination]}
