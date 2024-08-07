@@ -42,6 +42,16 @@ const Slider = () => {
     slide_image_8,
     slide_image_9,
     slide_image_10,
+    slide_image_1,
+    slide_image_2,
+    slide_image_3,
+    slide_image_4,
+    slide_image_5,
+    slide_image_6,
+    slide_image_7,
+    slide_image_8,
+    slide_image_9,
+    slide_image_10,
   ];
 
 
@@ -75,14 +85,14 @@ const Slider = () => {
             modifier: 2.5,
           }}
           autoplay={{
-            delay: 2000,
+            delay: 5000,
             disableOnInteraction: false,
           }}
           modules={[EffectCoverflow, Autoplay, Pagination]}
           onSwiper={(swiper) => {
             swiperInstance = swiper;
           }}
-          className="swiper_container"
+          className="swiper_container h-[400px]"
           breakpoints={breakpoints}
         >
           {images.map((image, index) => (
@@ -105,9 +115,9 @@ const Slider = () => {
                   onMouseLeave={handleMouseLeave}
                 >
                   
-                  <button className="w-auto p-2 text-lg font-semibold tracking-wider text-white bg-black border border-black rounded-full lg:px-4">
+                  {/* <button className="w-auto p-2 text-lg font-semibold tracking-wider text-white bg-black border border-black rounded-full lg:px-4">
                     Find Out More
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </SwiperSlide>
