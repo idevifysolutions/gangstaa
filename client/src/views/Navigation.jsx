@@ -56,20 +56,20 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="bg-white text-black sticky top-0 z-50 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="sticky top-0 z-50 text-black bg-white shadow-lg">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className=" p-2 rounded-md text-black hover:bg-gray-200 focus:outline-none"
+              className="p-2 text-black rounded-md  hover:bg-gray-200 focus:outline-none"
             >
               <span className="sr-only">Open main menu</span>
               <motion.div variants={iconVariants} whileHover="hover">
                 {isOpen ? (
-                  <FaTimes className="h-6 w-6" />
+                  <FaTimes className="w-6 h-6" />
                 ) : (
-                  <FaBarsStaggered className="h-6 w-6" />
+                  <FaBarsStaggered className="w-6 h-6" />
                 )}
               </motion.div>
             </button>
@@ -79,15 +79,17 @@ const Navigation = () => {
               Logo
             </Link>
           </div>
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="items-center hidden space-x-4 md:flex">
             <Link to="/login">
               {" "}
               <motion.div variants={iconVariants} whileHover="hover">
-                <FaUserAlt className="h-6 w-6" />
+                <FaUserAlt className="w-6 h-6" />
               </motion.div>
             </Link>
             <motion.div variants={iconVariants} whileHover="hover">
-              <FaShoppingCart className="h-6 w-6" />
+              <Link to="/cart">
+                <FaShoppingCart className="w-6 h-6" />
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -99,7 +101,7 @@ const Navigation = () => {
           animate={{ x: 0 }}
           exit={{ x: "-100%" }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-y-16 left-0 bg-white text-black w-64 z-50 h-full shadow-2xl"
+          className="fixed left-0 z-50 w-64 h-full text-black bg-white shadow-2xl inset-y-16"
         >
           <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
             <Link
