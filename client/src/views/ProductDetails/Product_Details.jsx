@@ -91,10 +91,8 @@ const Product_Details = () => {
 
                     </ul>
                     <button className='text-2xl border-2 border-solid border-gray-700 
-                    rounded-lg mt-10 p-5 bg-gray-200 font-bold hover:bg-gray-100 
-                    mb-7'>Add To Cart</button>
+                    rounded-lg mt-10 p-5 bg-gray-200 font-bold hover:bg-gray-100 mb-5'>Add To Cart</button>
                 </div>
-
             </div>
         </div>
     )
