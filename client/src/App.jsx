@@ -10,6 +10,12 @@ import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
 import VerifyingOTP from "./views/VerifyingOTP";
 import Product_Details from "./views/ProductDetails/Product_Details"
+import JacketsPage from "./components/product/JacketsPage";
+import ShirtsPage from './components/product/ShirtsPage'
+import JeansPage from "./components/product/JeansPage";
+import TShirtPage from "./components/product/TShirtPage";
+import Dashboard from "./views/admin/Dashboard";
+
 const App = () => {
   return (
     <>
@@ -25,6 +31,12 @@ const App = () => {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
+          <Route path="/catagery/jackets" element={<JacketsPage />} />
+          <Route path="/catagery/ShirtsPage" element={<ShirtsPage />} />
+          <Route path="/catagery/JeansPage" element={<JeansPage/>} />
+          <Route path="/catagery/TShirtPage" element={<TShirtPage/>} />
+           {/* admin routes */}
+          <Route path="/admin/dashboard" element={<Dashboard/>}/>
         </Routes>
         <Footer />
       </Router>

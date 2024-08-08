@@ -105,29 +105,29 @@ const Navigation = () => {
         >
           <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
             <Link
-              to="/men/tshirts"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              to="/catagery/TShirtPage"
+              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("T-Shirts")}
             </Link>
             <Link
-              to="/men/shirts"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              to="/catagery/ShirtsPage"
+              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Shirts")}
             </Link>
             <Link
-              to="/men/jeans"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              to="/catagery/JeansPage"
+              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jeans")}
             </Link>
             <Link
-              to="/men/jackets"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              to="/catagery/jackets"
+              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jackets")}
