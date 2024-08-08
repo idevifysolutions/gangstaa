@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 
-const Caroueselcard = () => {
+const CarouselCard = () => {
   const slides = [
     {
       url: "https://marketplace.canva.com/EAFKwirl3N8/1/0/1600w/canva-brown-minimalist-fashion-product-banner-iRHpbHTqh-A.jpg",
@@ -29,10 +29,6 @@ const Caroueselcard = () => {
     setCurrentIndex(newIndex);
   };
 
-  // const goToSlide = (slideIndex) => {
-  //   setCurrentIndex(slideIndex);
-  // };
-
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
@@ -42,31 +38,31 @@ const Caroueselcard = () => {
   }, [currentIndex]);
 
   return (
-    <div className="max-w-[1684px] h-[650px] w-full m-auto relative group">
+    <div className="w-full max-w-full lg:max-w-[1684px] h-[200px] sm:h-[300px] md:h-[400px] lg:h-[650px] mx-auto relative group ">
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className="relative w-full h-full duration-500 bg-center bg-cover"
+        className="w-full h-full duration-500 bg-center bg-cover"
       >
         {slides[currentIndex].text && (
-          <div className="absolute font-bold text-white transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ">
-            <p className="text-2xl lg:text-4xl lg:text-justify ">
+          <div className="absolute font-bold text-white transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+            <p className="text-xl sm:text-2xl lg:text-4xl lg:text-justify">
               {slides[currentIndex].text}
             </p>
           </div>
         )}
       </div>
-      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-2 sm:left-5 text-lg sm:text-2xl rounded-full p-1 sm:p-2 bg-black/20 text-white cursor-pointer">
         <BsChevronCompactLeft onClick={prevSlide} size={30} />
       </div>
-      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+      <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-2 sm:right-5 text-lg sm:text-2xl rounded-full p-1 sm:p-2 bg-black/20 text-white cursor-pointer">
         <BsChevronCompactRight onClick={nextSlide} size={30} />
       </div>
-      <div className="absolute flex space-x-2 transform -translate-x-1/2 bottom-4 left-1/2">
+      <div className="absolute flex space-x-2 transform -translate-x-1/2 bottom-2 sm:bottom-4 left-1/2">
         {slides.map((_, slideIndex) => (
           <div
             key={slideIndex}
             onClick={() => setCurrentIndex(slideIndex)}
-            className={`text-2xl cursor-pointer ${
+            className={`text-lg sm:text-2xl cursor-pointer ${
               slideIndex === currentIndex ? "text-gray-900" : "text-gray-400"
             }`}
           >
@@ -78,4 +74,4 @@ const Caroueselcard = () => {
   );
 };
 
-export default Caroueselcard;
+export default CarouselCard;

@@ -42,6 +42,12 @@
     height: 20%;
     box-sizing: border-box;
     padding: 10px 0;
+
+    & > div{
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
 }
 
 .mySwiper .swiper-slide {
