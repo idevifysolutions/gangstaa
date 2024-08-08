@@ -10,6 +10,7 @@ import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
 import VerifyingOTP from "./views/VerifyingOTP";
 import Product_Details from "./views/ProductDetails/Product_Details"
+import Dashboard from "./views/admin/Dashboard";
 const App = () => {
   return (
     <>
@@ -25,6 +26,9 @@ const App = () => {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
+
+          {/* admin routes */}
+          <Route path="/admin/dashboard" element={<Dashboard/>}/>
         </Routes>
         <Footer />
       </Router>
