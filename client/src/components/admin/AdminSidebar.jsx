@@ -6,6 +6,7 @@ import { IoNewspaperSharp } from "react-icons/io5";
 import { FaChartBar, FaChartPie, FaChartLine } from "react-icons/fa";
 import { FaStopwatch } from "react-icons/fa6";
 import { RiCoupon3Fill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const AdminSidebar = () => {
   return (
@@ -34,7 +35,7 @@ const AdminSidebar = () => {
                   <span>
                     <HiShoppingBag />
                   </span>
-                  <span>product</span>
+                 <Link to="admin/products"><span>product</span> </Link> 
                 </li>
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
                   <span>
