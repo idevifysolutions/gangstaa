@@ -241,7 +241,6 @@ const Footer = () => {
 
 
 
-
           {/* Mobile view dropdowns */}
           <div className="md:hidden mt-6 space-y-4 mb-3">
             {["company", "support", "legal", "resources"].map((section) => (
@@ -255,35 +254,40 @@ const Footer = () => {
                   </button>
                 </div>
                 {isOpen[section] && (
-                  <ul className=" pl-6 sm:pl-8 space-y-1 text-base">
+                  <ul className=" text-base flex flex-wrap items-center justify-start gap-4 pl-6 my-2 ">
                     <li>
-                      <Link to="#" className="">
+                      <Link to="#" className="border-[1px] p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black">
                         About Us
                       </Link>
                     </li>
                     <li>
-                      <Link to="#" className="">
+                      <Link to="#" className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black">
                         Careers
                       </Link>
                     </li>
                     <li>
-                      <Link to="#" className="">
+                      <Link to="#" className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black">
                         Blog
                       </Link>
                     </li>
                     <li>
-                      <Link to="#" className="">
+                      <Link to="#" className="border-[1px]  p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black">
                         News
                       </Link>
                     </li>
                     <li>
-                      <Link to="#" className="">
+                      <Link to="#" className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black">
+                        Events
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="#" className="border-[1px]  p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black">
                         Events
                       </Link>
                     </li>
                   </ul>
                 )}
-                <div className="border-dashed border-b-[1px] border-white w-[95%] mx-auto"></div>
+                <div className="border-dashed border-b-[1px] border-white w-[90%] mx-auto mt-2"></div>
               </div>
             ))}
           </div>
