@@ -8,11 +8,13 @@ import JacketsPage from '../components/product/JacketsPage';
 // import ShirtsPage from './ShirtsPage';
 // import TemplatePage from "../components/templete/TemplatePage";
 import ShirtsPage from "../components/product/ShirtsPage";
+import Trenndign_NewDrop from '../components/Trennding_NewDrop';
 
 const Home = () => {
   return (
     <div>
       <Banner />
+      <Trenndign_NewDrop/>
       <TrendingNow />
       <Slider />
       <HomeProductCard />
