@@ -20,21 +20,7 @@ const Home = () => {
       <Trenndign_NewDrop/>
       <TrendingNow />
       <Slider />
-      <div className="flex items-center justify-center gap-5 mx-2 my-8">
-        {homeProductData.map((item) => {
-          return (
-            <div key={item.id} className="">
-              <HomeProductCard
-                productId={item.id}
-                productName={item.name}
-                productImage={item.image}
-                productPrice={item.price}
-                handler={addToCartHandle}
-              />
-            </div>
-          );
-        })}
-      </div>
+      <HomeProductCard />
     </div>
   );
 };

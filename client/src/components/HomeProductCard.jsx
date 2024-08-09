@@ -1,30 +1,109 @@
 import React from "react";
+import { homeProductData } from "../data/homeProductData";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
+import { Link } from "react-router-dom";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-const HomeProductCard = ({
-  productId,
-  handler,
-  productName,
-  productImage,
-  productPrice,
-}) => {
-  // console.log(productId);
+const HomeProductCard = () => {
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
+
+  const handleBrowseClick = (productId) => {
+    // Navigate to the respective product page
+    navigate(`/product/${productId}`);
+  };
+
+  // Settings for react-slick
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
 
   return (
-    <div className="">
-      <div className="">
-        <img src={productImage} alt="" />
+    <section className="py-10 bg-gray-100">
+      <div className="container mx-auto px-6">
+        <h2 className="lg:text-3xl font-bold text-center mb-8 text-[1.4rem]">
+          Shop by Category
+        </h2>
+        <Slider {...settings} className="lg:hidden">
+          {" "}
+          {/* Slider only visible on small screens */}
+          {homeProductData.map((product) => (
+            <motion.div
+              key={product.id}
+              className="relative bg-white p-1 rounded-lg shadow-lg group h-[250px]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-64 object-cover rounded-lg mb-4"
+                />
+                {/* <img
+                  src={product.hoverImage}
+                  alt={product.name}
+                  className="absolute top-0 left-0 w-full h-64 object-cover rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"
+                /> */}
+                <Link
+                  to={`/catagery/${product.categoryRoute}`}
+                  className="absolute inset-0 bg-black bg-opacity-50 text-white font-semibold opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-lg transition-opacity duration-300"
+                >
+                  {product.category}
+                </Link>
+              </div>
+              {/* <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+              <p className="text-gray-700">{product.price}</p> */}
+            </motion.div>
+          ))}
+        </Slider>
+
+        <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {" "}
+          {/* Grid only visible on large screens */}
+          {homeProductData.map((product) => (
+            <motion.div
+              key={product.id}
+              className="relative bg-white p-3 rounded-lg shadow-lg group "
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-64 object-cover rounded-lg mb-4"
+                />
+                <img
+                  src={product.hoverImage}
+                  alt={product.name}
+                  className="absolute top-0 left-0 w-full h-64 object-cover rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"
+                />
+                <Link
+                  to={`/catagery/${product.categoryRoute}`}
+                  className="absolute inset-0 bg-black bg-opacity-50 text-white font-semibold text-2xl opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-lg transition-opacity duration-300"
+                >
+                  {product.category}
+                </Link>
+              </div>
+              {/* <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+              <p className="text-gray-700">{product.price}</p> */}
+            </motion.div>
+          ))}
+        </div>
       </div>
-      <h2 className="text-lg font-semibold">{productName}</h2>
-      <p className="text-lg">{productPrice}</p>
-      <button
-        className="px-4 py-2 my-2 text-white bg-gray-800 rounded-full"
-        onClick={() => {
-          handler(productId);
-        }}
-      >
-        Add To Cart
-      </button>
-    </div>
+    </section>
   );
 };
 
