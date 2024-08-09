@@ -1,0 +1,64 @@
+{
+    "categories": [
+        {
+            "value": 40,
+            "heading": "Hoodies"
+        },
+        {
+            "value": 100,
+            "heading": "Shirts"
+        },
+        {
+            "value": 80,
+            "heading": "TShirts"
+        },
+        {
+            "value": 60,
+            "heading": "Jeans"
+        }
+    ],
+    "transactions": [
+        {
+            "id": "adfasdfsdf",
+            "amount": 4000,
+            "quantity": 4,
+            "discount": 300,
+            "status": "Processing"
+        },
+        {
+            "id": "adfasdfsdf",
+            "amount": 4000,
+            "quantity": 4,
+            "discount": 300,
+            "status": "Processing"
+        },
+        {
+            "id": "adfasdfsdf",
+            "amount": 4000,
+            "quantity": 4,
+            "discount": 300,
+            "status": "Processing"
+        },
+        {
+            "id": "adfasdfsdf",
+            "amount": 4000,
+            "quantity": 4,
+            "discount": 300,
+            "status": "Processing"
+        },
+        {
+            "id": "adfasdfsdf",
+            "amount": 4000,
+            "quantity": 4,
+            "discount": 300,
+            "status": "Processing"
+        },
+        {
+            "id": "adfasdfsdf",
+            "amount": 4000,
+            "quantity": 4,
+            "discount": 300,
+            "status": "Processing"
+        }
+    ]
+}
