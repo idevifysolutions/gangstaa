@@ -17,48 +17,48 @@
             "heading": "Jeans"
         }
     ],
-    "transactions": [
+    "orders": [
         {
-            "id": "adfasdfsdf",
-            "amount": 4000,
+            "_id": "adfasdfsdf",
+            "amount": 3400,
             "quantity": 4,
-            "discount": 300,
+            "discount": 100,
             "status": "Processing"
         },
         {
-            "id": "adfasdfsdf",
-            "amount": 4000,
+            "_id": "adfasdfsdf",
+            "amount": 2342,
             "quantity": 4,
-            "discount": 300,
+            "discount": 50,
+            "status": "Shipped"
+        },
+        {
+            "_id": "adfasdfsdf",
+            "amount": 4564,
+            "quantity": 4,
+            "discount": 23,
+            "status": "Delivered"
+        },
+        {
+            "_id": "adfasdfsdf",
+            "amount": 344,
+            "quantity": 4,
+            "discount": 23,
             "status": "Processing"
         },
         {
-            "id": "adfasdfsdf",
-            "amount": 4000,
+            "_id": "adfasdfsdf",
+            "amount": 5323,
             "quantity": 4,
-            "discount": 300,
-            "status": "Processing"
+            "discount": 223,
+            "status": "Shipped"
         },
         {
-            "id": "adfasdfsdf",
-            "amount": 4000,
+            "_id": "adfasdfsdf",
+            "amount": 2343,
             "quantity": 4,
-            "discount": 300,
-            "status": "Processing"
-        },
-        {
-            "id": "adfasdfsdf",
-            "amount": 4000,
-            "quantity": 4,
-            "discount": 300,
-            "status": "Processing"
-        },
-        {
-            "id": "adfasdfsdf",
-            "amount": 4000,
-            "quantity": 4,
-            "discount": 300,
-            "status": "Processing"
+            "discount": 2,
+            "status": "Delivered"
         }
     ]
 }
