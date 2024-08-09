@@ -58,7 +58,7 @@ const Trending_Products = () => {
         </div>
 
         {newDrop && (
-          <div className="  w-[96%] h-[550px] lg:w-[90%] lg:h-fit  lg:gap-4  xl:w-[95%] xl:h-[69vh]  xl:gap-5 md:gap-2 md:w-[98%] w-90%    mx-auto  flex lg:flex md:flex gap-5  overflow-x-scroll hide-scrollbar">
+          <div className="  w-[96%] h-[550px] lg:w-[90%] lg:h-fit  lg:gap-4  xl:w-[95%] xl:h-[69vh]  xl:gap-5 md:gap-2 md:w-[98%] w-90%    mx-auto  flex lg:flex md:flex gap-5 md:overflow-hidden  overflow-x-scroll hide-scrollbar">
             {newDropProducts.map((product, index) => {
               return (
               
