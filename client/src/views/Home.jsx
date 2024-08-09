@@ -19,6 +19,7 @@ const Home = () => {
       <Banner />
       <Trenndign_NewDrop/>
       <TrendingNow />
+  
       <Slider />
       <div className="flex items-center justify-center gap-5 mx-2 my-8">
         {homeProductData.map((item) => {

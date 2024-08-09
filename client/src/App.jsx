@@ -15,7 +15,7 @@ import ShirtsPage from './components/product/ShirtsPage'
 import JeansPage from "./components/product/JeansPage";
 import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
-
+import Userprofile from "./components/templete/userprofile";
 const App = () => {
   return (
     <>
@@ -35,8 +35,11 @@ const App = () => {
           <Route path="/catagery/ShirtsPage" element={<ShirtsPage />} />
           <Route path="/catagery/JeansPage" element={<JeansPage/>} />
           <Route path="/catagery/TShirtPage" element={<TShirtPage/>} />
+
+          <Route path="/catagery/userprofile" element={<Userprofile/>}/>
            {/* admin routes */}
           <Route path="/admin/dashboard" element={<Dashboard/>}/>
+          
         </Routes>
         <Footer />
       </Router>
