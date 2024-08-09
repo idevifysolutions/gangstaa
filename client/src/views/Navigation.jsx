@@ -79,9 +79,10 @@ const Navigation = () => {
               Logo
             </Link>
           </div>
+
+          {/* Items hidden on mobile and shown on desktop */}
           <div className="items-center hidden space-x-4 md:flex">
             <Link to="/login">
-              {" "}
               <motion.div variants={iconVariants} whileHover="hover">
                 <FaUserAlt className="w-6 h-6" />
               </motion.div>
@@ -104,6 +105,33 @@ const Navigation = () => {
           className="fixed left-0 z-50 w-64 h-full text-black bg-white shadow-2xl inset-y-16"
         >
           <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
+            {/* User Profile button */}
+            <Link
+              to="/catagery/userprofile"
+              className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-gray-800"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaUserAlt className="w-5 h-5" />
+              <span>User Profile</span>
+            </Link>
+
+            {/* Cart and User Icons in side menu */}
+            <Link
+              to="/login"
+              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaUserAlt className="w-6 h-6" />
+            </Link>
+            <Link
+              to="/cart"
+              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaShoppingCart className="w-6 h-6" />
+            </Link>
+
+            {/* Category links */}
             <Link
               to="/catagery/TShirtPage"
               className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"

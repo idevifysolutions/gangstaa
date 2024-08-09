@@ -1,138 +1,113 @@
-import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import "./Carousel.css"; // Import the CSS for the carousel
+import React from "react";
+import Slider from "react-slick";
+import Image1 from "./images/img1.jpeg";
+import Image2 from "./images/img2.jpeg";
+import Image3 from "./images/img3.jpeg";
 
-const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(1);
-  const [showDetail, setShowDetail] = useState(false);
-  const timeoutRef = useRef(null);
+const ImageList = [
+  {
+    id: 1,
+    img: Image1,
+    title: "Upto 10% off on all Men's Wear",
+    description:
+      "lorem His Life will forever be Changed dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    id: 2,
+    img: Image2,
+    title: "30% off on all Trending's Wear",
+    description:
+      "Who's there lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+  },
+  {
+    id: 3,
+    img: Image3,
+    title: "50% off on all Products Sale",
+    description:
+      "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna incididunt ut labore et dolore magna aliqua.",
+  },
+];
 
-  const items = [
-    {
-      src: "https://images.bewakoof.com/t1080/men-s-blue-den-graphic-printed-oversized-shirt-604442-1721131088-1.jpg",
-      title: "DESIGN SLIDER",
-      topic: "Aerphone",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
-      detailTitle: "Aerphone GHTK",
-      detailDescription:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit...",
-      specifications: {
-        "Used Time": "6 hours",
-        "Charging port": "Type-C",
-        Compatible: "Android",
-        Bluetooth: "5.3",
-        Controlled: "Touch",
-      },
-    },
-    {
-      src: "https://thehouseofrare.com/cdn/shop/files/HERO_7c109915-b917-440a-a14a-5fe90a7571ef_765x.jpg?v=1710235193",
-      title: "DESIGN SLIDER",
-      topic: "Aerphone",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
-      detailTitle: "Aerphone GHTK",
-      detailDescription:
-        "Lorem ipsum dolor sit amet, consectetur adipisicing elit...",
-      specifications: {
-        "Used Time": "6 hours",
-        "Charging port": "Type-C",
-        Compatible: "Android",
-        Bluetooth: "5.3",
-        Controlled: "Touch",
-      },
-    },
-    // Add other items here...
-  ];
-
-  const handleNavigation = (direction) => {
-    setCurrentIndex((prevIndex) => {
-      let newIndex = direction === "next" ? prevIndex + 1 : prevIndex - 1;
-      if (newIndex < 1) newIndex = items.length;
-      if (newIndex > items.length) newIndex = 1;
-      return newIndex;
-    });
-    disableButtons();
+const Hero = ({ handleOrderPopup }) => {
+  var settings = {
+    dots: false,
+    arrows: false,
+    infinite: true,
+    speed: 800,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    cssEase: "ease-in-out",
+    pauseOnHover: false,
+    pauseOnFocus: true,
   };
-
-  const disableButtons = () => {
-    const nextButton = document.getElementById("next");
-    const prevButton = document.getElementById("prev");
-    nextButton.style.pointerEvents = "none";
-    prevButton.style.pointerEvents = "none";
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      nextButton.style.pointerEvents = "auto";
-      prevButton.style.pointerEvents = "auto";
-    }, 2000);
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => handleNavigation("next"), 5000);
-    return () => clearInterval(interval);
-  }, []);
 
   return (
-    <div className={`carousel ${showDetail ? "showDetail" : ""}`}>
-      <div className="list">
-        <AnimatePresence>
-          {items.map(
-            (item, index) =>
-              index + 1 === currentIndex && (
-                <motion.div
-                  key={index}
-                  className="item"
-                  initial={{ x: "100%", opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  exit={{ x: "-100%", opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <img src={item.src} alt={item.title} />
-                  <div className="introduce">
-                    <div className="title">{item.title}</div>
-                    <div className="topic">{item.topic}</div>
-                    <div className="des">{item.description}</div>
+    <div className="relative overflow-hidden min-h-[700px] sm:min-h-[650px] flex justify-center items-center dark:bg-gray-950 dark:text-white duration-200 ">
+      <div className="h-[700px] w-[700px] bg-primary/40 absolute -top-1/2 right-0 rounded-3xl rotate-45 -z-[8]"></div>
+      <div className="container pb-8 sm:pb-0">
+        <Slider {...settings}>
+          {ImageList.map((data) => (
+            <div key={data.id}>
+              <div className="grid grid-cols-1 sm:grid-cols-2">
+                <div className="relative z-10 flex flex-col justify-center order-2 gap-4 pt-12 pl-8 text-center sm:pt-0 sm:text-left lg:pl-16 sm:order-1">
+                  <h1
+                    data-aos="zoom-out"
+                    data-aos-duration="500"
+                    data-aos-once="true"
+                    className="text-5xl font-bold sm:text-6xl lg:text-7xl"
+                  >
+                    {data.title}
+                  </h1>
+                  <p
+                    data-aos="fade-up"
+                    data-aos-duration="500"
+                    data-aos-delay="100"
+                    className="text-sm"
+                  >
+                    {data.description}
+                  </p>
+                  <div
+                    data-aos="fade-up"
+                    data-aos-duration="500"
+                    data-aos-delay="300"
+                    className="flex items-center justify-center gap-4 sm:justify-start"
+                  >
                     <button
-                      className="seeMore"
-                      onClick={() => setShowDetail(true)}
+                      onClick={handleOrderPopup}
+                      className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
                     >
-                      SEE MORE &#8599;
+                      Shop Now
+                    </button>
+                    <button
+                      onClick={handleOrderPopup}
+                      className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+                    >
+                      All Products
                     </button>
                   </div>
-                  <div className={`detail ${showDetail ? "show" : ""}`}>
-                    <div className="title">{item.detailTitle}</div>
-                    <div className="des">{item.detailDescription}</div>
-                    <div className="specifications">
-                      {Object.entries(item.specifications).map(
-                        ([key, value]) => (
-                          <div key={key}>
-                            <p>{key}</p>
-                            <p>{value}</p>
-                          </div>
-                        )
-                      )}
-                    </div>
-                    <div className="checkout">
-                      <button>ADD TO CART</button>
-                      <button>CHECKOUT</button>
-                    </div>
+                </div>
+                {/* image section */}
+                <div className="order-1 sm:order-2">
+                  <div
+                    data-aos="zoom-in"
+                    data-aos-once="true"
+                    className="relative z-10"
+                  >
+                    <img
+                      src={data.img}
+                      alt=""
+                      className="w-[250px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto"
+                    />
                   </div>
-                </motion.div>
-              )
-          )}
-        </AnimatePresence>
-      </div>
-      <div className="arrows">
-        <button id="prev" onClick={() => handleNavigation("prev")}>
-          {"<"}
-        </button>
-        <button id="next" onClick={() => handleNavigation("next")}>
-          {">"}
-        </button>
-        <button id="back" onClick={() => setShowDetail(false)}>
-          See All &#8599;
-        </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
       </div>
     </div>
   );
 };
 
-export default Carousel;
+export default Hero;
