@@ -72,7 +72,7 @@ const Product_Details = () => {
                         </SwiperSlide>
                     </Swiper>
                 </div>
-                <div className='flex flex-col items-start ml-6 h-full w-[50rem]'>
+                <div className='flex flex-col items-start ml-6 h-full w-[40rem]'>
                     <h2 className='text-3xl font-bold'>Funky Hoodie</h2>
                     <p className='text-2xl my-7'>Men's Black House Of The Dragon Iconic Graphic Printed T-shirt</p>
                     <div className='flex flex-col'>

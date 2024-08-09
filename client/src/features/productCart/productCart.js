@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  productAddedToCartId: []
+  productAddedToCartId: [],
 };
 
 export const productAddedToCartSlice = createSlice({
-  name: 'productAddedToCart',
+  name: "productAddedToCart",
   initialState,
   reducers: {
     addToCart: (state, action) => {
@@ -15,16 +15,19 @@ export const productAddedToCartSlice = createSlice({
     },
     removeProductFromCart: (state, action) => {
       const productId = action.payload;
-      state.productAddedToCartId = state.productAddedToCartId.filter(id => id !== productId);
+      state.productAddedToCartId = state.productAddedToCartId.filter(
+        (id) => id !== productId
+      );
       console.log("State after removing product:", state.productAddedToCartId);
     },
     emptyCart: (state) => {
       state.productAddedToCartId = [];
       console.log("All products removed:", state.productAddedToCartId);
-    }
-  }
+    },
+  },
 });
 
-export const { addToCart, removeProductFromCart, emptyCart } = productAddedToCartSlice.actions;
+export const { addToCart, removeProductFromCart, emptyCart } =
+  productAddedToCartSlice.actions;
 
 export default productAddedToCartSlice.reducer;
