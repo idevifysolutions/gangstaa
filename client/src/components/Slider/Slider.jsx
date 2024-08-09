@@ -8,18 +8,6 @@ import "swiper/css/navigation";
 
 import { EffectCoverflow, Autoplay, Pagination } from "swiper/modules";
 
-import slide_image_1 from "./images/hoddie.jpg";
-import slide_image_2 from "./images/hoddie.jpg";
-import slide_image_3 from "./images/hoddie.jpg";
-import slide_image_4 from "./images/hoddie.jpg";
-import slide_image_5 from "./images/hoddie.jpg";
-import slide_image_6 from "./images/hoddie.jpg";
-import slide_image_7 from "./images/hoddie.jpg";
-import slide_image_8 from "./images/hoddie.jpg";
-import slide_image_9 from "./images/hoddie.jpg";
-import slide_image_10 from "./images/hoddie.jpg";
-
-
 const Slider = () => {
   let swiperInstance = null;
 
@@ -32,28 +20,39 @@ const Slider = () => {
   };
 
   const images = [
-    slide_image_1,
-    slide_image_2,
-    slide_image_3,
-    slide_image_4,
-    slide_image_5,
-    slide_image_6,
-    slide_image_7,
-    slide_image_8,
-    slide_image_9,
-    slide_image_10,
-    slide_image_1,
-    slide_image_2,
-    slide_image_3,
-    slide_image_4,
-    slide_image_5,
-    slide_image_6,
-    slide_image_7,
-    slide_image_8,
-    slide_image_9,
-    slide_image_10,
-  ];
+    "https://e0.pxfuel.com/wallpapers/422/676/desktop-wallpaper-mens-fashion-men-clothing-thumbnail.jpg",
+    "https://images.bewakoof.com/utter/content/2726/content_Jeans_jackets.jpg",
+    "https://5.imimg.com/data5/SELLER/Default/2020/11/LT/ZU/OX/65535174/photo-1552252059-9d77e4059ad1-jpg.jpg",
+    "https://images.unsplash.com/photo-1618886614638-80e3c103d31a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1lbiUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D",
+    "https://5.imimg.com/data5/SS/YL/VB/SELLER-10042265/men-brick-red-dobby-textured-cotton-shirt-500x500.jpg",
+    "https://5.imimg.com/data5/BX/HM/OF/SELLER-24348080/skyblue-mens-formal-shirt.jpg",
+    "https://nutcaseshop.com/cdn/shop/products/NC-HOODIE-0034d.jpg?v=1711786536&width=1445",
+    "https://i.pinimg.com/474x/2a/ba/87/2aba8782ce94096839144c1d8df7a7c2.jpg",
+    "https://images.meesho.com/images/products/405359816/z4kif_512.jpg",
+    "https://www.jiomart.com/images/product/500x630/rvtdvtuhds/coloured-collar-t-shirt-for-men-casual-regular-fit-t-shirt-pure-cotton-lightweight-comfortable-classic-t-shirt-classic-vertical-stripes-medium-green-product-images-rvtdvtuhds-0-202209090825.jpg",
 
+    "https://e0.pxfuel.com/wallpapers/422/676/desktop-wallpaper-mens-fashion-men-clothing-thumbnail.jpg",
+    "https://images.bewakoof.com/utter/content/2726/content_Jeans_jackets.jpg",
+    "https://5.imimg.com/data5/SELLER/Default/2020/11/LT/ZU/OX/65535174/photo-1552252059-9d77e4059ad1-jpg.jpg",
+    "https://images.unsplash.com/photo-1618886614638-80e3c103d31a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1lbiUyMGZhc2hpb258ZW58MHx8MHx8fDA%3D",
+    "https://5.imimg.com/data5/SS/YL/VB/SELLER-10042265/men-brick-red-dobby-textured-cotton-shirt-500x500.jpg",
+    "https://5.imimg.com/data5/BX/HM/OF/SELLER-24348080/skyblue-mens-formal-shirt.jpg",
+    "https://nutcaseshop.com/cdn/shop/products/NC-HOODIE-0034d.jpg?v=1711786536&width=1445",
+    "https://i.pinimg.com/474x/2a/ba/87/2aba8782ce94096839144c1d8df7a7c2.jpg",
+    "https://images.meesho.com/images/products/405359816/z4kif_512.jpg",
+    "https://www.jiomart.com/images/product/500x630/rvtdvtuhds/coloured-collar-t-shirt-for-men-casual-regular-fit-t-shirt-pure-cotton-lightweight-comfortable-classic-t-shirt-classic-vertical-stripes-medium-green-product-images-rvtdvtuhds-0-202209090825.jpg",
+
+    // "https://example.com/image1.jpg",
+    // "https://example.com/image2.jpg",
+    // "https://example.com/image3.jpg",
+    // "https://example.com/image4.jpg",
+    // "https://example.com/image5.jpg",
+    // "https://example.com/image6.jpg",
+    // "https://example.com/image7.jpg",
+    // "https://example.com/image8.jpg",
+    // "https://example.com/image9.jpg",
+    // "https://example.com/image10.jpg",
+  ];
 
   const breakpoints = {
     0: {
@@ -66,11 +65,11 @@ const Slider = () => {
       slidesPerView: 4,
     },
   };
+
   return (
     <>
       <div className="px-4 py-8 mx-auto container0">
-        <div className="flex flex-col px-4 mb-12 md:flex-row gap-7">
-        </div>
+        <div className="flex flex-col px-4 mb-12 md:flex-row gap-7"></div>
         <Swiper
           effect={"coverflow"}
           grabCursor={true}
@@ -114,7 +113,6 @@ const Slider = () => {
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >
-                  
                   {/* <button className="w-auto p-2 text-lg font-semibold tracking-wider text-white bg-black border border-black rounded-full lg:px-4">
                     Find Out More
                   </button> */}
@@ -125,7 +123,7 @@ const Slider = () => {
         </Swiper>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Slider
+export default Slider;
