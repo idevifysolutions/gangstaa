@@ -1,72 +1,82 @@
-import React from 'react';
+
+
+import React, { useState } from 'react';
+
+const Dropdown = ({ title, options }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div className="mb-4">
+      <button
+        onClick={toggleDropdown}
+        className="flex justify-between items-center w-full px-4 py-2 text-left text-xl font-bold border-b-2"
+      >
+        {title}
+        <span className={`transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>
+          ▼
+        </span>
+      </button>
+      {isOpen && (
+        <ul className="mt-2 pl-4">
+          {options.map((option, index) => (
+            <li key={index} className="mb-2">
+              <input type="checkbox" /> {option}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
 
 const TemplatePage = ({ children }) => {
   return (
     <div className="container mx-auto py-8 px-4">
-      <div className="flex">
-        <aside className="w-1/4 pr-4">
-          <h2 className="text-xl font-bold mb-4">Collections</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> Shirts (543)</li>
-            <li className="mb-2"><input type="checkbox" /> Jeans (138)</li>
-            <li className="mb-2"><input type="checkbox" /> T-Shirts (81)</li>
-            <li className="mb-2"><input type="checkbox" /> Trousers (69)</li>
-            <li className="mb-2"><input type="checkbox" /> Boxers (33)</li>
-            <li className="mb-2"><input type="checkbox" /> Chinos (27)</li>
-            <li className="mb-2"><input type="checkbox" /> Cargo Pants (26)</li>
-          </ul>
-          <h2 className="text-xl font-bold mb-4">Size</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> S (607)</li>
-            <li className="mb-2"><input type="checkbox" /> M (627)</li>
-            <li className="mb-2"><input type="checkbox" /> L (656)</li>
-            <li className="mb-2"><input type="checkbox" /> XL (563)</li>
-            <li className="mb-2"><input type="checkbox" /> XXL (460)</li>
-            <li className="mb-2"><input type="checkbox" /> 28 (20)</li>
-            <li className="mb-2"><input type="checkbox" /> 30 (200)</li>
-          </ul>
-          <h2 className="text-xl font-bold mb-4">Fit</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> Slim</li>
-            <li className="mb-2"><input type="checkbox" /> Regular</li>
-            <li className="mb-2"><input type="checkbox" /> Loose</li>
-          </ul>
-          <h2 className="text-xl font-bold mb-4">Pattern</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> Solid</li>
-            <li className="mb-2"><input type="checkbox" /> Striped</li>
-            <li className="mb-2"><input type="checkbox" /> Checked</li>
-          </ul>
-          <h2 className="text-xl font-bold mb-4">Colors</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> Red</li>
-            <li className="mb-2"><input type="checkbox" /> Blue</li>
-            <li className="mb-2"><input type="checkbox" /> Green</li>
-          </ul>
-          <h2 className="text-xl font-bold mb-4">Price (INR)</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> 0-500</li>
-            <li className="mb-2"><input type="checkbox" /> 500-1000</li>
-            <li className="mb-2"><input type="checkbox" /> 1000-2000</li>
-          </ul>
-          <h2 className="text-xl font-bold mb-4">Occasion</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> Casual</li>
-            <li className="mb-2"><input type="checkbox" /> Formal</li>
-          </ul>
-          <h2 className="text-xl font-bold mb-4">Sleeves</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> Short</li>
-            <li className="mb-2"><input type="checkbox" /> Long</li>
-          </ul>
-          <h2 className="text-xl font-bold mb-4">Neck/Collar</h2>
-          <ul className="mb-8">
-            <li className="mb-2"><input type="checkbox" /> Round</li>
-            <li className="mb-2"><input type="checkbox" /> V-Neck</li>
-            <li className="mb-2"><input type="checkbox" /> Collar</li>
-          </ul>
+      <div className="flex flex-wrap">
+        <aside className="w-full sm:w-1/4 pr-4 mb-4 sm:mb-0">
+          <Dropdown
+            title="Collections"
+            options={['Shirts (543)', 'Jeans (138)', 'T-Shirts (81)', 'Trousers (69)', 'Boxers (33)', 'Chinos (27)', 'Cargo Pants (26)']}
+          />
+          <Dropdown
+            title="Size"
+            options={['S (607)', 'M (627)', 'L (656)', 'XL (563)', 'XXL (460)', '28 (20)', '30 (200)']}
+          />
+          <Dropdown
+            title="Fit"
+            options={['Slim', 'Regular', 'Loose']}
+          />
+          <Dropdown
+            title="Pattern"
+            options={['Solid', 'Striped', 'Checked']}
+          />
+          <Dropdown
+            title="Colors"
+            options={['Red', 'Blue', 'Green']}
+          />
+          <Dropdown
+            title="Price (INR)"
+            options={['0-500', '500-1000', '1000-2000']}
+          />
+          <Dropdown
+            title="Occasion"
+            options={['Casual', 'Formal']}
+          />
+          <Dropdown
+            title="Sleeves"
+            options={['Short', 'Long']}
+          />
+          <Dropdown
+            title="Neck/Collar"
+            options={['Round', 'V-Neck', 'Collar']}
+          />
         </aside>
-        <main className="w-3/4">
+        <main className="w-full sm:w-3/4">
           <div className="flex justify-between mb-4">
             <div>
               <button className="px-2 py-1 border"><i className="fas fa-th-large"></i></button>
@@ -89,3 +99,4 @@ const TemplatePage = ({ children }) => {
 };
 
 export default TemplatePage;
+
