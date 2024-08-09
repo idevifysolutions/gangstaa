@@ -80,6 +80,13 @@ const Navigation = () => {
             </Link>
           </div>
           <div className="items-center hidden space-x-4 md:flex">
+  <Link to="/catagery/userprofile" className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-gray-800">
+    <FaUserAlt className="w-5 h-5" />
+    <span>User Profile</span>
+  </Link>
+</div>
+
+          <div className="items-center hidden space-x-4 md:flex">
             <Link to="/login">
               {" "}
               <motion.div variants={iconVariants} whileHover="hover">
