@@ -12,7 +12,7 @@ import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
 import VerifyingOTP from "./views/VerifyingOTP";
 import JacketsPage from "./components/product/JacketsPage";
-import ShirtsPage from './components/product/ShirtsPage'
+import ShirtsPage from "./components/product/ShirtsPage";
 import JeansPage from "./components/product/JeansPage";
 import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/aboutus" element={<About />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/product/:id" element={<Product_Details />} />
-          <Route path="/empty" element={<Emptycart/>} />
+          <Route path="/empty" element={<Emptycart />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signUp" element={<SignUp />} />
@@ -36,19 +36,13 @@ const App = () => {
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
           <Route path="/catagery/jackets" element={<JacketsPage />} />
           <Route path="/catagery/ShirtsPage" element={<ShirtsPage />} />
-          <Route path="/catagery/JeansPage" element={<JeansPage/>} />
-          <Route path="/catagery/TShirtPage" element={<TShirtPage/>} />
+          <Route path="/catagery/JeansPage" element={<JeansPage />} />
+          <Route path="/catagery/TShirtPage" element={<TShirtPage />} />
 
-          
-           
-          
-
-
-          <Route path="/catagery/userprofile" element={<Userprofile/>}/>
-           {/* admin routes */}
-          <Route path="/admin/dashboard" element={<Dashboard/>}/>
-          <Route path="/admin/products" element={<Products/>} />
-          
+          <Route path="/catagery/userprofile" element={<Userprofile />} />
+          {/* admin routes */}
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/products" element={<Products />} />
         </Routes>
         <Footer />
       </Router>
