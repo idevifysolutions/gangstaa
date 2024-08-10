@@ -58,7 +58,7 @@ const Products = () => {
 
               <div className="producttable h-22 w-full  flex items-center justify-between border-[2px] border-slate-400 ">
 
-                     <div className="heading text-xl  w-44 h-[90%] my-2 flex items-center justify-center mx-4 box-border">
+                     <div className="heading text-lg  w-44 h-[90%] my-2 flex items-center justify-center mx-4 box-border">
                      Image
                      </div>
 
@@ -69,13 +69,13 @@ const Products = () => {
 
                      <div className="heading text-lg  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border"> Price</div>
 
-                     <div className="heading text-xl  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border">Available Stock  </div>
+                     <div className="heading text-lg  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border">Available Stock  </div>
 
-                     <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center"> 
+                     <div className="heading text-lg  w-40 h-[90%] my-auto flex items-center justify-center"> 
                      Update
                      </div>
                      
-                     <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center "> 
+                     <div className="heading text-lg  w-40 h-[90%] my-auto flex items-center justify-center "> 
                      Remove
                    </div>
               </div>
