@@ -3,7 +3,7 @@ import { CgClose } from "react-icons/cg";
 import { FaCloudUploadAlt } from "react-icons/fa";
 
 
-const UploadProduct = ({onClose}) => {
+const UpdateProduct = ({onClose}) => {
   const [data,setData] = useState({
     title : "",
     description : "",
@@ -235,4 +235,4 @@ const UploadProduct = ({onClose}) => {
   )
 }
 
-export default UploadProduct
+export default UpdateProduct

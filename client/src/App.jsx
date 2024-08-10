@@ -11,7 +11,6 @@ import LogIn from "./views/LogIn";
 import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
 import VerifyingOTP from "./views/VerifyingOTP";
-import Product_Details from "./views/ProductDetails/Product_Details"
 import JacketsPage from "./components/product/JacketsPage";
 import ShirtsPage from './components/product/ShirtsPage'
 import JeansPage from "./components/product/JeansPage";

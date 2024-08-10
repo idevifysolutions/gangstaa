@@ -10,6 +10,7 @@ const app = express();
 // using middlewares
 app.use(express.json());
 app.use(cors());
+app.options("*", cors())
 
 const __dirname = path.resolve();
 const port = process.env.PORT || 3000;

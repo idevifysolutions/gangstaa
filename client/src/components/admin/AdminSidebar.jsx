@@ -8,10 +8,15 @@ import { FaStopwatch } from "react-icons/fa6";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-const AdminSidebar = () => {
+const AdminSidebar = ({sidebar}) => {
+
+   const {showsidebar,  handleSideBar} = sidebar;
+
+
+   
   return (
     < >
-    <div className="h-[100vh] w-auto bg-slate-50"> 
+    <div className={`h-[100vh] w-auto bg-slate-50 ${showsidebar? "block" : "hidden" } lg:block  absolute lg:relative`}> 
       <div className="adminsidebarcontainer w-72 h-[100vh]  overflow-y-scroll hide-scrollbar">
         <aside className="w-[100%]  p-4 z-10  bg-white">
           <div>
@@ -25,25 +30,25 @@ const AdminSidebar = () => {
               </h1>
 
               <ul className="flex flex-col gap-2 ">
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <MdDashboard />
                   </span>
                   <span>DashBoard </span>
                 </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <HiShoppingBag />
                   </span>
                  <Link to="admin/products"><span>product</span> </Link> 
                 </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <IoIosPeople />
                   </span>
                   <span>Customer </span>
                 </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <IoNewspaperSharp />
                   </span>
@@ -60,19 +65,19 @@ const AdminSidebar = () => {
               </h1>
 
               <ul className="flex flex-col gap-2 ">
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartBar />
                   </span>
                   <span>bar</span>
                 </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartLine />
                   </span>
                   <span>line </span>
                 </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartPie />
                   </span>
@@ -89,13 +94,13 @@ const AdminSidebar = () => {
               </h1>
 
               <ul className="flex flex-col gap-2 ">
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaStopwatch />
                   </span>
                   <span>Stopwatch </span>
                 </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <RiCoupon3Fill />
                   </span>
