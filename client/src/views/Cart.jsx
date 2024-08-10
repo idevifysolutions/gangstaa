@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { homeProductData } from "../data/homeProductData";
 import { removeProductFromCart } from "../features/productCart/productCart";
+import Emptycart from "../components/EmptyCart/Emptycart";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Cart = () => {
           </div>
         ))
       ) : (
-        <p>Your cart is empty.</p>
+        <Emptycart />
       )}
     </div>
   );

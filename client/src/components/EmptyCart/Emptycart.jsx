@@ -15,7 +15,7 @@ function Emptycart() {
         </p>
         <button className="add-button">
           <a href="/" className="button-link">
-            ADD ITEMS FROM CART
+            ADD ITEMS TO CART
           </a>
         </button>
       </main>
