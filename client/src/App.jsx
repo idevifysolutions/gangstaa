@@ -6,7 +6,7 @@ import About from "./views/About";
 import Cart from "./views/Cart";
 import Footer from "./views/Footer";
 import Product_Details from "./views/ProductDetails/Product_Details";
-import Emptycart from "./components/EmptyCart/Emptycart";
+// import Emptycart from "./components/EmptyCart/Emptycart";
 import LogIn from "./views/LogIn";
 import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/aboutus" element={<About />} />
           <Route path="/contactus" element={<Contact />} />
           <Route path="/product/:id" element={<Product_Details />} />
-          <Route path="/empty" element={<Emptycart />} />
+          {/* <Route path="/empty" element={<Emptycart />} /> */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/signUp" element={<SignUp />} />
