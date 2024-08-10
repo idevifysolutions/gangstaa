@@ -14,6 +14,8 @@ const Products = () => {
         setUploadProduct((prev) => !prev);
     } 
 
+    const arr = [1, 2, 3, 4, 5];
+
   return (
     <>
       <div className='relative flex h-full'>
@@ -30,39 +32,65 @@ const Products = () => {
               </div>
 
               <div className='flex flex-col'> 
-                
-              <div className="producttable h-14 w-full flex items-center justify-between border-[2px] border-slate-400">
-                     <div className="heading text-xl  w-44 my-auto text-center py-2"> Image  </div>
-                     <div className="heading text-xl  w-80 my-auto text-center py-2"> Name</div>
-                     <div className="heading text-xl w-44 my-auto text-center py-2"> Price</div>
-                     <div className="heading text-xl  w-44 my-auto text-center py-2">  Available Stock </div>
-                     <div className="heading text-xl  w-40 my-auto text-center py-2"> Update </div>
-                     <div className="heading text-xl  w-40 my-auto text-center py-2"> Remove  </div>
-              </div>
 
-              <div className="producttable h-44 w-full  flex items-center justify-between border-[2px] border-slate-400 border-t-0 ">
-                     <div className="heading text-xl  w-44 h-[90%] my-2 flex items-center justify-center mx-4">
-                         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=804"  className=' w-full h-[100%] object-contain' alt="" />
+              <div className="producttable h-22 w-full  flex items-center justify-between border-[2px] border-slate-400 ">
+
+                     <div className="heading text-xl  w-44 h-[90%] my-2 flex items-center justify-center mx-4 box-border">
+                     Image
                      </div>
 
 
-                     <div className="heading text-lg w-80 h-[90%] my-auto mx-auto flex items-center justify-center p-4 "> 
-                        <p>Puma Shoes Air Jordan Cook Nigga 2023</p>
+                     <div className="heading text-lg w-80 h-[90%] my-auto mx-auto flex items-center justify-center p-4  box-border"> 
+                     Name
                      </div>
 
-                     <div className="heading text-lg  w-44 h-[90%] my-auto flex items-center justify-center   py-2">₹ 2200</div>
-                     <div className="heading text-xl  w-44 h-[90%] my-auto flex items-center justify-center   py-2"> 880 </div>
+                     <div className="heading text-lg  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border"> Price</div>
+
+                     <div className="heading text-xl  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border">Available Stock  </div>
+
                      <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center"> 
-
-                        <div className='w-16 h-16 rounded-full border text-gray-800 hover:bg-[#10151d] hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110'>   
-                        <TfiPencil className='w-10 h-auto'/>
-                        </div>
- 
+                     Update
                      </div>
-                     <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center"> 
-                     <div className="w-16 h-16 rounded-full border text-gray-800 hover:bg-red-600 hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110"> <RiDeleteBinLine className='w-10 h-auto'/>  </div>
+                     
+                     <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center "> 
+                     Remove
+                   </div>
               </div>
-              </div>
+
+
+              {
+                       arr.map((arr, index) => {
+                           
+                        return (
+                            <div className="producttable h-44 w-full  flex items-center justify-between border-[2px] border-slate-400 border-t-0 ">
+                            <div className="heading text-xl  w-44 h-[90%] my-2 flex items-center justify-center mx-4 box-border">
+                                <img src="https://th.bing.com/th/id/OIP.xKRlmHeOnnoduRo5F_PY-gHaIh?rs=1&pid=ImgDetMain"  className=' w-full h-[100%] object-contain' alt="" />
+                            </div>
+       
+       
+                            <div className="heading text-lg w-80 h-[90%] my-auto mx-auto flex items-center justify-center p-4  box-border"> 
+                               <p>Puma Shoes Air Jordan Cook Nigga 2023</p>
+                            </div>
+       
+                            <div className="heading text-lg  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border">₹ 2200</div>
+                            <div className="heading text-xl  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border"> 880 </div>
+                            <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center"> 
+       
+                               <div className='w-16 h-16 rounded-full border text-gray-800 hover:bg-[#10151d] hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border'>   
+                               <TfiPencil className='w-10 h-auto'/>
+                               </div>
+        
+                            </div>
+                            <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center "> 
+                            <div className="w-16 h-16 rounded-full border text-gray-800 hover:bg-red-600 hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border"> <RiDeleteBinLine className='w-10 h-auto'/>  </div>
+                          </div>
+                     </div>
+
+                        )
+
+                       })
+              }
+             
               </div>
        </div>
 
