@@ -31,7 +31,7 @@ function UserProfile() {
     <div className="container mx-auto py-8 px-4">
       {/* User Info */}
       <div className="border p-4 rounded-lg shadow-lg mb-6">
-        <h2 className="text-2xl font-bold mb-4">User Information</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">User Information</h2>
         
         {/* User Image */}
         <div className="mb-4 text-center">
@@ -87,12 +87,15 @@ function UserProfile() {
             readOnly={!isEditingProfile}
           />
         </div>
-        <button 
-          onClick={() => setIsEditingProfile(!isEditingProfile)}
-          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800"
-        >
-          {isEditingProfile ? "Cancel" : "Edit Profile"}
-        </button>
+        <div className="text-center">
+          <button 
+            onClick={() => setIsEditingProfile(!isEditingProfile)}
+            className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+           
+          >
+            {isEditingProfile ? "Cancel" : "Edit Profile"}
+          </button>
+        </div>
       </div>
 
       {/* Order History */}
@@ -152,19 +155,21 @@ function UserProfile() {
             readOnly={!isEditingAddresses}
           />
         </div>
-        <button 
-          onClick={() => setIsEditingAddresses(!isEditingAddresses)}
-          className="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800"
-        >
-          {isEditingAddresses ? "Cancel" : "Edit Addresses"}
-        </button>
+        <div className="text-center">
+          <button 
+            onClick={() => setIsEditingAddresses(!isEditingAddresses)}
+            className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+          >
+            {isEditingAddresses ? "Cancel" : "Edit Addresses"}
+          </button>
+        </div>
       </div>
 
       {/* Save Button */}
       <div className="mt-6 text-center">
         <button 
           onClick={handleSave}
-          className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+          className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
         >
           Save
         </button>
@@ -174,3 +179,4 @@ function UserProfile() {
 }
 
 export default UserProfile;
+
