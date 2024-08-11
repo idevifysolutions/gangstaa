@@ -22,11 +22,8 @@ import Userprofile from "./components/templete/userprofile";
 import Error from "./components/Errormsg/Error";
 import { useSelector } from "react-redux";
 
-
 const App = () => {
-  const loggedIn = useSelector((state) => {
-    state.isLoggedIn;
-  });
+  const loggedIn = useSelector((state) => state.isLoggedIn);
 
   console.log(loggedIn);
 
@@ -45,7 +42,6 @@ const App = () => {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
-          <Route path="/notfoundpage" element={<Error />} />
           <Route path="/catagery/jackets" element={<JacketsPage />} />
           <Route path="/catagery/ShirtsPage" element={<ShirtsPage />} />
           <Route path="/catagery/JeansPage" element={<JeansPage />} />
@@ -55,6 +51,9 @@ const App = () => {
           {/* admin routes */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<Products />} />
+
+          {/* Catch-all route for undefined paths */}
+          <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
       </Router>
