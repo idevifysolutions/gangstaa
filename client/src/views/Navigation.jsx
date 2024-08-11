@@ -57,7 +57,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 text-black bg-white shadow-lg">
+    <nav className="sticky top-0 z-50 text-black bg-white shadow-lg h-20">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
