@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+}
+
+.not-found-container {
+  text-align: center;
+  padding: 20px;
+  max-width: 90%;
+  margin: auto;
+}
+
+.error-title {
+  font-size: 2.5rem;
+  color: #444;
+  margin: 20px 0;
+}
+
+.error-message {
+  font-size: 1.25rem;
+  color: #555;
+  margin: 10px 0;
+}
+
+.suggestion {
+  font-size: 1rem;
+  color: #777;
+  margin: 20px 0;
+}
+
+.home-link {
+  color: #0066c0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.home-link:hover {
+  color: #004080;
+}
+
+.err-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.err-image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+}
+
+@media (min-width: 768px) {
+  .not-found-container {
+    padding: 40px 20px;
+  }
+
+  .error-title {
+    font-size: 4rem;
+  }
+
+  .error-message {
+    font-size: 1.5rem;
+  }
+
+  .suggestion {
+    font-size: 1.25rem;
+  }
+
+  .err-image {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .not-found-container {
+    padding: 60px 40px;
+    max-width: 800px;
+  }
+
+  .error-title {
+    font-size: 6rem;
+  }
+
+  .error-message {
+    font-size: 2rem;
+  }
+
+  .suggestion {
+    font-size: 1.5rem;
+  }
+
+  .err-image {
+    max-width: 350px;
+  }
+}

@@ -18,6 +18,7 @@ import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
 import Userprofile from "./components/templete/userprofile";
+import Error from "./components/Errormsg/Error";
 const App = () => {
   return (
     <>
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
+          <Route path="/notfoundpage" element={<Error />} />
           <Route path="/catagery/jackets" element={<JacketsPage />} />
           <Route path="/catagery/ShirtsPage" element={<ShirtsPage />} />
           <Route path="/catagery/JeansPage" element={<JeansPage />} />
