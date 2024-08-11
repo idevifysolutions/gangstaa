@@ -1,28 +1,31 @@
 import React from "react";
 import Slider from "react-slick";
-import Image1 from "./images/img1.jpeg";
-import Image2 from "./images/img2.jpeg";
-import Image3 from "./images/img3.jpeg";
+import Image1 from "./images/img1.png";
+import Image2 from "./images/img2.png";
+import Image3 from "./images/img3.png";
 
 const ImageList = [
   {
     id: 1,
     img: Image1,
-    title: "Upto 10% off on all Men's Wear",
+    title: "Upto 10% off on",
+    title2: "all Men's Wear",
     description:
       "lorem His Life will forever be Changed dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     id: 2,
     img: Image2,
-    title: "30% off on all Trending's Wear",
+    title: "30% off on",
+    title2: "all Trending's Wear",
     description:
       "Who's there lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     id: 3,
     img: Image3,
-    title: "50% off on all Products Sale",
+    title: "50% off on all",
+    title2: "Products Sale",
     description:
       "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna incididunt ut labore et dolore magna aliqua.",
   },
@@ -43,7 +46,7 @@ const Hero = ({ handleOrderPopup }) => {
   };
 
   return (
-    <div className="relative overflow-hidden min-h-[700px] sm:min-h-[650px] flex justify-center items-center duration-200 ">
+    <div className="relative overflow-hidden min-h-[700px] sm:min-h-[650px] flex justify-center items-center duration-200 bg-[#7a6256]">
       <div className="h-[700px] w-[700px] bg-primary/40 absolute -top-1/2 right-0 rounded-3xl rotate-45 -z-[8]"></div>
       <div className="container pb-8 sm:pb-0">
         <Slider {...settings}>
@@ -55,15 +58,23 @@ const Hero = ({ handleOrderPopup }) => {
                     data-aos="zoom-out"
                     data-aos-duration="500"
                     data-aos-once="true"
-                    className="text-5xl font-bold sm:text-6xl lg:text-7xl"
+                    className="text-5xl font-bold sm:text-6xl lg:text-7xl text-[#f2dec2]"
                   >
                     {data.title}
+                  </h1>
+                  <h1
+                    data-aos="zoom-out"
+                    data-aos-duration="500"
+                    data-aos-once="true"
+                    className="text-5xl font-bold sm:text-6xl lg:text-7xl text-[#ffffff]"
+                  >
+                    {data.title2}
                   </h1>
                   <p
                     data-aos="fade-up"
                     data-aos-duration="500"
                     data-aos-delay="100"
-                    className="text-sm"
+                    className="text-sm text-[#ffffff]"
                   >
                     {data.description}
                   </p>
@@ -81,7 +92,8 @@ const Hero = ({ handleOrderPopup }) => {
                     </button>
                     <button
                       onClick={handleOrderPopup}
-                      className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+                      // className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2  rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+                      className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
                     >
                       All Products
                     </button>
@@ -97,7 +109,7 @@ const Hero = ({ handleOrderPopup }) => {
                     <img
                       src={data.img}
                       alt=""
-                      className="w-[250px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto"
+                      className="w-[250px] h-[300px] sm:h-[450px] sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto shadow-lg"
                     />
                   </div>
                 </div>

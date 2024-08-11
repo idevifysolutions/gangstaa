@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { UserData } from "../context/UserContext";
+import { useDispatch } from "react-redux";
+import { setLoggeIn } from "../features/userAuthentication/userAuthenticationSlice";
 
 const images = [
   "https://images.bewakoof.com/original/men-s-blue-den-printed-oversized-shirt-604442-1698919129-2.jpg",
@@ -14,6 +16,7 @@ const images = [
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const { userLogin } = UserData();
   const navigate = useNavigate();
@@ -21,6 +24,7 @@ const Login = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     await userLogin(email, password, navigate);
+    dispatch(setLoggeIn(true));
   };
 
   return (
