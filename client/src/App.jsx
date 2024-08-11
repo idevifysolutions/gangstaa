@@ -18,7 +18,15 @@ import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
 import Userprofile from "./components/templete/userprofile";
+import { useSelector } from "react-redux";
+
 const App = () => {
+  const loggedIn = useSelector((state) => {
+    state.isLoggedIn;
+  });
+
+  console.log(loggedIn);
+
   return (
     <>
       <Router>
