@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaTimes, FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
+import logo from "../assets/gangstaaLogo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +77,7 @@ const Navigation = () => {
           </div>
           <div className="flex-shrink-0 text-center">
             <Link to="/" className="text-xl font-bold">
-              Logo
+              <img src={logo} alt="" className="h-20" />
             </Link>
           </div>
 
