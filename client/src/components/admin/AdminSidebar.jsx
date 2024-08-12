@@ -33,19 +33,19 @@ const AdminSidebar = (props) => {
                   <span>
                     <MdDashboard />
                   </span>
-                  <span>DashBoard </span>
+                 <Link to="/admin/dashboard"><span>DashBoard </span></Link>
                 </li>
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <HiShoppingBag />
                   </span>
-                 <Link to="admin/products"><span>product</span> </Link> 
+                 <Link to="/admin/products"><span>product</span> </Link> 
                 </li>
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <IoIosPeople />
                   </span>
-                  <span>Customer </span>
+                <Link to="/admin/customers"><span>Customer </span></Link>
                 </li>
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
@@ -68,19 +68,19 @@ const AdminSidebar = (props) => {
                   <span>
                     <FaChartBar />
                   </span>
-                  <span>bar</span>
+                 <Link to="/admin/chart/bar"><span>bar</span></Link>
                 </li>
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartLine />
                   </span>
-                  <span>line </span>
+                 <Link to="/admin/chart/line"> <span>line </span></Link>
                 </li>
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartPie />
                   </span>
-                  <span>pie</span>
+                  <Link to="/admin/chart/pie"><span>pie</span></Link>
                 </li>
               </ul>
             </div>

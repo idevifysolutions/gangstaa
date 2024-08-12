@@ -21,6 +21,9 @@ import Userprofile from "./components/templete/userprofile";
 import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
 import { useSelector } from "react-redux";
+import BarCharts from "./views/admin/charts/BarCharts";
+import PieCharts from "./views/admin/charts/PieCharts";
+import LineCharts from "./views/admin/charts/LineCharts";
 
 
 const App = () => {
@@ -52,13 +55,10 @@ const App = () => {
           {/* admin routes */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<Products />} />
-
-          <Route path="/catagery/userprofile" element={<Userprofile/>}/>
-           {/* admin routes */}
-          <Route path="/admin/dashboard" element={<Dashboard/>}/>
-          <Route path="/admin/products" element={<Products/>} />
           <Route path="/admin/customers" element={<Customers/>} />
-
+          <Route path="/admin/chart/bar" element={<BarCharts/>} />
+          <Route path="/admin/chart/pie" element={<PieCharts/>} />
+          <Route path="/admin/chart/line" element={<LineCharts/>} />
           {/* Catch-all route for undefined paths */}
           <Route path="*" element={<Error />} />
 
