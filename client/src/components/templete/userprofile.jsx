@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function UserProfile() {
   const [image, setImage] = useState(null);
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingAddresses, setIsEditingAddresses] = useState(false);
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address1, setAddress1] = useState("");
+  const [address2, setAddress2] = useState("");
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -28,21 +28,23 @@ function UserProfile() {
   };
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <div className="container px-4 py-8 mx-auto">
       {/* User Info */}
-      <div className="border p-4 rounded-lg shadow-lg mb-6">
-        <h2 className="text-2xl font-bold mb-4 text-center">User Information</h2>
-        
+      <div className="p-4 mb-6 border rounded-lg shadow-lg">
+        <h2 className="mb-4 text-2xl font-bold text-center">
+          User Information
+        </h2>
+
         {/* User Image */}
         <div className="mb-4 text-center">
           {image ? (
             <img
               src={image}
               alt="User"
-              className="w-32 h-32 mx-auto rounded-full object-cover border mb-4"
+              className="object-cover w-32 h-32 mx-auto mb-4 border "
             />
           ) : (
-            <div className="w-32 h-32 mx-auto rounded-full bg-gray-200 border mb-4 flex items-center justify-center text-gray-500">
+            <div className="flex items-center justify-center w-32 h-32 mx-auto mb-4 text-gray-500 bg-gray-200 border ">
               No Image
             </div>
           )}
@@ -50,12 +52,12 @@ function UserProfile() {
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-300"
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file: file:border-0 file:text-sm file:font-semibold file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-300"
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">Name</label>
+          <label className="block mb-2 text-sm font-semibold">Name</label>
           <input
             type="text"
             placeholder="Enter your name"
@@ -66,7 +68,7 @@ function UserProfile() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">Email</label>
+          <label className="block mb-2 text-sm font-semibold">Email</label>
           <input
             type="email"
             placeholder="Enter your email"
@@ -77,7 +79,7 @@ function UserProfile() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">Phone</label>
+          <label className="block mb-2 text-sm font-semibold">Phone</label>
           <input
             type="text"
             placeholder="Enter your phone number"
@@ -88,10 +90,9 @@ function UserProfile() {
           />
         </div>
         <div className="text-center">
-          <button 
+          <button
             onClick={() => setIsEditingProfile(!isEditingProfile)}
-            className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
-           
+            className="px-4 py-2 m-2 text-white duration-200 bg-black hover:bg-gray-800 bg-gradient-to-r from-primary to-secondary hover:scale-105"
           >
             {isEditingProfile ? "Cancel" : "Edit Profile"}
           </button>
@@ -99,30 +100,30 @@ function UserProfile() {
       </div>
 
       {/* Order History */}
-      <div className="border p-4 rounded-lg shadow-lg mb-6">
-        <h2 className="text-2xl font-bold mb-4">Order History</h2>
+      <div className="p-4 mb-6 border rounded-lg shadow-lg">
+        <h2 className="mb-4 text-2xl font-bold">Order History</h2>
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr>
-                <th className="px-4 py-2 border text-center">Order ID</th>
-                <th className="px-4 py-2 border text-center">Date</th>
-                <th className="px-4 py-2 border text-center">Status</th>
-                <th className="px-4 py-2 border text-center">Total</th>
+                <th className="px-4 py-2 text-center border">Order ID</th>
+                <th className="px-4 py-2 text-center border">Date</th>
+                <th className="px-4 py-2 text-center border">Status</th>
+                <th className="px-4 py-2 text-center border">Total</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="px-4 py-2 border text-center">#12345</td>
-                <td className="px-4 py-2 border text-center">2024-08-01</td>
-                <td className="px-4 py-2 border text-center">Shipped</td>
-                <td className="px-4 py-2 border text-center">INR 1599</td>
+                <td className="px-4 py-2 text-center border">#12345</td>
+                <td className="px-4 py-2 text-center border">2024-08-01</td>
+                <td className="px-4 py-2 text-center border">Shipped</td>
+                <td className="px-4 py-2 text-center border">INR 1599</td>
               </tr>
               <tr>
-                <td className="px-4 py-2 border text-center">#12346</td>
-                <td className="px-4 py-2 border text-center">2024-07-21</td>
-                <td className="px-4 py-2 border text-center">Delivered</td>
-                <td className="px-4 py-2 border text-center">INR 999</td>
+                <td className="px-4 py-2 text-center border">#12346</td>
+                <td className="px-4 py-2 text-center border">2024-07-21</td>
+                <td className="px-4 py-2 text-center border">Delivered</td>
+                <td className="px-4 py-2 text-center border">INR 999</td>
               </tr>
               {/* Add more orders as needed */}
             </tbody>
@@ -131,10 +132,10 @@ function UserProfile() {
       </div>
 
       {/* Address Book */}
-      <div className="border p-4 rounded-lg shadow-lg">
-        <h2 className="text-2xl font-bold mb-4">Address Book</h2>
+      <div className="p-4 border rounded-lg shadow-lg">
+        <h2 className="mb-4 text-2xl font-bold">Address Book</h2>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">Address 1</label>
+          <label className="block mb-2 text-sm font-semibold">Address 1</label>
           <textarea
             className="w-full px-4 py-2 border rounded-md"
             rows="3"
@@ -145,7 +146,7 @@ function UserProfile() {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-2">Address 2</label>
+          <label className="block mb-2 text-sm font-semibold">Address 2</label>
           <textarea
             className="w-full px-4 py-2 border rounded-md"
             rows="3"
@@ -156,9 +157,9 @@ function UserProfile() {
           />
         </div>
         <div className="text-center">
-          <button 
+          <button
             onClick={() => setIsEditingAddresses(!isEditingAddresses)}
-            className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+            className="px-4 py-2 m-2 text-white duration-200 bg-black hover:bg-gray-800 bg-gradient-to-r from-primary to-secondary hover:scale-105"
           >
             {isEditingAddresses ? "Cancel" : "Edit Addresses"}
           </button>
@@ -167,9 +168,9 @@ function UserProfile() {
 
       {/* Save Button */}
       <div className="mt-6 text-center">
-        <button 
+        <button
           onClick={handleSave}
-          className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+          className="px-4 py-2 m-2 text-white duration-200 bg-black hover:bg-gray-800 bg-gradient-to-r from-primary to-secondary hover:scale-105"
         >
           Save
         </button>
@@ -179,4 +180,3 @@ function UserProfile() {
 }
 
 export default UserProfile;
-

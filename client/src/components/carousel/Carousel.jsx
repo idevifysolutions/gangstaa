@@ -8,16 +8,16 @@ const ImageList = [
   {
     id: 1,
     img: Image1,
-    title: "Upto 10% off on",
-    title2: "all Men's Wear",
+    title: " 10% off on all",
+    title2: " Men's Wear",
     description:
       "lorem His Life will forever be Changed dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     id: 2,
     img: Image2,
-    title: "30% off on",
-    title2: "all Trending's Wear",
+    title: "30% off on all",
+    title2: " Trending's Wear",
     description:
       "Who's there lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
@@ -48,7 +48,7 @@ const Hero = ({ handleOrderPopup }) => {
   return (
     <div className="relative overflow-hidden min-h-[700px] sm:min-h-[650px] flex justify-center items-center duration-200 bg-[#7a6256]">
       <div className="h-[700px] w-[700px] bg-primary/40 absolute -top-1/2 right-0 rounded-3xl rotate-45 -z-[8]"></div>
-      <div className="container pb-8 sm:pb-0">
+      <div className="container pb-8 mr-8 lg:mr-0 sm:pb-0">
         <Slider {...settings}>
           {ImageList.map((data) => (
             <div key={data.id}>
@@ -86,14 +86,13 @@ const Hero = ({ handleOrderPopup }) => {
                   >
                     <button
                       onClick={handleOrderPopup}
-                      className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+                      className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary hover:scale-105"
                     >
                       Shop Now
                     </button>
                     <button
                       onClick={handleOrderPopup}
-                      // className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2  rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
-                      className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+                      className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white bg-gradient-to-r from-primary to-secondary hover:scale-105"
                     >
                       All Products
                     </button>
@@ -109,7 +108,7 @@ const Hero = ({ handleOrderPopup }) => {
                     <img
                       src={data.img}
                       alt=""
-                      className="w-[250px] h-[300px] sm:h-[500px] sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto drop-shadow-lg"
+                      className="w-[250px] h-[300px] sm:h-[500px] pt-4 sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto drop-shadow-lg"
                     />
                   </div>
                 </div>
