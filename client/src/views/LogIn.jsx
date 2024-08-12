@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaLock } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { UserData } from "../context/UserContext";
 import { useDispatch } from "react-redux";
 import { setLoggeIn } from "../features/userAuthentication/userAuthenticationSlice";
@@ -17,6 +17,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
   const { userLogin } = UserData();
   const navigate = useNavigate();
@@ -25,6 +26,10 @@ const Login = () => {
     e.preventDefault();
     await userLogin(email, password, navigate);
     dispatch(setLoggeIn(true));
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
   return (
@@ -83,14 +88,14 @@ const Login = () => {
               />
             </div>
           </div>
-          <div className="mb-4">
+          <div className="mb-2">
             <label className="block text-black mb-2" htmlFor="password">
               Password
             </label>
-            <div className="flex items-center border border-gray-400 rounded-md">
+            <div className="flex items-center border border-gray-400 rounded-md relative">
               <FaLock className="ml-2 text-gray-600" />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -98,7 +103,21 @@ const Login = () => {
                 placeholder="Enter your password"
                 required
               />
+              <div
+                onClick={togglePasswordVisibility}
+                className="absolute right-3 cursor-pointer text-gray-600"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
             </div>
+          </div>
+          <div className="text-right">
+            <Link
+              to="/forgotpassword"
+              className="text-gray-800 font-bold hover:text-blue-700 hover:underline"
+            >
+              Forgot Password?
+            </Link>
           </div>
           <button
             type="submit"

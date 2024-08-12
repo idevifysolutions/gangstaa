@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { UserData } from "../context/UserContext";
-import { FaEnvelope, FaUser, FaLock } from "react-icons/fa";
+import { FaEnvelope, FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const images = [
   "https://images.bewakoof.com/original/men-s-blue-den-printed-oversized-shirt-604442-1698919129-2.jpg",
@@ -15,9 +15,14 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const { registerUser } = UserData();
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -101,10 +106,10 @@ const Register = () => {
             <label className="block text-black mb-2" htmlFor="password">
               Password
             </label>
-            <div className="flex items-center border border-gray-400 rounded-md">
+            <div className="flex items-center border border-gray-400 rounded-md relative">
               <FaLock className="ml-2 text-gray-600" />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -112,6 +117,12 @@ const Register = () => {
                 placeholder="Enter your password"
                 required
               />
+              <div
+                onClick={togglePasswordVisibility}
+                className="absolute right-3 cursor-pointer text-gray-600"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </div>
             </div>
           </div>
           <button
