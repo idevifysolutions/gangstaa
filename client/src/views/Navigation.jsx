@@ -57,13 +57,13 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 text-black bg-white shadow-lg h-20">
+    <nav className="sticky top-0 z-50 h-20 text-black bg-white shadow-lg">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-black rounded-md  hover:bg-gray-200 focus:outline-none"
+              className="p-2 text-black rounded-md hover:bg-gray-200 focus:outline-none"
             >
               <span className="sr-only">Open main menu</span>
               <motion.div variants={iconVariants} whileHover="hover">
@@ -109,7 +109,7 @@ const Navigation = () => {
             {/* User Profile button */}
             <Link
               to="/catagery/userprofile"
-              className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-white bg-black rounded-md hover:bg-gray-800"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium text-white bg-black hover:bg-gray-800"
               onClick={() => setIsOpen(false)}
             >
               <FaUserAlt className="w-5 h-5" />
@@ -119,14 +119,14 @@ const Navigation = () => {
             {/* Cart and User Icons in side menu */}
             <Link
               to="/login"
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               <FaUserAlt className="w-6 h-6" />
             </Link>
             <Link
               to="/cart"
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               <FaShoppingCart className="w-6 h-6" />
@@ -135,28 +135,28 @@ const Navigation = () => {
             {/* Category links */}
             <Link
               to="/catagery/TShirtPage"
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("T-Shirts")}
             </Link>
             <Link
               to="/catagery/ShirtsPage"
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Shirts")}
             </Link>
             <Link
               to="/catagery/JeansPage"
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jeans")}
             </Link>
             <Link
               to="/catagery/jackets"
-              className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-200"
+              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jackets")}

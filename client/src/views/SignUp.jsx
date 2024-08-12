@@ -30,7 +30,7 @@ const Register = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen bg-white overflow-hidden">
+    <div className="relative flex items-center justify-center h-screen overflow-hidden bg-white">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -51,25 +51,25 @@ const Register = () => {
           {images.map((image, index) => (
             <div
               key={index}
-              className="w-full h-full bg-cover bg-center"
+              className="w-full h-full bg-center bg-cover"
               style={{ backgroundImage: `url(${image})`, filter: "blur(3px)" }}
             />
           ))}
         </motion.div>
       </motion.div>
-      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+      <div className="absolute inset-0 z-10 bg-black opacity-50"></div>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative z-20 p-6 bg-gray-100 shadow-md rounded-md w-full max-w-sm"
+        className="relative z-20 w-full max-w-sm p-6 bg-gray-100 rounded-md shadow-md"
       >
-        <h2 className="text-2xl font-semibold text-center text-black mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-center text-black">
           Register
         </h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4">
-            <label className="block text-black mb-2" htmlFor="name">
+            <label className="block mb-2 text-black" htmlFor="name">
               Name
             </label>
             <div className="flex items-center border border-gray-400 rounded-md">
@@ -86,7 +86,7 @@ const Register = () => {
             </div>
           </div>
           <div className="mb-4">
-            <label className="block text-black mb-2" htmlFor="email">
+            <label className="block mb-2 text-black" htmlFor="email">
               Email Address
             </label>
             <div className="flex items-center border border-gray-400 rounded-md">
@@ -103,10 +103,10 @@ const Register = () => {
             </div>
           </div>
           <div className="mb-4">
-            <label className="block text-black mb-2" htmlFor="password">
+            <label className="block mb-2 text-black" htmlFor="password">
               Password
             </label>
-            <div className="flex items-center border border-gray-400 rounded-md relative">
+            <div className="relative flex items-center border border-gray-400 rounded-md">
               <FaLock className="ml-2 text-gray-600" />
               <input
                 type={showPassword ? "text" : "password"}
@@ -119,7 +119,7 @@ const Register = () => {
               />
               <div
                 onClick={togglePasswordVisibility}
-                className="absolute right-3 cursor-pointer text-gray-600"
+                className="absolute text-gray-600 cursor-pointer right-3"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </div>
@@ -127,15 +127,15 @@ const Register = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-2 mt-4 text-white bg-black rounded-md hover:bg-gray-800"
+            className="w-full px-4 py-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary "
           >
             Register
           </button>
         </form>
-        <div className="flex items-center justify-center pt-4 border-t-2 border-black mt-4">
+        <div className="flex items-center justify-center pt-4 mt-4 border-t-2 border-black">
           <Link
             to="/login"
-            className="text-gray-800 font-bold hover:text-blue-700 hover:underline"
+            className="font-bold text-gray-800 hover:text-blue-700 hover:underline"
           >
             Have an account? Login
           </Link>

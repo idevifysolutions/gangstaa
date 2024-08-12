@@ -48,7 +48,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen bg-white overflow-hidden">
+    <div className="relative flex items-center justify-center h-screen overflow-hidden bg-white">
       {/* Background Image Carousel */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -70,27 +70,27 @@ const ForgotPassword = () => {
           {images.map((image, index) => (
             <div
               key={index}
-              className="w-full h-full bg-cover bg-center"
+              className="w-full h-full bg-center bg-cover"
               style={{ backgroundImage: `url(${image})`, filter: "blur(3px)" }}
             />
           ))}
         </motion.div>
       </motion.div>
-      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+      <div className="absolute inset-0 z-10 bg-black opacity-50"></div>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative z-20 p-6 bg-gray-100 shadow-md rounded-md w-full max-w-sm"
+        className="relative z-20 w-full max-w-sm p-6 bg-gray-100 rounded-md shadow-md"
       >
-        <h2 className="text-2xl font-semibold text-center text-black mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-center text-black">
           Reset Password
         </h2>
         <div className="mb-4">
-          <label className="block text-black mb-2" htmlFor="newPassword">
+          <label className="block mb-2 text-black" htmlFor="newPassword">
             New Password
           </label>
-          <div className="flex items-center border border-gray-400 rounded-md relative">
+          <div className="relative flex items-center border border-gray-400 rounded-md">
             <FaLock className="ml-2 text-gray-600" />
             <input
               type={showNewPassword ? "text" : "password"}
@@ -102,17 +102,17 @@ const ForgotPassword = () => {
             />
             <div
               onClick={toggleNewPasswordVisibility}
-              className="absolute right-3 cursor-pointer text-gray-600"
+              className="absolute text-gray-600 cursor-pointer right-3"
             >
               {showNewPassword ? <FaEyeSlash /> : <FaEye />}
             </div>
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-black mb-2" htmlFor="confirmPassword">
+          <label className="block mb-2 text-black" htmlFor="confirmPassword">
             Confirm Password
           </label>
-          <div className="flex items-center border border-gray-400 rounded-md relative">
+          <div className="relative flex items-center border border-gray-400 rounded-md">
             <FaLock className="ml-2 text-gray-600" />
             <input
               type={showConfirmPassword ? "text" : "password"}
@@ -124,7 +124,7 @@ const ForgotPassword = () => {
             />
             <div
               onClick={toggleConfirmPasswordVisibility}
-              className="absolute right-3 cursor-pointer text-gray-600"
+              className="absolute text-gray-600 cursor-pointer right-3"
             >
               {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
             </div>
@@ -132,7 +132,7 @@ const ForgotPassword = () => {
         </div>
         <button
           onClick={handleUpdatePassword}
-          className="w-full py-2 mt-4 text-white bg-black rounded-md hover:bg-gray-800"
+          className="w-full px-4 py-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary "
         >
           Update Password
         </button>
