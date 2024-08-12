@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaTimes, FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
+import logo from "../assets/gangstaaLogo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 text-black bg-white shadow-lg">
+    <nav className="sticky top-0 z-50 text-black bg-white shadow-lg h-20">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -76,7 +77,7 @@ const Navigation = () => {
           </div>
           <div className="flex-shrink-0 text-center">
             <Link to="/" className="text-xl font-bold">
-              Logo
+              <img src={logo} alt="" className="h-20" />
             </Link>
           </div>
 
