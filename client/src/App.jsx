@@ -18,9 +18,10 @@ import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
 import Userprofile from "./components/templete/userprofile";
-
+import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
 import { useSelector } from "react-redux";
+
 
 const App = () => {
   const loggedIn = useSelector((state) => state.isLoggedIn);
@@ -52,8 +53,15 @@ const App = () => {
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<Products />} />
 
+          <Route path="/catagery/userprofile" element={<Userprofile/>}/>
+           {/* admin routes */}
+          <Route path="/admin/dashboard" element={<Dashboard/>}/>
+          <Route path="/admin/products" element={<Products/>} />
+          <Route path="/admin/customers" element={<Customers/>} />
+
           {/* Catch-all route for undefined paths */}
           <Route path="*" element={<Error />} />
+
         </Routes>
         <Footer />
       </Router>

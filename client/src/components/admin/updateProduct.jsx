@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import { CgClose } from "react-icons/cg";
-import { FaCloudUploadAlt, FaCreativeCommonsNcJp } from "react-icons/fa";
-import axios from 'axios'
+import { FaCloudUploadAlt } from "react-icons/fa";
 
 
-const UploadProduct = ({onClose}) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [price, setPrice] = useState('');
-  const [stock, setStock] = useState('');
-  const [file, setFile] = useState(null);
+const UpdateProduct = ({onClose}) => {
+  const [data,setData] = useState({
+    title : "",
+    description : "",
+    stock : "",
+    price : "",
+    image : "",
+    sold : "",
+    category : ""
+  })
 
 
 //   const productCategory = [
@@ -22,54 +24,55 @@ const UploadProduct = ({onClose}) => {
 // ]
   
 
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-    setFile(selectedFile);
-  };
+  const handleOnChange = (e)=>{
+      const { name, value} = e.target
 
-  // const handleUploadProduct = async(e) => {
-  //   const file = e.target.files;
-  //   console.log("files", file);
-  //   setData((preve)=>{
-  //     return{
-  //       ...preve,
-  //     }
-  //   })
-  // }
+      setData((preve)=>{
+        return{
+          ...preve,
+          [name]  : value
+        }
+      })
+  }
+
+  const handleUploadProduct = async(e) => {
+    const file = e.target.files;
+    console.log("files", file);
+    setData((preve)=>{
+      return{
+        ...preve,
+        image: file[0]
+      }
+    })
+  }
+
+  
 
 
   {/**upload product */}
   const handleSubmit = async(e) =>{
     e.preventDefault()
 
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('category', category);
-    formData.append('price', price);
-    formData.append('stock', stock);
-    if (file) {
-      formData.append('image', file);
-    }
+    if(!data.image){
+      return alert("Please upload product Image");
+  }
+  if(!data.description){
+      return alert("Please Enter Product description");
+  }
 
+  const response = await fetch( "http://localhost:4000/api/product/new" ,{
+    method : "post",
+    headers : {
+      "content-type" : "application/json"
+    },
+    body : JSON.stringify(data)
+  })
 
-  // const response = await fetch( "http://localhost:4000/api/product/new" , {
-  //   method : "post",
-  //   headers : {
-  //     "content-type" : "application/json",
-  //     "token" : localStorage.token,
-  //   },
-  //   body : JSON.stringify(formData),
-  // })
+  const responseData = await response.json();
 
-  axios.post('http://localhost:3001/upload',formData )
-    .then( res => { console.log(res) ,  
-        alert(res?.message)
-    } )
-    .catch(er => console.log(er))
-
-
-  // console.log("Product Data", responseData);
+  alert(responseData?.message)
+  console.log("Product Data", data);
+  onClose()
 
 
   }
@@ -94,8 +97,8 @@ const UploadProduct = ({onClose}) => {
               id='productName' 
               placeholder='enter product name' 
               name='title'
-              value={title} 
-              onChange={(e) => setTitle(e.target.value)}
+              value={data.title} 
+              onChange={handleOnChange}
               className='p-2 bg-slate-100 border rounded inputbox'
               required
             />
@@ -107,8 +110,8 @@ const UploadProduct = ({onClose}) => {
               id='productcategory' 
               placeholder='enter product category' 
               name='category'
-              value={category} 
-              onChange={(e) => setCategory(e.target.value)}
+              value={data.category} 
+              onChange={handleOnChange}
               className='p-2 bg-slate-100 border rounded inputbox'
               required
             />
@@ -119,9 +122,9 @@ const UploadProduct = ({onClose}) => {
                 type='text' 
                 id='stock' 
                 placeholder='enter available stock' 
-                value={stock} 
+                value={data.stock} 
                 name='stock'
-                onChange={(e) => setStock(e.target.value)} 
+                onChange={handleOnChange}
                 className='p-2 bg-slate-100 border rounded inputbox'
                 required
               />
@@ -144,7 +147,7 @@ const UploadProduct = ({onClose}) => {
                         <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
                           <span className='text-4xl'><FaCloudUploadAlt/></span>
                           <p className='text-sm'>Upload Product Image</p>
-                          <input type='file' id='uploadImageInput'  className='hidden'  onChange={handleFileChange}/>
+                          <input type='file' id='uploadImageInput'  className='hidden' onChange={handleUploadProduct}/>
                         </div>
               </div>
               </label> 
@@ -185,9 +188,9 @@ const UploadProduct = ({onClose}) => {
                 type='text' 
                 id='price' 
                 placeholder='enter price' 
-                value={price} 
+                value={data.price} 
                 name='price'
-                onChange={(e) => setPrice(e.target.value)}
+                onChange={handleOnChange}
                 className='p-2 bg-slate-100 border rounded inputbox'
                 required
               />
@@ -198,7 +201,9 @@ const UploadProduct = ({onClose}) => {
                 type='text' 
                 id='sellingPrice' 
                 placeholder='enter sold products' 
+                value={data.sold} 
                 name='sold'
+                onChange={handleOnChange}
                 className='p-2 bg-slate-100 border rounded inputbox'
                 required
               />
@@ -208,9 +213,9 @@ const UploadProduct = ({onClose}) => {
                 className='h-28 bg-slate-100 border rounded resize-none p-1 inputbox' 
                 placeholder='enter product description' 
                 rows={3} 
-                onChange={(e) => setDescription(e.target.value)} 
+                onChange={handleOnChange} 
                 name='description'
-                value={description}
+                value={data.description}
               >
               </textarea>
 
@@ -230,4 +235,4 @@ const UploadProduct = ({onClose}) => {
   )
 }
 
-export default UploadProduct
+export default UpdateProduct
