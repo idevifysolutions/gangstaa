@@ -47,7 +47,7 @@ const Dashboard = () => {
                     <img className='h-[2rem] w-[2rem] rounded-[50%]' src={userImg} alt="User" />
                 </div>
 
-                <section className='widget-container flex flex-wrap justify-between items-stretch py-[2rem] px-[2rem]'>
+                <section className='widget-container flex flex-wrap justify-center lg:justify-between items-stretch py-[2rem] px-[2rem]'>
                     <WidgetItem
                         percent={30}
                         amount={true}
@@ -78,8 +78,8 @@ const Dashboard = () => {
                     />
                 </section>
 
-                <section className='graph-container flex gap-[2rem] pr-[2rem] pb-[2rem]'>
-                    <div className="revenue-chart bg-white rounded-[10px] w-full py-[1rem] px-[3rem] ">
+                <section className='graph-container flex flex-col sm:flex-col md:flex-col lg:flex-row gap-[2rem] pr-[2rem] pb-[2rem]'>
+                    <div className="revenue-chart bg-white rounded-[10px] w-full py-[1rem] px-[3rem]  shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]">
                         {/* give the same style to all the divs in graph container till rounded - 10 px*/}
                         <h2 className='uppercase text-center mt-[1rem] mb-[2rem] ml-[0.25rem] font-bold tracking-wider text-2xl'>Revenue And Orders</h2>
                         <BarChart
@@ -91,14 +91,14 @@ const Dashboard = () => {
                             bgColor_2="rgba(252, 3, 215, 0.8)"
                         />
                     </div>
-                    <div className="dashboard-categories bg-white rounded-[10px] w-full max-w-[16rem] flex flex-col pt-[2rem]">
+                    <div className="dashboard-categories bg-white rounded-[10px] w-full max-w-[18rem] flex flex-col pt-[2rem] m-auto  shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]">
                         <h2 className='uppercase text-center mt-[1rem] mb-[2rem] ml-[0.25rem] font-bold tracking-wider text-2xl'>Inventory</h2>
 
                         <div className='bg-white rounded-[10px] overflow-y-auto h-[40rem] pl-[0.5rem]'>
-                            {data.categories.map((item) => {
+                            {data.categories.map((item, index) => {
                                 return (
                                     <CategoryItem
-                                        key={item.heading}
+                                        key={index}
                                         value={item.value}
                                         heading={item.heading}
                                         color="gray"
@@ -109,7 +109,7 @@ const Dashboard = () => {
                     </div>
                 </section>
 
-                <section className='transaction-container flex gap-8 pr-8 pb-8 h-[30rem]'>
+                <section className='transaction-container flex justify-center items-center flex-wrap lg:flex-nowrap gap-8 pr-8 pb-8 h-[37rem]'>
                     <div className="gender-chart bg-white shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] rounded-xl w-full max-w-[20rem] relative">
                         <h2 className='text-center mt-6 mb-8 text-2xl font-bold'>Gender Ratio</h2>
                         <DoughnutChart />
