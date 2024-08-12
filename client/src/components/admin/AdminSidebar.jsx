@@ -15,7 +15,7 @@ const AdminSidebar = (props) => {
    
   return (
     < >
-    <div className={`h-[100vh] w-auto bg-slate-50 ${showsidebar? "block" : "hidden" } lg:block  absolute lg:relative`}> 
+    <div className={`h-[100vh] w-auto bg-slate-50 ${showsidebar? "block" : "hidden" } lg:block  absolute lg:relative z-40`}> 
       <div className="adminsidebarcontainer w-72 h-[100vh]  overflow-y-scroll hide-scrollbar">
         <aside className="w-[100%]  p-4 z-10  bg-white">
           <div>
