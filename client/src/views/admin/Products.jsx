@@ -23,6 +23,7 @@ const Products = () => {
 
     const handleSideBar = () => {
       setShowsidebar((prev) => !prev);
+      console.log(showsidebar)
     }
 
     const arr = [1, 2, 3, 4, 5];
@@ -37,7 +38,7 @@ const Products = () => {
     <>
       <div className='relative flex h-full'>
 
-       <AdminSidebar sidebar={{showsidebar, setShowsidebar, handleSideBar}}/>
+     <AdminSidebar  sidebar={{showsidebar, handleSideBar}}  />
             
        <div className='h-[100vh] w-full overflow-y-auto bg-white p-5 top-0  flex flex-col gap-4'>
 

@@ -13,6 +13,8 @@ export const createProduct = async (req, res) => {
 
     const image = req.file;
 
+    console.log("image", image);
+
     if (!image)
       return res.status(400).json({
         message: "Please give image",

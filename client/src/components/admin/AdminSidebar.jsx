@@ -8,11 +8,10 @@ import { FaStopwatch } from "react-icons/fa6";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-const AdminSidebar = ({sidebar}) => {
-
-   const {showsidebar,  handleSideBar} = sidebar;
-
-
+const AdminSidebar = (props) => {
+    
+   const {showsidebar,  handleSideBar} = props.sidebar;
+   
    
   return (
     < >
