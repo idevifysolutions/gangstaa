@@ -1,19 +1,51 @@
-body {
+* {
   margin: 0;
-  font-family: "Arial", sans-serif;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .not-found-container {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  padding: 15px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
-  max-width: 90%;
-  margin: auto;
+  text-align: center;
+}
+
+.lottie-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 10px;
+}
+
+.lottie-animation {
+  width: 100%;
+  height: auto;
+  border: none;
 }
 
 .error-title {
   font-size: 2.5rem;
   color: #444;
   margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .error-message {
@@ -39,8 +71,10 @@ body {
 }
 
 .err-container {
-  margin-top: 30px;
-  text-align: center;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .err-image {
@@ -48,12 +82,25 @@ body {
   max-width: 200px;
   height: auto;
   border-radius: 10px;
-  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
 }
 
 @media (min-width: 768px) {
   .not-found-container {
+    flex-direction: row;
     padding: 40px 20px;
+  }
+
+  .err-container {
+    margin-right: 20px;
+  }
+
+  .text-container {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .lottie-container {
+    margin-bottom: 0;
   }
 
   .error-title {
@@ -75,8 +122,8 @@ body {
 
 @media (min-width: 1200px) {
   .not-found-container {
-    padding: 60px 40px;
-    max-width: 800px;
+    max-width: 1200px;
+    height: auto;
   }
 
   .error-title {
@@ -89,6 +136,10 @@ body {
 
   .suggestion {
     font-size: 1.5rem;
+  }
+
+  .lottie-animation {
+    max-width: 500px;
   }
 
   .err-image {
