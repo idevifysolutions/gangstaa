@@ -3,7 +3,10 @@ import { User } from "../models/User.js";
 
 export const isAuth = async (req, res, next) => {
   try {
-    const token = req.headers.token;
+    const token = req.headers.token
+
+    // console.log("request", req.headers.authorization);
+    // console.log(token);
 
     if (!token)
       return res.status(403).json({
@@ -11,6 +14,7 @@ export const isAuth = async (req, res, next) => {
       });
 
     const decodedData = jwt.verify(token, process.env.Jwt_Sec);
+    console.log(decodedData);
 
     req.user = await User.findById(decodedData._id);
 
