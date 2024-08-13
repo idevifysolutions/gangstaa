@@ -22,7 +22,7 @@ const VerifyingOTP = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen bg-white overflow-hidden">
+    <div className="relative flex items-center justify-center h-screen overflow-hidden bg-white">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -43,25 +43,25 @@ const VerifyingOTP = () => {
           {images.map((image, index) => (
             <div
               key={index}
-              className="w-full h-full bg-cover bg-center"
+              className="w-full h-full bg-center bg-cover"
               style={{ backgroundImage: `url(${image})`, filter: "blur(3px)" }}
             />
           ))}
         </motion.div>
       </motion.div>
-      <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
+      <div className="absolute inset-0 z-10 bg-black opacity-50"></div>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative z-20 p-6 bg-gray-100 shadow-md rounded-md w-full max-w-sm"
+        className="relative z-20 w-full max-w-sm p-6 bg-gray-100 rounded-md shadow-md"
       >
-        <h2 className="text-2xl font-semibold text-center text-black mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-center text-black">
           Verify Account
         </h2>
         <form onSubmit={submitHandler}>
           <div className="mb-4">
-            <label className="block text-black mb-2" htmlFor="otp">
+            <label className="block mb-2 text-black" htmlFor="otp">
               Enter OTP
             </label>
             <div className="flex items-center border border-gray-400 rounded-md">
@@ -79,15 +79,15 @@ const VerifyingOTP = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-2 mt-4 text-white bg-black rounded-md hover:bg-gray-800"
+            className="w-full px-4 py-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary"
           >
             Verify
           </button>
         </form>
-        <div className="flex items-center justify-center pt-4 border-t-2 border-black mt-4">
+        <div className="flex items-center justify-center pt-4 mt-4 border-t-2 border-black">
           <Link
             to="/login"
-            className="text-gray-800 font-bold hover:text-blue-700 hover:underline"
+            className="font-bold text-gray-800 hover:text-blue-700 hover:underline"
           >
             Go to login page
           </Link>

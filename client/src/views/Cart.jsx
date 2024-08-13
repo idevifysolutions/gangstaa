@@ -1,19 +1,18 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { homeProductData } from "../data/homeProductData";
 import { removeProductFromCart } from "../features/productCart/productCart";
 import Emptycart from "../components/EmptyCart/Emptycart";
+import { jacketsProducts } from "../data/jacketsProducts";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const addToCart = useSelector((state) => state.productAddedToCartId || []);
-
-  // Debugging output
-  console.log("Redux state:", addToCart);
+  const productAddedToCartId = useSelector(
+    (state) => state.productAddedToCart || []
+  );
 
   // Filter the products that are in the cart
-  const cartProducts = homeProductData.filter((product) =>
-    addToCart.includes(product.id)
+  const cartProducts = jacketsProducts.filter((product) =>
+    productAddedToCartId.includes(product.id)
   );
 
   // Function to handle removing a product from the cart
@@ -34,7 +33,7 @@ const Cart = () => {
             }}
           >
             <img
-              src={product.image}
+              src={product.imageUrl}
               alt={product.name}
               style={{ width: "100px", height: "100px" }}
             />
@@ -43,6 +42,7 @@ const Cart = () => {
             <button onClick={() => handleRemoveFromCart(product.id)}>
               Remove From Cart
             </button>
+            <button style={{ marginLeft: "10px" }}>Buy</button>
           </div>
         ))
       ) : (

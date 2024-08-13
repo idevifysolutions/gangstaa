@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectDb } from "./database/db.js";
 import cors from "cors";
 import path from "path";
+import bodyParser from "body-parser";
 
 dotenv.config();
 const app = express();
@@ -10,6 +11,9 @@ const app = express();
 // using middlewares
 app.use(express.json());
 app.use(cors());
+
+
+app.use(bodyParser.json()); 
 
 const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
