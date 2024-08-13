@@ -68,7 +68,6 @@ const Products = () => {
 
     const handleSideBar = () => {
       setShowsidebar((prev) => !prev);
-      console.log(showsidebar)
     }
 
     const handleDeleteProduct = async (id) => {
@@ -94,78 +93,90 @@ const Products = () => {
 
      <AdminSidebar  sidebar={{showsidebar, handleSideBar}}  />
             
-       <div className='h-[100vh] w-full overflow-y-auto bg-white p-5 top-0  flex flex-col gap-4'>
+     <div className='h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4'>
+      <div className="headerbar h-20 w-full border flex items-center justify-between shadow-md shadow-slate-400 px-4">
+        {/* Sidebar toggle for mobile */}
+        <div className='lg:hidden block cursor-pointer' onClick={handleSideBar}>
+          <RxHamburgerMenu className='text-2xl' />
+        </div>
 
-              <div className="headerbar h-12 w-full border flex items-center justify-between   shadow-md shadow-slate-400">
-                   <div className='lg:hidden block cursor-pointer' onClick={handleSideBar}>
-                      
-                       <RxHamburgerMenu  className='text-2xl m-2'/>
-
-                   </div>
-
-                   <div className='h-[100%] w-[100%] border flex items-center justify-between px-1'>
-                   <div className='text-3xl'>Products</div>
-                   <div className='text-xl cursor-pointer' onClick={handleUploadProduct}> Upload Product</div>
-                   </div>
-              </div>
+        {/* Main header content */}
+        <div className='h-full w-full flex items-center justify-between'>
+          <div className='text-3xl font-bold flex-grow lg:text-xl text-center lg:text-left py-3'>
+            Products
+          </div>
+          <div className='text-xl cursor-pointer py-3' onClick={handleUploadProduct}>
+            Upload Product
+          </div>
+        </div>
+      </div>
+      
 
               <div className='flex flex-col'> 
 
-              <div className="producttable h-22 w-full  flex items-center justify-between border-[2px] border-slate-400 ">
 
-                     <div className="heading text-lg  w-44 h-[90%] my-2 flex items-center justify-center mx-4 box-border">
-                     Image
-                     </div>
+<div className="hidden md:flex h-22 w-full items-center justify-between border-[2px] border-slate-400 p-2">
+      <div className="heading text-lg w-44 h-full flex items-center justify-center mx-4 box-border">
+        Image
+      </div>
 
+      <div className="heading text-lg w-80 h-full flex items-center justify-center p-4 box-border">
+        Name
+      </div>
 
-                     <div className="heading text-lg w-80 h-[90%] my-auto mx-auto flex items-center justify-center p-4  box-border"> 
-                     Name
-                     </div>
+      <div className="heading text-lg w-44 h-full flex items-center justify-center py-2 box-border">
+        Price
+      </div>
 
-                     <div className="heading text-lg  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border"> Price</div>
+      <div className="heading text-lg w-44 h-full flex items-center justify-center py-2 box-border">
+        Available Stock
+      </div>
 
-                     <div className="heading text-lg  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border">Available Stock  </div>
+      <div className="heading text-lg w-40 h-full flex items-center justify-center">
+        Update
+      </div>
 
-                     <div className="heading text-lg  w-40 h-[90%] my-auto flex items-center justify-center"> 
-                     Update
-                     </div>
-                     
-                     <div className="heading text-lg  w-40 h-[90%] my-auto flex items-center justify-center "> 
-                     Remove
-                   </div>
-              </div>
+      <div className="heading text-lg w-40 h-full flex items-center justify-center">
+        Remove
+      </div>
+    </div>
 
 
               {
                         adminProducts.map((product, index) => {
                            
                         return (
-                            <div className="producttable h-44 w-full  flex items-center justify-between border-[2px] border-slate-400 border-t-0 " key={index}>
-                            <div className="heading text-xl  w-44 h-[90%] my-2 flex items-center justify-center mx-4 box-border">
-                                <img src={`http://localhost:4000/${product.image}`}  className=' w-full h-[100%] object-contain' alt="" />
-                            </div>
-       
-       
-                            <div className="heading text-lg w-80 h-[90%] my-auto mx-auto flex items-center justify-center p-4  box-border"> 
-                               <p>{product.title}</p>
-                            </div>
-       
-                            <div className="heading text-lg  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border">{product.price}</div>
+                   
 
-                            <div className="heading text-xl  w-44 h-[90%] my-auto flex items-center justify-center   py-2 box-border">{product.stock}</div>
-                            
-                            <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center"> 
-       
-                               <div className='w-16 h-16 rounded-full border text-gray-800 hover:bg-[#10151d] hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border' onClick={() => handleUpdateProduct(product._id)}>   
-                               <TfiPencil className='w-10 h-auto'/>
-                               </div>
-        
-                            </div>
-                            <div className="heading text-xl  w-40 h-[90%] my-auto flex items-center justify-center "> 
-                            <div className="w-16 h-16 rounded-full border text-gray-800 hover:bg-red-600 hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border"onClick={() => handleDeleteProduct(product._id)} > <RiDeleteBinLine className='w-10 h-auto'/>  </div>
-                          </div>
-                     </div>
-
+                    <div className="producttable w-full flex flex-col md:flex-row items-center justify-between border-[2px] border-slate-400 border-t-0 p-4 my-2 rounded-md shadow-md" key={index}>
+                    <div className="heading text-xl flex-shrink-0 w-full md:w-24 h-auto my-2 flex items-center justify-center mx-4 box-border">
+                      <img src={`http://localhost:4000/${product.image}`} className='w-[120px] h-[120px] object-cover' alt={product.title} />
+                    </div>
+              
+                    <div className="heading text-lg w-full md:w-40 h-auto my-2 flex items-center justify-center p-4 box-border">
+                      <p className='text-center'>{product.title}</p>
+                    </div>
+              
+                    <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center py-2 box-border">
+                      {product.price}
+                    </div>
+              
+                    <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center py-2 box-border">
+                      {product.stock}
+                    </div>
+              
+                    <div className="heading text-lg w-full md:w-20 h-auto my-2 flex items-center justify-center">
+                      <div className='w-12 h-12 rounded-full border text-gray-800 hover:bg-[#10151d] hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border' onClick={() => handleUpdateProduct(product._id)}>
+                        <TfiPencil className='w-6 h-auto' />
+                      </div>
+                    </div>
+              
+                    <div className="heading text-lg w-full md:w-20 h-auto my-2 flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full border text-gray-800 hover:bg-red-600 hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border" onClick={() => handleDeleteProduct(product._id)}>
+                        <RiDeleteBinLine className='w-6 h-auto' />
+                      </div>
+                    </div>
+                  </div>
                         )
 
                        })
