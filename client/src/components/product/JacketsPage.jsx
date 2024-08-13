@@ -122,4 +122,3 @@ const JacketsPage = () => {
 };
 
 export default JacketsPage;
-
