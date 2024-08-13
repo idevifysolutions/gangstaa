@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AdminSidebar from '../../components/admin/AdminSidebar'
 import { BsSearch } from 'react-icons/bs'
 import { BiMaleFemale } from "react-icons/bi";
@@ -7,39 +7,32 @@ import Table from "../../components/admin/DashboardTable"
 import data from "../../assets/data.json"
 import { HiTrendingUp, HiTrendingDown } from "react-icons/hi"
 import { BarChart, DoughnutChart } from '../../components/admin/Charts'
+import { RxHamburgerMenu } from 'react-icons/rx';
 
 const userImg =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";
 
-const tableData = [
-    {
-        "_id": "66aa30af0d768fd872d729d3",
-        "discount": 0,
-        "amount": 106200,
-        "quantity": 1,
-        "status": "Delivered"
-    },
-    {
-        "_id": "66aa42ea0d402aacbb064275",
-        "discount": 0,
-        "amount": 35400,
-        "quantity": 1,
-        "status": "Shipped"
-    },
-    {
-        "_id": "66af454ef82730a16255be58",
-        "discount": 0,
-        "amount": 35400,
-        "quantity": 1,
-        "status": "Processing"
-    }
-]
 
 const Dashboard = () => {
+
+    const [showsidebar, setShowsidebar] = useState(false);
+
+    const handleSideBar = () => {
+        setShowsidebar((prev) => !prev);
+        console.log(showsidebar)
+      }
+
     return (
         <div className='h-full flex relative'>
-            <AdminSidebar />
+            <AdminSidebar sidebar={{showsidebar, handleSideBar}} />
+            <div className='lg:hidden block cursor-pointer' onClick={handleSideBar}>
+                      
+                      <RxHamburgerMenu  className='text-2xl m-2'/>
+
+                  </div>
             <main className='dashboard w-full overflow-y-auto'>
+           
+
                 <div className="bar h-[4rem] flex justify-center items-center gap-[1rem] py-0 px-[1rem] border-b-2 border-black">
                     <BsSearch className='text-[1.2rem] opacity-[0.7]' />
                     <input className='mr-auto w-full py-[1rem] px-0 outline-none border-none' type="text" placeholder="Search for data, users, docs" />
@@ -47,7 +40,7 @@ const Dashboard = () => {
                     <img className='h-[2rem] w-[2rem] rounded-[50%]' src={userImg} alt="User" />
                 </div>
 
-                <section className='widget-container flex flex-wrap justify-between items-stretch py-[2rem] px-[2rem]'>
+                <section className='widget-container flex flex-wrap justify-center lg:justify-between items-stretch py-[2rem] px-[2rem]'>
                     <WidgetItem
                         percent={30}
                         amount={true}
@@ -78,8 +71,8 @@ const Dashboard = () => {
                     />
                 </section>
 
-                <section className='graph-container flex gap-[2rem] pr-[2rem] pb-[2rem]'>
-                    <div className="revenue-chart bg-white rounded-[10px] w-full py-[1rem] px-[3rem] ">
+                <section className='graph-container flex flex-col sm:flex-col md:flex-col lg:flex-row gap-[2rem] pr-[2rem] pb-[2rem]'>
+                    <div className="revenue-chart bg-white rounded-[10px] w-full py-[1rem] px-[3rem]  shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]">
                         {/* give the same style to all the divs in graph container till rounded - 10 px*/}
                         <h2 className='uppercase text-center mt-[1rem] mb-[2rem] ml-[0.25rem] font-bold tracking-wider text-2xl'>Revenue And Orders</h2>
                         <BarChart
@@ -91,14 +84,14 @@ const Dashboard = () => {
                             bgColor_2="rgba(252, 3, 215, 0.8)"
                         />
                     </div>
-                    <div className="dashboard-categories bg-white rounded-[10px] w-full max-w-[16rem] flex flex-col pt-[2rem]">
+                    <div className="dashboard-categories bg-white rounded-[10px] w-full max-w-[18rem] flex flex-col pt-[2rem] m-auto  shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]">
                         <h2 className='uppercase text-center mt-[1rem] mb-[2rem] ml-[0.25rem] font-bold tracking-wider text-2xl'>Inventory</h2>
 
                         <div className='bg-white rounded-[10px] overflow-y-auto h-[40rem] pl-[0.5rem]'>
-                            {data.categories.map((item) => {
+                            {data.categories.map((item, index) => {
                                 return (
                                     <CategoryItem
-                                        key={item.heading}
+                                        key={index}
                                         value={item.value}
                                         heading={item.heading}
                                         color="gray"
@@ -109,10 +102,10 @@ const Dashboard = () => {
                     </div>
                 </section>
 
-                <section className='transaction-container flex gap-8 pr-8 pb-8 h-[30rem]'>
+                <section className='transaction-container flex justify-center items-center flex-wrap lg:flex-nowrap gap-8 pr-8 pb-8 h-[37rem]'>
                     <div className="gender-chart bg-white shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] rounded-xl w-full max-w-[20rem] relative">
                         <h2 className='text-center mt-6 mb-8 text-2xl font-bold'>Gender Ratio</h2>
-                        <DoughnutChart />
+                        <DoughnutChart labels={['Female', 'Male']} data={[10, 15]}  backgroundColor={["hsl(340, 82%, 56%)", "rgba(12, 348, 276, 0.8)"]} />
                         <p className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[2rem]'><BiMaleFemale /></p>
                     </div>
                     <Table data = {data.orders} />

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../assets/gangstaaLogo.png";
 import {
   FaFacebookF,
   FaTwitter,
@@ -29,159 +30,150 @@ const Footer = () => {
     <>
       <FooterBanner />
       <footer className="bg-black text-white py-6 w-full ">
-
-
         <div className="w-[90%] mx-auto flex flex-col  md:flex-row ">
-            
-            {/* Logo and company Information */}
+          {/* Logo and company Information */}
           <div className=" w-full md:w-[25%] md:h-full">
-                
             <div className="flex items-center justify-center md:justify-start md:items-start md:flex-col md:pt-1 md:px-2 py-2">
-            <img
-              src="https://static.vecteezy.com/system/resources/previews/016/471/452/original/abstract-modern-ecommerce-logo-ecommerce-logo-design-shop-logo-design-template-creative-ecommerce-logo-vector.jpg"
-              alt="Company Logo"
-              className=" h-20 w-20  transform transition-transform duration-300 hover:scale-110"
-            />
+              <Link to="/">
+                <img
+                  src={logo}
+                  className=" h-28 w-2h-28  transform transition-transform duration-300 hover:scale-110"
+                />
+              </Link>
 
-            <div className=" hidden md:block pt-3 pr-9">
-            Unleash your inner swagger with Gangstaa—where street style meets high fashion. Elevate your game and own the look.
+              <div className=" hidden md:block pt-3 pr-9">
+                Unleash your inner swagger with Gangstaa—where street style
+                meets high fashion. Elevate your game and own the look.
+              </div>
             </div>
-
-            </div>
-
           </div>
-         
 
           {/* Links Section */}
-            <div className=" hidden w-[50%] h-full md:flex text-center">
+          <div className=" hidden w-[50%] h-full md:flex text-center">
+            <div className="mb-6 md:mb-0 md:w-[50vw] ">
+              <h3 className="text-lg font-bold mb-2">Company</h3>
+              <ul className="space-y-4 text-sm">
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    News
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Events
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-                <div className="mb-6 md:mb-0 md:w-[50vw] ">
-                  <h3 className="text-lg font-bold mb-2">Company</h3>
-                  <ul className="space-y-4 text-sm">
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        About Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Careers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Blog
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        News
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Events
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+            <div className="mb-6 md:mb-0 md:w-[50vw]">
+              <h3 className="text-lg font-bold mb-2">Company</h3>
+              <ul className="space-y-4 text-sm">
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    News
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Events
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-                <div className="mb-6 md:mb-0 md:w-[50vw]">
-                  <h3 className="text-lg font-bold mb-2">Company</h3>
-                  <ul className="space-y-4 text-sm">
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        About Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Careers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Blog
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        News
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Events
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
+            <div className="mb-6 md:mb-0 md:w-[50vw]">
+              <h3 className="text-lg font-bold mb-2">Company</h3>
+              <ul className="space-y-4 text-sm">
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    News
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Events
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-                <div className="mb-6 md:mb-0 md:w-[50vw]">
-                  <h3 className="text-lg font-bold mb-2">Company</h3>
-                  <ul className="space-y-4 text-sm">
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        About Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Careers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Blog
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        News
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Events
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="mb-6 md:mb-0 md:w-[50vw]">
-                  <h3 className="text-lg font-bold mb-2">Company</h3>
-                  <ul className="space-y-4 text-sm">
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        About Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Careers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Blog
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        News
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="hover:text-gray-400">
-                        Events
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-
+            <div className="mb-6 md:mb-0 md:w-[50vw]">
+              <h3 className="text-lg font-bold mb-2">Company</h3>
+              <ul className="space-y-4 text-sm">
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    News
+                  </Link>
+                </li>
+                <li>
+                  <Link to="#" className="hover:text-gray-400">
+                    Events
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
-
-         
 
           {/* Address and Social Icons Section */}
           <div className=" w-full md:w-[25%] md:h-full px-3">
@@ -233,75 +225,83 @@ const Footer = () => {
                 <FaLinkedinIn className="h-7 w-7 transform transition-transform duration-300 hover:scale-125" />
               </Link>
             </div>
-
           </div>
+        </div>
 
-          </div>
-
-
-
-
-          {/* Mobile view dropdowns */}
-          <div className="md:hidden mt-6 space-y-4 mb-3">
-            {["company", "support", "legal", "resources"].map((section) => (
-              <div key={section} className="">
-                <div className="w-[95%] text-center px-4 mx-auto flex justify-between">
-                  <h1 className="uppercase text-sm">
-                    {section.charAt(0).toUpperCase() + section.slice(1)}
-                  </h1>
-                  <button onClick={() => toggleDropdown(section)}>
-                    <LiaAngleDownSolid className="h-auto w-4" />
-                  </button>
-                </div>
-                {isOpen[section] && (
-                  <ul className=" text-base flex flex-wrap items-center justify-start gap-4 pl-6 my-2 ">
-                    <li>
-                      <Link to="#" className="border-[1px] p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black">
-                        About Us
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black">
-                        Careers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black">
-                        Blog
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="border-[1px]  p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black">
-                        News
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black">
-                        Events
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="#" className="border-[1px]  p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black">
-                        Events
-                      </Link>
-                    </li>
-                  </ul>
-                )}
-                <div className="border-dashed border-b-[1px] border-white w-[90%] mx-auto mt-2"></div>
+        {/* Mobile view dropdowns */}
+        <div className="md:hidden mt-6 space-y-4 mb-3">
+          {["company", "support", "legal", "resources"].map((section) => (
+            <div key={section} className="">
+              <div className="w-[95%] text-center px-4 mx-auto flex justify-between">
+                <h1 className="uppercase text-sm">
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </h1>
+                <button onClick={() => toggleDropdown(section)}>
+                  <LiaAngleDownSolid className="h-auto w-4" />
+                </button>
               </div>
-            ))}
-          </div>
-
-
-
-       
+              {isOpen[section] && (
+                <ul className=" text-base flex flex-wrap items-center justify-start gap-4 pl-6 my-2 ">
+                  <li>
+                    <Link
+                      to="#"
+                      className="border-[1px] p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black"
+                    >
+                      About Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="#"
+                      className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black"
+                    >
+                      Careers
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="#"
+                      className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black"
+                    >
+                      Blog
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="#"
+                      className="border-[1px]  p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black"
+                    >
+                      News
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="#"
+                      className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black"
+                    >
+                      Events
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="#"
+                      className="border-[1px]  p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black"
+                    >
+                      Events
+                    </Link>
+                  </li>
+                </ul>
+              )}
+              <div className="border-dashed border-b-[1px] border-white w-[90%] mx-auto mt-2"></div>
+            </div>
+          ))}
+        </div>
 
         <div className=" flex items-center justify-center border-t-[1px] border-slate-400">
           <p className="text-sm my-4">
             &copy; 2024 Your Company. All rights reserved.
           </p>
         </div>
-
       </footer>
     </>
   );
