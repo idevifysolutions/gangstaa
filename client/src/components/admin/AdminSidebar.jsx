@@ -9,18 +9,18 @@ import { FaStopwatch } from "react-icons/fa6";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
-const AdminSidebar = ({ sidebar }) => {
-  const { showsidebar, handleSideBar } = sidebar;
+const AdminSidebar = (props) => {
+  const { showsidebar, handleSideBar } = props.sidebar;
 
   return (
     <>
       <div
         className={`h-[100vh] w-auto bg-slate-50 ${
           showsidebar ? "block" : "hidden"
-        } lg:block absolute lg:relative`}
+        } lg:block  absolute lg:relative`}
       >
-        <div className="adminsidebarcontainer w-72 h-[100vh] overflow-y-scroll hide-scrollbar">
-          <aside className="w-full p-4 z-10 bg-white">
+        <div className="adminsidebarcontainer w-72 h-[100vh]  overflow-y-scroll hide-scrollbar">
+          <aside className="w-[100%]  p-4 z-10  bg-white">
             <div>
               <h1 className="text-2xl font-bold">Logo.</h1>
             </div>
