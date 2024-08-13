@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { MdDashboard } from "react-icons/md";
 import { HiShoppingBag } from "react-icons/hi2";
