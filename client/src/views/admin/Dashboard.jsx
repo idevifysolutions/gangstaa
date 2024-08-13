@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AdminSidebar from '../../components/admin/AdminSidebar'
 import { BsSearch } from 'react-icons/bs'
 import { BiMaleFemale } from "react-icons/bi";
@@ -11,35 +11,20 @@ import { BarChart, DoughnutChart } from '../../components/admin/Charts'
 const userImg =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";
 
-const tableData = [
-    {
-        "_id": "66aa30af0d768fd872d729d3",
-        "discount": 0,
-        "amount": 106200,
-        "quantity": 1,
-        "status": "Delivered"
-    },
-    {
-        "_id": "66aa42ea0d402aacbb064275",
-        "discount": 0,
-        "amount": 35400,
-        "quantity": 1,
-        "status": "Shipped"
-    },
-    {
-        "_id": "66af454ef82730a16255be58",
-        "discount": 0,
-        "amount": 35400,
-        "quantity": 1,
-        "status": "Processing"
-    }
-]
 
 const Dashboard = () => {
+
+    const [showsidebar, setShowsidebar] = useState(false);
+
+
+    const handleSideBar = () => {
+        setShowsidebar((prev) => !prev);
+        console.log(showsidebar)
+      }
     return (
         <div className='h-full flex relative'>
-            <AdminSidebar />
-            <main className='dashboard w-full overflow-y-auto'>
+            <AdminSidebar sidebar={{showsidebar, handleSideBar}}/>
+            <main className='dashboard overflow-y-auto'>
                 <div className="bar h-[4rem] flex justify-center items-center gap-[1rem] py-0 px-[1rem] border-b-2 border-black">
                     <BsSearch className='text-[1.2rem] opacity-[0.7]' />
                     <input className='mr-auto w-full py-[1rem] px-0 outline-none border-none' type="text" placeholder="Search for data, users, docs" />
@@ -112,7 +97,7 @@ const Dashboard = () => {
                 <section className='transaction-container flex justify-center items-center flex-wrap lg:flex-nowrap gap-8 pr-8 pb-8 h-[37rem]'>
                     <div className="gender-chart bg-white shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] rounded-xl w-full max-w-[20rem] relative">
                         <h2 className='text-center mt-6 mb-8 text-2xl font-bold'>Gender Ratio</h2>
-                        <DoughnutChart />
+                        <DoughnutChart labels={['Female', 'Male']} data={[10, 15]}  backgroundColor={["hsl(340, 82%, 56%)", "rgba(12, 348, 276, 0.8)"]} />
                         <p className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[2rem]'><BiMaleFemale /></p>
                     </div>
                     <Table data = {data.orders} />

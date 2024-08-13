@@ -29,88 +29,61 @@ const AdminSidebar = (props) => {
                 <h1 className="font-thin uppercase opacity-80 my-4 tracking-wider text-slate-900 text-[16px] ">
                   Dashboard
                 </h1>
-
-                <ul className="flex flex-col gap-2 ">
-                  <li
-                    className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide"
-                    onClick={handleSideBar}
-                  >
-                    <span>
-                      <MdDashboard />
-                    </span>
-                    <span>DashBoard </span>
-                  </li>
-                  <li
-                    className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide"
-                    onClick={handleSideBar}
-                  >
-                    <span>
-                      <HiShoppingBag />
-                    </span>
-                    <Link to="admin/products">
-                      <span>product</span>{" "}
-                    </Link>
-                  </li>
-                  <li
-                    className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide"
-                    onClick={handleSideBar}
-                  >
-                    <span>
-                      <IoIosPeople />
-                    </span>
-                    <span>Customer </span>
-                  </li>
-                  <li
-                    className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide"
-                    onClick={handleSideBar}
-                  >
-                    <span>
-                      <IoNewspaperSharp />
-                    </span>
-                    <span>Transaction </span>
-                  </li>
-                </ul>
-              </div>
+              <ul className="flex flex-col gap-2 ">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                  <span>
+                    <MdDashboard />
+                  </span>
+                 <Link to="/admin/dashboard"><span>DashBoard </span></Link>
+                </li>
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                  <span>
+                    <HiShoppingBag />
+                  </span>
+                 <Link to="/admin/products"><span>product</span> </Link> 
+                </li>
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                  <span>
+                    <IoIosPeople />
+                  </span>
+                <Link to="/admin/customers"><span>Customer </span></Link>
+                </li>
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                  <span>
+                    <IoNewspaperSharp />
+                  </span>
+                  <span>Transaction </span>
+                </li>
+              </ul>
             </div>
-
             <div className="flex ">
               <div className="item flex-1 mx-4 mt-6">
                 <h1 className="font-thin uppercase opacity-80 my-4 tracking-wider text-slate-900 text-[16px]">
                   charts
                 </h1>
 
-                <ul className="flex flex-col gap-2 ">
-                  <li
-                    className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide"
-                    onClick={handleSideBar}
-                  >
-                    <span>
-                      <FaChartBar />
-                    </span>
-                    <span>bar</span>
-                  </li>
-                  <li
-                    className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide"
-                    onClick={handleSideBar}
-                  >
-                    <span>
-                      <FaChartLine />
-                    </span>
-                    <span>line </span>
-                  </li>
-                  <li
-                    className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide"
-                    onClick={handleSideBar}
-                  >
-                    <span>
-                      <FaChartPie />
-                    </span>
-                    <span>pie</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
 
+              <ul className="flex flex-col gap-2 ">
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                  <span>
+                    <FaChartBar />
+                  </span>
+                 <Link to="/admin/chart/bar"><span>bar</span></Link>
+                </li>
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                  <span>
+                    <FaChartLine />
+                  </span>
+                 <Link to="/admin/chart/line"> <span>line </span></Link>
+                </li>
+                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                  <span>
+                    <FaChartPie />
+                  </span>
+                  <Link to="/admin/chart/pie"><span>pie</span></Link>
+                </li>
+              </ul>
+            </div>
             <div className="flex ">
               <div className="item flex-1 mx-4 my-6">
                 <h1 className="font-thin uppercase opacity-80 my-4 tracking-wider text-[16px] text-slate-900">
