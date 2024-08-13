@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function UserProfile() {
   const [image, setImage] = useState(null);
@@ -10,21 +11,57 @@ function UserProfile() {
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
 
+  useEffect(() => {
+    // Fetch user profile data from the backend when the component mounts
+    axios.get('/api/userprofile')
+      .then(response => {
+        const { name, email, phone, address1, address2, profileImage } = response.data;
+        setName(name);
+        setEmail(email);
+        setPhone(phone);
+        setAddress1(address1);
+        setAddress2(address2);
+        setImage(profileImage);
+      })
+      .catch(error => {
+        console.error('Error fetching user profile:', error);
+      });
+  }, []);
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
+      const formData = new FormData();
+      formData.append('profileImage', file);
+
+      axios.post('/api/uploadProfileImage', formData)
+        .then(response => {
+          setImage(response.data.profileImage);
+        })
+        .catch(error => {
+          console.error('Error uploading profile image:', error);
+        });
     }
   };
 
   const handleSave = () => {
-    setIsEditingProfile(false);
-    setIsEditingAddresses(false);
-    // Add logic to save the edited information here
+    const userData = {
+      name,
+      email,
+      phone,
+      address1,
+      address2,
+    };
+
+    axios.put('/api/userprofile', userData)
+      .then(response => {
+        setIsEditingProfile(false);
+        setIsEditingAddresses(false);
+        // You can also update state with response data if needed
+      })
+      .catch(error => {
+        console.error('Error saving user profile:', error);
+      });
   };
 
   return (
@@ -90,8 +127,7 @@ function UserProfile() {
         <div className="text-center">
           <button 
             onClick={() => setIsEditingProfile(!isEditingProfile)}
-            className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
-           
+            className="px-4 py-2 bg-black m-2 text-white duration-200 rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
           >
             {isEditingProfile ? "Cancel" : "Edit Profile"}
           </button>
@@ -158,7 +194,7 @@ function UserProfile() {
         <div className="text-center">
           <button 
             onClick={() => setIsEditingAddresses(!isEditingAddresses)}
-            className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+            className="px-4 py-2 bg-black m-2 text-white duration-200 rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
           >
             {isEditingAddresses ? "Cancel" : "Edit Addresses"}
           </button>
@@ -169,7 +205,7 @@ function UserProfile() {
       <div className="mt-6 text-center">
         <button 
           onClick={handleSave}
-          className="px-4 py-2 bg-black  m-2 text-white  duration-200  rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
+          className="px-4 py-2 bg-black m-2 text-white duration-200 rounded-full hover:bg-gray-800 rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105"
         >
           Save
         </button>
@@ -179,4 +215,3 @@ function UserProfile() {
 }
 
 export default UserProfile;
-
