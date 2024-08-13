@@ -18,10 +18,10 @@ function TableHOC(columns, data, containerClassName, heading, showPagination = f
                 <h2 className="heading mt-6 text-center text-2xl font-bold uppercase">{heading}</h2>
                 <table className="table w-full border-collapse" {...getTableProps()}>
                     <thead>
-                        {headerGroups.map((headerGroup) => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroups.map((headerGroup, index) => (
+                            <tr {...headerGroup.getHeaderGroupProps()} key={index}>
                                 {headerGroup.headers.map((column) => (
-                                    <th {...column.getHeaderProps(column.getSortByToggleProps())} className="p-2 text-left align-middle font-bold text-black text-[1.1rem] py-8 px-4">
+                                    <th {...column.getHeaderProps(column.getSortByToggleProps())} key={column.id} className="p-2 text-left align-middle font-bold text-black text-[1.1rem] py-8 px-4">
                                         {column.render("Header")}
                                         {column.isSorted && (
                                             <span>
@@ -43,9 +43,9 @@ function TableHOC(columns, data, containerClassName, heading, showPagination = f
                             prepareRow(row);
 
                             return (
-                                <tr {...row.getRowProps()} className="">
+                                <tr {...row.getRowProps()} key={row.id} className="">
                                     {row.cells.map((cell) => (
-                                        <td  {...cell.getCellProps()} className="p-4">{cell.render("Cell")}</td>
+                                        <td  {...cell.getCellProps()} key={crypto.randomUUID()} className="p-4">{cell.render("Cell")}</td>
                                     ))}
                                 </tr>
                             )

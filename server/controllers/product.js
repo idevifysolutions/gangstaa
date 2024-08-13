@@ -13,6 +13,8 @@ export const createProduct = async (req, res) => {
 
     const image = req.file;
 
+    console.log("image", image);
+
     if (!image)
       return res.status(400).json({
         message: "Please give image",
@@ -108,32 +110,59 @@ export const fetchSingleProduct = async (req, res) => {
   }
 };
 
-export const updateStock = async (req, res) => {
+export const updateProduct = async (req, res) => {
   try {
-    //this route is for admin
-    if (req.user.role !== "admin")
+    // This route is for admin
+    if (req.user.role !== "admin") {
       return res.status(403).json({
-        message: "Unauthorized", // condition for checking user role
-      });
-    const product = await Product.findById(req.params.id);
-
-    if (req.body.stock) {
-      product.stock = req.body.stock;
-      await product.save();
-      return res.json({
-        message: "Stock Updated",
+        message: "Unauthorized", // Condition for checking user role
       });
     }
 
-    res.status(400).json({
-      message: "Please give stock value",
+    const { title, description, category, price, stock } = req.body;
+    const image = req.file;
+
+    console.log("image", image);
+
+    if (!title || !description || !category || !price || !stock) {
+      return res.status(400).json({
+        message: "All fields are required", // Ensure all required fields are provided
+      });
+    }
+
+    if (!image) {
+      return res.status(400).json({
+        message: "Please provide an image", // Make sure image is provided
+      });
+    }
+
+    const product = await Product.findByIdAndUpdate(req.params.id, {
+      title,
+      description,
+      category,
+      price,
+      stock,
+      image: image.path, // Adjust this according to your storage method
+    }, { new: true }); // The new option returns the updated document
+
+    if (!product) {
+      return res.status(404).json({
+        message: "Product not found", // Handle case when product is not found
+      });
+    }
+
+    res.status(200).json({ // Use status 200 for successful updates
+      message: "Product updated successfully",
+      updatedProduct: product,
     });
   } catch (error) {
+    console.error("Error updating product:", error);
     res.status(500).json({
       message: error.message,
     });
   }
 };
+
 
 export const deleteProduct = async (req, res) => {
   try {

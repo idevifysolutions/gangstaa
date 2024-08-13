@@ -3,7 +3,7 @@ import { trendingProducts, newDropProducts } from "../data/TrendingNewDropData";
 
 const Trending_Products = () => {
   const [newDrop, setNewDrop] = useState(true);
-  const [trenDing, setTrendging] = useState(false);
+  const [trenDing, setTrending] = useState(false);
 
   const [isHovered, setIsHovered] = useState({
     image1: false,
@@ -16,12 +16,15 @@ const Trending_Products = () => {
   const handleNewDropClick = () => {
     if (!newDrop) {
       setNewDrop(true);
-      setTrendging(false);
+      setTrending(false);
     }
   };
+
   const handleTrendingClick = () => {
-    if (!trenDing) setNewDrop(false);
-    setTrendging(true);
+    if (!trenDing) {
+      setNewDrop(false);
+      setTrending(true);
+    }
   };
 
   const handleMouseEnter = (image1) => {
@@ -42,27 +45,37 @@ const Trending_Products = () => {
 
   return (
     <>
-      <div className=" w-full  sm:w-[100vw] sm:mx-auto">
-        <div className="flex gap-5 pl-8 mx-auto my-5 lg:pl-0 w-fit h-fit md:w-fit md:h-fit mb-14 ">
-          <div className="newdrops" onClick={handleNewDropClick}>
-            <button className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105">
+      <div className="w-full sm:w-[100vw] sm:mx-auto">
+        <div className="flex mx-auto my-5 lg:pl-0 w-fit h-fit mb-14">
+          <div
+            className={`newdrops ${
+              newDrop ? "bg-black text-white" : "bg-white text-black"
+            } border-2 border-black`}
+            onClick={handleNewDropClick}
+          >
+            <button className="px-4 py-2 text-xl duration-200 bg-gradient-to-r from-primary to-secondary hover:scale-105">
               New Drops
             </button>
           </div>
 
-          <div className="mosttending " onClick={handleTrendingClick}>
-            <button className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105">
+          <div
+            className={`mosttending ${
+              trenDing ? "bg-black text-white" : "bg-white text-black"
+            } border-2 border-black`}
+            onClick={handleTrendingClick}
+          >
+            <button className="px-4 py-2 text-xl duration-200 bg-gradient-to-r from-primary to-secondary hover:scale-105">
               Most Trending
             </button>
           </div>
         </div>
 
         {newDrop && (
-          <div className="  w-[96%] h-[550px] lg:w-[90%] lg:h-fit  lg:gap-4  xl:w-[95%] xl:h-[69vh]  xl:gap-5 md:gap-2 md:w-[98%] w-90%    mx-auto  flex lg:flex md:flex gap-5 md:overflow-hidden  overflow-x-scroll hide-scrollbar">
+          <div className="w-[96%] h-[550px] lg:w-[90%] lg:h-fit lg:gap-4 xl:w-[95%] xl:h-[69vh] xl:gap-5 md:gap-2 md:w-[98%] mx-auto flex lg:flex md:flex gap-5 md:overflow-hidden overflow-x-scroll hide-scrollbar">
             {newDropProducts.map((product, index) => {
               return (
                 <div
-                  className="  h-[400px] w-[500px] md:h-[400px] md:w-[50%] lg:w-[40%] lg:h-[500px]  xl:w-[20%] xl:h-full bg-slate-100 "
+                  className="h-[400px] w-[500px] md:h-[400px] md:w-[50%] lg:w-[40%] lg:h-[500px] xl:w-[20%] xl:h-full bg-slate-100"
                   key={index}
                 >
                   <div
@@ -73,8 +86,7 @@ const Trending_Products = () => {
                     <img
                       src={product.imageUrl1}
                       alt="Placeholder"
-                      // w-full h-[100%]
-                      className={`absolute inset-0  object-cover w-full h-[100%] transition-opacity duration-300 ${
+                      className={`absolute inset-0 object-cover w-full h-[100%] transition-opacity duration-300 ${
                         data[index] ? "opacity-0" : "opacity-100"
                       }`}
                     />
@@ -82,13 +94,13 @@ const Trending_Products = () => {
                     <img
                       src={product.imageUrl2}
                       alt="Hover Image"
-                      className={`absolute inset-0  w-full h-[100%] object-cover transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-[100%] object-cover transition-opacity duration-300 ${
                         data[index] ? "opacity-100" : "opacity-0"
                       }`}
                     />
                   </div>
 
-                  <div className="desc h-[20%] w-[100%] bg-white  text-ellipsis px-1 py-1">
+                  <div className="desc h-[20%] w-[100%] bg-white text-ellipsis px-1 py-1">
                     <div>
                       <p className="text-black text-xs py-1 tracking-[2px]">
                         Slick Dark Blue Distressed Slim Fit Jeans
@@ -123,11 +135,11 @@ const Trending_Products = () => {
         )}
 
         {trenDing && (
-          <div className="  w-[96%] h-[550px] lg:w-[90%] lg:h-fit  lg:gap-4  xl:w-[95%] xl:h-[69vh]  xl:gap-5 md:gap-2 md:w-[98%] w-90%    mx-auto  flex lg:flex md:flex gap-5  overflow-x-scroll hide-scrollbar">
+          <div className="w-[96%] h-[550px] lg:w-[90%] lg:h-fit lg:gap-4 xl:w-[95%] xl:h-[69vh] xl:gap-5 md:gap-2 md:w-[98%] mx-auto flex lg:flex md:flex gap-5 overflow-x-scroll hide-scrollbar">
             {trendingProducts.map((product, index) => {
               return (
                 <div
-                  className="  h-[400px] w-[500px] md:h-[400px] md:w-[50%] lg:w-[40%] lg:h-[500px]  xl:w-[20%] xl:h-full bg-slate-100 "
+                  className="h-[400px] w-[500px] md:h-[400px] md:w-[50%] lg:w-[40%] lg:h-[500px] xl:w-[20%] xl:h-full bg-slate-100"
                   key={index}
                 >
                   <div
@@ -138,8 +150,7 @@ const Trending_Products = () => {
                     <img
                       src={product.imageUrl1}
                       alt="Placeholder"
-                      // w-full h-[100%]
-                      className={`absolute inset-0  object-cover w-full h-[100%] transition-opacity duration-300 ${
+                      className={`absolute inset-0 object-cover w-full h-[100%] transition-opacity duration-300 ${
                         data[index] ? "opacity-0" : "opacity-100"
                       }`}
                     />
@@ -147,13 +158,13 @@ const Trending_Products = () => {
                     <img
                       src={product.imageUrl2}
                       alt="Hover Image"
-                      className={`absolute inset-0  w-full h-[100%] object-cover transition-opacity duration-300 ${
+                      className={`absolute inset-0 w-full h-[100%] object-cover transition-opacity duration-300 ${
                         data[index] ? "opacity-100" : "opacity-0"
                       }`}
                     />
                   </div>
 
-                  <div className="desc h-[20%] w-[100%] bg-white  text-ellipsis px-1 py-1">
+                  <div className="desc h-[20%] w-[100%] bg-white text-ellipsis px-1 py-1">
                     <div>
                       <p className="text-black text-xs py-1 tracking-[2px]">
                         Slick Dark Blue Distressed Slim Fit Jeans
@@ -186,10 +197,9 @@ const Trending_Products = () => {
             })}
           </div>
         )}
-
         <div className="flex gap-5 mx-auto my-10 w-fit h-fit mb-14">
           <div className="newdrops ">
-            <button className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105">
+            <button className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black bg-gradient-to-r from-primary to-secondary hover:scale-105">
               View all
             </button>
           </div>
