@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const TrendingNow = () => {
+  const [hoveredProductId, setHoveredProductId] = useState(null);
+
   return (
     <div className="container px-4 py-8 mx-auto">
       <div className="flex justify-center mb-8">
@@ -13,7 +15,9 @@ const TrendingNow = () => {
       </div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {trendingProducts.map((product) => (
+
           <ProductCard key={product.id} product={product} />
+
         ))}
       </div>
     </div>

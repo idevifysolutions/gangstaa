@@ -107,10 +107,10 @@ const Product_Details = () => {
             </li>
           </ul>
           <div className="flex gap-5 my-4">
-            <button className="px-4 py-4 m-2 text-xl text-white duration-200 bg-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105">
+            <button className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary hover:scale-105">
               Add To Cart
             </button>
-            <button className="px-4 py-4 m-2 text-xl text-black duration-200 bg-white border-2 border-black rounded-full bg-gradient-to-r from-primary to-secondary hover:scale-105">
+            <button className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black bg-gradient-to-r from-primary to-secondary hover:scale-105">
               Buy Now
             </button>
           </div>

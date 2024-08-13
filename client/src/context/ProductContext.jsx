@@ -16,6 +16,7 @@ export const ProductContextProvider = ({ children }) => {
   const [price, setPrice] = useState(0);
   const [page, setPage] = useState(1);
   const [adminProducts, setAdminProducts] = useState([]);
+
   async function fetchProducts() {
     try {
       const { data } = await axios.get(
@@ -44,6 +45,9 @@ export const ProductContextProvider = ({ children }) => {
       setLoading(false);
     }
   }
+
+
+
 
   useEffect(() => {
     fetchProducts();
