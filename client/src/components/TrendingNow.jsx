@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { trendingProducts } from "../data/trendingProducts";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const TrendingNow = () => {
+  const [hoveredProductId, setHoveredProductId] = useState(null);
+
   return (
     <div className="container px-4 py-8 mx-auto">
       <div className="flex justify-center mb-8">
@@ -18,10 +20,12 @@ const TrendingNow = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="p-2 h-[25rem] transition transform border rounded-lg shadow-lg"
+            onMouseEnter={() => setHoveredProductId(product.id)}
+            onMouseLeave={() => setHoveredProductId(null)}
           >
             <Link to={`/product/${product.id}`}>
               <motion.img
-                src={product.imageUrl}
+                src={hoveredProductId === product.id ? product.secondaryImageUrl : product.imageUrl}
                 alt={product.name}
                 className="object-cover w-full h-[80%] mb-4 rounded-md"
                 initial={{ opacity: 0, y: 20 }}
