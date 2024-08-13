@@ -1,42 +1,41 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
 
-export const isAuth = async (req, res, next) => {
-  try {
-    const token = req.headers.token
 
-    // console.log("request", req.headers.authorization);
-    // console.log(token);
+export const isAuth = async(req, res, next) => {
+    try {
+        const token = req.headers.token
 
-    if (!token)
-      return res.status(403).json({
-        message: "Please Login",
-      });
 
-    const decodedData = jwt.verify(token, process.env.Jwt_Sec);
-    console.log(decodedData);
+        if (!token)
+            return res.status(403).json({
+                message: "Please Login",
+            });
 
-    req.user = await User.findById(decodedData._id);
+        const decodedData = jwt.verify(token, process.env.Jwt_Sec);
+        console.log(decodedData);
 
-    next();
-  } catch (error) {
-    res.status(500).json({
-      message: "Login First",
-    });
-  }
+        req.user = await User.findById(decodedData._id);
+
+        next();
+    } catch (error) {
+        res.status(500).json({
+            message: "Login First",
+        });
+    }
 };
 
 export const isAdmin = (req, res, next) => {
-  try {
-    if (req.user.role !== "admin")
-      return res.status(403).json({
-        message: "You are not admin",
-      });
+    try {
+        if (req.user.role !== "admin")
+            return res.status(403).json({
+                message: "You are not admin",
+            });
 
-    next();
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
+        next();
+    } catch (error) {
+        res.status(500).json({
+            message: error.message,
+        });
+    }
 };
