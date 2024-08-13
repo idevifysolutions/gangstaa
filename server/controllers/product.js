@@ -171,6 +171,7 @@ export const deleteProduct = async (req, res) => {
       return res.status(403).json({
         message: "Unauthorized", // condition for checking user role
       });
+      
     const product = await Product.findById(req.params.id);
 
     rm(product.image, () => {

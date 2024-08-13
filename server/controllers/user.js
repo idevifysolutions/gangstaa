@@ -80,14 +80,6 @@ export const verifyUser = TryCatch(async (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
 export const loginUser = TryCatch(async (req, res) => {
   const { email, password } = req.body;
 
@@ -178,3 +170,71 @@ export const resetPassword = TryCatch(async (req, res) => {
 
   res.json({ message: "Password Reset" });
 });
+
+
+//  get all users
+export const getAllusers = async (req, res) => {
+
+  if (req.user.role !== "admin")
+    return res.status(403).json({
+      message: "Unauthorized", // condition for checking user role
+    });
+
+      try{
+       const data = await User.find();
+       const userslist = await data;
+       res.status(200).send({
+        message: "All users data",
+        data: userslist
+       })
+      }
+      catch(error){
+        res.status(500).json({
+          message: error.message || error,
+          sucess: false,
+          error: true
+        })
+      }
+}
+
+// delete one users
+
+export const deleteOneUser = async (req, res) => {
+
+  if (req.user.role !== "admin")
+    return res.status(403).json({
+      message: "Unauthorized", // condition for checking user role
+    });
+
+  try {
+    const userId = req.params.id;
+    if (!userId) {
+      return res.status(400).json({
+        message: "User ID is required",
+        success: false,
+        error: true
+      });
+    }
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+        error: true
+      });
+    }
+
+    res.json({
+      message: "User deleted successfully",
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "An error occurred",
+      success: false,
+      error: true
+    });
+  }
+};
