@@ -1,16 +1,10 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+/* eslint-disable react/prop-types */
 import LoginPopup from "./LoginPopup";
 
 const ProtectedRoute = ({ children }) => {
-  const loggedIn = useSelector((state) => state.isLoggedIn);
-  const [showPopup, setShowPopup] = useState(false);
+  const isAuth = localStorage.getItem("isAuth") === "true";
 
-  if (!loggedIn && !showPopup) {
-    setShowPopup(true);
-  }
-
-  return <>{loggedIn ? children : showPopup && <LoginPopup />}</>;
+  return isAuth ? children : <LoginPopup />;
 };
 
 export default ProtectedRoute;

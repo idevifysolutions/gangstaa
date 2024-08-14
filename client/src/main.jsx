@@ -9,13 +9,13 @@ import { CartContextProvider } from "./context/CartContext.jsx";
 import { store } from "./store/store.js";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <UserContextProvider>
-    <ProductContextProvider>
-      <CartContextProvider>
-        <Provider store={store}>
+  <Provider store={store}>
+    <UserContextProvider>
+      <ProductContextProvider>
+        <CartContextProvider>
           <App />
-        </Provider>
-      </CartContextProvider>
-    </ProductContextProvider>
-  </UserContextProvider>
+        </CartContextProvider>
+      </ProductContextProvider>
+    </UserContextProvider>
+  </Provider>
 );
