@@ -16,6 +16,7 @@ import JeansPage from "./components/product/JeansPage";
 import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
+import CheckoutPage from "./views/Checkout";
 import Userprofile from "./components/templete/userprofile";
 import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
 
           <Route
             path="/catagery/jackets"
@@ -148,7 +150,6 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-
           {/* Catch-all route for undefined paths */}
           <Route path="*" element={<Error />} />
         </Routes>
