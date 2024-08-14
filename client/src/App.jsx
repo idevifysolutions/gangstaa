@@ -144,6 +144,7 @@ import JeansPage from "./components/product/JeansPage";
 import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
+import CheckoutPage from "./views/Checkout";
 import Userprofile from "./components/templete/userprofile";
 import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
@@ -151,10 +152,8 @@ import BarCharts from "./views/admin/charts/BarCharts";
 import PieCharts from "./views/admin/charts/PieCharts";
 import LineCharts from "./views/admin/charts/LineCharts";
 
-
 // import { useSelector } from "react-redux";
 // import ProtectedRoute from "./components/ProtectedRoute";
-
 
 const App = () => {
   // const loggedIn = useSelector((state) => state.isLoggedIn);
@@ -180,15 +179,16 @@ const App = () => {
           <Route path="/catagery/JeansPage" element={<JeansPage />} />
           <Route path="/catagery/TShirtPage" element={<TShirtPage />} />
           <Route path="/catagery/userprofile" element={<Userprofile />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
 
           {/* Admin routes */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<Products />} />
 
-          <Route path="/admin/customers" element={<Customers/>} />
-          <Route path="/admin/chart/bar" element={<BarCharts/>} />
-          <Route path="/admin/chart/pie" element={<PieCharts/>} />
-          <Route path="/admin/chart/line" element={<LineCharts/>} />
+          <Route path="/admin/customers" element={<Customers />} />
+          <Route path="/admin/chart/bar" element={<BarCharts />} />
+          <Route path="/admin/chart/pie" element={<PieCharts />} />
+          <Route path="/admin/chart/line" element={<LineCharts />} />
 
           {/* Catch-all route for undefined paths */}
           <Route path="*" element={<Error />} />
