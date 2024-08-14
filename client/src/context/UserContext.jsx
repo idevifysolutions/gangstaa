@@ -14,33 +14,6 @@ export const UserContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  // async function userLogin(email, password, navigate) {
-  //   try {
-  //     const { data } = await axios.post(
-  //       `http://localhost:4000/api/user/login`,
-  //       {
-  //         email,
-  //         password,
-  //       }
-  //     );
-
-  //     if (data.message) {
-  //       toast.success(data.message);
-  //       localStorage.setItem("token", data.token);
-  //       setLoading(false);
-  //       setIsAuth(true);
-  //       dispatch(setLoggeIn(isAuth));
-  //       setUser(data.user);
-  //       navigate("/");
-  //       window.location.reload();
-  //     }
-  //   } catch (error) {
-  //     toast.error(error.response.data.message);
-  //     setLoading(false);
-  //     setIsAuth(false);
-  //   }
-  // }
-
   async function userLogin(email, password, navigate) {
     try {
       const { data } = await axios.post(
