@@ -1,68 +1,29 @@
-import React, { useState } from "react";
-import { trendingProducts } from "../data/trendingProducts";
+import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { FaPlus } from "react-icons/fa"
 
-const TrendingNow = () => {
-  const [hoveredProductId, setHoveredProductId] = useState(null);
-
+const TrendingNow = ({ productId, name, price, stock, photo, handler }) => {
   return (
-    <div className="container px-4 py-8 mx-auto">
-      <div className="flex justify-center mb-8">
-        <h2 className="text-xl font-bold text-center md:text-3xl lg:text-2xl">
-          Trending Now
-        </h2>
-      </div>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {trendingProducts.map((product) => (
+    <>
+      <div className="flex flex-col items-center justify-center rounded-md my-5 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] pb-5">
 
-          <ProductCard key={product.id} product={product} />
+        <div className="w-[20rem] h-[20rem] flex items-start justify-center ">
+          <img className="object-cover w-[95%] h-[95%] rounded-md" src={photo} alt="" />
+        </div>
 
-        ))}
+        <p className="text-2xl font-bold">{name}</p>
+        <span className="text-xl">{price}</span>
+        <div className="w-[10rem] mt-4">
+          <button className="border-2 border-black p-4 flex items-center justify-center w-full gap-3" onClick={() => handler({ productId, price, name, photo, stock, quantity: 1 })}>
+            <span className="font-bold">Add To Cart</span>
+            <FaPlus/>
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
-const ProductCard = ({ product }) => {
-  const [imageSrc, setImageSrc] = useState(product.imageUrl);
-
-  return (
-    <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="p-2 h-[25rem] transition transform border rounded-lg shadow-lg"
-      onMouseEnter={() => setImageSrc(product.secondaryImageUrl)}
-      onMouseLeave={() => setImageSrc(product.imageUrl)}
-    >
-      <Link to={`/product/${product.id}`}>
-        <motion.img
-          src={imageSrc}
-          alt={product.name}
-          className="object-cover w-full h-[80%] mb-4 rounded-md"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        />
-      </Link>
-      <motion.h3
-        className="mb-2 text-xl font-semibold"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        {product.name}
-      </motion.h3>
-      <motion.p
-        className="text-lg text-gray-700"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        {product.price}
-      </motion.p>
-    </motion.div>
-  );
-};
 
 export default TrendingNow;

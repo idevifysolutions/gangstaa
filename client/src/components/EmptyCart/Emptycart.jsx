@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./Emptycart.css";
 
 function Emptycart() {
@@ -14,9 +15,9 @@ function Emptycart() {
           Explore and add items to complete your shopping!
         </p>
         <button className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary hover:scale-105">
-          <a href="/" className="button-link">
+          <Link to="/" className="button-link">
             ADD ITEMS TO CART
-          </a>
+          </Link>
         </button>
       </main>
     </div>
