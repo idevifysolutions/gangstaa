@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import Image1 from "./images/img1.png";
 import Image2 from "./images/img2.png";
@@ -8,18 +9,18 @@ const ImageList = [
   {
     id: 1,
     img: Image1,
-    title: " 10% off on all",
-    title2: " Men's Wear",
+    title: "10% off on all",
+    title2: "Men's Wear",
     description:
-      "lorem His Life will forever be Changed dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "His Life will forever be Changed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     id: 2,
     img: Image2,
     title: "30% off on all",
-    title2: " Trending's Wear",
+    title2: "Trending's Wear",
     description:
-      "Who's there lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Who's there? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
     id: 3,
@@ -27,11 +28,13 @@ const ImageList = [
     title: "50% off on all",
     title2: "Products Sale",
     description:
-      "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna incididunt ut labore et dolore magna aliqua.",
+      "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
 ];
 
 const Hero = ({ handleOrderPopup }) => {
+  const navigate = useNavigate();
+
   var settings = {
     dots: false,
     arrows: false,
@@ -91,7 +94,7 @@ const Hero = ({ handleOrderPopup }) => {
                       Shop Now
                     </button>
                     <button
-                      onClick={handleOrderPopup}
+                      onClick={() => navigate("/catagery/ShirtsPage")}
                       className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white bg-gradient-to-r from-primary to-secondary hover:scale-105"
                     >
                       All Products

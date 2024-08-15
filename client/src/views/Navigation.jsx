@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaTimes, FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
@@ -7,6 +7,19 @@ import logo from "../assets/gangstaaLogo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const authStatus = localStorage.getItem("isAuth") === "true";
+    setIsAuth(authStatus);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isAuth");
+    setIsAuth(false);
+    navigate("/"); // Redirect to home or login page
+  };
 
   const iconVariants = {
     hover: {
@@ -83,11 +96,26 @@ const Navigation = () => {
 
           {/* Items hidden on mobile and shown on desktop */}
           <div className="items-center hidden space-x-4 md:flex">
-            <Link to="/login">
-              <motion.div variants={iconVariants} whileHover="hover">
-                <FaUserAlt className="w-6 h-6" />
-              </motion.div>
-            </Link>
+            {isAuth ? (
+              <motion.button
+                onClick={handleLogout}
+                variants={iconVariants}
+                whileHover="hover"
+                className="font-bold text-xl"
+              >
+                LogOut
+              </motion.button>
+            ) : (
+              <Link to="/login">
+                <motion.div
+                  variants={iconVariants}
+                  whileHover="hover"
+                  className="font-bold text-xl"
+                >
+                  LogIn
+                </motion.div>
+              </Link>
+            )}
             <motion.div variants={iconVariants} whileHover="hover">
               <Link to="/cart">
                 <FaShoppingCart className="w-6 h-6" />
@@ -109,21 +137,35 @@ const Navigation = () => {
             {/* User Profile button */}
             <Link
               to="/catagery/userprofile"
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium text-white bg-black hover:bg-gray-800"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               <FaUserAlt className="w-5 h-5" />
-              <span>User Profile</span>
             </Link>
 
             {/* Cart and User Icons in side menu */}
-            <Link
-              to="/login"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              <FaUserAlt className="w-6 h-6" />
-            </Link>
+            {isAuth ? (
+              <motion.button
+                onClick={() => {
+                  setIsOpen(false);
+                  handleLogout();
+                }}
+                variants={iconVariants}
+                className="block w-full px-3 py-2 text-lg font-medium text-left rounded-md hover:bg-gray-200"
+              >
+                LogOut
+              </motion.button>
+            ) : (
+              <Link
+                to="/login"
+                className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
+                onClick={() => setIsOpen(false)}
+              >
+                <motion.div variants={iconVariants} whileHover="hover">
+                  LogIn
+                </motion.div>
+              </Link>
+            )}
             <Link
               to="/cart"
               className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
@@ -135,28 +177,28 @@ const Navigation = () => {
             {/* Category links */}
             <Link
               to="/catagery/TShirtPage"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              className="block px-3 py-2 rounded-md hover:bg-gray-200 text-lg font-medium"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("T-Shirts")}
             </Link>
             <Link
               to="/catagery/ShirtsPage"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              className="block px-3 py-2 rounded-md hover:bg-gray-200 text-lg font-medium"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Shirts")}
             </Link>
             <Link
               to="/catagery/JeansPage"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              className="block px-3 py-2 rounded-md hover:bg-gray-200 text-lg font-medium"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jeans")}
             </Link>
             <Link
               to="/catagery/jackets"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              className="block px-3 py-2 rounded-md hover:bg-gray-200 text-lg font-medium"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jackets")}
