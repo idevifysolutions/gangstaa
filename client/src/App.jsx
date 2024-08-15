@@ -150,6 +150,7 @@ import Error from "./components/Errormsg/Error";
 import BarCharts from "./views/admin/charts/BarCharts";
 import PieCharts from "./views/admin/charts/PieCharts";
 import LineCharts from "./views/admin/charts/LineCharts";
+import Orders from "./views/admin/Orders";
 
 
 // import { useSelector } from "react-redux";
@@ -184,8 +185,8 @@ const App = () => {
           {/* Admin routes */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/products" element={<Products />} />
-
           <Route path="/admin/customers" element={<Customers/>} />
+          <Route path="/admin/orders" element={<Orders/>} />
           <Route path="/admin/chart/bar" element={<BarCharts/>} />
           <Route path="/admin/chart/pie" element={<PieCharts/>} />
           <Route path="/admin/chart/line" element={<LineCharts/>} />

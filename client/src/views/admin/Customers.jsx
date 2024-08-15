@@ -150,55 +150,6 @@ const Customers = () => {
             </div>
           </div>
 
-
-
-
-
-
-
-
-
-//             <div className="producttable w-full flex flex-col sm:flex-row sm:flex-wrap border-[2px] border-slate-400 border-t-0 p-2">
-//   {/* Avatar */}
-//   <div className="heading text-lg w-full sm:w-44 h-auto flex items-center justify-center box-border py-2">
-//     <img
-//       src="https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?rs=1&pid=ImgDetMain"
-//       className="w-24 sm:w-36 h-auto object-contain"
-//       alt="Avatar"
-//     />
-//   </div>
-
-//   {/* Name */}
-//   <div className="heading text-lg w-full sm:w-72 h-auto flex items-center justify-center p-4 box-border py-2">
-//     {user.name}
-//   </div>
-
-//   {/* Gender */}
-//   <div className="heading text-lg w-full sm:w-40 h-auto flex items-center justify-center py-2 box-border">
-//     Male
-//   </div>
-
-//   {/* Email */}
-//   <div className="heading text-lg w-full sm:w-1/2 h-auto flex items-center justify-center py-2 box-border">
-//     {user.email}
-//   </div>
-
-//   {/* Role */}
-//   <div className="heading text-lg w-full sm:w-28 h-auto flex items-center justify-center py-2 box-border">
-//     {user.role}
-//   </div>
-
-//   {/* Remove Button */}
-//   <div className="heading text-lg w-full sm:w-28 h-auto flex items-center justify-center py-2 box-border">
-//     <div
-//       className="w-10 h-10 rounded-full border text-gray-800 hover:bg-red-600 hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border"
-//       onClick={() => deleteOneuser(user._id)}
-//     >
-//       <RiDeleteBinLine className="w-6 h-auto" />
-//     </div>
-//   </div>
-// </div>
-
          );
             })}
           </div>
