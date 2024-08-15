@@ -112,55 +112,32 @@ export const fetchSingleProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   try {
-    // This route is for admin
-    if (req.user.role !== "admin") {
-      return res.status(403).json({
-        message: "Unauthorized", // Condition for checking user role
-      });
+    const productId = req.params.id;
+    const updates = req.body;
+
+    // Define the allowed fields for updating
+    const allowedUpdates = ['title', 'description', 'price', 'category', 'sold'];
+    const updatesToApply = {};
+
+    // Filter the incoming updates to only include allowed fields
+    for (const key in updates) {
+        if (allowedUpdates.includes(key)) {
+            updatesToApply[key] = updates[key];
+        }
     }
 
-    const { title, description, category, price, stock } = req.body;
-    const image = req.file;
+    // Update the product in the database
+    const updatedProduct = await Product.findByIdAndUpdate(productId, updatesToApply, { new: true });
 
-    console.log("image", image);
-
-    if (!title || !description || !category || !price || !stock) {
-      return res.status(400).json({
-        message: "All fields are required", // Ensure all required fields are provided
-      });
+    if (!updatedProduct) {
+        return res.status(404).send({ error: 'Product not found' });
     }
 
-    if (!image) {
-      return res.status(400).json({
-        message: "Please provide an image", // Make sure image is provided
-      });
-    }
-
-    const product = await Product.findByIdAndUpdate(req.params.id, {
-      title,
-      description,
-      category,
-      price,
-      stock,
-      image: image.path, // Adjust this according to your storage method
-    }, { new: true }); // The new option returns the updated document
-
-    if (!product) {
-      return res.status(404).json({
-        message: "Product not found", // Handle case when product is not found
-      });
-    }
-
-    res.status(200).json({ // Use status 200 for successful updates
-      message: "Product updated successfully",
-      updatedProduct: product,
-    });
-  } catch (error) {
-    console.error("Error updating product:", error);
-    res.status(500).json({
-      message: error.message,
-    });
-  }
+    res.status(200).send(updatedProduct);
+} catch (error) {
+    console.error('Error updating product:', error); // Log the error
+    res.status(500).send({ error: 'Server error' });
+}
 };
 
 

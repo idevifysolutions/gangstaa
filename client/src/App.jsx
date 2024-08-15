@@ -132,6 +132,15 @@ const App = () => {
           />
 
           <Route
+            path="/admin/orders"
+            element={
+              <ProtectedRoute>
+                <Orders />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
             path="/admin/chart/bar"
             element={
               <ProtectedRoute>

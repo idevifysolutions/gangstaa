@@ -5,7 +5,8 @@ import { User } from "../models/User.js";
 export const isAuth = async(req, res, next) => {
     try {
         const token = req.headers.token
-
+        
+        console.log("token", token);
 
         if (!token)
             return res.status(403).json({
