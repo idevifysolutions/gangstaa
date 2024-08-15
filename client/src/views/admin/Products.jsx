@@ -44,7 +44,6 @@ const Products = () => {
       setProductId(id);
       
 
-
     //   const handleUpdateProducts = async (id) => {
           
     //     try{
@@ -105,7 +104,7 @@ const Products = () => {
           <div className='text-3xl font-bold flex-grow lg:text-xl text-center lg:text-left py-3'>
             Products
           </div>
-          <div className='text-xl cursor-pointer py-3' onClick={handleUploadProduct}>
+          <div className='text-xl cursor-pointer py-3 bg-slate-200 my-1 px-1 rounded-md' onClick={handleUploadProduct}>
             Upload Product
           </div>
         </div>
