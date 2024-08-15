@@ -70,24 +70,34 @@ const AdminSidebar = (props) => {
               </h1>
 
               <ul className="flex flex-col gap-2 ">
+
+                <Link to="/admin/chart/bar">
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartBar />
                   </span>
                   <span>bar</span>
                 </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                </Link>
+
+               <Link to="/admin/chart/line">
+               <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartLine />
                   </span>
                   <span>line </span>
                 </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+               </Link>
+
+               <Link to="/admin/chart/pie">
+               <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartPie />
                   </span>
                   <span>pie</span>
                 </li>
+               </Link>
+
               </ul>
             </div>
           </div>
