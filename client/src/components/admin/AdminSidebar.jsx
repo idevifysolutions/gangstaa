@@ -7,6 +7,7 @@ import { FaChartBar, FaChartPie, FaChartLine } from "react-icons/fa";
 import { FaStopwatch } from "react-icons/fa6";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { CgClose } from "react-icons/cg";
 
 const AdminSidebar = (props) => {
     
@@ -18,9 +19,9 @@ const AdminSidebar = (props) => {
     <div className={`h-[100vh] w-auto bg-slate-50 ${showsidebar? "block" : "hidden" } lg:block  absolute lg:relative z-40`}> 
       <div className="adminsidebarcontainer w-72 h-[100vh]  overflow-y-scroll hide-scrollbar">
         <aside className="w-[100%]  p-4 z-10  bg-white">
-          <div>
-            <h1 className="text-2xl font-bold">Logo.</h1>
-          </div>
+        <div className='w-fit block  md:hidden ml-auto text-2xl hover:text-red-600 cursor-pointer ' onClick={handleSideBar}>
+                    <CgClose/>
+                </div>
 
           <div className="flex">
             <div className="item flex-1 mx-4 mt-6">
@@ -50,12 +51,14 @@ const AdminSidebar = (props) => {
                  <span>Customer</span>  
                 </li></Link>
 
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                <Link to="/admin/orders">   <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <IoNewspaperSharp />
                   </span>
                   <span>Orders</span>
-                </li>
+                </li>   </Link>
+
+
               </ul>
             </div>
           </div>

@@ -16,7 +16,7 @@ router.post("/product/new", isAuth, uploadFiles, createProduct);
 router.get("/product/all", fetchProducts);
 router.get("/product/admin/all", fetchProductsAdmin);
 router.get("/product/:id", fetchSingleProduct);
-router.put("/product/:id", updateProduct);
+router.put("/product/:id", isAuth, updateProduct);
 router.delete("/product/:id", isAuth, deleteProduct);
 
 export default router;

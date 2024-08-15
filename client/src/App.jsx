@@ -22,8 +22,14 @@ import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
 import BarCharts from "./views/admin/charts/BarCharts";
 import PieCharts from "./views/admin/charts/PieCharts";
-import LineCharts from "./views/admin/charts/LineCharts";
+import LineCharts from "./views/admin/charts/LineCharts"
+import Orders from "./views/admin/Orders";
+
+
+// import { useSelector } from "react-redux";
+// import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedRoute from "./components/ProtectedRoute"; // Import ProtectedRoute
+
 
 const App = () => {
   return (
@@ -97,6 +103,7 @@ const App = () => {
           />
 
           {/* Admin routes */}
+
           <Route
             path="/admin/dashboard"
             element={
