@@ -4,11 +4,15 @@ import { motion } from "framer-motion";
 import { FaTimes, FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
 import logo from "../assets/gangstaaLogo.png";
+import { useSelector } from "react-redux";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
+
+  const { cartItems } = useSelector((state) => state.cartReducer);
+  console.log(cartItems.length);
 
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuth") === "true";
@@ -116,9 +120,24 @@ const Navigation = () => {
                 </motion.div>
               </Link>
             )}
+            {/* <motion.div variants={iconVariants} whileHover="hover">
+              <Link to="/cart">
+
+                <p><FaShoppingCart className="relative w-6 h-6" />
+                <span className="total-order absolute top-[0px] bg-red-500 p-[10px]">{cartItems.length}</span>
+                </p>
+
+              </Link>
+            </motion.div> */}
+
             <motion.div variants={iconVariants} whileHover="hover">
               <Link to="/cart">
-                <FaShoppingCart className="w-6 h-6" />
+                <p className="relative flex items-center">
+                  <FaShoppingCart className="w-6 h-6" />
+                  <span className="absolute bottom-5 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItems.length}
+                  </span>
+                </p>
               </Link>
             </motion.div>
           </div>
