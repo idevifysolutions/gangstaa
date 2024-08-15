@@ -7,6 +7,7 @@ import { FaChartBar, FaChartPie, FaChartLine } from "react-icons/fa";
 import { FaStopwatch } from "react-icons/fa6";
 import { RiCoupon3Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { CgClose } from "react-icons/cg";
 
 const AdminSidebar = (props) => {
     
@@ -15,12 +16,12 @@ const AdminSidebar = (props) => {
    
   return (
     < >
-    <div className={`h-[100vh] w-auto bg-slate-50 ${showsidebar? "block" : "hidden" } lg:block  absolute lg:relative`}> 
+    <div className={`h-[100vh] w-auto bg-slate-50 ${showsidebar? "block" : "hidden" } lg:block  absolute lg:relative z-40`}> 
       <div className="adminsidebarcontainer w-72 h-[100vh]  overflow-y-scroll hide-scrollbar">
         <aside className="w-[100%]  p-4 z-10  bg-white">
-          <div>
-            <h1 className="text-2xl font-bold">Logo.</h1>
-          </div>
+        <div className='w-fit block  md:hidden ml-auto text-2xl hover:text-red-600 cursor-pointer ' onClick={handleSideBar}>
+                    <CgClose/>
+                </div>
 
           <div className="flex">
             <div className="item flex-1 mx-4 mt-6">
@@ -29,30 +30,35 @@ const AdminSidebar = (props) => {
               </h1>
 
               <ul className="flex flex-col gap-2 ">
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+              <Link to="/admin/dashboard">  <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <MdDashboard />
                   </span>
-                 <Link to="/admin/dashboard"><span>DashBoard </span></Link>
-                </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                 <span>DashBoard</span>
+                </li> </Link> 
+
+                <Link to="/admin/products">  <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <HiShoppingBag />
                   </span>
-                 <Link to="/admin/products"><span>product</span> </Link> 
-                </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                <span>product</span> 
+                </li> </Link> 
+                
+                <Link to="/admin/customers">   <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <IoIosPeople />
                   </span>
-                <Link to="/admin/customers"><span>Customer </span></Link>
-                </li>
-                <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                 <span>Customer</span>  
+                </li></Link>
+
+                <Link to="/admin/orders">   <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <IoNewspaperSharp />
                   </span>
-                  <span>Transaction </span>
-                </li>
+                  <span>Orders</span>
+                </li>   </Link>
+
+
               </ul>
             </div>
           </div>
@@ -68,19 +74,19 @@ const AdminSidebar = (props) => {
                   <span>
                     <FaChartBar />
                   </span>
-                 <Link to="/admin/chart/bar"><span>bar</span></Link>
+                  <span>bar</span>
                 </li>
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartLine />
                   </span>
-                 <Link to="/admin/chart/line"> <span>line </span></Link>
+                  <span>line </span>
                 </li>
                 <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <FaChartPie />
                   </span>
-                  <Link to="/admin/chart/pie"><span>pie</span></Link>
+                  <span>pie</span>
                 </li>
               </ul>
             </div>
@@ -106,6 +112,7 @@ const AdminSidebar = (props) => {
                   <span>cupon </span>
                 </li>
               </ul>
+
             </div>
           </div>
         </aside>

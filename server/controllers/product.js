@@ -110,32 +110,36 @@ export const fetchSingleProduct = async (req, res) => {
   }
 };
 
-export const updateStock = async (req, res) => {
+export const updateProduct = async (req, res) => {
   try {
-    //this route is for admin
-    if (req.user.role !== "admin")
-      return res.status(403).json({
-        message: "Unauthorized", // condition for checking user role
-      });
-    const product = await Product.findById(req.params.id);
+    const productId = req.params.id;
+    const updates = req.body;
 
-    if (req.body.stock) {
-      product.stock = req.body.stock;
-      await product.save();
-      return res.json({
-        message: "Stock Updated",
-      });
+    // Define the allowed fields for updating
+    const allowedUpdates = ['title', 'description', 'price', 'category', 'sold'];
+    const updatesToApply = {};
+
+    // Filter the incoming updates to only include allowed fields
+    for (const key in updates) {
+        if (allowedUpdates.includes(key)) {
+            updatesToApply[key] = updates[key];
+        }
     }
 
-    res.status(400).json({
-      message: "Please give stock value",
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
-  }
+    // Update the product in the database
+    const updatedProduct = await Product.findByIdAndUpdate(productId, updatesToApply, { new: true });
+
+    if (!updatedProduct) {
+        return res.status(404).send({ error: 'Product not found' });
+    }
+
+    res.status(200).send(updatedProduct);
+} catch (error) {
+    console.error('Error updating product:', error); // Log the error
+    res.status(500).send({ error: 'Server error' });
+}
 };
+
 
 export const deleteProduct = async (req, res) => {
   try {
@@ -144,6 +148,7 @@ export const deleteProduct = async (req, res) => {
       return res.status(403).json({
         message: "Unauthorized", // condition for checking user role
       });
+      
     const product = await Product.findById(req.params.id);
 
     rm(product.image, () => {

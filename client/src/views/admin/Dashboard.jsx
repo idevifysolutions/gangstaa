@@ -7,6 +7,7 @@ import Table from "../../components/admin/DashboardTable"
 import data from "../../assets/data.json"
 import { HiTrendingUp, HiTrendingDown } from "react-icons/hi"
 import { BarChart, DoughnutChart } from '../../components/admin/Charts'
+import { RxHamburgerMenu } from 'react-icons/rx';
 
 const userImg =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";
@@ -16,15 +17,22 @@ const Dashboard = () => {
 
     const [showsidebar, setShowsidebar] = useState(false);
 
-
     const handleSideBar = () => {
         setShowsidebar((prev) => !prev);
         console.log(showsidebar)
       }
+
     return (
         <div className='h-full flex relative'>
-            <AdminSidebar sidebar={{showsidebar, handleSideBar}}/>
-            <main className='dashboard overflow-y-auto'>
+            <AdminSidebar sidebar={{showsidebar, handleSideBar}} />
+            <div className='lg:hidden block cursor-pointer' onClick={handleSideBar}>
+                      
+                      <RxHamburgerMenu  className='text-2xl m-2'/>
+
+                  </div>
+            <main className='dashboard w-full overflow-y-auto'>
+           
+
                 <div className="bar h-[4rem] flex justify-center items-center gap-[1rem] py-0 px-[1rem] border-b-2 border-black">
                     <BsSearch className='text-[1.2rem] opacity-[0.7]' />
                     <input className='mr-auto w-full py-[1rem] px-0 outline-none border-none' type="text" placeholder="Search for data, users, docs" />

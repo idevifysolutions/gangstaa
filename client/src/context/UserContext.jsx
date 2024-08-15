@@ -3,6 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 // import { server } from "../main";
 import toast, { Toaster } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { setLoggeIn } from "../features/userAuthentication/userAuthenticationSlice";
 
 const UserContext = createContext();
 
@@ -10,6 +12,7 @@ export const UserContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   async function userLogin(email, password, navigate) {
     try {
@@ -24,8 +27,10 @@ export const UserContextProvider = ({ children }) => {
       if (data.message) {
         toast.success(data.message);
         localStorage.setItem("token", data.token);
+        localStorage.setItem("isAuth", true); // Store isAuth in local storage
         setLoading(false);
         setIsAuth(true);
+        dispatch(setLoggeIn(true)); // Use true directly instead of isAuth
         setUser(data.user);
         navigate("/");
         window.location.reload();
@@ -34,6 +39,7 @@ export const UserContextProvider = ({ children }) => {
       toast.error(error.response.data.message);
       setLoading(false);
       setIsAuth(false);
+      localStorage.setItem("isAuth", false); // Store false in case of error
     }
   }
 

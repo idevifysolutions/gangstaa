@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { trendingProducts, newDropProducts } from "../data/TrendingNewDropData";
 
 const Trending_Products = () => {
@@ -12,6 +13,8 @@ const Trending_Products = () => {
     image4: false,
     image5: false,
   });
+
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleNewDropClick = () => {
     if (!newDrop) {
@@ -39,6 +42,10 @@ const Trending_Products = () => {
       ...prev,
       [image1]: !prev[image1],
     }));
+  };
+
+  const handleViewAllClick = () => {
+    navigate("/catagery/JeansPage"); // Navigate to the Jeans page
   };
 
   const data = Object.values(isHovered);
@@ -199,7 +206,10 @@ const Trending_Products = () => {
         )}
         <div className="flex gap-5 mx-auto my-10 w-fit h-fit mb-14">
           <div className="newdrops ">
-            <button className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black bg-gradient-to-r from-primary to-secondary hover:scale-105">
+          <button
+              className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black bg-gradient-to-r from-primary to-secondary hover:scale-105"
+              onClick={handleViewAllClick} // Handle click
+            >
               View all
             </button>
           </div>

@@ -41,10 +41,10 @@ function UserProfile() {
             <img
               src={image}
               alt="User"
-              className="object-cover w-32 h-32 mx-auto mb-4 border "
+              className="object-cover w-32 h-32 mx-auto mb-4 border"
             />
           ) : (
-            <div className="flex items-center justify-center w-32 h-32 mx-auto mb-4 text-gray-500 bg-gray-200 border ">
+            <div className="flex items-center justify-center w-32 h-32 mx-auto mb-4 text-gray-500 bg-gray-200 border">
               No Image
             </div>
           )}
@@ -52,7 +52,7 @@ function UserProfile() {
             type="file"
             accept="image/*"
             onChange={handleImageUpload}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file: file:border-0 file:text-sm file:font-semibold file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-300"
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-300"
           />
         </div>
 

@@ -26,5 +26,4 @@ const TrendingNow = ({ productId, name, price, stock, photo, handler }) => {
 };
 
 
-
 export default TrendingNow;

@@ -10,12 +10,12 @@ const userAuthenticationSlice = createSlice({
   reducers: {
     setActivationToken: (state, action) => {
       console.log("action.payloadsssssssssssssssss", action.payload);
-      state.activationToken = action.payload;
+      state.activationToken = true;
       console.log("state.activationToken", state.activationToken);
     },
     setLoggeIn : (state , action) => {
       console.log("Logged In", action.payload);
-      state.isLoggedIn = true
+      state.isLoggedIn = action.payload
       console.log("After Logged In", action.payload);
     },
     setSignedUp : (state , action) => {
