@@ -120,13 +120,15 @@ const Navigation = () => {
                 </motion.div>
               </Link>
             )}
+
             {/* <motion.div variants={iconVariants} whileHover="hover">
               <Link to="/cart">
-
-                <p><FaShoppingCart className="relative w-6 h-6" />
-                <span className="total-order absolute top-[0px] bg-red-500 p-[10px]">{cartItems.length}</span>
+                <p className="relative flex items-center">
+                  <FaShoppingCart className="w-6 h-6" />
+                  <span className="absolute bottom-5 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItems.length}
+                  </span>
                 </p>
-
               </Link>
             </motion.div> */}
 
@@ -134,9 +136,11 @@ const Navigation = () => {
               <Link to="/cart">
                 <p className="relative flex items-center">
                   <FaShoppingCart className="w-6 h-6" />
-                  <span className="absolute bottom-5 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartItems.length}
-                  </span>
+                  {cartItems.length > 0 && (
+                    <span className="absolute bottom-5 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {cartItems.length}
+                    </span>
+                  )}
                 </p>
               </Link>
             </motion.div>
