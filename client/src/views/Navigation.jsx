@@ -105,18 +105,8 @@ const Navigation = () => {
               <Link to="/cart">
                 <p className="relative flex items-center">
                   <FaShoppingCart className="w-6 h-6" />
-                  <span className="absolute bottom-5 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                    {cartItems.length}
-                  </span>
-                </p>
-              </Link>
-            </motion.div>
-            <motion.div variants={iconVariants} whileHover="hover">
-              <Link to="/cart">
-                <p className="relative flex items-center">
-                  <FaShoppingCart className="w-6 h-6" />
                   {cartItems.length > 0 && (
-                    <span className="absolute bottom-5 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    <span className="absolute right-0 flex items-center justify-center w-5 h-5 text-xs text-white bg-red-500 rounded-full bottom-5">
                       {cartItems.length}
                     </span>
                   )}
@@ -128,7 +118,7 @@ const Navigation = () => {
                 onClick={handleLogout}
                 variants={iconVariants}
                 whileHover="hover"
-                className="font-bold text-xl bg-black text-white p-2 cursor-pointer"
+                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
               >
                 LogOut
               </motion.button>
@@ -136,7 +126,7 @@ const Navigation = () => {
               <Link to="/login">
                 <motion.div
                   whileHover="hover"
-                  className="font-bold text-xl bg-black text-white p-2 cursor-pointer"
+                  className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
                 >
                   LogIn
                 </motion.div>
@@ -181,28 +171,28 @@ const Navigation = () => {
             {/* Category links */}
             <Link
               to="/catagery/TShirtPage"
-              className="block px-3 py-2 rounded-md hover:bg-gray-200 text-lg font-medium"
+              className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("T-Shirts")}
             </Link>
             <Link
               to="/catagery/ShirtsPage"
-              className="block px-3 py-2 rounded-md hover:bg-gray-200 text-lg font-medium"
+              className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Shirts")}
             </Link>
             <Link
               to="/catagery/JeansPage"
-              className="block px-3 py-2 rounded-md hover:bg-gray-200 text-lg font-medium"
+              className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jeans")}
             </Link>
             <Link
               to="/catagery/jackets"
-              className="block px-3 py-2 rounded-md hover:bg-gray-200 text-lg font-medium"
+              className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jackets")}
@@ -221,7 +211,7 @@ const Navigation = () => {
           ) : (
             <Link
               to="/login"
-              className="block px-3 py-2 text-lg  rounded-md hover:bg-gray-200 font-bold"
+              className="block px-3 py-2 text-lg font-bold rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               <motion.div whileHover="hover">LogIn</motion.div>
