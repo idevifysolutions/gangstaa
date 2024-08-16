@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaTimes, FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
 import logo from "../assets/gangstaaLogo.png";
 import { useSelector } from "react-redux";
 
@@ -100,36 +101,6 @@ const Navigation = () => {
 
           {/* Items hidden on mobile and shown on desktop */}
           <div className="items-center hidden space-x-4 md:flex">
-            {isAuth ? (
-              <motion.button
-                onClick={handleLogout}
-                variants={iconVariants}
-                whileHover="hover"
-                className="font-bold text-xl"
-              >
-                LogOut
-              </motion.button>
-            ) : (
-              <Link to="/login">
-                <motion.div
-                  variants={iconVariants}
-                  whileHover="hover"
-                  className="font-bold text-xl"
-                >
-                  LogIn
-                </motion.div>
-              </Link>
-            )}
-            {/* <motion.div variants={iconVariants} whileHover="hover">
-              <Link to="/cart">
-
-                <p><FaShoppingCart className="relative w-6 h-6" />
-                <span className="total-order absolute top-[0px] bg-red-500 p-[10px]">{cartItems.length}</span>
-                </p>
-
-              </Link>
-            </motion.div> */}
-
             <motion.div variants={iconVariants} whileHover="hover">
               <Link to="/cart">
                 <p className="relative flex items-center">
@@ -140,6 +111,32 @@ const Navigation = () => {
                 </p>
               </Link>
             </motion.div>
+            <motion.div variants={iconVariants} whileHover="hover">
+              <Link to="/cart">
+                <p className="relative flex items-center">
+                  <FaSearch className="w-6 h-6" />
+                </p>
+              </Link>
+            </motion.div>
+            {isAuth ? (
+              <motion.button
+                onClick={handleLogout}
+                variants={iconVariants}
+                whileHover="hover"
+                className="font-bold text-xl bg-black text-white p-2 cursor-pointer"
+              >
+                LogOut
+              </motion.button>
+            ) : (
+              <Link to="/login">
+                <motion.div
+                  whileHover="hover"
+                  className="font-bold text-xl bg-black text-white p-2 cursor-pointer"
+                >
+                  LogIn
+                </motion.div>
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -160,37 +157,20 @@ const Navigation = () => {
               onClick={() => setIsOpen(false)}
             >
               <FaUserAlt className="w-5 h-5" />
+              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                Profile
+              </span>
             </Link>
 
-            {/* Cart and User Icons in side menu */}
-            {isAuth ? (
-              <motion.button
-                onClick={() => {
-                  setIsOpen(false);
-                  handleLogout();
-                }}
-                variants={iconVariants}
-                className="block w-full px-3 py-2 text-lg font-medium text-left rounded-md hover:bg-gray-200"
-              >
-                LogOut
-              </motion.button>
-            ) : (
-              <Link
-                to="/login"
-                className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
-                onClick={() => setIsOpen(false)}
-              >
-                <motion.div variants={iconVariants} whileHover="hover">
-                  LogIn
-                </motion.div>
-              </Link>
-            )}
             <Link
               to="/cart"
-              className="block px-3 py-2 text-base font-medium rounded-md hover:bg-gray-200"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
               <FaShoppingCart className="w-6 h-6" />
+              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                Cart
+              </span>
             </Link>
 
             {/* Category links */}
@@ -223,6 +203,25 @@ const Navigation = () => {
               {renderTextWithAnimation("Jackets")}
             </Link>
           </div>
+          {isAuth ? (
+            <motion.button
+              onClick={() => {
+                setIsOpen(false);
+                handleLogout();
+              }}
+              className="block w-full px-3 py-2 text-lg font-bold text-left rounded-md hover:bg-gray-200"
+            >
+              LogOut
+            </motion.button>
+          ) : (
+            <Link
+              to="/login"
+              className="block px-3 py-2 text-lg  rounded-md hover:bg-gray-200 font-bold"
+              onClick={() => setIsOpen(false)}
+            >
+              <motion.div whileHover="hover">LogIn</motion.div>
+            </Link>
+          )}
         </motion.div>
       )}
     </nav>
