@@ -11,6 +11,16 @@ const schema = new mongoose.Schema({
     required: true,
   },
 
+  colors: {
+    type: [], // Array of strings
+    default: [],
+  },
+
+  size: {
+    type: [],
+    default: []
+  },
+
   stock: {
     type: Number,
     required: true,

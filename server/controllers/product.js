@@ -9,7 +9,12 @@ export const createProduct = async (req, res) => {
         message: "Unauthorized", // condition for checking user role
       });
 
-    const { title, description, category, price, stock } = req.body;
+    let { title, description, category, price, stock, colors, size } = req.body;
+
+     colors = colors.split(',');
+     size = size.split(',');
+     stock = Number(stock);
+
 
     const image = req.file;
 
@@ -26,6 +31,8 @@ export const createProduct = async (req, res) => {
       category,
       price,
       stock,
+      colors, 
+      size,
       image: image?.path,
     });
 
@@ -33,6 +40,8 @@ export const createProduct = async (req, res) => {
       message: "Product Created",
       product,
     });
+
+    console.log("array of colors", product);
   } catch (error) {
     res.status(500).json({
       message: error.message,
@@ -91,6 +100,7 @@ export const fetchProductsAdmin = async (req, res) => {
     const products = await Product.find();
 
     res.json({ products });
+    console.log(products);
   } catch (error) {
     res.status(500).json({
       message: error.message,
