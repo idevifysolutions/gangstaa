@@ -114,7 +114,12 @@ const Navigation = () => {
             <motion.div variants={iconVariants} whileHover="hover">
               <Link to="/cart">
                 <p className="relative flex items-center">
-                  <FaSearch className="w-6 h-6" />
+                  <FaShoppingCart className="w-6 h-6" />
+                  {cartItems.length > 0 && (
+                    <span className="absolute bottom-5 right-0 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {cartItems.length}
+                    </span>
+                  )}
                 </p>
               </Link>
             </motion.div>
