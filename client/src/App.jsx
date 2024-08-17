@@ -10,10 +10,10 @@ import LogIn from "./views/LogIn";
 import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
 import VerifyingOTP from "./views/VerifyingOTP";
-import JacketsPage from "./components/product/JacketsPage";
-import ShirtsPage from "./components/product/ShirtsPage";
-import JeansPage from "./components/product/JeansPage";
-import TShirtPage from "./components/product/TShirtPage";
+import AllproductPage from "./components/product/AllproductPage";
+// import ShirtsPage from "./components/product/ShirtsPage";
+// import JeansPage from "./components/product/JeansPage";
+// import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
 import CheckoutPage from "./views/Checkout";
@@ -60,14 +60,14 @@ const App = () => {
           <Route path="/payment" element={<PaymentPage />} />
 
           <Route
-            path="/catagery/jackets"
+            path="/catagery/AllproductPage"
             element={
               <ProtectedRoute>
-                <JacketsPage />
+                <AllproductPage />
               </ProtectedRoute>
             }
           />
-
+{/* 
           <Route
             path="/catagery/ShirtsPage"
             element={
@@ -75,25 +75,25 @@ const App = () => {
                 <ShirtsPage />
               </ProtectedRoute>
             }
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path="/catagery/JeansPage"
             element={
               <ProtectedRoute>
                 <JeansPage />
               </ProtectedRoute>
             }
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path="/catagery/TShirtPage"
             element={
               <ProtectedRoute>
                 <TShirtPage />
               </ProtectedRoute>
             }
-          />
+          /> */}
 
           <Route
             path="/catagery/userprofile"

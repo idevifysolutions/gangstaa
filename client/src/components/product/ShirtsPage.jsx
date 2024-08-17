@@ -140,12 +140,9 @@ const shirtsProducts = [
     price: '999',
     imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.PGU90xMjuYZbTrhqyTxIqwD6D6&pid=Api&P=0&h=180',
     size: 'M',
-    fit: 'Slim',
-    pattern: 'Solid',
-    color: 'Blue',
-    occasion: 'Casual',
-    sleeves: 'Long',
-    neck: 'Collar'
+  
+    color: 'Blue'
+   
   },
   {
     id: 2,
