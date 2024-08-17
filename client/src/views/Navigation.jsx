@@ -6,6 +6,9 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import logo from "../assets/gangstaaLogo.png";
 import { useSelector } from "react-redux";
+import { BiSolidCategory } from "react-icons/bi";
+import { IoMdLogOut } from "react-icons/io";
+import { FaHome } from "react-icons/fa";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -147,6 +150,16 @@ const Navigation = () => {
           <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
             {/* User Profile button */}
             <Link
+              to="/"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaHome className="w-5 h-5" />
+              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                Home
+              </span>
+            </Link>
+            <Link
               to="/catagery/userprofile"
               className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
@@ -168,8 +181,20 @@ const Navigation = () => {
               </span>
             </Link>
 
-            {/* Category links */}
             <Link
+              to="/catagery"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+              onClick={() => setIsOpen(false)}
+            >
+           
+              <BiSolidCategory className="w-6 h-6"/>
+              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                Category
+              </span>
+            </Link>
+
+            {/* Category links */}
+            {/* <Link
               to="/catagery/TShirtPage"
               className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
@@ -196,25 +221,37 @@ const Navigation = () => {
               onClick={() => setIsOpen(false)}
             >
               {renderTextWithAnimation("Jackets")}
-            </Link>
+            </Link> */}
           </div>
           {isAuth ? (
-            <motion.button
-              onClick={() => {
-                setIsOpen(false);
-                handleLogout();
-              }}
-              className="block w-full px-3 py-2 text-lg font-bold text-left rounded-md hover:bg-gray-200"
-            >
-              LogOut
-            </motion.button>
-          ) : (
+            
             <Link
+           
+            className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+            onClick={() => {
+                  setIsOpen(false);
+                  handleLogout();
+                }}
+          >
+         
+            <IoMdLogOut className="w-6 h-6"/>
+            <span className="pl-2 font-semibold text-[18px] text-gray-500">
+              Logout
+            </span>
+          </Link>
+          ) : (
+            
+            <Link
+              
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
               to="/login"
-              className="block px-3 py-2 text-lg font-bold rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
-              <motion.div whileHover="hover">LogIn</motion.div>
+           
+              <IoMdLogOut className="w-6 h-6"/>
+              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                Login
+              </span>
             </Link>
           )}
         </motion.div>
