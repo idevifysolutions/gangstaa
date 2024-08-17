@@ -97,7 +97,15 @@ const tshirtProducts = [
     name: 'Classic White T-Shirt',
     price: 'INR 499',
     imageUrl: "https://tse1.mm.bing.net/th?id=OIP.iTtCdo2MWG8Jg93bWoswpwAAAA&pid=Api&P=0&h=180",
-  },
+  },{
+  id: 1,
+  name: 'Cool Blue Shirt',
+  price: '999',
+  imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.PGU90xMjuYZbTrhqyTxIqwD6D6&pid=Api&P=0&h=180',
+  size: 'M',
+
+  color: 'Blue'
+  }
   // Add more products as needed
 ];
 
