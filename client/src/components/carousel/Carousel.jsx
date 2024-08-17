@@ -87,11 +87,17 @@ const Hero = ({ handleOrderPopup }) => {
                     data-aos-delay="300"
                     className="flex items-center justify-center gap-4 sm:justify-start"
                   >
-                    <button
+                    {/* <button
                       onClick={handleOrderPopup}
                       className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary hover:scale-105"
                     >
                       Shop Now
+                    </button> */}
+                    <button
+                      onClick={() => navigate("/catagery/jackets")}
+                      className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary hover:scale-105"
+                    >
+                      All Products
                     </button>
                     <button
                       onClick={() => navigate("/catagery/ShirtsPage")}
