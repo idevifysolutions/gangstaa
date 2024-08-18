@@ -15,9 +15,12 @@ const instance = new Razorpay({
   key_secret: process.env.Razorpay_Secret,
 });
 
+
+
 export const newOrderCod = async (req, res) => {
   try {
     const { method, phone, address } = req.body;
+    console.log("Req.id" , req.user._id)
 
     const cart = await Cart.find({ user: req.user._id }).populate("product");
 

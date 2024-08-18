@@ -18,19 +18,18 @@ import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
 import CheckoutPage from "./views/Checkout";
 import PaymentPage from "./views/Payment";
+import Shipping from "./views/Shipping";
 import Userprofile from "./components/templete/userprofile";
 import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
 import BarCharts from "./views/admin/charts/BarCharts";
 import PieCharts from "./views/admin/charts/PieCharts";
-import LineCharts from "./views/admin/charts/LineCharts"
+import LineCharts from "./views/admin/charts/LineCharts";
 import Orders from "./views/admin/Orders";
-
 
 // import { useSelector } from "react-redux";
 // import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedRoute from "./components/ProtectedRoute"; // Import ProtectedRoute
-
 
 const App = () => {
   return (
@@ -58,6 +57,7 @@ const App = () => {
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/shipping" element={<Shipping />} />
 
           <Route
             path="/catagery/jackets"
