@@ -20,6 +20,7 @@ import CheckoutPage from "./views/Checkout";
 import PaymentPage from "./views/Payment";
 import Shipping from "./views/Shipping";
 import Userprofile from "./components/templete/userprofile";
+import MyOrder from "./components/templete/MyOrder";
 import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
 import BarCharts from "./views/admin/charts/BarCharts";
@@ -67,7 +68,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-{/* 
+          {/* 
           <Route
             path="/catagery/ShirtsPage"
             element={
@@ -100,6 +101,15 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Userprofile />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/catagery/myorder"
+            element={
+              <ProtectedRoute>
+                <MyOrder />
               </ProtectedRoute>
             }
           />
