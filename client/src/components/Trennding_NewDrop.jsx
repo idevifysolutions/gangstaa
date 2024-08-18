@@ -45,9 +45,9 @@ const Trending_Products = () => {
   };
 
   const handleViewAllClick = () => {
-    navigate("/catagery/JeansPage"); // Navigate to the Jeans page
+    window.scrollTo(0, 0);
+    navigate("/catagery");
   };
-
   const data = Object.values(isHovered);
 
   return (
@@ -208,7 +208,7 @@ const Trending_Products = () => {
           <div className="newdrops ">
             <button
               className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black bg-gradient-to-r from-primary to-secondary hover:scale-105"
-              onClick={() => navigate("/catagery")}
+              onClick={handleViewAllClick}
             >
               View all
             </button>
