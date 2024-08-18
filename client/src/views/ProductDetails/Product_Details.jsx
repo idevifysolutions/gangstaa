@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import image1 from "./images/hoodie1.jpeg";
@@ -19,8 +20,10 @@ import { useParams } from "react-router-dom";
 
 const Product_Details = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  
+  //TODO: needed to fetch data from database to show the product details and add the item to the cart
   const params = useParams();
-  // console.log(params.id)
+
   return (
     <div className="relative h-full mt-7">
       <div className="flex flex-wrap items-center justify-around gap-5 sm:justify-center">
@@ -90,21 +93,16 @@ const Product_Details = () => {
 
           <h2 className="text-3xl font-bold mt-9">Select Size</h2>
           <ul className="flex flex-wrap mt-4 gap-7">
-            <li className="inline-block text-2xl font-bold border-2 border-black border-solid rounded-md p-7 active:bg-gray-500">
-              S
-            </li>
-            <li className="inline-block text-2xl font-bold border-2 border-black border-solid rounded-md p-7 active:bg-gray-500">
-              M
-            </li>
-            <li className="inline-block text-2xl font-bold border-2 border-black border-solid rounded-md p-7 active:bg-gray-500">
-              L
-            </li>
-            <li className="inline-block text-2xl font-bold border-2 border-black border-solid rounded-md p-7 active:bg-gray-500">
-              XL
-            </li>
-            <li className="inline-block text-2xl font-bold border-2 border-black border-solid rounded-md p-7 active:bg-gray-500">
-              XXL
-            </li>
+              <li className="font-bold text-xl border-2 border-black h-8 w-8 
+              rounded-md p-6 flex items-center justify-center">S</li>
+              <li className="font-bold text-xl border-2 border-black h-8 w-8 
+              rounded-md p-6 flex items-center justify-center">M</li>
+              <li className="font-bold text-xl border-2 border-black h-8 w-8 
+              rounded-md p-6 flex items-center justify-center">L</li>
+              <li className="font-bold text-xl border-2 border-black h-8 w-8 
+              rounded-md p-6 flex items-center justify-center">XL</li>
+              <li className="font-bold text-xl border-2 border-black h-8 w-8 
+              rounded-md p-6 flex items-center justify-center">XXL</li>
           </ul>
           <div className="flex gap-5 my-4">
             <button className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary hover:scale-105">

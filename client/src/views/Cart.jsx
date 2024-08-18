@@ -29,9 +29,12 @@ const Cart = () => {
     dispatch(removeProductFromCart(productId));
   };
 
-  useEffect(() => {
-    dispatch(calculatePrice());
-  }, [cartItems]);
+
+  useEffect(()=>{
+    dispatch(calculatePrice())
+    localStorage.setItem("cart_items", JSON.stringify(cartItems));
+  }, [cartItems])
+
 
   return (
     <div className='py-8 px-16 flex flex-wrap justify-center gap-[4rem] "h-[calc(100vh-4rem)]"'>
@@ -39,13 +42,12 @@ const Cart = () => {
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (
             <>
-              <CartItemCard
-                key={index}
-                cartItem={item}
-                incrementHandler={incrementHandler}
-                decrementHandler={decrementHandler}
-                removeHandler={removeHandler}
-              />
+
+
+              <CartItemCard key={crypto.randomUUID()} cartItem={item} incrementHandler={incrementHandler} decrementHandler={decrementHandler} removeHandler={removeHandler} />
+
+
+
             </>
           ))
         ) : (
