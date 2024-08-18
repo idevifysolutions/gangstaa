@@ -60,7 +60,7 @@ const App = () => {
           <Route path="/payment" element={<PaymentPage />} />
 
           <Route
-            path="/catagery/AllproductPage"
+            path="/catagery"
             element={
               <ProtectedRoute>
                 <AllproductPage />
