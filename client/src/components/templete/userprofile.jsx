@@ -92,7 +92,7 @@ function UserProfile() {
     return (
         <div className="flex w-full h-screen">
             {/* Left Column (25%) */}
-            <div className="w-1/4 bg-gray-800 p-6 text-center text-white">
+            <div className="w-1/4 bg-gray-500 p-6 text-center text-white">
                 <img 
                     src={userInfo.image ? URL.createObjectURL(userInfo.image) : defaultImage} 
                     alt="Profile" 
@@ -112,7 +112,7 @@ function UserProfile() {
 
             {/* Right Column (75%) */}
             <div className="w-3/4 p-6">
-                <h2 className="text-2xl font-bold mb-4">Profile Settings</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center ">Profile Settings</h2>
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label>Name</label>
@@ -177,30 +177,30 @@ function UserProfile() {
                 </div>
 
                 <div className="mt-4">
-                    {isEditMode ? (
-                        <>
-                            <button
-                                onClick={clearInfo}
-                                className="bg-red-500 text-white px-4 py-2 rounded mr-4"
-                            >
-                                Delete Info
-                            </button>
-                            <button
-                                onClick={handleSubmit}
-                                className="bg-green-500 text-white px-4 py-2 rounded"
-                            >
-                                Save Info
-                            </button>
-                        </>
-                    ) : (
-                        <button
-                            onClick={handleEditProfile}
-                            className="bg-blue-500 text-white px-4 py-2 rounded"
-                        >
-                            Edit Profile
-                        </button>
-                    )}
-                </div>
+    {isEditMode ? (
+        <>
+            <button
+                onClick={clearInfo}
+                className="p-2 text-xl font-bold text-white bg-black cursor-pointer  mr-4"
+            >
+                Delete Info
+            </button>
+            <button
+                onClick={handleSubmit}
+                className="p-2 text-xl font-bold text-white bg-black cursor-pointer "
+            >
+                Save Info
+            </button>
+        </>
+    ) : (
+        <button
+            onClick={handleEditProfile}
+            className="p-2 text-xl font-bold text-white bg-black cursor-pointer rounded"
+        >
+            Edit Profile
+        </button>
+    )}
+</div>
 
                 {/* Popup Notification */}
                 {showPopup && (
