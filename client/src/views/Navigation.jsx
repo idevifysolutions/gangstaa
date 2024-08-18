@@ -119,7 +119,6 @@ const Navigation = () => {
             {isAuth ? (
               <motion.button
                 onClick={handleLogout}
-                variants={iconVariants}
                 whileHover="hover"
                 className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
               >
@@ -186,8 +185,7 @@ const Navigation = () => {
               className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
               onClick={() => setIsOpen(false)}
             >
-           
-              <BiSolidCategory className="w-6 h-6"/>
+              <BiSolidCategory className="w-6 h-6" />
               <span className="pl-2 font-semibold text-[18px] text-gray-500">
                 Category
               </span>
@@ -224,31 +222,25 @@ const Navigation = () => {
             </Link> */}
           </div>
           {isAuth ? (
-            
             <Link
-           
-            className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
-            onClick={() => {
-                  setIsOpen(false);
-                  handleLogout();
-                }}
-          >
-         
-            <IoMdLogOut className="w-6 h-6"/>
-            <span className="pl-2 font-semibold text-[18px] text-gray-500">
-              Logout
-            </span>
-          </Link>
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+              onClick={() => {
+                setIsOpen(false);
+                handleLogout();
+              }}
+            >
+              <IoMdLogOut className="w-6 h-6" />
+              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                Logout
+              </span>
+            </Link>
           ) : (
-            
             <Link
-              
               className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
               to="/login"
               onClick={() => setIsOpen(false)}
             >
-           
-              <IoMdLogOut className="w-6 h-6"/>
+              <IoMdLogOut className="w-6 h-6" />
               <span className="pl-2 font-semibold text-[18px] text-gray-500">
                 Login
               </span>
