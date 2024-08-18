@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaPlus } from "react-icons/fa"
+import { server } from "../store/store";
 
 const TrendingNow = ({ productId, name, price, stock, photo, handler }) => {
   return (
@@ -10,12 +11,12 @@ const TrendingNow = ({ productId, name, price, stock, photo, handler }) => {
 
        <Link to={`/product/${productId}`}>
        <div className="w-[20rem] h-[20rem] flex items-start justify-center ">
-          <img className="object-cover w-[95%] h-[95%] rounded-md" src={photo} alt="" />
+          <img className="object-cover w-[95%] h-[95%] rounded-md" src={`${server}/${photo}`} alt="" />
         </div>
        </Link>
 
         <p className="text-2xl font-bold">{name}</p>
-        <span className="text-xl">{price}</span>
+        <span className="text-xl font-bold">Rs {price}</span>
         <div className="w-[10rem] mt-4">
           <button className="border-2 border-black p-4 flex items-center justify-center w-full gap-3" onClick={() => handler({ productId, price, name, photo, stock, quantity: 1 })}>
             <span className="font-bold">Add To Cart</span>

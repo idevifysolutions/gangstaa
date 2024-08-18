@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { emptyCart } from "../features/productCart/productCart";
 
 const Checkout = () => {
   const [userInfoToggle, setUserInfoToggle] = useState(true);
@@ -14,6 +16,8 @@ const Checkout = () => {
     phone: "",
     address: "",
   });
+
+  const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,6 +54,7 @@ const Checkout = () => {
 
       if (response.status === 201) {
         toast.success("Order placed successfully!");
+        dispatch(emptyCart())
       } else {
         toast.error(`Failed to place order: ${response.data.message}`);
       }

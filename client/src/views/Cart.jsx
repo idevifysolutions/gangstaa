@@ -69,9 +69,13 @@ const Cart = () => {
         <p className="text-[1.1rem] flex justify-between">
           Discount: <span>₹ {discount}</span>
         </p>
-        <p className="text-[1.1rem] font-bold flex justify-between">
+       {
+        subtotal === 0 ? ( <p className="text-[1.1rem] font-bold flex justify-between">
+          Total: <span>₹ {0}</span>
+        </p>): ( <p className="text-[1.1rem] font-bold flex justify-between">
           Total: <span>₹ {total}</span>
-        </p>
+        </p>)
+       }
 
         {
           //Add the route to the shipping form page
