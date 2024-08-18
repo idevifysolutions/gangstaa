@@ -28,7 +28,7 @@ const Home = () => {
     if (isAuth == null) {
       // console.log(isAuth);
       // return <LoginPopUp />;
-      return toast.error("Longin required");
+      return toast.error("Login Required");
     } else {
       if (stock < 1) return toast.error("Out Of Stock");
       dispatch(addToCart({ productId, photo, name, price, quantity, stock }));

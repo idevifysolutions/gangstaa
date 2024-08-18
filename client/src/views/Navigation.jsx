@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FaTimes, FaUserAlt, FaShoppingCart } from "react-icons/fa";
+import {
+  FaTimes,
+  FaBorderAll,
+  FaUserAlt,
+  FaShoppingCart,
+} from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import logo from "../assets/gangstaaLogo.png";
@@ -166,6 +171,17 @@ const Navigation = () => {
               <FaUserAlt className="w-5 h-5" />
               <span className="pl-2 font-semibold text-[18px] text-gray-500">
                 Profile
+              </span>
+            </Link>
+
+            <Link
+              to="/catagery/myorder"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaBorderAll className="w-5 h-5" />
+              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                Order
               </span>
             </Link>
 
