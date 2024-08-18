@@ -1,402 +1,218 @@
+
 import React, { useState } from 'react';
-import defaultImage from "../../data/image.jpeg";
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import axios from 'axios';
+import defaultImage from "../../data/image.jpeg"; // Adjust the path as necessary
 
 function UserProfile() {
-  const [image, setImage] = useState(defaultImage);
-  const [name, setName] = useState('Ashanka Dongare');
-  const [email, setEmail] = useState('ashankad343@gmail.com');
-  const [address, setAddress] = useState('Ashanka Dongare, At post Haregoan, Tq Ausa Dis Latur, 413520 M.S.Bidve Engineering College of Latur Maharashtra, India, +919373338274');
-  const [isEditingName, setIsEditingName] = useState(false);
-  const [isEditingEmail, setIsEditingEmail] = useState(false);
-  const [isEditingAddress, setIsEditingAddress] = useState(false);
-  
-  // Mock order history data
-  const orderHistory = [
-    { id: 1, date: '2024-08-01', status: 'Delivered', total: '$100' },
-    { id: 2, date: '2024-07-25', status: 'Processing', total: '$80' }
-  ];
+    const [userInfo, setUserInfo] = useState({
+        name: '',
+        surname: '',
+        email: '',
+        phone: '',
+        address: '', // Added address field
+        image: null, // For image upload
+    });
 
-  // Image upload handler
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+    const [showPopup, setShowPopup] = useState(false); // For showing the pop-up
+    const [isEditMode, setIsEditMode] = useState(true); // To toggle between Save and Edit mode
+    const [errors, setErrors] = useState({}); // To handle validation errors
 
-  // Save button handler
-  const handleSave = () => {
-    setIsEditingName(false);
-    setIsEditingEmail(false);
-    setIsEditingAddress(false);
-  };
+    // Handle input change
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setUserInfo({
+            ...userInfo,
+            [name]: value,
+        });
+    };
 
-  return (
-    <div className="max-w-2xl mx-auto bg-gray-100 p-6 rounded-lg shadow-lg">
-      {/* Profile Image and Edit */}
-      <div className="flex items-center justify-center mb-6">
-        <div className="relative">
-          <img
-            src={image}
-            alt="Profile"
-            className="w-16 h-16 xs:w-24 xs:h-24 sm:w-32 sm:h-32 rounded-full border-2 border-gray-300"
-          />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            className="absolute top-0 left-0 w-16 h-16 xs:w-24 xs:h-24 sm:w-32 sm:h-32 opacity-0 cursor-pointer"
-          />
+    // Handle file change
+    const handleFileChange = (e) => {
+        setUserInfo({
+            ...userInfo,
+            image: e.target.files[0],
+        });
+    };
+
+    // Validate required fields
+    const validateForm = () => {
+        const newErrors = {};
+        if (!userInfo.name) newErrors.name = "Name is required";
+        if (!userInfo.surname) newErrors.surname = "Surname is required";
+        if (!userInfo.email) newErrors.email = "Email is required";
+        if (!userInfo.phone) newErrors.phone = "Phone is required";
+        if (!userInfo.address) newErrors.address = "Address is required";
+        return newErrors;
+    };
+
+    // Handle form submission
+    const handleSubmit = () => {
+        const formErrors = validateForm();
+        if (Object.keys(formErrors).length > 0) {
+            setErrors(formErrors);
+            return;
+        }
+
+        const formData = new FormData();
+        for (const key in userInfo) {
+            formData.append(key, userInfo[key]);
+        }
+
+        axios.post('http://localhost:4000/api/upload', formData)
+            .then((res) => {
+                console.log('Profile updated successfully:', res.data);
+                // Show popup, toggle mode to Edit and remove delete button
+                setShowPopup(true);
+                setIsEditMode(false);
+                setErrors({});
+            })
+            .catch((err) => {
+                console.error('Error updating profile:', err.message || err);
+            });
+    };
+
+    // Clear all input fields
+    const clearInfo = () => {
+        setUserInfo({
+            name: '',
+            surname: '',
+            email: '',
+            phone: '',
+            address: '', // Clear address field
+            image: null,
+        });
+        setErrors({});
+    };
+
+    // Handle Edit Profile mode
+    const handleEditProfile = () => {
+        setIsEditMode(true);
+    };
+
+    return (
+        <div className="flex w-full h-screen">
+            {/* Left Column (25%) */}
+            <div className="w-1/4 bg-gray-800 p-6 text-center text-white">
+                <img 
+                    src={userInfo.image ? URL.createObjectURL(userInfo.image) : defaultImage} 
+                    alt="Profile" 
+                    className="rounded-full mx-auto w-32 h-32"
+                />
+                <input
+                    type="file"
+                    onChange={handleFileChange}
+                    className="mt-4"
+                    disabled={!isEditMode} // Disable file input in view mode
+                />
+                <h2 className="mt-4 text-xl font-semibold">
+                    {userInfo.name || "User"} {userInfo.surname || "Name"}
+                </h2>
+                <p>{userInfo.email || "user@example.com"}</p>
+            </div>
+
+            {/* Right Column (75%) */}
+            <div className="w-3/4 p-6">
+                <h2 className="text-2xl font-bold mb-4">Profile Settings</h2>
+                <div className="grid grid-cols-2 gap-4">
+                    <div>
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            value={userInfo.name}
+                            onChange={handleInputChange}
+                            className={`border p-2 w-full ${errors.name ? 'border-red-500' : ''}`}
+                            disabled={!isEditMode} // Disable input in view mode
+                        />
+                        {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+                    </div>
+                    <div>
+                        <label>Surname</label>
+                        <input
+                            type="text"
+                            name="surname"
+                            value={userInfo.surname}
+                            onChange={handleInputChange}
+                            className={`border p-2 w-full ${errors.surname ? 'border-red-500' : ''}`}
+                            disabled={!isEditMode} // Disable input in view mode
+                        />
+                        {errors.surname && <p className="text-red-500 text-sm">{errors.surname}</p>}
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            value={userInfo.email}
+                            onChange={handleInputChange}
+                            className={`border p-2 w-full ${errors.email ? 'border-red-500' : ''}`}
+                            disabled={!isEditMode} // Disable input in view mode
+                        />
+                        {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+                    </div>
+                    <div>
+                        <label>Phone</label>
+                        <input
+                            type="text"
+                            name="phone"
+                            value={userInfo.phone}
+                            onChange={handleInputChange}
+                            className={`border p-2 w-full ${errors.phone ? 'border-red-500' : ''}`}
+                            disabled={!isEditMode} // Disable input in view mode
+                        />
+                        {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
+                    </div>
+                    <div>
+                        <label>Address</label>
+                        <input
+                            type="text"
+                            name="address"
+                            value={userInfo.address}
+                            onChange={handleInputChange}
+                            className={`border p-2 w-full ${errors.address ? 'border-red-500' : ''}`}
+                            disabled={!isEditMode} // Disable input in view mode
+                        />
+                        {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
+                    </div>
+                </div>
+
+                <div className="mt-4">
+                    {isEditMode ? (
+                        <>
+                            <button
+                                onClick={clearInfo}
+                                className="bg-red-500 text-white px-4 py-2 rounded mr-4"
+                            >
+                                Delete Info
+                            </button>
+                            <button
+                                onClick={handleSubmit}
+                                className="bg-green-500 text-white px-4 py-2 rounded"
+                            >
+                                Save Info
+                            </button>
+                        </>
+                    ) : (
+                        <button
+                            onClick={handleEditProfile}
+                            className="bg-blue-500 text-white px-4 py-2 rounded"
+                        >
+                            Edit Profile
+                        </button>
+                    )}
+                </div>
+
+                {/* Popup Notification */}
+                {showPopup && (
+                    <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                        Your profile has been submitted successfully.
+                    </div>
+                )}
+            </div>
         </div>
-      </div>
-
-      {/* Name Section */}
-      <div className="mb-4">
-        <label className="block text-xs xs:text-sm font-medium text-gray-700 flex items-center">
-          <div className="flex items-center justify-center w-6 h-6 xs:w-8 xs:h-8 bg-gray-200 rounded-full">
-            <i className="fas fa-user text-black"></i>
-          </div>
-          <span className="ml-2">Name</span>
-        </label>
-        {isEditingName ? (
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md"
-          />
-        ) : (
-          <p>{name}</p>
-        )}
-        <button
-          onClick={() => setIsEditingName(!isEditingName)}
-          className="mt-2 text-blue-600 hover:underline"
-        >
-          {isEditingName ? 'Save' : 'Edit'}
-        </button>
-      </div>
-      
-      {/* Email Section */}
-      <div className="mb-4">
-        <label className="block text-xs xs:text-sm font-medium text-gray-700 flex items-center">
-          <div className="flex items-center justify-center w-6 h-6 xs:w-8 xs:h-8 bg-gray-200 rounded-full">
-            <i className="fas fa-envelope text-black"></i>
-          </div>
-          <span className="ml-2">Email</span>
-        </label>
-        {isEditingEmail ? (
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md"
-          />
-        ) : (
-          <p>{email}</p>
-        )}
-        <button
-          onClick={() => setIsEditingEmail(!isEditingEmail)}
-          className="mt-2 text-blue-600 hover:underline"
-        >
-          {isEditingEmail ? 'Save' : 'Edit'}
-        </button>
-      </div>
-
-      {/* Address Section */}
-      <div className="mb-4">
-        <label className="block text-xs xs:text-sm font-medium text-gray-700 flex items-center">
-          <div className="flex items-center justify-center w-6 h-6 xs:w-8 xs:h-8 bg-gray-200 rounded-full">
-            <i className="fas fa-map-marker-alt text-black"></i>
-          </div>
-          <span className="ml-2">Address</span>
-        </label>
-        {isEditingAddress ? (
-          <textarea
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md"
-          />
-        ) : (
-          <p>{address}</p>
-        )}
-        <button
-          onClick={() => setIsEditingAddress(!isEditingAddress)}
-          className="mt-2 text-blue-600 hover:underline"
-        >
-          {isEditingAddress ? 'Save' : 'Edit'}
-        </button>
-      </div>
-      
-      {/* Order History */}
-      <div className="mt-6 flex justify-center">
-        <div className="w-full">
-          <h2 className="text-lg xs:text-xl font-semibold mb-4 text-center">Order History</h2>
-          <table className="w-full table-auto text-center">
-            <thead>
-              <tr>
-                <th className="border px-4 py-2 text-xs xs:text-sm">Order ID</th>
-                <th className="border px-4 py-2 text-xs xs:text-sm">Date</th>
-                <th className="border px-4 py-2 text-xs xs:text-sm">Status</th>
-                <th className="border px-4 py-2 text-xs xs:text-sm">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orderHistory.map((order) => (
-                <tr key={order.id}>
-                  <td className="border px-4 py-2 text-xs xs:text-sm">{order.id}</td>
-                  <td className="border px-4 py-2 text-xs xs:text-sm">{order.date}</td>
-                  <td className="border px-4 py-2 text-xs xs:text-sm">{order.status}</td>
-                  <td className="border px-4 py-2 text-xs xs:text-sm">{order.total}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* Save Button */}
-      <div className="mt-6 text-center">
-        <button
-          onClick={handleSave}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md text-xs xs:text-sm"
-        >
-          Save
-        </button>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default UserProfile;
 
 
-
-// import React, { useState } from "react";
-
-// // Replace with a direct URL to an image
-// const defaultImage = "https://example.com/path/to/your/image.jpeg";
-
-// function UserProfile() {
-//   const [image, setImage] = useState(defaultImage);
-//   const [isEditingProfile, setIsEditingProfile] = useState(false);
-//   const [isProfileSaved, setIsProfileSaved] = useState(false); // New state to track if profile is saved
-//   const [name, setName] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [phone, setPhone] = useState("");
-
-//   // State for editing addresses
-//   const [isEditingAddresses, setIsEditingAddresses] = useState(false);
-//   const [address1, setAddress1] = useState("123 Main St, City, Country");
-//   const [address2, setAddress2] = useState("456 Oak St, City, Country");
-
-//   // Mock Data for Order History
-//   const [orders] = useState([
-//     { id: 1, date: "2024-08-01", total: "$150.00", status: "Delivered" },
-//     { id: 2, date: "2024-07-25", total: "$85.00", status: "In Transit" },
-//   ]);
-
-//   const handleImageUpload = (event) => {
-//     const file = event.target.files[0];
-//     if (file) {
-//       const reader = new FileReader();
-//       reader.onloadend = () => {
-//         setImage(reader.result);
-//       };
-//       reader.readAsDataURL(file);
-//     }
-//   };
-
-//   const handleSave = () => {
-//     setIsEditingProfile(false);
-//     setIsEditingAddresses(false);
-//     setIsProfileSaved(true); // Mark profile as saved
-//     // Add logic to save the edited information here
-//   };
-
-//   const handleDelete = () => {
-//     // Logic to handle deleting user info
-//     setName("");
-//     setEmail("");
-//     setPhone("");
-//     setIsProfileSaved(false); // Reset profile saved state
-//   };
-
-//   return (
-//     <div className="container mx-auto px-4 py-8 bg-gray-100">
-//       {/* User Info */}
-//       <div className="bg-gray-200 border rounded-lg shadow-lg p-6 mb-8">
-//         <div className="flex justify-center">
-//           <div className="w-full max-w-4xl">
-//             <div className="flex">
-//               {/* User Image and Sidebar */}
-//               <div className="w-1/3 text-center">
-//                 <img
-//                   src={image}
-//                   alt="User"
-//                   className="w-32 h-32 mx-auto mb-4 border rounded-full"
-//                 />
-//                 <input
-//                   type="file"
-//                   accept="image/*"
-//                   onChange={handleImageUpload}
-//                   className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-300"
-//                 />
-//               </div>
-
-//               {/* User Details */}
-//               <div className="w-2/3 pl-6">
-//                 <h2 className="text-2xl font-bold mb-6">User Information</h2>
-
-//                 <div className="space-y-4">
-//                   <div className="flex items-center">
-//                     <label className="w-1/3 text-sm font-semibold">Name</label>
-//                     <input
-//                       type="text"
-//                       placeholder="Enter your name"
-//                       value={name}
-//                       onChange={(e) => setName(e.target.value)}
-//                       className="w-full px-4 py-2 border rounded-md"
-//                       readOnly={!isEditingProfile}
-//                     />
-//                   </div>
-
-//                   <div className="flex items-center">
-//                     <label className="w-1/3 text-sm font-semibold">Email</label>
-//                     <input
-//                       type="email"
-//                       placeholder="Enter your email"
-//                       value={email}
-//                       onChange={(e) => setEmail(e.target.value)}
-//                       className="w-full px-4 py-2 border rounded-md"
-//                       readOnly={!isEditingProfile}
-//                     />
-//                   </div>
-
-//                   <div className="flex items-center">
-//                     <label className="w-1/3 text-sm font-semibold">Phone</label>
-//                     <input
-//                       type="text"
-//                       placeholder="Enter your phone number"
-//                       value={phone}
-//                       onChange={(e) => setPhone(e.target.value)}
-//                       className="w-full px-4 py-2 border rounded-md"
-//                       readOnly={!isEditingProfile}
-//                     />
-//                   </div>
-//                 </div>
-
-//                 <div className="text-center mt-6">
-//                   {!isProfileSaved ? (
-//                     <button
-//                       onClick={() => setIsEditingProfile(!isEditingProfile)}
-//                       className="px-4 py-2 text-white bg-black hover:bg-gray-800"
-//                     >
-//                       {isEditingProfile ? "Cancel" : "Update Profile"}
-//                     </button>
-//                   ) : (
-//                     <div className="flex justify-center space-x-4">
-//                       <button
-//                         onClick={() => setIsEditingProfile(true)}
-//                         className="px-4 py-2 text-white bg-blue-500 hover:bg-blue-600"
-//                       >
-//                         Edit
-//                       </button>
-//                       <button
-//                         onClick={handleDelete}
-//                         className="px-4 py-2 text-white bg-red-500 hover:bg-red-600"
-//                       >
-//                         Delete
-//                       </button>
-//                     </div>
-//                   )}
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Address Book Section */}
-//       <div className="bg-gray-200 border rounded-lg shadow-lg p-6 mb-8 mx-auto max-w-4xl">
-//         <h2 className="mb-4 text-2xl font-bold text-center">Address Book</h2>
-
-//         <div className="mb-4">
-//           <label className="block mb-2 text-sm font-semibold">Address 1</label>
-//           <textarea
-//             className="w-full px-4 py-2 border rounded-md"
-//             rows="3"
-//             placeholder="Enter Address 1"
-//             value={address1}
-//             onChange={(e) => setAddress1(e.target.value)}
-//             readOnly={!isEditingAddresses}
-//           />
-//         </div>
-
-//         <div className="mb-4">
-//           <label className="block mb-2 text-sm font-semibold">Address 2</label>
-//           <textarea
-//             className="w-full px-4 py-2 border rounded-md"
-//             rows="3"
-//             placeholder="Enter Address 2"
-//             value={address2}
-//             onChange={(e) => setAddress2(e.target.value)}
-//             readOnly={!isEditingAddresses}
-//           />
-//         </div>
-
-//         <div className="text-center">
-//           <button
-//             onClick={() => setIsEditingAddresses(!isEditingAddresses)}
-//             className="px-4 py-2 m-2 text-white duration-200 bg-black hover:bg-gray-800"
-//           >
-//             {isEditingAddresses ? "Cancel" : "Update Addresses"}
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Order History Section */}
-//       <div className="bg-gray-200 border rounded-lg shadow-lg p-6 mb-8 mx-auto max-w-4xl">
-//         <h2 className="mb-4 text-2xl font-bold text-center">Order History</h2>
-//         <div className="overflow-x-auto">
-//           <table className="w-full">
-//             <thead>
-//               <tr>
-//                 <th className="px-4 py-2 text-center border">Order ID</th>
-//                 <th className="px-4 py-2 text-center border">Date</th>
-//                 <th className="px-4 py-2 text-center border">Status</th>
-//                 <th className="px-4 py-2 text-center border">Total</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {orders.map((order) => (
-//                 <tr key={order.id}>
-//                   <td className="px-4 py-2 text-center border">{`#${order.id}`}</td>
-//                   <td className="px-4 py-2 text-center border">{order.date}</td>
-//                   <td className="px-4 py-2 text-center border">{order.status}</td>
-//                   <td className="px-4 py-2 text-center border">{order.total}</td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         </div>
-//       </div>
-
-//       {/* Save Button */}
-//       <div className="mt-6 text-center">
-//         <button
-//           onClick={handleSave}
-//           className="px-4 py-2 m-2 text-white duration-200 bg-black hover:bg-gray-800"
-//         >
-//           Save
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default UserProfile;
