@@ -176,18 +176,18 @@ function UserProfile() {
                     </div>
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-4 flex justify-center space-x-4">
     {isEditMode ? (
         <>
             <button
                 onClick={clearInfo}
-                className="p-2 text-xl font-bold text-white bg-black cursor-pointer  mr-4"
+                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
             >
-                Delete Info
+                Delete Profile
             </button>
             <button
                 onClick={handleSubmit}
-                className="p-2 text-xl font-bold text-white bg-black cursor-pointer "
+                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
             >
                 Save Info
             </button>
@@ -201,6 +201,7 @@ function UserProfile() {
         </button>
     )}
 </div>
+
 
                 {/* Popup Notification */}
                 {showPopup && (
