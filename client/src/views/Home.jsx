@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HomeProductCard from "../components/HomeProductCard";
 import TrendingNow from "../components/TrendingNow";
 import Slider from "../components/Slider/Slider";
@@ -11,8 +11,10 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../features/productCart/productCart";
 import { trendingProducts } from "../data/trendingProducts";
 import toast from "react-hot-toast";
+import axios from "axios"
 
 const Home = () => {
+  const [products, setProducts] = useState([])
   const dispatch = useDispatch();
   let isAuth = localStorage.getItem("isAuth");
   console.log("auth", localStorage.getItem("isAuth"));
@@ -35,6 +37,17 @@ const Home = () => {
       toast.success("Added To Cart");
     }
   };
+
+  useEffect(()=> {
+   const getData = async ()=>{
+    const res = await axios.get("http://localhost:4000/api/product/all")
+    setProducts(res?.data?.products)
+  }
+  getData();
+}, [])
+
+  console.log(products)
+
   return (
     <div>
       {/* <Banner /> */}
@@ -46,14 +59,14 @@ const Home = () => {
           Trending Now
         </h2>
         <div className="flex flex-wrap items-center justify-evenly ">
-          {trendingProducts?.map((item) => (
+          {products?.map((item) => (
             <TrendingNow
-              key={item.id}
-              productId={item.id}
-              name={item.name}
+              key={item._id}
+              productId={item._id}
+              name={item.title}
               price={item.price}
               stock={item.stock}
-              photo={item.imageUrl}
+              photo={item.image}
               handler={addToCartHandle}
             />
           ))}
