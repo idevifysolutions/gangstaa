@@ -15,11 +15,39 @@ const UploadProduct = ({onClose}) => {
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
   const [file, setFile] = useState(null);
+  const [colors, setSelectedColors] = useState([]);
+  const [size, setSelectedSize] = useState([]);
+
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
   };
+
+
+  
+  // List of colors
+  const colorsarr = ['Red', 'Green', 'Blue', 'Yellow', 'Purple'];
+  const sizearr = [ 'S' , 'M',  'L', 'XL', 'XXL'];
+
+
+  // Handle checkbox change
+  const handleCheckboxChange = (color) => {
+    setSelectedColors((prev) =>
+        prev.includes(color)? prev.filter((item) => item !== color) : [...prev, color] // Add color
+    );
+
+  };
+
+  const handleSizeCheckboxChange = (size) => {
+    setSelectedSize((prev) =>
+        prev.includes(size)? prev.filter((item) => item !== size) : [...prev, size] // Add color
+    );
+
+  };
+
+
+
 
 
   {/**upload product */}
@@ -32,6 +60,9 @@ const UploadProduct = ({onClose}) => {
     formData.append('category', category);
     formData.append('price', price);
     formData.append('stock', stock);
+    formData.append('colors', colors);
+    formData.append('size', size);
+    formData.append
     if (file) {
       formData.append('image', file);
     }
@@ -53,10 +84,15 @@ const UploadProduct = ({onClose}) => {
            setCategory("");
            setFile(null);
            fetchAdminProducts();
+           console.log("Slected colors", colors);
+      console.log("Selected size", size);
            onClose();
       }
     } catch (error) {
+      console.log("Slected colors", colors);
+      console.log("Selected size", size);
       alert(error.response.data.message);
+
     }
   }
 
@@ -135,6 +171,59 @@ const UploadProduct = ({onClose}) => {
                 className='p-2 bg-slate-100 border rounded inputbox'
                 required
               />
+
+            <label htmlFor='category' className='mt-3 '>Colors :</label>
+              <div required  name='category' className='p-2 bg-slate-100 border rounded inputbox'>
+                  {
+                    colorsarr.map((color,index)=>{
+                      return(
+                        <div key={index} className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  id={color}
+                  checked={colors.includes(color)}
+                  onChange={() => handleCheckboxChange(color)}
+                  className="mr-2"
+                />
+                <label htmlFor={color} className="text-gray-700">
+                  {color}
+                </label>
+              </div>
+                      
+                      )
+                    })
+                  }
+              
+              </div>
+
+
+
+            <label htmlFor='category' className='mt-3 '>Size :</label>
+              <div required  name='category' className='p-2 bg-slate-100 border rounded inputbox'>
+                  {
+                    sizearr.map((sizeitem,index)=>{
+                      return(
+                        <div key={index} className="flex items-center mb-2">
+                <input
+                  type="checkbox"
+                  id={sizeitem}
+                  checked={size.includes(sizeitem)}
+                  onChange={() => handleSizeCheckboxChange(sizeitem)}
+                  className="mr-2"
+                />
+                <label htmlFor={size} className="text-gray-700">
+                  {sizeitem}
+                </label>
+              </div>
+                      
+                      )
+                    })
+                  }
+              
+              </div>
+
+
+      
 
 
               <label htmlFor='sellingPrice' className='mt-3'>Product Sold :</label>

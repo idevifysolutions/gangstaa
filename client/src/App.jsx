@@ -10,26 +10,26 @@ import LogIn from "./views/LogIn";
 import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
 import VerifyingOTP from "./views/VerifyingOTP";
-import JacketsPage from "./components/product/JacketsPage";
-import ShirtsPage from "./components/product/ShirtsPage";
-import JeansPage from "./components/product/JeansPage";
-import TShirtPage from "./components/product/TShirtPage";
+import AllproductPage from "./components/product/AllproductPage";
+// import ShirtsPage from "./components/product/ShirtsPage";
+// import JeansPage from "./components/product/JeansPage";
+// import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
 import CheckoutPage from "./views/Checkout";
+import PaymentPage from "./views/Payment";
+import Shipping from "./views/Shipping";
 import Userprofile from "./components/templete/userprofile";
 import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
 import BarCharts from "./views/admin/charts/BarCharts";
 import PieCharts from "./views/admin/charts/PieCharts";
-import LineCharts from "./views/admin/charts/LineCharts"
+import LineCharts from "./views/admin/charts/LineCharts";
 import Orders from "./views/admin/Orders";
-
 
 // import { useSelector } from "react-redux";
 // import ProtectedRoute from "./components/ProtectedRoute";
 import ProtectedRoute from "./components/ProtectedRoute"; // Import ProtectedRoute
-
 
 const App = () => {
   return (
@@ -56,16 +56,18 @@ const App = () => {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/verifyOTP" element={<VerifyingOTP />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/shipping" element={<Shipping />} />
 
           <Route
-            path="/catagery/jackets"
+            path="/catagery"
             element={
               <ProtectedRoute>
-                <JacketsPage />
+                <AllproductPage />
               </ProtectedRoute>
             }
           />
-
+{/* 
           <Route
             path="/catagery/ShirtsPage"
             element={
@@ -73,25 +75,25 @@ const App = () => {
                 <ShirtsPage />
               </ProtectedRoute>
             }
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path="/catagery/JeansPage"
             element={
               <ProtectedRoute>
                 <JeansPage />
               </ProtectedRoute>
             }
-          />
+          /> */}
 
-          <Route
+          {/* <Route
             path="/catagery/TShirtPage"
             element={
               <ProtectedRoute>
                 <TShirtPage />
               </ProtectedRoute>
             }
-          />
+          /> */}
 
           <Route
             path="/catagery/userprofile"
