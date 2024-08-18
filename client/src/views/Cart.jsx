@@ -27,6 +27,7 @@ const Cart = () => {
 
   useEffect(()=>{
     dispatch(calculatePrice())
+    localStorage.setItem("cart_items", JSON.stringify(cartItems));
   }, [cartItems])
 
   return (
@@ -36,7 +37,7 @@ const Cart = () => {
           cartItems.length > 0 ? cartItems.map((item, index) => (
             <>
 
-              <CartItemCard key={index} cartItem={item} incrementHandler={incrementHandler} decrementHandler={decrementHandler} removeHandler={removeHandler} />
+              <CartItemCard key={crypto.randomUUID()} cartItem={item} incrementHandler={incrementHandler} decrementHandler={decrementHandler} removeHandler={removeHandler} />
 
 
             </>

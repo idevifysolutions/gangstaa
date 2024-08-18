@@ -8,9 +8,11 @@ const TrendingNow = ({ productId, name, price, stock, photo, handler }) => {
     <>
       <div className="flex flex-col items-center justify-center rounded-md my-5 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] pb-5">
 
-        <div className="w-[20rem] h-[20rem] flex items-start justify-center ">
+       <Link to={`/product/${productId}`}>
+       <div className="w-[20rem] h-[20rem] flex items-start justify-center ">
           <img className="object-cover w-[95%] h-[95%] rounded-md" src={photo} alt="" />
         </div>
+       </Link>
 
         <p className="text-2xl font-bold">{name}</p>
         <span className="text-xl">{price}</span>
