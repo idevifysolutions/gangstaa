@@ -20,8 +20,6 @@ const Products = () => {
     const [productId, setProductId] = useState();
 
 
-    console.log("admin produccts", adminProducts);
-
     const  handleUploadProduct =  () => {
         setUploadProduct((prev) => !prev);
     } 
