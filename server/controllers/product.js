@@ -2,7 +2,6 @@ import { Product } from "../models/Product.js";
 import { rm } from "fs";
 
 export const createProduct = async (req, res) => {
-  //only admin can create product so it is admin route
   try {
     if (req.user.role !== "admin")
       return res.status(403).json({
@@ -121,33 +120,31 @@ export const fetchSingleProduct = async (req, res) => {
 };
 
 export const updateProduct = async (req, res) => {
+
   try {
-    const productId = req.params.id;
-    const updates = req.body;
+    //this route is for admin
+    if (req.user.role !== "admin")
+      return res.status(403).json({
+        message: "Unauthorized", // condition for checking user role
+      });
+    const product = await Product.findById(req.params.id);
 
-    // Define the allowed fields for updating
-    const allowedUpdates = ['title', 'description', 'price', 'category', 'sold'];
-    const updatesToApply = {};
-
-    // Filter the incoming updates to only include allowed fields
-    for (const key in updates) {
-        if (allowedUpdates.includes(key)) {
-            updatesToApply[key] = updates[key];
-        }
+    if (req.body.stock) {
+      product.stock = req.body.stock;
+      await product.save();
+      return res.json({
+        message: "Stock Updated",
+      });
     }
 
-    // Update the product in the database
-    const updatedProduct = await Product.findByIdAndUpdate(productId, updatesToApply, { new: true });
-
-    if (!updatedProduct) {
-        return res.status(404).send({ error: 'Product not found' });
-    }
-
-    res.status(200).send(updatedProduct);
-} catch (error) {
-    console.error('Error updating product:', error); // Log the error
-    res.status(500).send({ error: 'Server error' });
-}
+    res.status(400).json({
+      message: "Please give stock value",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 };
 
 
@@ -176,3 +173,41 @@ export const deleteProduct = async (req, res) => {
     });
   }
 };
+
+
+// filter the products on the basis of the conditions
+
+export const filterProducts = async (req, res) => {
+  try {
+    const { category, size, colors, priceRange } = req.query;
+
+    let filter = {};
+
+    if (category) {
+      filter.category = { $in: Array.isArray(category) ? category : [category] };
+    }
+
+    if (size) {
+      filter.size = { $in: Array.isArray(size) ? size : [size] };
+    }
+
+    if (colors) {
+      filter.colors = { $in: Array.isArray(colors) ? colors : [colors] };
+    }
+
+    if (priceRange) {
+      const priceValues = Array.isArray(priceRange) ? priceRange : [priceRange];
+      const minPrice = Math.min(...priceValues.map(range => parseInt(range.split('-')[0], 10)));
+      const maxPrice = Math.max(...priceValues.map(range => parseInt(range.split('-')[1], 10)));
+      
+      filter.price = { $gte: minPrice, $lte: maxPrice };
+    }
+
+    // Fetch the filtered products from the database
+    const products = await Product.find(filter);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}

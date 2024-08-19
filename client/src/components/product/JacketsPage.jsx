@@ -1,21 +1,79 @@
 import React, {useEffect, useState} from "react";
-import {ProductData} from '../../context/ProductContext';
+import Sidebar from "./Sidebar";
+import { RxHamburgerMenu } from "react-icons/rx";
+
 
 const JacketsPage = () => {
 
-  const { adminProducts, fetchAdminProducts} = ProductData();
+  const [data, setData] =  useState([]); 
+  const [sortBy,setSortBy] = useState("")
 
-  console.log("jacket Products", adminProducts);
+  const [showsidebar, setShowsidebar] = useState(false);
 
-  useEffect(() => {
-    fetchAdminProducts();
-  }, []);
+  const handleSideBar = () => {
+    setShowsidebar((prev) => !prev);
+  };
+
+
+  const handleOnChangeSortBy = (e)=>{
+    const { value } = e.target
+
+    setSortBy(value);
+
+    console.log("value", value);
+
+    if(value === 'asc'){
+      setData(preve => preve.sort((a,b)=>a.price - b.price))
+    }
+
+    if(value === 'dsc'){
+      setData(preve => preve.sort((a,b)=>b.price - a.price))
+    }
+
+    if(value === 'new'){
+      setData(preve => preve.sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt)));
+    }
+  }
+
+  useEffect(()=>{
+
+  },[sortBy, data])
+
+ 
+
+  
+
 
   return (
-    <TemplatePage >
 
-      <div className="grid grid-cols-1 gap-6 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
-        {adminProducts.map((product) => (
+    <> 
+    <div className='relative flex h-full'>
+
+ <Sidebar  sidebar={{showsidebar, handleSideBar, data, setData}}  /> 
+       
+<div className='h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4'>
+ <div className="headerbar h-20 w-full border flex items-center justify-between shadow-md shadow-slate-400 px-4">
+
+          {/* Sidebar toggle for mobile */}
+          <div className='lg:hidden block cursor-pointer' onClick={handleSideBar}>
+          <RxHamburgerMenu className='text-2xl' />
+        </div>
+
+          <div className="text-xl font-semibold"> All Products</div>
+
+           <div className="">
+              <select className=" border p-2 " onChange={handleOnChangeSortBy}>
+                <option>Select Sort</option>
+                <option value="asc">Price (Low to High)</option>
+                <option value="dsc">Price (High to Low)</option>
+                <option value="new">Newest First</option>
+              </select>
+            </div>
+
+            </div>
+
+            <div className="grid grid-cols-1 gap-6 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 over">
+        {data.map((product) => (
           <div
             key={product._id}
             className="border p-4 rounded-lg shadow-lg transition-transform transform hover:scale-95 w-full 442px:w-[30%]"
@@ -30,88 +88,17 @@ const JacketsPage = () => {
           </div>
         ))}
       </div>
-    </TemplatePage>
+            
+
+  </div>
+
+  </div>
+    
+</>
+
   );
 };
 
 export default JacketsPage;
 
 
-const TemplatePage = ({ children }) => {
-  return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="flex flex-wrap">
-        <aside className="w-full sm:w-1/4 pr-4 mb-4 sm:mb-0">
-          <Dropdown
-            title="Collections"
-            options={['Shirts (543)', 'Jeans (138)', 'T-Shirts (81)', 'Trousers (69)', 'Boxers (33)', 'Chinos (27)', 'Cargo Pants (26)']}
-          />
-          <Dropdown
-            title="Size"
-            options={['S (607)', 'M (627)', 'L (656)', 'XL (563)', 'XXL (460)', '28 (20)', '30 (200)']}
-          />
-          <Dropdown
-            title="Colors"
-            options={['Red', 'Blue', 'Green']}
-          />
-          <Dropdown
-            title="Price (INR)"
-            options={['0-500', '500-1000', '1000-2000']}
-          />
-        </aside>
-        <main className="w-full sm:w-3/4">
-          <div className="flex justify-between mb-4">
-            <div>
-              <button className="px-2 py-1 border"><i className="fas fa-th-large"></i></button>
-              <button className="px-2 py-1 border"><i className="fas fa-th"></i></button>
-              <button className="px-2 py-1 border"><i className="fas fa-th-list"></i></button>
-            </div>
-            <div>
-              <select className="px-2 py-1 border">
-                <option>Price (Low to High)</option>
-                <option>Price (High to Low)</option>
-                <option>Newest First</option>
-              </select>
-            </div>
-          </div>
-          {children}
-        </main>
-      </div>
-    </div>
-  );
-};
-
-
- const Dropdown = ({ title, options }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
-
-
-  return (
-    <div className="mb-4">
-      <button
-        onClick={toggleDropdown}
-        className="flex justify-between items-center w-full px-4 py-2 text-left text-xl font-bold border-b-2"
-      >
-        {title}  
-        <span className={`transform transition-transform ${isOpen ? 'rotate-180' : ''}`}>
-          ▼
-        </span>
-      </button>
-      {isOpen && (
-        <ul className="mt-2 pl-4">
-          {options.map((option, index) => (
-            <li key={index} className="mb-2">
-              <input type="checkbox"
-              /> {option}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-};

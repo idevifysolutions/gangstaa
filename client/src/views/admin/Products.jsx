@@ -44,26 +44,25 @@ const Products = () => {
        const data = await fetchSingleProduct(id);
       setUpdateProduct((prev) => !prev);
       setProductId(id);
-      
+           
+        try{
+          
+             const response = await axios.put(`http://localhost:4000/api/product/${id}`,
+               {
+                 headers: {
+                   token: localStorage.getItem("token"),
+                 },
+               },
+                      
+              )
 
-    //   const handleUpdateProducts = async (id) => {
-          
-    //     try{
-          
-    //          const response = await axios.put(`http://localhost:4000/api/product/${id}`,
-    //            {
-    //              headers: {
-    //                token: localStorage.getItem("token"),
-    //              },
-    //            },
+                  alert(response);
+        }
     
-    //           )
-    //     }
+        catch(error){
+                alert("error");
+        }               
     
-    //     catch(error){
-               
-    //     }               
-    // }
 
   } 
 

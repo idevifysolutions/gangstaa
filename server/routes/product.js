@@ -6,6 +6,7 @@ import {
   fetchProducts,
   fetchProductsAdmin,
   fetchSingleProduct,
+  filterProducts,
   updateProduct,
 } from "../controllers/product.js";
 import { uploadFiles } from "../middlewares/multer.js";
@@ -16,7 +17,8 @@ router.post("/product/new", isAuth, uploadFiles, createProduct);
 router.get("/product/all", fetchProducts);
 router.get("/product/admin/all", fetchProductsAdmin);
 router.get("/product/:id", fetchSingleProduct);
-router.put("/product/:id",  updateProduct);
+router.put("/product/:id", isAuth,  updateProduct);
 router.delete("/product/:id", isAuth, deleteProduct);
+router.get("/products/filterProducts", filterProducts)
 
 export default router;
