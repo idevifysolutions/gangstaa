@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Sidebar from "./Sidebar";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 
 const AllproductPage = () => {
@@ -78,11 +79,13 @@ const AllproductPage = () => {
             key={product._id}
             className="border p-4 rounded-lg shadow-lg transition-transform transform hover:scale-95 w-full 442px:w-[30%]"
           >
-            <img
+           <Link to={`/product/${product._id}`}>
+           <img
               src={`http://localhost:4000/${product.image}`}
               alt={product.title}
               className="object-cover w-full h-48 mb-4 rounded-md"
             />
+           </Link>
             <h3 className="mb-2 text-lg font-semibold">{product.title}</h3>
             <p className="text-gray-700">{product.price}</p>
           </div>

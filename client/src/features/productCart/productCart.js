@@ -59,11 +59,15 @@ export const productAddedToCartSlice = createSlice({
       state.total = state.subtotal + state.tax + state.shippingCharges;
     },
 
+    saveShippingInfo: (state, action) => {
+      state.shippingInfo = action.payload
+    },
+
     emptyCart: () => initialState
   },
 });
 
-export const { addToCart, removeProductFromCart,calculatePrice, emptyCart } =
+export const { addToCart, removeProductFromCart,calculatePrice, saveShippingInfo, emptyCart } =
   productAddedToCartSlice.actions;
 
 export default productAddedToCartSlice.reducer;

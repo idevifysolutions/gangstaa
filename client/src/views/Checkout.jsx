@@ -1,23 +1,34 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { emptyCart } from "../features/productCart/productCart";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const [userInfoToggle, setUserInfoToggle] = useState(true);
   const [shippingToggle, setShippingToggle] = useState(false);
   const [paymentToggle, setPaymentToggle] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // const {address, phone} = location.state
+  // console.log("shippingInfo",location.state, address)
+
+  const {shippingInfo, cartItems, subtotal, tax, discount, shippingCharges, total} = useSelector((state) => state.cartReducer)
+
+  console.log("selector", shippingInfo, cartItems, subtotal, tax, discount, shippingCharges, total  )
 
   const [formData, setFormData] = useState({
     method: "COD", // Default to COD
-    phone: "",
-    address: "",
+    phone: shippingInfo.phone,
+    address: shippingInfo.address,
   });
 
   const dispatch = useDispatch();
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,9 +50,11 @@ const Checkout = () => {
       const response = await axios.post(
         "http://localhost:4000/api/order/new/cod",
         {
-          method: formData.method,
-          phone: formData.phone,
-          address: formData.address,
+         items: cartItems,
+         method: formData.method,
+         address: shippingInfo,
+         subTotal: total
+
         },
         {
           headers: {
@@ -66,6 +79,10 @@ const Checkout = () => {
       );
     }
   };
+
+  useEffect(() => {
+    if(shippingInfo.address === "") return navigate("/cart")
+  }, [shippingInfo])
 
   return (
     <div className="container px-4 py-8 mx-auto min-h-96 md:px-16 lg:px-24">
@@ -116,7 +133,7 @@ const Checkout = () => {
             </ToggleSection>
           </div>
 
-          <OrderSummary formData={formData} />
+          <OrderSummary total= {total} formData={formData} />
         </div>
       </form>
     </div>
@@ -152,12 +169,13 @@ const InputField = ({ label, name, value, onChange }) => (
   </div>
 );
 
-const OrderSummary = ({ formData }) => (
+const OrderSummary = ({ formData, total }) => (
   <div className="p-6 bg-white border rounded-lg shadow-md md:w-1/3">
     <h3 className="mb-4 text-xl font-semibold">Order Summary</h3>
     <div className="mb-4">
       <p>Phone: {formData.phone}</p>
       <p>Address: {formData.address}</p>
+      <p>Total Amount To Pay: {total}</p>
       <p>Payment Method: {formData.method}</p>
     </div>
     <button
