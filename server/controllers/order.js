@@ -93,7 +93,7 @@ export const getAllOrderAdmin = async (req, res) => {
         message: "Unauthorized",
       });
 
-    const orders = await Order.find();
+    const orders = await Order.find().populate("user");
 
     res.json({ orders });
   } catch (error) {
