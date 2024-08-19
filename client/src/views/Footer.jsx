@@ -29,30 +29,30 @@ const Footer = () => {
   return (
     <>
       <FooterBanner />
-      <footer className="bg-black text-white py-6 w-full ">
-        <div className="w-[90%] mx-auto flex flex-col  md:flex-row ">
-          {/* Logo and company Information */}
-          <div className=" w-full md:w-[25%] md:h-full">
-            <div className="flex items-center justify-center md:justify-start md:items-start md:flex-col md:pt-1 md:px-2 py-2">
+      <footer className="bg-black text-white py-8 w-full">
+        <div className="w-[90%] mx-auto flex flex-col md:flex-row md:justify-between">
+          {/* Logo and Company Information */}
+          <div className="w-full md:w-[25%] md:pr-8">
+            <div className="flex flex-col items-center md:items-start text-center md:text-left">
               <Link to="/">
                 <img
                   src={logo}
-                  className=" h-28 w-2h-28  transform transition-transform duration-300 hover:scale-110"
+                  className="h-28 w-auto transform transition-transform duration-300 hover:scale-110"
+                  alt="Company Logo"
                 />
               </Link>
-
-              <div className=" hidden md:block pt-3 pr-9">
-                Unleash your inner swagger with Gangstaa—where street style
-                meets high fashion. Elevate your game and own the look.
-              </div>
+              <p className="hidden md:block pt-4">
+                Unleash your inner swagger with Gangstaa—where street style meets
+                high fashion. Elevate your game and own the look.
+              </p>
             </div>
           </div>
-
+  
           {/* Links Section */}
-          <div className=" hidden w-[50%] h-full md:flex text-center">
-            <div className="mb-6 md:mb-0 md:w-[50vw] ">
-              <h3 className="text-lg font-bold mb-2">Company</h3>
-              <ul className="space-y-4 text-sm">
+          <div className="w-full md:w-[50%] mt-6 md:mt-0 flex flex-col md:flex-row justify-center text-center">
+            <div className="space-y-2 md:w-1/2">
+              <h3 className="text-lg font-bold mb-3">Company</h3>
+              <ul className="space-y-2 text-sm">
                 <li>
                   <Link to="#" className="hover:text-gray-400">
                     About Us
@@ -80,106 +80,43 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-
-            <div className="mb-6 md:mb-0 md:w-[50vw]">
-              <h3 className="text-lg font-bold mb-2">Company</h3>
-              <ul className="space-y-4 text-sm">
+            <div className="space-y-2 md:w-1/2">
+              <h3 className="text-lg font-bold mb-3">Support</h3>
+              <ul className="space-y-2 text-sm">
                 <li>
                   <Link to="#" className="hover:text-gray-400">
-                    About Us
+                    Contact Us
                   </Link>
                 </li>
                 <li>
                   <Link to="#" className="hover:text-gray-400">
-                    Careers
+                    FAQs
                   </Link>
                 </li>
                 <li>
                   <Link to="#" className="hover:text-gray-400">
-                    Blog
+                    Shipping
                   </Link>
                 </li>
                 <li>
                   <Link to="#" className="hover:text-gray-400">
-                    News
+                    Returns
                   </Link>
                 </li>
                 <li>
                   <Link to="#" className="hover:text-gray-400">
-                    Events
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="mb-6 md:mb-0 md:w-[50vw]">
-              <h3 className="text-lg font-bold mb-2">Company</h3>
-              <ul className="space-y-4 text-sm">
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    News
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Events
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div className="mb-6 md:mb-0 md:w-[50vw]">
-              <h3 className="text-lg font-bold mb-2">Company</h3>
-              <ul className="space-y-4 text-sm">
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    About Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    News
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Events
+                    Privacy Policy
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
-
+  
           {/* Address and Social Icons Section */}
-          <div className=" w-full md:w-[25%] md:h-full px-3">
+          <div className="w-full md:w-[25%] mt-6 md:mt-0 md:pl-8">
             {/* Address */}
-            <div className="text-center md:text-left md:px-1">
-              <h2 className="text-lg font-semibold mb-2">Address</h2>
+            <div className="text-center md:text-left">
+              <h2 className="text-lg font-semibold mb-3">Address</h2>
               <p className="text-sm md:text-base">
                 1st 2nd 3rd 4th Floors, 509, PID No 81-1-509,
               </p>
@@ -189,9 +126,9 @@ const Footer = () => {
               <p className="text-sm md:text-base">Phone: +91 8095733338</p>
               <p className="text-sm md:text-base">Email: care@wrogn.com</p>
             </div>
-
+  
             {/* Social Icons */}
-            <div className=" flex items-center justify-center py-5 gap-4 md:justify-start md:flex md:gap-5 md:py-5">
+            <div className="flex justify-center md:justify-start gap-4 mt-6">
               <Link
                 to="#"
                 target="_blank"
@@ -227,77 +164,9 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
-        {/* Mobile view dropdowns */}
-        <div className="md:hidden mt-6 space-y-4 mb-3">
-          {["company", "support", "legal", "resources"].map((section) => (
-            <div key={section} className="">
-              <div className="w-[95%] text-center px-4 mx-auto flex justify-between">
-                <h1 className="uppercase text-sm">
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
-                </h1>
-                <button onClick={() => toggleDropdown(section)}>
-                  <LiaAngleDownSolid className="h-auto w-4" />
-                </button>
-              </div>
-              {isOpen[section] && (
-                <ul className=" text-base flex flex-wrap items-center justify-start gap-4 pl-6 my-2 ">
-                  <li>
-                    <Link
-                      to="#"
-                      className="border-[1px] p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black"
-                    >
-                      About Us
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black"
-                    >
-                      Careers
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black"
-                    >
-                      Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="border-[1px]  p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black"
-                    >
-                      News
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="border-[1px]  p-1  rounded-lg text-xs hover:bg-slate-50 hover:text-black"
-                    >
-                      Events
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="#"
-                      className="border-[1px]  p-1 rounded-lg text-xs hover:bg-slate-50 hover:text-black"
-                    >
-                      Events
-                    </Link>
-                  </li>
-                </ul>
-              )}
-              <div className="border-dashed border-b-[1px] border-white w-[90%] mx-auto mt-2"></div>
-            </div>
-          ))}
-        </div>
-
-        <div className=" flex items-center justify-center border-t-[1px] border-slate-400">
+  
+        {/* Footer Bottom */}
+        <div className="flex items-center justify-center border-t-[1px] border-slate-400 mt-6">
           <p className="text-sm my-4">
             &copy; 2024 Your Company. All rights reserved.
           </p>
@@ -305,6 +174,8 @@ const Footer = () => {
       </footer>
     </>
   );
+  
+  
 };
 
 export default Footer;
