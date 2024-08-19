@@ -20,7 +20,7 @@ const Orders = () => {
         }
       );
       setAllOrders(data.orders);
-      console.log(allOrders)
+      console.log( "allorders", allOrders)
 
     } catch (error) {
       console.log(error);
@@ -29,6 +29,7 @@ const Orders = () => {
 
   useEffect(() => {
     fetchAllOrders();
+    console.log(allOrders);
   }, []);
 
   const handleSideBar = () => {
@@ -104,7 +105,7 @@ const Orders = () => {
               return (
                 <div className="flex flex-col md:flex-row w-full items-center justify-between border-[2px] border-slate-400 border-t-0 p-4 my-2 rounded-md shadow-md" key={index}>
                   <div className="text-lg flex-1 text-center mb-2 md:mb-0">
-                    Prakash Ghorpade
+                    {order.user.name}
                   </div>
                   <div className="text-lg flex-1 text-center mb-2 md:mb-0">
                     {order.subTotal}
