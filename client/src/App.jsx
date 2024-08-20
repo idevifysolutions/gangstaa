@@ -27,6 +27,7 @@ import BarCharts from "./views/admin/charts/BarCharts";
 import PieCharts from "./views/admin/charts/PieCharts";
 import LineCharts from "./views/admin/charts/LineCharts";
 import Orders from "./views/admin/Orders";
+import OfferPage from "./components/OfferPage";
 
 // import { useSelector } from "react-redux";
 // import ProtectedRoute from "./components/ProtectedRoute";
@@ -59,6 +60,7 @@ const App = () => {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/shipping" element={<Shipping />} />
+          <Route path="/OfferPage" element={<OfferPage />}/>
 
           <Route
             path="/catagery"
