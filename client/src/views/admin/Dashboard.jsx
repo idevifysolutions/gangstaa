@@ -33,12 +33,12 @@ const Dashboard = () => {
             <main className='dashboard w-full overflow-y-auto'>
            
 
-                <div className="bar h-[4rem] flex justify-center items-center gap-[1rem] py-0 px-[1rem] border-b-2 border-black">
+                {/* <div className="bar h-[4rem] flex justify-center items-center gap-[1rem] py-0 px-[1rem] border-b-2 border-black">
                     <BsSearch className='text-[1.2rem] opacity-[0.7]' />
                     <input className='mr-auto w-full py-[1rem] px-0 outline-none border-none' type="text" placeholder="Search for data, users, docs" />
                     <FaRegBell className='text-[1.2rem] opacity-[0.7]' />
                     <img className='h-[2rem] w-[2rem] rounded-[50%]' src={userImg} alt="User" />
-                </div>
+                </div> */}
 
                 <section className='widget-container flex flex-wrap justify-center lg:justify-between items-stretch py-[2rem] px-[2rem]'>
                     <WidgetItem
@@ -71,9 +71,9 @@ const Dashboard = () => {
                     />
                 </section>
 
-                <section className='graph-container flex flex-col sm:flex-col md:flex-col lg:flex-row gap-[2rem] pr-[2rem] pb-[2rem]'>
+                {/* <section className='graph-container flex flex-col sm:flex-col md:flex-col lg:flex-row gap-[2rem] pr-[2rem] pb-[2rem]'>
                     <div className="revenue-chart bg-white rounded-[10px] w-full py-[1rem] px-[3rem]  shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]">
-                        {/* give the same style to all the divs in graph container till rounded - 10 px*/}
+                        
                         <h2 className='uppercase text-center mt-[1rem] mb-[2rem] ml-[0.25rem] font-bold tracking-wider text-2xl'>Revenue And Orders</h2>
                         <BarChart
                             data_1={[12, 20, 89, 5, 33, 76, 25]}
@@ -100,14 +100,14 @@ const Dashboard = () => {
                             })}
                         </div>
                     </div>
-                </section>
+                </section> */}
 
                 <section className='transaction-container flex justify-center items-center flex-wrap lg:flex-nowrap gap-8 pr-8 pb-8 h-[37rem]'>
-                    <div className="gender-chart bg-white shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] rounded-xl w-full max-w-[20rem] relative">
+                    {/* <div className="gender-chart bg-white shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] rounded-xl w-full max-w-[20rem] relative">
                         <h2 className='text-center mt-6 mb-8 text-2xl font-bold'>Gender Ratio</h2>
                         <DoughnutChart labels={['Female', 'Male']} data={[10, 15]}  backgroundColor={["hsl(340, 82%, 56%)", "rgba(12, 348, 276, 0.8)"]} />
                         <p className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[2rem]'><BiMaleFemale /></p>
-                    </div>
+                    </div> */}
                     <Table data = {data.orders} />
                 </section>
             </main>
@@ -119,7 +119,7 @@ const WidgetItem = ({ heading, value, percent, color, amount }) => (
     <article className='widget w-[16rem] p-[2rem] rounded-[10px] flex justify-between items-stretch shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)]'>
         <div className='widget-info '>
             <p className='opacity-[0.7] text-[0.8rem] '>{heading}</p>
-            <h4 className='text-[1.5rem] '>{amount ? `Rs${value}` : value}</h4>
+            <h4 className='text-[1.5rem] '>{amount ? `Total: ${value}+` : value}</h4>
             {
                 percent > 0 ? (
                     <span className='green flex items-center gap-[0.2rem]'>

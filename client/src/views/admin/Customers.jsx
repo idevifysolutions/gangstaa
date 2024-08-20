@@ -56,6 +56,31 @@ const Customers = () => {
         }
   }
 
+
+  const Updateuser = async (id) => {
+
+    if(confirm("you wnat to update users role")){
+
+        try{
+            const response = axios.put(`http://localhost:4000/api/user/updateRole/${id}`, {},
+                {
+                    headers: {
+                        token: localStorage.getItem("token"),
+                      },  
+                })
+            const updateduserData = await response;
+
+                console.log(updateduserData);
+                alert("user role Updated successfully");
+                getAllusers();
+              }
+        catch(error){
+            alert(error.message);
+            console.log(error);
+        }
+  }
+  }
+
   function removeDomain(email) {
     const [username] = email.split('@');
     return username;
@@ -63,99 +88,77 @@ const Customers = () => {
 
 
   return (
-    <>
-      <div className="relative flex h-full">
-         <AdminSidebar sidebar={{ showsidebar, handleSideBar }} /> 
+<>
+<div className="relative flex h-full">
+  <AdminSidebar sidebar={{ showsidebar, handleSideBar }} />
 
-         <div className='h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4'>
-      <div className="headerbar h-20 w-full border flex items-center justify-between shadow-md shadow-slate-400 px-4">
-        {/* Sidebar toggle for mobile */}
-        <div className='lg:hidden block cursor-pointer' onClick={handleSideBar}>
-          <RxHamburgerMenu className='text-2xl' />
-        </div>
-
-        {/* Main header content */}
-        <div className='h-full w-full flex items-center justify-between'>
-          <div className='text-3xl font-bold flex-grow lg:text-xl text-center lg:text-left py-2'>
-            Customers
-          </div>
-        </div>
+  <div className="h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4">
+    <div className="headerbar h-10 w-full border flex items-center justify-between shadow-md shadow-slate-400 p-6">
+      <div
+        className="lg:hidden block cursor-pointer"
+        onClick={handleSideBar}
+      >
+        <RxHamburgerMenu className="text-2xl" />
       </div>
-
-
-
-          <div className="flex flex-col">
-           
-<div className="hidden md:flex h-22 w-full items-center justify-between border-[2px] border-slate-400 p-2">
-
-      <div className="heading text-lg w-44 h-full flex items-center justify-center mx-4 box-border">
-      Avtar
-      </div>
-
-      <div className="heading text-lg w-44 h-full flex items-center justify-center p-4 box-border">
-        Name
-      </div>
-
-      <div className="heading text-lg w-44 h-full flex items-center justify-center py-2 box-border">
-      Gender
-      </div>
-
-      <div className="heading text-lg w-80 h-full flex items-center justify-center py-2 box-border">
-      Email
-      </div>
-
-      <div className="heading text-lg w-32 h-full flex items-center justify-center">
-      Role
-      </div>
-
-      <div className="heading text-lg w-32 h-full flex items-center justify-center">
-      Remove
+      <div className="font-bold flex-grow text-xl text-center lg:text-left py-3">
+        Customers
       </div>
     </div>
 
-
-
+    <main className="flex-grow">
+      <div className="items-center justify-center w-full h-full overflow-x-auto">
+        <table className="min-w-full bg-white border border-gray-200">
+          <thead>
+            <tr className="text-sm leading-normal text-gray-600 uppercase bg-gray-200">
+              <th className="px-6 py-3 text-center">Avtar</th>
+              <th className="px-6 py-3 text-center">Name</th>
+              <th className="px-6 py-3 text-center">Gender</th>
+              <th className="px-6 py-3 text-center">Email</th>
+              <th className="px-6 py-3 text-center">Update Role</th>
+              <th className="px-6 py-3 text-center">Remove</th>
+            </tr>
+          </thead>
+          <tbody className="text-sm font-light text-gray-600">
 
             {allusers.map((user, index) => {
-              return (
-           
-            <div className="producttable w-full flex flex-col md:flex-row items-center justify-between border-[2px] border-slate-400 border-t-0 p-4 my-2 rounded-md shadow-md" key={index}>
 
-            <div className="heading text-xl flex-shrink-0 w-full md:w-32 h-auto my-2 flex items-center justify-center mx-4 box-border">
-              <img src={`https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?rs=1&pid=ImgDetMain`} className='w-[120px] h-[120px] object-cover' alt={user.name} />
-            </div>
-      
-            <div className="heading text-lg w-full md:w-44 h-auto my-2 flex items-center justify-center p-4 box-border">
-              <p className='text-center'>{user.name}</p>
-            </div>
-      
-            <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center py-2 box-border">
-            Male
-            </div>
-      
-            <div className="heading text-lg w-full md:w-80 h-auto my-2 flex items-center justify-center py-2 box-border flex-wrap">
-            {removeDomain(user.email)}
-            </div>
-      
-            <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center">
-              <div className='w-12 h-12 rounded-full border text-gray-800 hover:bg-[#10151d] hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border' >
-              {user.role}
-              </div>
-            </div>
-      
-            <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full border text-gray-800 hover:bg-red-600 hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border" onClick={() => deleteOneuser(user._id)}>
-                <RiDeleteBinLine className='w-6 h-auto' />
-              </div>
-            </div>
-          </div>
+               return (
+              <tr
+                className="border-b border-gray-200 hover:bg-gray-100" key={index}
+              >
+                <td className="px-6 py-3 text-center">
+               <img src={`https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?rs=1&pid=ImgDetMain`} className='h-[50px] object-cover' alt={user.name} />
 
-         );
-            })}
-          </div>
-        </div>
+                </td>
+                <td className="px-6 py-3 text-center">
+                {user.name}
+                </td>
+                <td className="px-6 py-3 text-center"> Male</td>
+                <td className="px-6 py-3 text-center"> {removeDomain(user.email)}</td>
+
+                <td
+                  className="px-6 py-3 flex items-center justify-between gap-2 cursor-pointer"
+                >
+                  <p>{user.role}</p>
+                  <button className="bg-black text-white p-2" onClick={() => Updateuser(user._id)}>Update Role</button>
+                </td>
+
+                <td
+                  className="px-6 py-3 cursor-pointer">
+                    <div className="border-2 p-2 w-12 rounded-full hover:bg-red-600" onClick={() => deleteOneuser(user._id)}>
+                    <RiDeleteBinLine className="w-6 h-auto mx-auto" />
+                    </div>
+                </td>
+              </tr>
+
+            ) } ) }
+          </tbody>
+        </table>
       </div>
-    </>
+    </main>
+  </div>
+</div>
+</>
   );
 };
 

@@ -1,204 +1,148 @@
-import React, { useState } from 'react'
-import AdminSidebar from '../../components/admin/AdminSidebar'
+import React, { useState } from "react";
+import AdminSidebar from "../../components/admin/AdminSidebar";
 import { TfiPencil } from "react-icons/tfi";
 import { RiDeleteBinLine } from "react-icons/ri";
-import UploadProduct from '../../components/admin/uploadProduct';
+import UploadProduct from "../../components/admin/uploadProduct";
 import { RxHamburgerMenu } from "react-icons/rx";
-import UpdateProduct from '../../components/admin/updateProduct';
-import {ProductData} from '../../context/ProductContext';
-import axios from 'axios';
+import UpdateProduct from "../../components/admin/updateProduct";
+import { ProductData } from "../../context/ProductContext";
+import axios from "axios";
+import { FaPlusCircle } from "react-icons/fa";
 
 const Products = () => {
-    
-  const { adminProducts, fetchAdminProducts} = ProductData();
-          
-    const [uploadProduct, setUploadProduct] = useState(false);
-    const [updateProduct, setUpdateProduct] = useState(false);
-    const [showsidebar, setShowsidebar] = useState(false);
-    const [product, setProduct] = useState();
-    const [productId, setProductId] = useState();
+  const { adminProducts, fetchAdminProducts } = ProductData();
 
+  const [uploadProduct, setUploadProduct] = useState(false);
+  const [updateProduct, setUpdateProduct] = useState(false);
+  const [showsidebar, setShowsidebar] = useState(false);
+  const [product, setProduct] = useState(null);
+  const [productId, setProductId] = useState(null);
 
-    console.log("admin produccts", adminProducts);
+  const handleUploadProduct = () => {
+    setUploadProduct((prev) => !prev);
+  };
 
-    const  handleUploadProduct =  () => {
-        setUploadProduct((prev) => !prev);
-    } 
-
-    const  fetchSingleProduct = async (id) => {
-      try {
-        const response = await axios.get(
-          `http://localhost:4000/api//product/${id}`
-        );
-        const data = await response;
-        setProduct( data.data.product);
-       
-      } catch (error) {
-        console.log(error);
-      }
+  const fetchSingleProduct = async (id) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/api/product/${id}`
+      );
+      setProduct(response.data.product);
+    } catch (error) {
+      console.error("Failed to fetch product:", error);
     }
+  };
 
-   
+  const handleUpdateProduct = async (id) => {
+    await fetchSingleProduct(id);
+    setUpdateProduct(true);
+    setProductId(id);
+  };
 
-    const handleUpdateProduct = async (id) => {
-       const data = await fetchSingleProduct(id);
-      setUpdateProduct((prev) => !prev);
-      setProductId(id);
-      
+  const handleSideBar = () => {
+    setShowsidebar((prev) => !prev);
+  };
 
-    //   const handleUpdateProducts = async (id) => {
-          
-    //     try{
-          
-    //          const response = await axios.put(`http://localhost:4000/api/product/${id}`,
-    //            {
-    //              headers: {
-    //                token: localStorage.getItem("token"),
-    //              },
-    //            },
-    
-    //           )
-    //     }
-    
-    //     catch(error){
-               
-    //     }               
-    // }
-
-  } 
-
-    const handleSideBar = () => {
-      setShowsidebar((prev) => !prev);
+  const handleDeleteProduct = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/api/product/${id}`,
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+      alert(response.data.message);
+      fetchAdminProducts();
+    } catch (error) {
+      console.error("Failed to delete product:", error);
     }
-
-    const handleDeleteProduct = async (id) => {
-           try {
-        const  response  = await axios.delete(`http://localhost:4000/api/product/${id}`,
-          {
-            headers: {
-              token: localStorage.getItem("token"),
-            },
-          }
-        );  
-        alert(response.data.message);
-        fetchAdminProducts();
-      } catch (error) {
-        alert(response.data.message);
-      }
-    }
-
+  };
 
   return (
     <>
-      <div className='relative flex h-full'>
+      <div className="relative flex h-full">
+        <AdminSidebar sidebar={{ showsidebar, handleSideBar }} />
 
-     <AdminSidebar  sidebar={{showsidebar, handleSideBar}}  />
-            
-     <div className='h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4'>
-      <div className="headerbar h-20 w-full border flex items-center justify-between shadow-md shadow-slate-400 px-4">
-        {/* Sidebar toggle for mobile */}
-        <div className='lg:hidden block cursor-pointer' onClick={handleSideBar}>
-          <RxHamburgerMenu className='text-2xl' />
-        </div>
-
-        {/* Main header content */}
-        <div className='h-full w-full flex items-center justify-between'>
-          <div className='text-3xl font-bold flex-grow lg:text-xl text-center lg:text-left py-3'>
-            Products
+        <div className="h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4">
+          <div className="headerbar h-10 w-full border flex items-center justify-between shadow-md shadow-slate-400 p-6">
+            <div
+              className="lg:hidden block cursor-pointer"
+              onClick={handleSideBar}
+            >
+              <RxHamburgerMenu className="text-2xl" />
+            </div>
+            <div className="font-bold flex-grow text-xl text-center lg:text-left py-3">
+              Products
+            </div>
+            <div
+              className="flex items-center cursor-pointer py-1 bg-black text-white my-1 px-4 rounded-md"
+              onClick={handleUploadProduct}
+            >
+              Upload Product <FaPlusCircle className="ps-1 text-[20px]" />
+            </div>
           </div>
-          <div className='text-xl cursor-pointer py-3 bg-slate-200 my-1 px-1 rounded-md' onClick={handleUploadProduct}>
-            Upload Product
-          </div>
+
+          <main className="flex-grow">
+            <div className="items-center justify-center w-full h-full overflow-x-auto">
+              <table className="min-w-full bg-white border border-gray-200">
+                <thead>
+                  <tr className="text-sm leading-normal text-gray-600 uppercase bg-gray-200">
+                    <th className="px-6 py-3 text-center">Image</th>
+                    <th className="px-6 py-3 text-center">Name</th>
+                    <th className="px-6 py-3 text-center">Price</th>
+                    <th className="px-6 py-3 text-center">Available Stock</th>
+                    <th className="px-6 py-3 text-center">Update</th>
+                    <th className="px-6 py-3 text-center">Remove</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm font-light text-gray-600">
+                  {adminProducts.map((product, index) => (
+                    <tr
+                      key={product._id}
+                      className="border-b border-gray-200 hover:bg-gray-100"
+                    >
+                      <td className="px-6 py-3 text-center">
+                        <img
+                          src={`http://localhost:4000/${product.image}`}
+                          className="h-[50px] object-cover"
+                          alt={product.title}
+                        />
+                      </td>
+                      <td className="px-6 py-3 text-center">
+                        {product.title}
+                      </td>
+                      <td className="px-6 py-3 text-center">{product.price}</td>
+                      <td className="px-6 py-3 text-center">{product.stock}</td>
+
+                      <td
+                        className="px-6 py-3 cursor-pointer"
+                        onClick={() => handleUpdateProduct(product._id)}
+                      >
+                        <TfiPencil className="w-6 h-auto mx-auto" />
+                      </td>
+
+                      <td
+                        className="px-6 py-3 cursor-pointer"
+                        onClick={() => handleDeleteProduct(product._id)}
+                      >
+                        <RiDeleteBinLine className="w-6 h-auto mx-auto" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </main>
         </div>
       </div>
-      
 
-              <div className='flex flex-col'> 
-
-
-<div className="hidden md:flex h-22 w-full items-center justify-between border-[2px] border-slate-400 p-2">
-      <div className="heading text-lg w-44 h-full flex items-center justify-center mx-4 box-border">
-        Image
-      </div>
-
-      <div className="heading text-lg w-80 h-full flex items-center justify-center p-4 box-border">
-        Name
-      </div>
-
-      <div className="heading text-lg w-44 h-full flex items-center justify-center py-2 box-border">
-        Price
-      </div>
-
-      <div className="heading text-lg w-44 h-full flex items-center justify-center py-2 box-border">
-        Available Stock
-      </div>
-
-      <div className="heading text-lg w-40 h-full flex items-center justify-center">
-        Update
-      </div>
-
-      <div className="heading text-lg w-40 h-full flex items-center justify-center">
-        Remove
-      </div>
-    </div>
-
-
-              {
-                        adminProducts.map((product, index) => {
-                           
-                        return (
-                   
-
-                    <div className="producttable w-full flex flex-col md:flex-row items-center justify-between border-[2px] border-slate-400 border-t-0 p-4 my-2 rounded-md shadow-md" key={index}>
-                    <div className="heading text-xl flex-shrink-0 w-full md:w-24 h-auto my-2 flex items-center justify-center mx-4 box-border">
-                      <img src={`http://localhost:4000/${product.image}`} className='w-[120px] h-[120px] object-cover' alt={product.title} />
-                    </div>
-              
-                    <div className="heading text-lg w-full md:w-40 h-auto my-2 flex items-center justify-center p-4 box-border">
-                      <p className='text-center'>{product.title}</p>
-                    </div>
-              
-                    <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center py-2 box-border">
-                      {product.price}
-                    </div>
-              
-                    <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center py-2 box-border">
-                      {product.stock}
-                    </div>
-              
-                    <div className="heading text-lg w-full md:w-20 h-auto my-2 flex items-center justify-center">
-                      <div className='w-12 h-12 rounded-full border text-gray-800 hover:bg-[#10151d] hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border' onClick={() => handleUpdateProduct(product._id)}>
-                        <TfiPencil className='w-6 h-auto' />
-                      </div>
-                    </div>
-              
-                    <div className="heading text-lg w-full md:w-20 h-auto my-2 flex items-center justify-center">
-                      <div className="w-12 h-12 rounded-full border text-gray-800 hover:bg-red-600 hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border" onClick={() => handleDeleteProduct(product._id)}>
-                        <RiDeleteBinLine className='w-6 h-auto' />
-                      </div>
-                    </div>
-                  </div>
-                        )
-
-                       })
-              }
-             
-              </div>
-       </div>
-
-              
-            
-       </div>
-         
-         {
-               uploadProduct &&  <UploadProduct onClose ={handleUploadProduct}/>
-         }
-         {
-              updateProduct &&  <UpdateProduct onClose={() => handleUpdateProduct(productId)} productDetails={product}/>
-
-         }
+      {uploadProduct && <UploadProduct onClose={handleUploadProduct} />}
+      {updateProduct && product && (<UpdateProduct onClose={() => setUpdateProduct(false)} productDetails={product}/>
+      )}
     </>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
