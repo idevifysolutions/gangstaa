@@ -13,11 +13,14 @@ const Orders = () => {
           token: localStorage.getItem("token"),
         },
       });
+      console.log(data);
+
       setOrders(data.orders);
     } catch (error) {
       console.log(error);
     }
   }
+  console.log(localStorage.getItem("token"));
 
   useEffect(() => {
     fetchOrders();
@@ -41,29 +44,35 @@ const Orders = () => {
               </tr>
             </thead>
             <tbody className="text-sm font-light text-gray-600">
-              {orders.map((e, i) => (
-                <tr
-                  key={i}
-                  className="border-b border-gray-200 hover:bg-gray-100"
-                >
-                  <td className="px-6 py-3 text-left">{i + 1}</td>
-                  <td className="px-6 py-3 text-left">{e.method}</td>
-                  <td className="px-6 py-3 text-left">{e.subTotal}</td>
-                  <td className="px-6 py-3 text-left">{e.status}</td>
-                  <td className="px-6 py-3 text-left">{e.address}</td>
-                  <td className="px-6 py-3 text-left">{e.phone}</td>
-                  {/* <td className="px-6 py-3 text-left">{e.items}</td> */}
+              {orders.map((e, i) => {
+                const shippingInfo = e.shippingInfo || {};
+                const { address, city, state, country, pinCode } = shippingInfo;
 
-                  <td className="px-6 py-3 text-left">
-                    <button
-                      className="px-4 py-2 text-lg text-white bg-black"
-                      onClick={() => navigate(`/order/${e._id}`)}
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                return (
+                  <tr
+                    key={i}
+                    className="border-b border-gray-200 hover:bg-gray-100"
+                  >
+                    <td className="px-6 py-3 text-left">{i + 1}</td>
+                    <td className="px-6 py-3 text-left">{e.method}</td>
+                    <td className="px-6 py-3 text-left">{e.subTotal}</td>
+                    <td className="px-6 py-3 text-left">{e.status}</td>
+                    <td className="px-6 py-3 text-left">{`${address || ""}, ${
+                      city || ""
+                    }, ${state || ""}, ${country || ""}, ${pinCode || ""}`}</td>
+                    <td className="px-6 py-3 text-left">{e.phone}</td>
+
+                    <td className="px-6 py-3 text-left">
+                      <button
+                        className="px-4 py-2 text-lg text-white bg-black"
+                        onClick={() => navigate(`/category/myorder/${e._id}`)}
+                      >
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

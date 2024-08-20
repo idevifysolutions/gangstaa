@@ -13,13 +13,30 @@ const Checkout = () => {
   const [paymentToggle, setPaymentToggle] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  
+
   // const {address, phone} = location.state
   // console.log("shippingInfo",location.state, address)
 
-  const {shippingInfo, cartItems, subtotal, tax, discount, shippingCharges, total} = useSelector((state) => state.cartReducer)
+  const {
+    shippingInfo,
+    cartItems,
+    subtotal,
+    tax,
+    discount,
+    shippingCharges,
+    total,
+  } = useSelector((state) => state.cartReducer);
 
-  console.log("selector", shippingInfo, cartItems, subtotal, tax, discount, shippingCharges, total  )
+  console.log(
+    "selector",
+    shippingInfo,
+    cartItems,
+    subtotal,
+    tax,
+    discount,
+    shippingCharges,
+    total
+  );
 
   const [formData, setFormData] = useState({
     method: "COD", // Default to COD
@@ -28,7 +45,6 @@ const Checkout = () => {
   });
 
   const dispatch = useDispatch();
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -57,12 +73,11 @@ const Checkout = () => {
       const response = await axios.post(
         endpoint,
         {
-         items: cartItems,
-         method: formData.method,
-         phone: shippingInfo.phone,
-         shippingInfo,
-         subTotal: total
-
+          items: cartItems,
+          method: formData.method,
+          phone: shippingInfo.phone,
+          shippingInfo,
+          subTotal: total,
         },
         {
           headers: {
@@ -73,11 +88,10 @@ const Checkout = () => {
 
       console.log(response);
 
-
       if (response.status === 200) {
-        dispatch(emptyCart())
+        dispatch(emptyCart());
         toast.success("Order placed successfully!");
-        console.log(("reduce stock"))
+        console.log("reduce stock");
       } else {
         toast.error(`Failed to place order:`);
       }
@@ -91,8 +105,8 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    if(shippingInfo.address === "") return navigate("/cart")
-  }, [shippingInfo])
+    if (shippingInfo.address === "") return navigate("/cart");
+  }, [shippingInfo]);
 
   return (
     <div className="container px-4 py-8 mx-auto min-h-96 md:px-16 lg:px-24">
@@ -143,7 +157,7 @@ const Checkout = () => {
             </ToggleSection>
           </div>
 
-          <OrderSummary total= {total} formData={formData} />
+          <OrderSummary total={total} formData={formData} />
         </div>
       </form>
     </div>
