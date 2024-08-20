@@ -3,15 +3,14 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema({
   items: [
     {
-      quantity: {
-        type: Number,
-        required: true,
-      },
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
-      },
+      name: String,
+      photo: String,
+      price: Number,
+      quantity: Number,
+      productId: {
+        type: mongoose.Types.ObjectId,
+        ref: "Product"
+      }
     },
   ],
 
@@ -36,9 +35,31 @@ const schema = new mongoose.Schema({
     required: true,
   },
 
-  address: {
-    type: String,
-    required: true,
+  shippingInfo: {
+    address: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    country: {
+      type: String,
+      required: true,
+    },
+    pinCode: {
+      type: Number,
+      required: true,
+    },
+    phone: {
+      type: Number,
+      required: true,
+    },
   },
 
   status: {
