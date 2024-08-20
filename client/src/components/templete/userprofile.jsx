@@ -1,5 +1,6 @@
 
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import defaultImage from "../../data/image.jpeg"; // Adjust the path as necessary
 
@@ -9,15 +10,30 @@ function UserProfile() {
         surname: '',
         email: '',
         phone: '',
-        address: '', // Added address field
-        image: null, // For image upload
+        address: '',
+        image: null,
     });
 
-    const [showPopup, setShowPopup] = useState(false); // For showing the pop-up
-    const [isEditMode, setIsEditMode] = useState(true); // To toggle between Save and Edit mode
-    const [errors, setErrors] = useState({}); // To handle validation errors
+    const [showPopup, setShowPopup] = useState(false);
+    const [isEditMode, setIsEditMode] = useState(true);
+    const [errors, setErrors] = useState({});
 
-    // Handle input change
+    // Fetch user data when the component mounts
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/user', {
+                    params: { email: userInfo.email }
+                });
+                setUserInfo(response.data);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserInfo({
@@ -26,7 +42,6 @@ function UserProfile() {
         });
     };
 
-    // Handle file change
     const handleFileChange = (e) => {
         setUserInfo({
             ...userInfo,
@@ -34,7 +49,6 @@ function UserProfile() {
         });
     };
 
-    // Validate required fields
     const validateForm = () => {
         const newErrors = {};
         if (!userInfo.name) newErrors.name = "Name is required";
@@ -45,8 +59,7 @@ function UserProfile() {
         return newErrors;
     };
 
-    // Handle form submission
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const formErrors = validateForm();
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
@@ -54,37 +67,42 @@ function UserProfile() {
         }
 
         const formData = new FormData();
-        for (const key in userInfo) {
-            formData.append(key, userInfo[key]);
+        formData.append('name', userInfo.name);
+        formData.append('surname', userInfo.surname);
+        formData.append('email', userInfo.email);
+        formData.append('phone', userInfo.phone);
+        formData.append('address', userInfo.address);
+
+        if (userInfo.image) {
+            formData.append('image', userInfo.image);
         }
 
-        axios.post('http://localhost:4000/api/upload', formData)
-            .then((res) => {
-                console.log('Profile updated successfully:', res.data);
-                // Show popup, toggle mode to Edit and remove delete button
-                setShowPopup(true);
-                setIsEditMode(false);
-                setErrors({});
-            })
-            .catch((err) => {
-                console.error('Error updating profile:', err.message || err);
+        try {
+            await axios.post('http://localhost:4000/api/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
             });
+            setShowPopup(true);
+            setIsEditMode(false);
+            setErrors({});
+        } catch (error) {
+            console.error('Error updating profile:', error.message || error);
+        }
     };
 
-    // Clear all input fields
     const clearInfo = () => {
         setUserInfo({
             name: '',
             surname: '',
             email: '',
             phone: '',
-            address: '', // Clear address field
+            address: '',
             image: null,
         });
         setErrors({});
     };
 
-    // Handle Edit Profile mode
     const handleEditProfile = () => {
         setIsEditMode(true);
     };
@@ -102,7 +120,7 @@ function UserProfile() {
                     type="file"
                     onChange={handleFileChange}
                     className="mt-4"
-                    disabled={!isEditMode} // Disable file input in view mode
+                    disabled={!isEditMode}
                 />
                 <h2 className="mt-4 text-xl font-semibold">
                     {userInfo.name || "User"} {userInfo.surname || "Name"}
@@ -112,8 +130,9 @@ function UserProfile() {
 
             {/* Right Column (75%) */}
             <div className="w-3/4 p-6">
-                <h2 className="text-2xl font-bold mb-4 text-center ">Profile Settings</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">Profile Settings</h2>
                 <div className="grid grid-cols-2 gap-4">
+                    {/* Name */}
                     <div>
                         <label>Name</label>
                         <input
@@ -122,10 +141,11 @@ function UserProfile() {
                             value={userInfo.name}
                             onChange={handleInputChange}
                             className={`border p-2 w-full ${errors.name ? 'border-red-500' : ''}`}
-                            disabled={!isEditMode} // Disable input in view mode
+                            disabled={!isEditMode}
                         />
                         {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                     </div>
+                    {/* Surname */}
                     <div>
                         <label>Surname</label>
                         <input
@@ -134,10 +154,11 @@ function UserProfile() {
                             value={userInfo.surname}
                             onChange={handleInputChange}
                             className={`border p-2 w-full ${errors.surname ? 'border-red-500' : ''}`}
-                            disabled={!isEditMode} // Disable input in view mode
+                            disabled={!isEditMode}
                         />
                         {errors.surname && <p className="text-red-500 text-sm">{errors.surname}</p>}
                     </div>
+                    {/* Email */}
                     <div>
                         <label>Email</label>
                         <input
@@ -146,10 +167,11 @@ function UserProfile() {
                             value={userInfo.email}
                             onChange={handleInputChange}
                             className={`border p-2 w-full ${errors.email ? 'border-red-500' : ''}`}
-                            disabled={!isEditMode} // Disable input in view mode
+                            disabled={!isEditMode}
                         />
                         {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                     </div>
+                    {/* Phone */}
                     <div>
                         <label>Phone</label>
                         <input
@@ -158,10 +180,11 @@ function UserProfile() {
                             value={userInfo.phone}
                             onChange={handleInputChange}
                             className={`border p-2 w-full ${errors.phone ? 'border-red-500' : ''}`}
-                            disabled={!isEditMode} // Disable input in view mode
+                            disabled={!isEditMode}
                         />
                         {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
                     </div>
+                    {/* Address */}
                     <div>
                         <label>Address</label>
                         <input
@@ -170,38 +193,37 @@ function UserProfile() {
                             value={userInfo.address}
                             onChange={handleInputChange}
                             className={`border p-2 w-full ${errors.address ? 'border-red-500' : ''}`}
-                            disabled={!isEditMode} // Disable input in view mode
+                            disabled={!isEditMode}
                         />
                         {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
                     </div>
                 </div>
 
                 <div className="mt-4 flex justify-center space-x-4">
-    {isEditMode ? (
-        <>
-            <button
-                onClick={clearInfo}
-                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
-            >
-                Delete Profile
-            </button>
-            <button
-                onClick={handleSubmit}
-                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
-            >
-                Save Info
-            </button>
-        </>
-    ) : (
-        <button
-            onClick={handleEditProfile}
-            className="p-2 text-xl font-bold text-white bg-black cursor-pointer rounded"
-        >
-            Edit Profile
-        </button>
-    )}
-</div>
-
+                    {isEditMode ? (
+                        <>
+                            <button
+                                onClick={clearInfo}
+                                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
+                            >
+                                Delete Profile
+                            </button>
+                            <button
+                                onClick={handleSubmit}
+                                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
+                            >
+                                Save Info
+                            </button>
+                        </>
+                    ) : (
+                        <button
+                            onClick={handleEditProfile}
+                            className="p-2 text-xl font-bold text-white bg-black cursor-pointer rounded"
+                        >
+                            Edit Profile
+                        </button>
+                    )}
+                </div>
 
                 {/* Popup Notification */}
                 {showPopup && (
@@ -215,5 +237,4 @@ function UserProfile() {
 }
 
 export default UserProfile;
-
 

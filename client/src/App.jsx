@@ -68,15 +68,15 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-          {/* 
-          <Route
-            path="/catagery/ShirtsPage"
+        
+          {/* <Route
+            path="/catagery/MyOrder"
             element={
               <ProtectedRoute>
-                <ShirtsPage />
+                <MyOrder />
               </ProtectedRoute>
             }
-          /> */}
+          />  */}
 
           {/* <Route
             path="/catagery/JeansPage"
