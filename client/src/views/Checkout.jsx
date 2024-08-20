@@ -25,6 +25,7 @@ const Checkout = () => {
       ...formData,
       [name]: value,
     });
+    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -36,8 +37,14 @@ const Checkout = () => {
         return;
       }
 
+      let endpoint = "http://localhost:4000/api/order/new/cod";
+
+      if (formData.method === "online") {
+        endpoint = "http://localhost:4000/api/order/new/online";
+      }
+
       const response = await axios.post(
-        "http://localhost:4000/api/order/new/cod",
+        endpoint,
         {
           method: formData.method,
           phone: formData.phone,
@@ -54,7 +61,7 @@ const Checkout = () => {
 
       if (response.status === 201) {
         toast.success("Order placed successfully!");
-        dispatch(emptyCart())
+        dispatch(emptyCart());
       } else {
         toast.error(`Failed to place order: ${response.data.message}`);
       }
@@ -111,7 +118,7 @@ const Checkout = () => {
                 className="w-full px-2 py-2 border border-2px sm:px-3"
               >
                 <option value="COD">Cash on Delivery</option>
-                {/* Add more payment methods here if needed */}
+                <option value="ONLINE">Online Payment</option>
               </select>
             </ToggleSection>
           </div>
