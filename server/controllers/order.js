@@ -66,7 +66,7 @@ export const getAllOrderAdmin = async (req, res) => {
         message: "Unauthorized",
       });
 
-    const orders = await Order.find();
+    const orders = await Order.find().populate("user");
 
     res.json({ orders });
   } catch (error) {
@@ -96,7 +96,9 @@ export const updateStatus = async (req, res) => {
       });
     }
 
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findOne({ _id: req.params.id});
+
+    console.log(req.user);
 
     if (order.status === "Pending") {
       order.status = "Processing";

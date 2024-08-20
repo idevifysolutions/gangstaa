@@ -86,29 +86,33 @@ const Customers = () => {
 
           <div className="flex flex-col">
            
-<div className="hidden md:flex h-22 w-full items-center justify-between border-[2px] border-slate-400 p-2">
+<div className="hidden md:flex h-22 w-full items-center justify-between border-[1px] border-slate-400 p-2">
 
-      <div className="heading text-lg w-44 h-full flex items-center justify-center mx-4 box-border">
+      <div className="heading text-lg font-bold w-44 h-full flex items-center justify-center mx-4 box-border">
       Avtar
       </div>
 
-      <div className="heading text-lg w-44 h-full flex items-center justify-center p-4 box-border">
+      <div className="heading text-lg w-44 font-bold h-full flex items-center justify-center p-4 box-border">
         Name
       </div>
 
-      <div className="heading text-lg w-44 h-full flex items-center justify-center py-2 box-border">
+      {/* <div className="heading text-lg w-44 h-full flex items-center justify-center py-2 box-border">
       Gender
-      </div>
+      </div> */}
 
-      <div className="heading text-lg w-80 h-full flex items-center justify-center py-2 box-border">
+      <div className="heading font-bold text-lg w-80 h-full flex items-center justify-center py-2 box-border">
       Email
       </div>
 
-      <div className="heading text-lg w-32 h-full flex items-center justify-center">
+      <div className="heading font-bold text-lg w-32 h-full flex items-center justify-center">
       Role
       </div>
 
-      <div className="heading text-lg w-32 h-full flex items-center justify-center">
+      <div className="heading font-bold text-lg w-32 h-full flex items-center justify-center">
+      Update
+      </div>
+
+      <div className="heading font-bold text-lg w-32 h-full flex items-center justify-center">
       Remove
       </div>
     </div>
@@ -119,27 +123,32 @@ const Customers = () => {
             {allusers.map((user, index) => {
               return (
            
-            <div className="producttable w-full flex flex-col md:flex-row items-center justify-between border-[2px] border-slate-400 border-t-0 p-4 my-2 rounded-md shadow-md" key={index}>
+            <div className="producttable w-full flex flex-col md:flex-row items-center justify-between border-[1px] border-slate-400 border-t-0   " key={index}>
 
             <div className="heading text-xl flex-shrink-0 w-full md:w-32 h-auto my-2 flex items-center justify-center mx-4 box-border">
-              <img src={`https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?rs=1&pid=ImgDetMain`} className='w-[120px] h-[120px] object-cover' alt={user.name} />
+              <img src={`https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?rs=1&pid=ImgDetMain`} className='h-[50px] object-cover' alt={user.name} />
             </div>
       
-            <div className="heading text-lg w-full md:w-44 h-auto my-2 flex items-center justify-center p-4 box-border">
+            <div className="heading text-[17px] w-full md:w-44 h-auto my-2 flex items-center justify-center p-4 box-border">
               <p className='text-center'>{user.name}</p>
             </div>
       
-            <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center py-2 box-border">
+            {/* <div className="heading text-[17px]  w-full md:w-24 h-auto my-2 flex items-center justify-center py-2 box-border">
             Male
-            </div>
+            </div> */}
       
-            <div className="heading text-lg w-full md:w-80 h-auto my-2 flex items-center justify-center py-2 box-border flex-wrap">
+            <div className="heading text-[17px]  w-full md:w-80 h-auto my-2 flex items-center justify-center py-2 box-border flex-wrap">
             {removeDomain(user.email)}
             </div>
       
             <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center">
-              <div className='w-12 h-12 rounded-full border text-gray-800 hover:bg-[#10151d] hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border' >
+              <div className='  text-gray-800   transition-all duration-500 ease-in-out flex items-center justify-center  box-border' >
               {user.role}
+              </div>
+            </div>
+            <div className="heading text-lg w-full md:w-24 h-auto my-2 flex items-center justify-center">
+              <div className='py-1 px-[10px] rounded border bg-black  text-white hover:bg-[#10151d] hover:text-white cursor-pointer transition-all duration-500 ease-in-out flex items-center justify-center hover:shadow-2xl hover:scale-110 box-border' >
+              Update
               </div>
             </div>
       

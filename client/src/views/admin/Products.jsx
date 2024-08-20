@@ -7,6 +7,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import UpdateProduct from '../../components/admin/updateProduct';
 import {ProductData} from '../../context/ProductContext';
 import axios from 'axios';
+import { FaPlusCircle } from "react-icons/fa";
 
 const Products = () => {
     
@@ -18,8 +19,6 @@ const Products = () => {
     const [product, setProduct] = useState();
     const [productId, setProductId] = useState();
 
-
-    console.log("admin produccts", adminProducts);
 
     const  handleUploadProduct =  () => {
         setUploadProduct((prev) => !prev);
@@ -106,8 +105,8 @@ const Products = () => {
           <div className='text-3xl font-bold flex-grow lg:text-xl text-center lg:text-left py-3'>
             Products
           </div>
-          <div className='text-xl cursor-pointer py-3 bg-slate-200 my-1 px-1 rounded-md' onClick={handleUploadProduct}>
-            Upload Product
+          <div className='flex items-center cursor-pointer py-3 bg-black text-white my-1 px-10 rounded-md' onClick={handleUploadProduct}>
+            Upload Product <FaPlusCircle className='ps-1 text-[20px]'/>
           </div>
         </div>
       </div>
@@ -116,8 +115,8 @@ const Products = () => {
               <div className='flex flex-col'> 
 
 
-<div className="hidden md:flex h-22 w-full items-center justify-between border-[2px] border-slate-400 p-2">
-      <div className="heading text-lg w-44 h-full flex items-center justify-center mx-4 box-border">
+<div className="hidden md:flex h-fit w-full items-center justify-between border-[2px] border-slate-400 ">
+      <div className="heading text-lg w-40 h-full flex items-center justify-center mx-4 box-border">
         Image
       </div>
 
@@ -149,12 +148,12 @@ const Products = () => {
                         return (
                    
 
-                    <div className="producttable w-full flex flex-col md:flex-row items-center justify-between border-[2px] border-slate-400 border-t-0 p-4 my-2 rounded-md shadow-md" key={index}>
+                    <div className="producttable w-full flex flex-col md:flex-row items-center justify-between border-[2px] border-slate-400 border-t-0    shadow-md" key={index}>
                     <div className="heading text-xl flex-shrink-0 w-full md:w-24 h-auto my-2 flex items-center justify-center mx-4 box-border">
-                      <img src={`http://localhost:4000/${product.image}`} className='w-[120px] h-[120px] object-cover' alt={product.title} />
+                      <img src={`http://localhost:4000/${product.image}`} className=' h-[50px] object-cover' alt={product.title} />
                     </div>
               
-                    <div className="heading text-lg w-full md:w-40 h-auto my-2 flex items-center justify-center p-4 box-border">
+                    <div className="heading text-[15px] w-full md:w-40 h-auto my-2 flex items-center justify-center p-4 box-border">
                       <p className='text-center'>{product.title}</p>
                     </div>
               
