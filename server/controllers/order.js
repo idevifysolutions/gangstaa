@@ -98,18 +98,18 @@ export const updateStatus = async (req, res) => {
 
     const order = await Order.findOne({ _id: req.params.id});
 
+
+
     console.log(req.user);
 
     if (order.status === "Pending") {
       order.status = "Processing";
-
       await sendMail(
         req.user.email,
         "Lets negotiate",
         "Your order is in processing and it will be delivered soon"
       );
-
-      await order.save();
+             await order.save();
 
       return res.json({
         message: "order status updated",
