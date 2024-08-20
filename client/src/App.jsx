@@ -21,6 +21,8 @@ import PaymentPage from "./views/Payment";
 import Shipping from "./views/Shipping";
 import Userprofile from "./components/templete/userprofile";
 import MyOrder from "./components/templete/MyOrder";
+import OrderItem from "./components/templete/OrderItem";
+
 import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
 import BarCharts from "./views/admin/charts/BarCharts";
@@ -112,6 +114,15 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <MyOrder />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/category/myorder/:id"
+            element={
+              <ProtectedRoute>
+                <OrderItem />
               </ProtectedRoute>
             }
           />

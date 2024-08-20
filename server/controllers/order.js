@@ -1,7 +1,7 @@
 import sendMail from "../middlewares/sendMail.js";
 import { Cart } from "../models/Cart.js";
 // import { Order } from "./../models/Order.js";
-import { Order } from "./../models/Order.js"
+import { Order } from "./../models/Order.js";
 import { Product } from "../models/Product.js";
 import Razorpay from "razorpay";
 import dotenv from "dotenv";
@@ -16,12 +16,10 @@ const instance = new Razorpay({
   key_secret: process.env.Razorpay_Secret,
 });
 
-
-
 export const newOrderCod = async (req, res) => {
   try {
-    const { items, method, phone, shippingInfo, subTotal } = req.body
-    console.log(items, method, phone, shippingInfo, subTotal, req.user._id)
+    const { items, method, phone, shippingInfo, subTotal } = req.body;
+    console.log(items, method, phone, shippingInfo, subTotal, req.user._id);
 
     const order = await Order.create({
       items,
@@ -29,22 +27,20 @@ export const newOrderCod = async (req, res) => {
       user: req.user._id,
       phone,
       shippingInfo,
-      subTotal
-    }) 
+      subTotal,
+    });
 
-    reduceStock(items)
+    reduceStock(items);
 
     res.status(200).json({
       message: "Order placed successfully",
-      order
-    })
-
+      order,
+    });
   } catch (error) {
     res.status(500).json({
       message: error.message,
     });
   }
-
 };
 
 export const getAllOrder = async (req, res) => {
@@ -78,7 +74,7 @@ export const getAllOrderAdmin = async (req, res) => {
 
 export const getMyOrder = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id).populate("items.product");
+    const order = await Order.findById(req.params.id).populate("items");
 
     res.json({ order });
   } catch (error) {
@@ -96,9 +92,7 @@ export const updateStatus = async (req, res) => {
       });
     }
 
-    const order = await Order.findOne({ _id: req.params.id});
-
-
+    const order = await Order.findOne({ _id: req.params.id });
 
     console.log(req.user);
 
@@ -109,7 +103,7 @@ export const updateStatus = async (req, res) => {
         "Lets negotiate",
         "Your order is in processing and it will be delivered soon"
       );
-             await order.save();
+      await order.save();
 
       return res.json({
         message: "order status updated",
