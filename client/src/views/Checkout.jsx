@@ -52,7 +52,8 @@ const Checkout = () => {
         {
          items: cartItems,
          method: formData.method,
-         address: shippingInfo,
+         phone: shippingInfo.phone,
+         shippingInfo,
          subTotal: total
 
         },
@@ -65,11 +66,12 @@ const Checkout = () => {
 
       console.log(response);
 
-      if (response.status === 201) {
-        toast.success("Order placed successfully!");
+      if (response.status === 200) {
         dispatch(emptyCart())
+        toast.success("Order placed successfully!");
+        console.log(("reduce stock"))
       } else {
-        toast.error(`Failed to place order: ${response.data.message}`);
+        toast.error(`Failed to place order:`);
       }
     } catch (error) {
       toast.error("There was an error placing the order.");
