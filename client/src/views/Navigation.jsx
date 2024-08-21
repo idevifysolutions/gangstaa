@@ -7,6 +7,8 @@ import {
   FaUserAlt,
   FaShoppingCart,
 } from "react-icons/fa";
+import axios from "axios";
+import { MdAdminPanelSettings } from "react-icons/md";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import logo from "../assets/gangstaaLogo.png";
@@ -18,7 +20,20 @@ import { FaHome } from "react-icons/fa";
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const [isAdmin, setIsAdmin] = useState("user");
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+
+  const getAllUser = async () => {
+    const response = await axios.get("http://localhost:4000/api/user/me", {
+      headers: {
+        token,
+      },
+    });
+
+    setIsAdmin(response.data.user.role);
+  };
 
   const { cartItems } = useSelector((state) => state.cartReducer);
   console.log(cartItems.length);
@@ -26,6 +41,7 @@ const Navigation = () => {
   useEffect(() => {
     const authStatus = localStorage.getItem("isAuth") === "true";
     setIsAuth(authStatus);
+    getAllUser();
   }, []);
 
   const handleLogout = () => {
@@ -163,6 +179,19 @@ const Navigation = () => {
                 Home
               </span>
             </Link>
+
+            {isAdmin === "admin" && (
+              <Link
+                to="/admin/dashboard"
+                className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+                onClick={() => setIsOpen(false)}
+              >
+                <MdAdminPanelSettings className="w-5 h-5" />
+                <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                  Admin
+                </span>
+              </Link>
+            )}
             <Link
               to="catagery/userprofile"
               className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"

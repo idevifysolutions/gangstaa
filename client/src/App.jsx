@@ -11,6 +11,7 @@ import SignUp from "./views/SignUp";
 import ForgotPassword from "./views/ForgotPassword";
 import VerifyingOTP from "./views/VerifyingOTP";
 import AllproductPage from "./components/product/AllproductPage";
+import AdminProtectedRoute from "./components/AdminProtectedRoute";
 // import ShirtsPage from "./components/product/ShirtsPage";
 // import JeansPage from "./components/product/JeansPage";
 // import TShirtPage from "./components/product/TShirtPage";
@@ -62,7 +63,7 @@ const App = () => {
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/shipping" element={<Shipping />} />
-          <Route path="/OfferPage" element={<OfferPage />}/>
+          <Route path="/OfferPage" element={<OfferPage />} />
 
           <Route
             path="/catagery"
@@ -72,7 +73,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-        
+
           {/* <Route
             path="/catagery/MyOrder"
             element={
@@ -132,36 +133,36 @@ const App = () => {
           <Route
             path="/admin/dashboard"
             element={
-              <ProtectedRoute>
+              <AdminProtectedRoute>
                 <Dashboard />
-              </ProtectedRoute>
+              </AdminProtectedRoute>
             }
           />
 
           <Route
             path="/admin/products"
             element={
-              <ProtectedRoute>
+              <AdminProtectedRoute>
                 <Products />
-              </ProtectedRoute>
+              </AdminProtectedRoute>
             }
           />
 
           <Route
             path="/admin/customers"
             element={
-              <ProtectedRoute>
+              <AdminProtectedRoute>
                 <Customers />
-              </ProtectedRoute>
+              </AdminProtectedRoute>
             }
           />
 
           <Route
             path="/admin/orders"
             element={
-              <ProtectedRoute>
+              <AdminProtectedRoute>
                 <Orders />
-              </ProtectedRoute>
+              </AdminProtectedRoute>
             }
           />
 
