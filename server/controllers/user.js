@@ -1,241 +1,365 @@
-import { User } from "../models/User.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+// import { User } from "../models/User.js";
+// import bcrypt from "bcrypt";
+// import jwt from "jsonwebtoken";
 import sendMail, { sendForgotMail } from "../middlewares/sendMail.js";
-import TryCatch from "../middlewares/TryCatch.js";
+// import TryCatch from 
+export const register = TryCatch(async(req, res) => {
+    const { email, name, password } = req.body;
 
-export const register = TryCatch(async (req, res) => {
-  const { email, name, password } = req.body;
+    let user = await User.findOne({ email });
 
-  let user = await User.findOne({ email });
+    if (user)
+        return res.status(400).json({
+            message: "User Already exists",
+        });
 
-  if (user)
-    return res.status(400).json({
-      message: "User Already exists",
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    user = {
+        name,
+        email,
+        password: hashPassword,
+    };
+
+    const otp = Math.floor(Math.random() * 1000000);
+
+    const activationToken = jwt.sign({
+            user,
+            otp,
+        },
+        process.env.Activation_Secret, {
+            expiresIn: "10m",
+        }
+    );
+
+    const data = {
+        name,
+        otp,
+    };
+
+    await sendMail(email, "Gangstaa Clothing Brand", data);
+
+    res.status(200).json({
+        message: "Otp send to your email address",
+        activationToken,
     });
-
-  const hashPassword = await bcrypt.hash(password, 10);
-
-  user = {
-    name,
-    email,
-    password: hashPassword,
-  };
-
-  const otp = Math.floor(Math.random() * 1000000);
-
-  const activationToken = jwt.sign(
-    {
-      user,
-      otp,
-    },
-    process.env.Activation_Secret,
-    {
-      expiresIn: "10m",
-    }
-  );
-
-  const data = {
-    name,
-    otp,
-  };
-
-  await sendMail(email, "Gangstaa Clothing Brand", data);
-
-  res.status(200).json({
-    message: "Otp send to your email address",
-    activationToken,
-  });
 });
 
-export const verifyUser = TryCatch(async (req, res) => {
-  const { otp, activationToken } = req.body;
-  if(!otp || !activationToken){console.log("No otp")}
+export const verifyUser = TryCatch(async(req, res) => {
+    const { otp, activationToken } = req.body;
+    if (!otp || !activationToken) { console.log("No otp") }
 
-  const verify = jwt.verify(activationToken, process.env.Activation_Secret);
+    const verify = jwt.verify(activationToken, process.env.Activation_Secret);
 
-  if (!verify)
-    return res.status(400).json({
-      message: "Otp Expired",
-    });
+    if (!verify)
+        return res.status(400).json({
+            message: "Otp Expired",
+        });
     console.log("Otp Expired")
 
-  if (verify.otp !== otp)
-    return res.status(400).json({
-      message: "Wrong Otp",
-    });
+    if (verify.otp !== otp)
+        return res.status(400).json({
+            message: "Wrong Otp",
+        });
     console.log("wrong OTP")
 
-  await User.create({
-    name: verify.user.name,
-    email: verify.user.email,
-    password: verify.user.password,
-  });
+    await User.create({
+        name: verify.user.name,
+        email: verify.user.email,
+        password: verify.user.password,
+    });
 
-  res.json({
-    message: "User Registered",
-  });
+    res.json({
+        message: "User Registered",
+    });
 });
 
 
 
 
-export const loginUser = TryCatch(async (req, res) => {
-  const { email, password } = req.body;
+export const loginUser = TryCatch(async(req, res) => {
+    const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+    const user = await User.findOne({ email });
 
-  if (!user)
-    return res.status(400).json({
-      message: "No User with this email",
+    if (!user)
+        return res.status(400).json({
+            message: "No User with this email",
+        });
+
+    const mathPassword = await bcrypt.compare(password, user.password);
+
+    if (!mathPassword)
+        return res.status(400).json({
+            message: "wrong Password",
+        });
+
+    const token = jwt.sign({ _id: user._id }, process.env.Jwt_Sec, {
+        expiresIn: "15d",
     });
 
-  const mathPassword = await bcrypt.compare(password, user.password);
-
-  if (!mathPassword)
-    return res.status(400).json({
-      message: "wrong Password",
+    res.json({
+        message: `Welcome back ${user.name}`,
+        token,
+        user,
     });
-
-  const token = jwt.sign({ _id: user._id }, process.env.Jwt_Sec, {
-    expiresIn: "15d",
-  });
-
-  res.json({
-    message: `Welcome back ${user.name}`,
-    token,
-    user,
-  });
 });
 
-export const myProfile = TryCatch(async (req, res) => {
-  const user = await User.findById(req.user._id);
+export const myProfile = TryCatch(async(req, res) => {
+    const user = await User.findById(req.user._id);
 
-  res.json({ user });
+    res.json({ user });
 });
 
-export const forgotPassword = TryCatch(async (req, res) => {
-  const { email } = req.body;
+export const forgotPassword = TryCatch(async(req, res) => {
+    const { email } = req.body;
 
-  const user = await User.findOne({ email });
+    const user = await User.findOne({ email });
 
-  if (!user)
-    return res.status(404).json({
-      message: "No User with this email",
+    if (!user)
+        return res.status(404).json({
+            message: "No User with this email",
+        });
+
+    const token = jwt.sign({ email }, process.env.Forgot_Secret);
+
+    const data = { email, token };
+
+    await sendForgotMail("E learning", data);
+
+    user.resetPasswordExpire = Date.now() + 5 * 60 * 1000;
+
+    await user.save();
+
+    res.json({
+        message: "Reset Password Link is send to you mail",
     });
-
-  const token = jwt.sign({ email }, process.env.Forgot_Secret);
-
-  const data = { email, token };
-
-  await sendForgotMail("E learning", data);
-
-  user.resetPasswordExpire = Date.now() + 5 * 60 * 1000;
-
-  await user.save();
-
-  res.json({
-    message: "Reset Password Link is send to you mail",
-  });
 });
 
-export const resetPassword = TryCatch(async (req, res) => {
-  const decodedData = jwt.verify(req.query.token, process.env.Forgot_Secret);
+export const resetPassword = TryCatch(async(req, res) => {
+    const decodedData = jwt.verify(req.query.token, process.env.Forgot_Secret);
 
-  const user = await User.findOne({ email: decodedData.email });
+    const user = await User.findOne({ email: decodedData.email });
 
-  if (!user)
-    return res.status(404).json({
-      message: "No user with this email",
-    });
+    if (!user)
+        return res.status(404).json({
+            message: "No user with this email",
+        });
 
-  if (user.resetPasswordExpire === null)
-    return res.status(400).json({
-      message: "Token Expired",
-    });
+    if (user.resetPasswordExpire === null)
+        return res.status(400).json({
+            message: "Token Expired",
+        });
 
-  if (user.resetPasswordExpire < Date.now()) {
-    return res.status(400).json({
-      message: "Token Expired",
-    });
-  }
+    if (user.resetPasswordExpire < Date.now()) {
+        return res.status(400).json({
+            message: "Token Expired",
+        });
+    }
 
-  const password = await bcrypt.hash(req.body.password, 10);
+    const password = await bcrypt.hash(req.body.password, 10);
 
-  user.password = password;
+    user.password = password;
 
-  user.resetPasswordExpire = null;
+    user.resetPasswordExpire = null;
 
-  await user.save();
+    await user.save();
 
-  res.json({ message: "Password Reset" });
+    res.json({ message: "Password Reset" });
 });
 
 
 //  get all users
-export const getAllusers = async (req, res) => {
+export const getAllusers = async(req, res) => {
 
-  if (req.user.role !== "admin")
-    return res.status(403).json({
-      message: "Unauthorized", // condition for checking user role
-    });
+    if (req.user.role !== "admin")
+        return res.status(403).json({
+            message: "Unauthorized", // condition for checking user role
+        });
 
-      try{
-       const data = await User.find();
-       const userslist = await data;
-       res.status(200).send({
-        message: "All users data",
-        data: userslist
-       })
-      }
-      catch(error){
-        res.status(500).json({
-          message: error.message || error,
-          sucess: false,
-          error: true
+    try {
+        const data = await User.find();
+        const userslist = await data;
+        res.status(200).send({
+            message: "All users data",
+            data: userslist
         })
-      }
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || error,
+            sucess: false,
+            error: true
+        })
+    }
 }
 
 // delete one users
 
-export const deleteOneUser = async (req, res) => {
+export const deleteOneUser = async(req, res) => {
 
-  if (req.user.role !== "admin")
-    return res.status(403).json({
-      message: "Unauthorized", // condition for checking user role
-    });
+    if (req.user.role !== "admin")
+        return res.status(403).json({
+            message: "Unauthorized", // condition for checking user role
+        });
 
-  try {
-    const userId = req.params.id;
-    if (!userId) {
-      return res.status(400).json({
-        message: "User ID is required",
-        success: false,
-        error: true
-      });
+    try {
+        const userId = req.params.id;
+        if (!userId) {
+            return res.status(400).json({
+                message: "User ID is required",
+                success: false,
+                error: true
+            });
+        }
+
+        const user = await User.findByIdAndDelete(userId);
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+                success: false,
+                error: true
+            });
+        }
+
+        res.json({
+            message: "User deleted successfully",
+            success: true,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: error.message || "An error occurred",
+            success: false,
+            error: true
+        });
+    }
+};
+
+import { User } from "../models/User.js";
+// import Userp from "../models/userRoutes.js"; //
+// import UserProfile from '../models/userRoutes.js';
+//  Assuming you have a UserProfile model
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import TryCatch from "../middlewares/TryCatch.js";
+
+// Registration API
+// export const register = TryCatch(async(req, res) => {
+//     const { email, name, surname, password, phone, address } = req.body;
+
+//     // Check if user already exists
+//     let user = await User.findOne({ email });
+//     if (user) {
+//         return res.status(400).json({
+//             message: "User already exists",
+//         });
+//     }
+
+//     // Hash the password
+//     const hashPassword = await bcrypt.hash(password, 10);
+
+//     // Create a new user
+//     user = await User.create({
+//         name,
+//         email,
+//         password: hashPassword,
+//     });
+
+//     // Create or update the user profile
+//     let userProfile = await UserProfile.findOne({ email });
+
+//     if (userProfile) {
+//         // Update existing profile
+//         userProfile.surname = surname;
+//         userProfile.phone = phone;
+//         userProfile.address = address;
+//         await userProfile.save();
+//     } else {
+//         // Create a new profile
+//         userProfile = new UserProfile({
+//             name,
+//             surname,
+//             email,
+//             phone,
+//             address,
+//         });
+//         await userProfile.save();
+//     }
+
+//     // Return success response
+//     res.status(201).json({
+//         message: "User registered and profile created successfully",
+//     });
+// });
+
+// Middleware for protected routes
+const authUser = (req, res, next) => {
+    // const token = req.headers.authorization ? .split(" ")[1];
+    if (!token) {
+        return res.status(401).json({ message: "Access Denied" });
     }
 
-    const user = await User.findByIdAndDelete(userId);
+    try {
+        const verified = jwt.verify(token, process.env.Jwt_Sec);
+        req.user = verified;
+        next();
+    } catch (err) {
+        res.status(400).json({ message: "Invalid Token" });
+    }
+};
 
+// Profile creation API (Protected route)
+export const createOrUpdateUserProfile = TryCatch(async(req, res) => {
+    const { email, name, surname, phone, address } = req.body;
+
+    // Find the user by email
+    const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-        success: false,
-        error: true
-      });
+        return res.status(400).json({
+            message: "User not found",
+        });
     }
 
-    res.json({
-      message: "User deleted successfully",
-      success: true,
+    // Check if the user's name and email match the submitted name and email
+    if (user.name !== name || user.email !== email) {
+        return res.status(400).json({
+            message: "User name and email do not match. Profile creation failed.",
+        });
+    }
+
+    // Check if a UserProfile exists for the email
+    let userProfile = await UserProfile.findOne({ email });
+
+    if (userProfile) {
+        // Update existing UserProfile
+        userProfile.surname = surname;
+        userProfile.phone = phone;
+        userProfile.address = address;
+        await userProfile.save();
+    } else {
+        // Create new UserProfile
+        userProfile = new UserProfile({
+            name,
+            surname,
+            email,
+            phone,
+            address,
+        });
+        await userProfile.save();
+    }
+
+    res.status(200).json({
+        message: "Profile created or updated successfully",
     });
-  } catch (error) {
-    res.status(500).json({
-      message: error.message || "An error occurred",
-      success: false,
-      error: true
-    });
+// <<<<<<< newmaina2
+// });
+
+// export default {
+//     register,
+//     createOrUpdateUserProfile,
+//     authUser
+// };
+
   }
 };
 
@@ -295,3 +419,4 @@ catch (error) {
 
 }
 }
+
