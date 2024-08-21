@@ -1,249 +1,241 @@
-// import { User } from "../models/User.js";
-// import bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
+import { User } from "../models/User.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import sendMail, { sendForgotMail } from "../middlewares/sendMail.js";
-// import TryCatch from 
-export const register = TryCatch(async(req, res) => {
-    const { email, name, password } = req.body;
+import TryCatch from "../middlewares/TryCatch.js";
 
-    let user = await User.findOne({ email });
+export const register = TryCatch(async (req, res) => {
+  const { email, name, password } = req.body;
 
-    if (user)
-        return res.status(400).json({
-            message: "User Already exists",
-        });
+  let user = await User.findOne({ email });
 
-    const hashPassword = await bcrypt.hash(password, 10);
-
-    user = {
-        name,
-        email,
-        password: hashPassword,
-    };
-
-    const otp = Math.floor(Math.random() * 1000000);
-
-    const activationToken = jwt.sign({
-            user,
-            otp,
-        },
-        process.env.Activation_Secret, {
-            expiresIn: "10m",
-        }
-    );
-
-    const data = {
-        name,
-        otp,
-    };
-
-    await sendMail(email, "Gangstaa Clothing Brand", data);
-
-    res.status(200).json({
-        message: "Otp send to your email address",
-        activationToken,
-    });
-});
-
-export const verifyUser = TryCatch(async(req, res) => {
-    const { otp, activationToken } = req.body;
-    if (!otp || !activationToken) { console.log("No otp") }
-
-    const verify = jwt.verify(activationToken, process.env.Activation_Secret);
-
-    if (!verify)
-        return res.status(400).json({
-            message: "Otp Expired",
-        });
-    console.log("Otp Expired")
-
-    if (verify.otp !== otp)
-        return res.status(400).json({
-            message: "Wrong Otp",
-        });
-    console.log("wrong OTP")
-
-    await User.create({
-        name: verify.user.name,
-        email: verify.user.email,
-        password: verify.user.password,
+  if (user)
+    return res.status(400).json({
+      message: "User Already exists",
     });
 
-    res.json({
-        message: "User Registered",
-    });
-});
+  const hashPassword = await bcrypt.hash(password, 10);
 
+  user = {
+    name,
+    email,
+    password: hashPassword,
+  };
 
+  const otp = Math.floor(Math.random() * 1000000);
 
-
-export const loginUser = TryCatch(async(req, res) => {
-    const { email, password } = req.body;
-
-    const user = await User.findOne({ email });
-
-    if (!user)
-        return res.status(400).json({
-            message: "No User with this email",
-        });
-
-    const mathPassword = await bcrypt.compare(password, user.password);
-
-    if (!mathPassword)
-        return res.status(400).json({
-            message: "wrong Password",
-        });
-
-    const token = jwt.sign({ _id: user._id }, process.env.Jwt_Sec, {
-        expiresIn: "15d",
-    });
-
-    res.json({
-        message: `Welcome back ${user.name}`,
-        token,
-        user,
-    });
-});
-
-export const myProfile = TryCatch(async(req, res) => {
-    const user = await User.findById(req.user._id);
-
-    res.json({ user });
-});
-
-export const forgotPassword = TryCatch(async(req, res) => {
-    const { email } = req.body;
-
-    const user = await User.findOne({ email });
-
-    if (!user)
-        return res.status(404).json({
-            message: "No User with this email",
-        });
-
-    const token = jwt.sign({ email }, process.env.Forgot_Secret);
-
-    const data = { email, token };
-
-    await sendForgotMail("E learning", data);
-
-    user.resetPasswordExpire = Date.now() + 5 * 60 * 1000;
-
-    await user.save();
-
-    res.json({
-        message: "Reset Password Link is send to you mail",
-    });
-});
-
-export const resetPassword = TryCatch(async(req, res) => {
-    const decodedData = jwt.verify(req.query.token, process.env.Forgot_Secret);
-
-    const user = await User.findOne({ email: decodedData.email });
-
-    if (!user)
-        return res.status(404).json({
-            message: "No user with this email",
-        });
-
-    if (user.resetPasswordExpire === null)
-        return res.status(400).json({
-            message: "Token Expired",
-        });
-
-    if (user.resetPasswordExpire < Date.now()) {
-        return res.status(400).json({
-            message: "Token Expired",
-        });
+  const activationToken = jwt.sign(
+    {
+      user,
+      otp,
+    },
+    process.env.Activation_Secret,
+    {
+      expiresIn: "10m",
     }
+  );
 
-    const password = await bcrypt.hash(req.body.password, 10);
+  const data = {
+    name,
+    otp,
+  };
 
-    user.password = password;
+  await sendMail(email, "Gangstaa Clothing Brand", data);
 
-    user.resetPasswordExpire = null;
-
-    await user.save();
-
-    res.json({ message: "Password Reset" });
+  res.status(200).json({
+    message: "Otp send to your email address",
+    activationToken,
+  });
 });
 
+export const verifyUser = TryCatch(async (req, res) => {
+  const { otp, activationToken } = req.body;
+  if (!otp || !activationToken) {
+    console.log("No otp");
+  }
+
+  const verify = jwt.verify(activationToken, process.env.Activation_Secret);
+
+  if (!verify)
+    return res.status(400).json({
+      message: "Otp Expired",
+    });
+  console.log("Otp Expired");
+
+  if (verify.otp !== otp)
+    return res.status(400).json({
+      message: "Wrong Otp",
+    });
+  console.log("wrong OTP");
+
+  await User.create({
+    name: verify.user.name,
+    email: verify.user.email,
+    password: verify.user.password,
+  });
+
+  res.json({
+    message: "User Registered",
+  });
+});
+
+export const loginUser = TryCatch(async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user)
+    return res.status(400).json({
+      message: "No User with this email",
+    });
+
+  const mathPassword = await bcrypt.compare(password, user.password);
+
+  if (!mathPassword)
+    return res.status(400).json({
+      message: "wrong Password",
+    });
+
+  const token = jwt.sign({ _id: user._id }, process.env.Jwt_Sec, {
+    expiresIn: "15d",
+  });
+
+  res.json({
+    message: `Welcome back ${user.name}`,
+    token,
+    user,
+  });
+});
+
+export const myProfile = TryCatch(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  res.json({ user });
+});
+
+export const forgotPassword = TryCatch(async (req, res) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user)
+    return res.status(404).json({
+      message: "No User with this email",
+    });
+
+  const token = jwt.sign({ email }, process.env.Forgot_Secret);
+
+  const data = { email, token };
+
+  await sendForgotMail("E learning", data);
+
+  user.resetPasswordExpire = Date.now() + 5 * 60 * 1000;
+
+  await user.save();
+
+  res.json({
+    message: "Reset Password Link is send to you mail",
+  });
+});
+
+export const resetPassword = TryCatch(async (req, res) => {
+  const decodedData = jwt.verify(req.query.token, process.env.Forgot_Secret);
+
+  const user = await User.findOne({ email: decodedData.email });
+
+  if (!user)
+    return res.status(404).json({
+      message: "No user with this email",
+    });
+
+  if (user.resetPasswordExpire === null)
+    return res.status(400).json({
+      message: "Token Expired",
+    });
+
+  if (user.resetPasswordExpire < Date.now()) {
+    return res.status(400).json({
+      message: "Token Expired",
+    });
+  }
+
+  const password = await bcrypt.hash(req.body.password, 10);
+
+  user.password = password;
+
+  user.resetPasswordExpire = null;
+
+  await user.save();
+
+  res.json({ message: "Password Reset" });
+});
 
 //  get all users
-export const getAllusers = async(req, res) => {
+export const getAllusers = async (req, res) => {
+  if (req.user.role !== "admin")
+    return res.status(403).json({
+      message: "Unauthorized", // condition for checking user role
+    });
 
-    if (req.user.role !== "admin")
-        return res.status(403).json({
-            message: "Unauthorized", // condition for checking user role
-        });
-
-    try {
-        const data = await User.find();
-        const userslist = await data;
-        res.status(200).send({
-            message: "All users data",
-            data: userslist
-        })
-    } catch (error) {
-        res.status(500).json({
-            message: error.message || error,
-            sucess: false,
-            error: true
-        })
-    }
-}
+  try {
+    const data = await User.find();
+    const userslist = await data;
+    res.status(200).send({
+      message: "All users data",
+      data: userslist,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || error,
+      sucess: false,
+      error: true,
+    });
+  }
+};
 
 // delete one users
 
-export const deleteOneUser = async(req, res) => {
+export const deleteOneUser = async (req, res) => {
+  if (req.user.role !== "admin")
+    return res.status(403).json({
+      message: "Unauthorized", // condition for checking user role
+    });
 
-    if (req.user.role !== "admin")
-        return res.status(403).json({
-            message: "Unauthorized", // condition for checking user role
-        });
-
-    try {
-        const userId = req.params.id;
-        if (!userId) {
-            return res.status(400).json({
-                message: "User ID is required",
-                success: false,
-                error: true
-            });
-        }
-
-        const user = await User.findByIdAndDelete(userId);
-
-        if (!user) {
-            return res.status(404).json({
-                message: "User not found",
-                success: false,
-                error: true
-            });
-        }
-
-        res.json({
-            message: "User deleted successfully",
-            success: true,
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: error.message || "An error occurred",
-            success: false,
-            error: true
-        });
+  try {
+    const userId = req.params.id;
+    if (!userId) {
+      return res.status(400).json({
+        message: "User ID is required",
+        success: false,
+        error: true,
+      });
     }
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found",
+        success: false,
+        error: true,
+      });
+    }
+
+    res.json({
+      message: "User deleted successfully",
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message || "An error occurred",
+      success: false,
+      error: true,
+    });
+  }
 };
 
-import { User } from "../models/User.js";
-// import Userp from "../models/userRoutes.js"; //
-// import UserProfile from '../models/userRoutes.js';
-//  Assuming you have a UserProfile model
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import TryCatch from "../middlewares/TryCatch.js";
-
 // Registration API
+
 // export const register = TryCatch(async(req, res) => {
 //     const { email, name, surname, password, phone, address } = req.body;
 
@@ -292,131 +284,52 @@ import TryCatch from "../middlewares/TryCatch.js";
 //     });
 // });
 
-// Middleware for protected routes
-const authUser = (req, res, next) => {
-    // const token = req.headers.authorization ? .split(" ")[1];
-    if (!token) {
-        return res.status(401).json({ message: "Access Denied" });
+export const updateRole = async (req, res) => {
+  try {
+    if (req.user.role !== "admin") {
+      return res.status(403).json({
+        message: "This is admin route",
+      });
     }
 
-    try {
-        const verified = jwt.verify(token, process.env.Jwt_Sec);
-        req.user = verified;
-        next();
-    } catch (err) {
-        res.status(400).json({ message: "Invalid Token" });
-    }
-};
+    const id = req.params.id;
 
-// Profile creation API (Protected route)
-export const createOrUpdateUserProfile = TryCatch(async(req, res) => {
-    const { email, name, surname, phone, address } = req.body;
+    const user = await User.findOne({ _id: id });
 
-    // Find the user by email
-    const user = await User.findOne({ email });
-    if (!user) {
-        return res.status(400).json({
-            message: "User not found",
-        });
-    }
+    if (user.role === "admin") {
+      user.role = "user";
 
-    // Check if the user's name and email match the submitted name and email
-    if (user.name !== name || user.email !== email) {
-        return res.status(400).json({
-            message: "User name and email do not match. Profile creation failed.",
-        });
+      await sendMail(
+        user.email,
+        "Role Updated",
+        "Your Role is Updated for the gangstaa Project"
+      );
+
+      await user.save();
+
+      return res.json({
+        message: "user Role updated",
+      });
     }
 
-    // Check if a UserProfile exists for the email
-    let userProfile = await UserProfile.findOne({ email });
+    if (user.role === "user") {
+      user.role = "admin";
 
-    if (userProfile) {
-        // Update existing UserProfile
-        userProfile.surname = surname;
-        userProfile.phone = phone;
-        userProfile.address = address;
-        await userProfile.save();
-    } else {
-        // Create new UserProfile
-        userProfile = new UserProfile({
-            name,
-            surname,
-            email,
-            phone,
-            address,
-        });
-        await userProfile.save();
+      await sendMail(
+        user.email,
+        "Role Updated",
+        "Your Role is Updated for the gangstaa Project"
+      );
+
+      await user.save();
+
+      return res.json({
+        message: "user Role updated",
+      });
     }
-
-    res.status(200).json({
-        message: "Profile created or updated successfully",
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
     });
-// <<<<<<< newmaina2
-// });
-
-// export default {
-//     register,
-//     createOrUpdateUserProfile,
-//     authUser
-// };
-
   }
 };
-
-
-export const updateRole = async (req, res) => {
-
-    try {
-
-      if (req.user.role !== "admin") {
-        return res.status(403).json({
-          message: "This is admin route",
-        });
-      }
-      
-      const  id  = req.params.id;
-
-      const user = await User.findOne({ _id: id});
-
-      if (user.role === "admin") {
-        user.role = "user";
-  
-        await sendMail(
-          user.email,
-          "Role Updated",
-          "Your Role is Updated for the gangstaa Project"
-        );
-  
-        await user.save();
-  
-        return res.json({
-          message: "user Role updated",
-        });
-      }
-
-
-      if (user.role === "user") {
-        user.role = "admin";
-  
-        await sendMail(
-          user.email,
-          "Role Updated",
-          "Your Role is Updated for the gangstaa Project"
-        );
-  
-        await user.save();
-  
-        return res.json({
-          message: "user Role updated",
-        });
-      }
-}
-
-catch (error) {
-  res.status(500).json({
-    message: error.message,
-  });
-
-}
-}
-
