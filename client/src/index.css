@@ -2,7 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
-  }
+  display: none; /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+}
+
+.container {
+  max-width: 100% !important;
+}
