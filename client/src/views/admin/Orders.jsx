@@ -96,7 +96,7 @@ const Orders = () => {
             <tr className="text-sm leading-normal text-gray-600 uppercase bg-gray-200">
               <th className="px-6 py-3 text-center">Name</th>
               <th className="px-6 py-3 text-center">Total</th>
-              <th className="px-6 py-3 text-center">Discount</th>
+              <th className="px-6 py-3 text-center">Phone</th>
               <th className="px-6 py-3 text-center">Quantity</th>
               <th className="px-6 py-3 text-center"> Update Status</th>
               <th className="px-6 py-3 text-center">More Info</th>
@@ -118,7 +118,7 @@ const Orders = () => {
                 {order.subTotal}               
                 </td>
 
-                <td className="px-6 py-3 text-center">500</td>
+                <td className="px-6 py-3 text-center">{order.phone}</td>
                 <td className="px-6 py-3 text-center"> {order.items.length}</td>
 
                 <td

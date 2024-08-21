@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AdminSidebar from '../../components/admin/AdminSidebar'
 import { BsSearch } from 'react-icons/bs'
 import { BiMaleFemale } from "react-icons/bi";
@@ -8,12 +8,42 @@ import data from "../../assets/data.json"
 import { HiTrendingUp, HiTrendingDown } from "react-icons/hi"
 import { BarChart, DoughnutChart } from '../../components/admin/Charts'
 import { RxHamburgerMenu } from 'react-icons/rx';
+import axios from 'axios';
 
 const userImg =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";
 
 
 const Dashboard = () => {
+
+    const [allOrders, setAllOrders] = useState([]);
+
+async function fetchAllOrders() {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:4000/api/order/admin/all`, 
+        {
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        }
+      );
+      setAllOrders(data.orders);
+      console.log( "allorders", data.orders)
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+  useEffect(() => {
+       fetchAllOrders();
+       console.log("allorders from orders", allOrders);
+
+  },[])
+
+
 
     const [showsidebar, setShowsidebar] = useState(false);
 
@@ -108,7 +138,7 @@ const Dashboard = () => {
                         <DoughnutChart labels={['Female', 'Male']} data={[10, 15]}  backgroundColor={["hsl(340, 82%, 56%)", "rgba(12, 348, 276, 0.8)"]} />
                         <p className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[2rem]'><BiMaleFemale /></p>
                     </div> */}
-                    <Table data = {data.orders} />
+                    <Table data = {allOrders} />
                 </section>
             </main>
         </div>
