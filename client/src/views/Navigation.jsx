@@ -108,7 +108,7 @@ const Navigation = () => {
               className="p-2 text-black rounded-md hover:bg-gray-200 focus:outline-none"
             >
               <span className="sr-only">Open main menu</span>
-              <motion.div variants={iconVariants} whileHover="hover">
+              <motion.div whileHover="hover">
                 {isOpen ? (
                   <FaTimes className="w-6 h-6" />
                 ) : (
@@ -125,7 +125,7 @@ const Navigation = () => {
 
           {/* Items hidden on mobile and shown on desktop */}
           <div className="items-center hidden space-x-4 md:flex">
-            <motion.div variants={iconVariants} whileHover="hover">
+            <motion.div whileHover="hover">
               <Link to="/cart">
                 <p className="relative flex items-center">
                   <FaShoppingCart className="w-6 h-6" />
@@ -141,7 +141,7 @@ const Navigation = () => {
               <motion.button
                 onClick={handleLogout}
                 whileHover="hover"
-                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
+                className="p-2 text-xl font-bold text-white bg-black rounded-md cursor-pointer"
               >
                 LogOut
               </motion.button>
@@ -149,7 +149,7 @@ const Navigation = () => {
               <Link to="/login">
                 <motion.div
                   whileHover="hover"
-                  className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
+                  className="p-2 text-xl font-bold text-white bg-black rounded-md cursor-pointer"
                 >
                   LogIn
                 </motion.div>
@@ -268,7 +268,7 @@ const Navigation = () => {
           </div>
           {isAuth ? (
             <Link
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-80 hover:bg-gray-300"
               onClick={() => {
                 setIsOpen(false);
                 handleLogout();
