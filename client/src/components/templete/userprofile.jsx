@@ -14,10 +14,9 @@ function UserProfile() {
     });
 
     const [showPopup, setShowPopup] = useState(false);
-    const [showDeletePopup, setShowDeletePopup] = useState(false); // New state for delete confirmation
+    const [showDeletePopup, setShowDeletePopup] = useState(false); // State for delete confirmation
     const [isEditMode, setIsEditMode] = useState(true);
     const [errors, setErrors] = useState({});
-    const [submitTimestamp, setSubmitTimestamp] = useState(null);
     const [deletionMessage, setDeletionMessage] = useState('');
 
     useEffect(() => {
@@ -33,7 +32,7 @@ function UserProfile() {
         };
 
         fetchUserData();
-    }, []);
+    }, [userInfo.email]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -67,9 +66,7 @@ function UserProfile() {
             return;
         }
 
-
         setShowPopup(true); // Show popup immediately
-
 
         const formData = new FormData();
         formData.append('name', userInfo.name);
@@ -77,14 +74,13 @@ function UserProfile() {
         formData.append('email', userInfo.email);
         formData.append('phone', userInfo.phone);
         formData.append('address', userInfo.address);
-        formData.append('timestamp', currentTimestamp);
 
         if (userInfo.image) {
             formData.append('image', userInfo.image);
         }
 
         try {
-            await axios.post('http://localhost:4000/api/upload', formData, {
+            await axios.post('http://localhost:4000/api/editprofile', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -92,18 +88,32 @@ function UserProfile() {
 
             setIsEditMode(false);
             setErrors({});
-
-            // Hide the popup after 2-3 seconds and switch buttons
+            
+            // Hide the popup after 2 seconds
             setTimeout(() => {
                 setShowPopup(false);
-            }, 2000); // Adjust timing as necessary
+            }, 2000);
 
         } catch (error) {
             console.error('Error updating profile:', error.message || error);
         }
     };
 
-    const clearInfo = () => {
+    const handleDeleteProfile = async () => {
+        try {
+            await axios.post('http://localhost:4000/api/deleteprofile', { email: userInfo.email });
+            setDeletionMessage('Your profile has been deleted.');
+
+            // Hide the delete confirmation popup after 2 seconds
+            setTimeout(() => {
+                setShowDeletePopup(false);
+            }, 2000);
+        } catch (error) {
+            console.error('Error deleting profile:', error.message || error);
+        }
+    };
+
+    const handleClearInfo = () => {
         setUserInfo({
             name: '',
             surname: '',
@@ -113,9 +123,10 @@ function UserProfile() {
             image: null,
         });
         setErrors({});
-// <<<<<<< up23
+        setShowPopup(false); // Hide save info popup when delete button is clicked
+        setDeletionMessage('Your profile will be deleted.');
         setShowDeletePopup(true); // Show delete confirmation message
-
+        handleDeleteProfile(); // Call delete profile API
     };
 
     const handleEditProfile = () => {
@@ -219,7 +230,7 @@ function UserProfile() {
                     {isEditMode ? (
                         <>
                             <button
-                                onClick={clearInfo}
+                                onClick={handleClearInfo}
                                 className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer"
                             >
                                 Delete Profile
@@ -244,49 +255,17 @@ function UserProfile() {
                 {/* Popup Notification */}
                 {showPopup && (
                     <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-                        Your profile will be submitted.
+                        Your profile has been updated successfully.
                     </div>
                 )}
 
                 {/* Delete Confirmation Popup */}
                 {showDeletePopup && (
                     <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-                        Your profile will be deleted.
-                    </div>
-                )}
-
-                {/* Deletion Notification */}
-                {deletionMessage && (
-                    <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
                         {deletionMessage}
                     </div>
                 )}
             </div>
-
-            {/* Media query for screens as small as 200px */}
-            <style jsx>{`
-                @media (max-width: 200px) {
-                    .p-4 {
-                        padding: 2px;
-                    }
-                    .p-2 {
-                        padding: 1px;
-                    }
-                    .text-xl {
-                        font-size: 1rem;
-                    }
-                    .text-lg {
-                        font-size: 0.875rem;
-                    }
-                    .text-sm {
-                        font-size: 0.75rem;
-                    }
-                    img {
-                        width: 20px;
-                        height: 20px;
-                    }
-                }
-            `}</style>
         </div>
     );
 }
