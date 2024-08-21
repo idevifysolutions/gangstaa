@@ -13,7 +13,7 @@ const Orders = () => {
   async function fetchAllOrders() {
     try {
       const { data } = await axios.get(
-        `http://localhost:4000/api/order/admin/all`, 
+        `http://localhost:4000/api/order/admin/all`,
         {
           headers: {
             token: localStorage.getItem("token"),
@@ -21,8 +21,7 @@ const Orders = () => {
         }
       );
       setAllOrders(data.orders);
-      console.log( "allorders", data.orders)
-
+      console.log("allorders", data.orders);
     } catch (error) {
       console.log(error);
     }
@@ -38,17 +37,15 @@ const Orders = () => {
   };
 
   const handlemanageOrder = (id) => {
-
-     const oneOrderInfo = allOrders.filter((order) => order._id === id);
+    const oneOrderInfo = allOrders.filter((order) => order._id === id);
 
     setOneOrderInfo(oneOrderInfo);
     setManageOrder((prev) => !prev);
-
   };
 
   const handleClose = () => {
     setManageOrder((prev) => !prev);
-  }
+  };
 
   const updateStatus = async (id) => {
     if (confirm("Are you sure you want to update status of this order")) {
@@ -73,80 +70,89 @@ const Orders = () => {
 
   return (
     <>
-<div className="relative flex h-full">
-  <AdminSidebar sidebar={{ showsidebar, handleSideBar }} />
+      <div className="relative flex h-full">
+        <AdminSidebar sidebar={{ showsidebar, handleSideBar }} />
 
-  <div className="h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4">
-    <div className="headerbar h-10 w-full border flex items-center justify-between shadow-md shadow-slate-400 p-6">
-      <div
-        className="lg:hidden block cursor-pointer"
-        onClick={handleSideBar}
-      >
-        <RxHamburgerMenu className="text-2xl" />
+        <div className="h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4">
+          <div className="flex items-center justify-between w-full h-10 p-6 border shadow-md headerbar shadow-slate-400">
+            <div
+              className="block cursor-pointer lg:hidden"
+              onClick={handleSideBar}
+            >
+              <RxHamburgerMenu className="text-2xl" />
+            </div>
+            <div className="flex-grow py-3 text-xl font-bold text-center lg:text-left">
+              Orders
+            </div>
+          </div>
+
+          <main className="flex-grow">
+            <div className="items-center justify-center w-full h-full overflow-x-auto">
+              <table className="min-w-full bg-white border border-gray-200">
+                <thead>
+                  <tr className="text-sm leading-normal text-gray-600 uppercase bg-gray-200">
+                    <th className="px-6 py-3 text-center">Name</th>
+                    <th className="px-6 py-3 text-center">Total</th>
+                    <th className="px-6 py-3 text-center">Phone</th>
+                    <th className="px-6 py-3 text-center">Quantity</th>
+                    <th className="px-6 py-3 text-center"> Update Status</th>
+                    <th className="px-6 py-3 text-center">More Info</th>
+                  </tr>
+                </thead>
+                <tbody className="text-sm font-light text-gray-600">
+                  {allOrders.map((order, index) => {
+                    return (
+                      <tr
+                        className="border-b border-gray-200 hover:bg-gray-100"
+                        key={index}
+                      >
+                        <td className="px-6 py-3 text-center">
+                          {order.user.name}
+                        </td>
+
+                        <td className="px-6 py-3 text-center">
+                          {order.subTotal}
+                        </td>
+
+                        <td className="px-6 py-3 text-center">{order.phone}</td>
+                        <td className="px-6 py-3 text-center">
+                          {" "}
+                          {order.items.length}
+                        </td>
+
+                        <td className="flex items-center justify-between gap-2 px-6 py-3 cursor-pointer">
+                          <p> {order.status}</p>
+                          <button
+                            className="p-2 text-white bg-black"
+                            onClick={() => updateStatus(order._id)}
+                          >
+                            Update Status
+                          </button>
+                        </td>
+
+                        <td className="px-6 py-3 cursor-pointer">
+                          <div className="flex items-center justify-center">
+                            <button
+                              className="p-2 text-white bg-black"
+                              onClick={() => handlemanageOrder(order._id)}
+                            >
+                              More Info
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </main>
+        </div>
       </div>
-      <div className="font-bold flex-grow text-xl text-center lg:text-left py-3">
-        Customers
-      </div>
-    </div>
-
-    <main className="flex-grow">
-      <div className="items-center justify-center w-full h-full overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="text-sm leading-normal text-gray-600 uppercase bg-gray-200">
-              <th className="px-6 py-3 text-center">Name</th>
-              <th className="px-6 py-3 text-center">Total</th>
-              <th className="px-6 py-3 text-center">Phone</th>
-              <th className="px-6 py-3 text-center">Quantity</th>
-              <th className="px-6 py-3 text-center"> Update Status</th>
-              <th className="px-6 py-3 text-center">More Info</th>
-            </tr>
-          </thead>
-          <tbody className="text-sm font-light text-gray-600">
-
-            {allOrders.map((order, index) => {
-
-               return (
-              <tr
-                className="border-b border-gray-200 hover:bg-gray-100" key={index}
-              >
-                <td className="px-6 py-3 text-center">
-                {order.user.name}
-                </td>
-
-                <td className="px-6 py-3 text-center">
-                {order.subTotal}               
-                </td>
-
-                <td className="px-6 py-3 text-center">{order.phone}</td>
-                <td className="px-6 py-3 text-center"> {order.items.length}</td>
-
-                <td
-                  className="px-6 py-3 flex items-center justify-between gap-2 cursor-pointer"
-                >
-                  <p> {order.status}</p>
-                  <button className="bg-black text-white p-2" onClick={() => updateStatus(order._id)}
-                  >Update Status</button>
-                </td>
-
-                <td
-                  className="px-6 py-3 cursor-pointer">
-                <div className="flex items-center justify-center">
-                <button className="bg-black text-white p-2" onClick={() => handlemanageOrder(order._id)}>More Info</button>
-
-                </div>
-                </td>
-              </tr>
-
-            ) } ) }
-          </tbody>
-        </table>
-      </div>
-    </main>
-  </div>
-</div>
-{manageOrder && <OrderDetails orderInfo={oneOrderInfo} onClose={handleClose} />}
-</>
+      {manageOrder && (
+        <OrderDetails orderInfo={oneOrderInfo} onClose={handleClose} />
+      )}
+    </>
   );
 };
 
