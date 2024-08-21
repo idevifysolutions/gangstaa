@@ -11,7 +11,7 @@ export default {
                 'custom-heavy': '0 4px 8px rgba(0, 0, 0, 0.3)',
             },
             screens: {
-                'xs': '350px', // Custom breakpoint for screens 350px and up
+                'xs': '200px',
             },
         },
 

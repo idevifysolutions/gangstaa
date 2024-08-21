@@ -1,12 +1,13 @@
 import sendMail from "../middlewares/sendMail.js";
 import { Cart } from "../models/Cart.js";
 // import { Order } from "./../models/Order.js";
-import { Order} from "./../models/Order.js"
+import { Order } from "./../models/Order.js";
 import { Product } from "../models/Product.js";
 import Razorpay from "razorpay";
 import dotenv from "dotenv";
 import crypto from "crypto";
 import { Payment } from "../models/Payment.js";
+import { reduceStock } from "../utilities/features.js";
 
 dotenv.config();
 
@@ -15,56 +16,24 @@ const instance = new Razorpay({
   key_secret: process.env.Razorpay_Secret,
 });
 
-
-
 export const newOrderCod = async (req, res) => {
   try {
-    const { method, phone, address } = req.body;
-    console.log("Req.id" , req.user._id)
-
-    const cart = await Cart.find({ user: req.user._id }).populate("product");
-
-    let subTotal = 0;
-
-    cart.forEach((i) => {
-      const itemSubtotal = i.product.price * i.quantity;
-
-      subTotal += itemSubtotal;
-    });
-
-    const items = await Cart.find({ user: req.user._id })
-      .select("-_id")
-      .select("-user")
-      .select("-__v");
+    const { items, method, phone, shippingInfo, subTotal } = req.body;
+    console.log(items, method, phone, shippingInfo, subTotal, req.user._id);
 
     const order = await Order.create({
       items,
       method,
       user: req.user._id,
       phone,
-      address,
+      shippingInfo,
       subTotal,
     });
 
-    for (let i of order.items) {
-      let product = await Product.findOne({ _id: i.product });
+    reduceStock(items);
 
-      product.$inc("stock", -1 * i.quantity);
-      product.$inc("sold", +i.quantity);
-
-      await product.save();
-    }
-
-    await Cart.find({ user: req.user._id }).deleteMany();
-
-    await sendMail(
-      req.user.email,
-      "Let's negotitate",
-      `Thanks your shopping of ₹ ${subTotal} from our Platform your order will be deliverd soon`
-    );
-
-    res.status(201).json({
-      message: "Order Placed Successfully",
+    res.status(200).json({
+      message: "Order placed successfully",
       order,
     });
   } catch (error) {
@@ -93,7 +62,7 @@ export const getAllOrderAdmin = async (req, res) => {
         message: "Unauthorized",
       });
 
-    const orders = await Order.find();
+    const orders = await Order.find().populate("user");
 
     res.json({ orders });
   } catch (error) {
@@ -105,7 +74,7 @@ export const getAllOrderAdmin = async (req, res) => {
 
 export const getMyOrder = async (req, res) => {
   try {
-    const order = await Order.findById(req.params.id).populate("items.product");
+    const order = await Order.findById(req.params.id).populate("items");
 
     res.json({ order });
   } catch (error) {
@@ -123,17 +92,17 @@ export const updateStatus = async (req, res) => {
       });
     }
 
-    const order = await Order.findById(req.params.id);
+    const order = await Order.findOne({ _id: req.params.id });
+
+    console.log(req.user);
 
     if (order.status === "Pending") {
       order.status = "Processing";
-
       await sendMail(
         req.user.email,
         "Lets negotiate",
         "Your order is in processing and it will be delivered soon"
       );
-
       await order.save();
 
       return res.json({

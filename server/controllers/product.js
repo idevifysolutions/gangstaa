@@ -176,3 +176,42 @@ export const deleteProduct = async (req, res) => {
     });
   }
 };
+
+
+
+// filter the products on the basis of the conditions
+
+export const filterProducts = async (req, res) => {
+  try {
+    const { category, size, colors, priceRange } = req.query;
+
+    let filter = {};
+
+    if (category) {
+      filter.category = { $in: Array.isArray(category) ? category : [category] };
+    }
+
+    if (size) {
+      filter.size = { $in: Array.isArray(size) ? size : [size] };
+    }
+
+    if (colors) {
+      filter.colors = { $in: Array.isArray(colors) ? colors : [colors] };
+    }
+
+    if (priceRange) {
+      const priceValues = Array.isArray(priceRange) ? priceRange : [priceRange];
+      const minPrice = Math.min(...priceValues.map(range => parseInt(range.split('-')[0], 10)));
+      const maxPrice = Math.max(...priceValues.map(range => parseInt(range.split('-')[1], 10)));
+      
+      filter.price = { $gte: minPrice, $lte: maxPrice };
+    }
+
+    // Fetch the filtered products from the database
+    const products = await Product.find(filter);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+}
