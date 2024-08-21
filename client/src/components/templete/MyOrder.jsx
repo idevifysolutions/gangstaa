@@ -1,66 +1,86 @@
-// import React from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-// const MyOrder = () => {
-//   return <div>MyOrder hgfhgfhgfhfgfhfg</div>;
-// };
+const Orders = () => {
+  const [orders, setOrders] = useState([]);
+  const navigate = useNavigate();
 
-// export default MyOrder;
+  async function fetchOrders() {
+    try {
+      const { data } = await axios.get("http://localhost:4000/api/order/all", {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      });
+      console.log(data);
 
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-function MyOrders() {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState('');
-
-    useEffect(() => {
-        // Fetch user's orders from the API
-        axios.get('http://localhost:4000/api/orders')
-            .then(res => {
-                setOrders(res.data);
-                setLoading(false);
-            })
-            .catch(err => {
-                setError('Failed to fetch orders.');
-                setLoading(false);
-            });
-    }, []);
-
-    if (loading) {
-        return <div>Loading...</div>;
+      setOrders(data.orders);
+    } catch (error) {
+      console.log(error);
     }
+  }
+  console.log(localStorage.getItem("token"));
 
-    if (error) {
-        return <div>{error}</div>;
-    }
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
-    return (
-        <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">My Orders</h2>
-            {orders.length === 0 ? (
-                <p>You have no orders yet.</p>
-            ) : (
-                <div className="grid grid-cols-1 gap-4">
-                    {orders.map(order => (
-                        <div key={order._id} className="border p-4 rounded shadow">
-                            <h3 className="text-xl font-semibold">Order #{order._id}</h3>
-                            <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
-                            <p><strong>Total:</strong> ₹{order.totalPrice}</p>
-                            <p><strong>Status:</strong> {order.status}</p>
-                            <ul className="mt-2">
-                                {order.items.map(item => (
-                                    <li key={item.productId}>
-                                        {item.name} - ₹{item.price} x {item.quantity}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
-            )}
+  return (
+    <main className="flex flex-col min-h-screen">
+      <h1 className="mt-8 mb-8 text-3xl font-bold text-center">My Orders</h1>
+      {orders && orders.length > 0 ? (
+        <div className="items-center justify-center w-full h-full p-2 overflow-x-auto lg:p-8">
+          <table className="min-w-full bg-white border border-gray-200">
+            <thead>
+              <tr className="text-sm leading-normal text-gray-600 uppercase bg-gray-200">
+                <th className="px-6 py-3 text-left">#</th>
+                <th className="px-6 py-3 text-left">Method</th>
+                <th className="px-6 py-3 text-left">Subtotal</th>
+                <th className="px-6 py-3 text-left">Status</th>
+                <th className="px-6 py-3 text-left">Address</th>
+                <th className="px-6 py-3 text-left">Phone</th>
+                <th className="px-6 py-3 text-left">Action</th>
+              </tr>
+            </thead>
+            <tbody className="text-sm font-light text-gray-600">
+              {orders.map((e, i) => {
+                const shippingInfo = e.shippingInfo || {};
+                const { address, city, state, country, pinCode } = shippingInfo;
+
+                return (
+                  <tr
+                    key={i}
+                    className="border-b border-gray-200 hover:bg-gray-100"
+                  >
+                    <td className="px-6 py-3 text-left">{i + 1}</td>
+                    <td className="px-6 py-3 text-left">{e.method}</td>
+                    <td className="px-6 py-3 text-left">{e.subTotal}</td>
+                    <td className="px-6 py-3 text-left">{e.status}</td>
+                    <td className="px-6 py-3 text-left">{`${address || ""}, ${
+                      city || ""
+                    }, ${state || ""}, ${country || ""}, ${pinCode || ""}`}</td>
+                    <td className="px-6 py-3 text-left">{e.phone}</td>
+
+                    <td className="px-6 py-3 text-left">
+                      <button
+                        className="px-4 py-2 text-lg text-white bg-black"
+                        onClick={() => navigate(`/category/myorder/${e._id}`)}
+                      >
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
-    );
-}
+      ) : (
+        <p className="mt-4 text-gray-500">No Orders Yet</p>
+      )}
+    </main>
+  );
+};
 
-export default MyOrders;
+export default Orders;

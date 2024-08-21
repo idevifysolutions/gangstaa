@@ -351,10 +351,72 @@ export const createOrUpdateUserProfile = TryCatch(async(req, res) => {
     res.status(200).json({
         message: "Profile created or updated successfully",
     });
-});
+// <<<<<<< newmaina2
+// });
 
-export default {
-    register,
-    createOrUpdateUserProfile,
-    authUser
+// export default {
+//     register,
+//     createOrUpdateUserProfile,
+//     authUser
+// };
+
+  }
 };
+
+
+export const updateRole = async (req, res) => {
+
+    try {
+
+      if (req.user.role !== "admin") {
+        return res.status(403).json({
+          message: "This is admin route",
+        });
+      }
+      
+      const  id  = req.params.id;
+
+      const user = await User.findOne({ _id: id});
+
+      if (user.role === "admin") {
+        user.role = "user";
+  
+        await sendMail(
+          user.email,
+          "Role Updated",
+          "Your Role is Updated for the gangstaa Project"
+        );
+  
+        await user.save();
+  
+        return res.json({
+          message: "user Role updated",
+        });
+      }
+
+
+      if (user.role === "user") {
+        user.role = "admin";
+  
+        await sendMail(
+          user.email,
+          "Role Updated",
+          "Your Role is Updated for the gangstaa Project"
+        );
+  
+        await user.save();
+  
+        return res.json({
+          message: "user Role updated",
+        });
+      }
+}
+
+catch (error) {
+  res.status(500).json({
+    message: error.message,
+  });
+
+}
+}
+

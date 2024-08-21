@@ -17,8 +17,9 @@ function UserProfile() {
     const [showDeletePopup, setShowDeletePopup] = useState(false); // New state for delete confirmation
     const [isEditMode, setIsEditMode] = useState(true);
     const [errors, setErrors] = useState({});
+    const [submitTimestamp, setSubmitTimestamp] = useState(null);
+    const [deletionMessage, setDeletionMessage] = useState('');
 
-    // Fetch user data when the component mounts
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -66,7 +67,9 @@ function UserProfile() {
             return;
         }
 
+
         setShowPopup(true); // Show popup immediately
+
 
         const formData = new FormData();
         formData.append('name', userInfo.name);
@@ -74,6 +77,7 @@ function UserProfile() {
         formData.append('email', userInfo.email);
         formData.append('phone', userInfo.phone);
         formData.append('address', userInfo.address);
+        formData.append('timestamp', currentTimestamp);
 
         if (userInfo.image) {
             formData.append('image', userInfo.image);
@@ -93,6 +97,7 @@ function UserProfile() {
             setTimeout(() => {
                 setShowPopup(false);
             }, 2000); // Adjust timing as necessary
+
         } catch (error) {
             console.error('Error updating profile:', error.message || error);
         }
@@ -108,21 +113,24 @@ function UserProfile() {
             image: null,
         });
         setErrors({});
+// <<<<<<< up23
         setShowDeletePopup(true); // Show delete confirmation message
+
     };
 
     const handleEditProfile = () => {
         setIsEditMode(true);
+        setDeletionMessage('');
     };
 
     return (
-        <div className="flex w-full h-screen">
-            {/* Left Column (25%) */}
-            <div className="w-1/4 bg-gray-500 p-6 text-center text-white">
+        <div className="flex flex-col md:flex-row w-full h-auto md:h-screen">
+            {/* Left Column */}
+            <div className="w-full md:w-1/4 bg-gray-500 p-4 md:p-6 text-center text-white">
                 <img 
                     src={userInfo.image ? URL.createObjectURL(userInfo.image) : defaultImage} 
                     alt="Profile" 
-                    className="rounded-full mx-auto w-32 h-32"
+                    className="rounded-full mx-auto w-24 h-24 sm:w-32 sm:h-32 md:w-48 md:h-48"
                 />
                 <input
                     type="file"
@@ -130,16 +138,16 @@ function UserProfile() {
                     className="mt-4"
                     disabled={!isEditMode}
                 />
-                <h2 className="mt-4 text-xl font-semibold">
+                <h2 className="mt-4 text-lg sm:text-xl font-semibold">
                     {userInfo.name || "User"} {userInfo.surname || "Name"}
                 </h2>
-                <p>{userInfo.email || "user@example.com"}</p>
+                <p className="text-sm sm:text-base">{userInfo.email || "user@example.com"}</p>
             </div>
 
-            {/* Right Column (75%) */}
-            <div className="w-3/4 p-6">
-                <h2 className="text-2xl font-bold mb-4 text-center">Profile Settings</h2>
-                <div className="grid grid-cols-2 gap-4">
+            {/* Right Column */}
+            <div className="w-full md:w-3/4 p-4 md:p-6">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center">Profile Settings</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Name */}
                     <div>
                         <label>Name</label>
@@ -207,18 +215,18 @@ function UserProfile() {
                     </div>
                 </div>
 
-                <div className="mt-4 flex justify-center space-x-4">
+                <div className="mt-4 flex justify-center space-x-2 sm:space-x-4">
                     {isEditMode ? (
                         <>
                             <button
                                 onClick={clearInfo}
-                                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
+                                className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer"
                             >
                                 Delete Profile
                             </button>
                             <button
                                 onClick={handleSubmit}
-                                className="p-2 text-xl font-bold text-white bg-black cursor-pointer"
+                                className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer"
                             >
                                 Save Info
                             </button>
@@ -226,7 +234,7 @@ function UserProfile() {
                     ) : (
                         <button
                             onClick={handleEditProfile}
-                            className="p-2 text-xl font-bold text-white bg-black cursor-pointer rounded"
+                            className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer rounded"
                         >
                             Edit Profile
                         </button>
@@ -246,7 +254,39 @@ function UserProfile() {
                         Your profile will be deleted.
                     </div>
                 )}
+
+                {/* Deletion Notification */}
+                {deletionMessage && (
+                    <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                        {deletionMessage}
+                    </div>
+                )}
             </div>
+
+            {/* Media query for screens as small as 200px */}
+            <style jsx>{`
+                @media (max-width: 200px) {
+                    .p-4 {
+                        padding: 2px;
+                    }
+                    .p-2 {
+                        padding: 1px;
+                    }
+                    .text-xl {
+                        font-size: 1rem;
+                    }
+                    .text-lg {
+                        font-size: 0.875rem;
+                    }
+                    .text-sm {
+                        font-size: 0.75rem;
+                    }
+                    img {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            `}</style>
         </div>
     );
 }

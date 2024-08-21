@@ -30,28 +30,28 @@ const AdminSidebar = (props) => {
               </h1>
 
               <ul className="flex flex-col gap-2 ">
-              <Link to="/admin/dashboard">  <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+              <Link to="/admin/dashboard">  <li className="px-4 py-2 rounded-[10px] hover:bg-gray-200  capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <MdDashboard />
                   </span>
                  <span>DashBoard</span>
                 </li> </Link> 
 
-                <Link to="/admin/products">  <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                <Link to="/admin/products">  <li className="px-4 py-2 rounded-[10px] hover:bg-gray-200 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <HiShoppingBag />
                   </span>
                 <span>product</span> 
                 </li> </Link> 
                 
-                <Link to="/admin/customers">   <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                <Link to="/admin/customers">   <li className="px-4 py-2 rounded-[10px] hover:bg-gray-200 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <IoIosPeople />
                   </span>
                  <span>Customer</span>  
                 </li></Link>
 
-                <Link to="/admin/orders">   <li className="px-4 py-2 rounded-[10px] hover:bg-blue-100 hover:text-blue-600 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
+                <Link to="/admin/orders">   <li className="px-4 py-2 rounded-[10px] hover:bg-gray-200 capitalize text-black flex items-center gap-4 hover:cursor-pointer tracking-wide" onClick={handleSideBar}>
                   <span>
                     <IoNewspaperSharp />
                   </span>
@@ -63,7 +63,7 @@ const AdminSidebar = (props) => {
             </div>
           </div>
 
-          <div className="flex ">
+          {/* <div className="flex ">
             <div className="item flex-1 mx-4 mt-6">
               <h1 className="font-thin uppercase opacity-80 my-4 tracking-wider text-slate-900 text-[16px]">
                 charts
@@ -100,9 +100,9 @@ const AdminSidebar = (props) => {
 
               </ul>
             </div>
-          </div>
+          </div> */}
 
-          <div className="flex ">
+          {/* <div className="flex ">
             <div className="item flex-1 mx-4 my-6">
               <h1 className="font-thin uppercase opacity-80 my-4 tracking-wider text-[16px] text-slate-900">
                 Apps
@@ -124,7 +124,7 @@ const AdminSidebar = (props) => {
               </ul>
 
             </div>
-          </div>
+          </div> */}
         </aside>
       </div>
       </div>

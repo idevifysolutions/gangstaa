@@ -7,6 +7,7 @@ import {
   myProfile,
   register,
   resetPassword,
+  updateRole,
   verifyUser,
 } from "../controllers/user.js";
 import { isAuth } from "../middlewares/isAuth.js";
@@ -21,10 +22,8 @@ router.get("/user/me", isAuth, myProfile);
 router.post("/user/forgot", forgotPassword);
 router.post("/user/reset", resetPassword);
 router.get("/user/getall", isAuth, getAllusers);
-router.delete("/user/deleteone/:id", isAuth, deleteOneUser)
-
-
-
+router.delete("/user/deleteone/:id", isAuth, deleteOneUser);
+router.put("/user/updateRole/:id", isAuth, updateRole);
 
 
 export default router;
