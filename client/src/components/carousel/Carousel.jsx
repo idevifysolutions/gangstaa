@@ -17,7 +17,7 @@ const ImageList = [
   {
     id: 2,
     img: Image2,
-    title: "50% off on all",
+    title: "20% off on all",
     title2: "Trending's Wear",
     description:
       "Who's there? Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
