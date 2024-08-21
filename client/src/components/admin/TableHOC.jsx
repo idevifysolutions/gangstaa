@@ -11,6 +11,7 @@ function TableHOC(columns, data, containerClassName, heading, showPagination = f
             },
         };
 
+
         const {getTableProps, getTableBodyProps, headerGroups, page, prepareRow, canPreviousPage, canNextPage, nextPage, previousPage, state: {pageIndex}, pageCount} = useTable(options, useSortBy, usePagination);
 
         return(
@@ -60,7 +61,7 @@ function TableHOC(columns, data, containerClassName, heading, showPagination = f
                         </button>
                         <span>{`${pageIndex + 1} of ${pageCount}`}</span>
                         <button className="py-2 px-4 border-none outline-none rounded-xl cursor-pointer" disabled={!canNextPage} onClick={nextPage}>
-                            Prev
+                            Next
                         </button>
                     </div>
                 )}

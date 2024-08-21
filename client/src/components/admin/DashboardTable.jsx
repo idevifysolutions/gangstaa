@@ -1,22 +1,21 @@
 import TableHOC from './TableHOC'
 
-
 const columns = [
     {
-        Header: "Id",
-        accessor: "_id"
+        Header: "Name",
+        accessor: "user.name"
     },
     {
         Header: "Quantity",
-        accessor: "quantity"
+        accessor: "items.length"
     },
     {
-        Header: "Discount",
-        accessor: "discount"
+        Header: "Phone",
+        accessor: "phone"
     },
     {
         Header: "Amount",
-        accessor: "amount"
+        accessor: "subTotal"
     },
     {
         Header: "Status",
@@ -26,7 +25,7 @@ const columns = [
 
 
 const DashboardTable = ({data}) => {
-  return TableHOC(columns, data, "transaction-box", "Top Orders")();
+  return TableHOC(columns, data, "transaction-box", "Top Orders", data.length > 6d)();
 }
 
 export default DashboardTable

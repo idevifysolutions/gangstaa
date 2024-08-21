@@ -53,7 +53,7 @@ const UpdateProduct = ({ onClose, productDetails }) => {
           </div>
         </div>
 
-        <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
+        <form className='grid p-4  overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
       
           <label htmlFor='stock' className='mt-3'>Product Stock :</label>
           <input
@@ -62,7 +62,7 @@ const UpdateProduct = ({ onClose, productDetails }) => {
             placeholder='enter available stock'
             value={data.stock}
             name='stock'
-            className='p-2 bg-slate-100 border rounded inputbox'
+            className=' bg-slate-100 border rounded inputbox'
             required
             readOnly
           />
@@ -76,11 +76,11 @@ const UpdateProduct = ({ onClose, productDetails }) => {
             value={updatedStock}
             name='updatedstock'
             onChange={handleOnChange}
-            className='p-2 bg-slate-100 border rounded inputbox'
+            className=' bg-slate-100 border rounded inputbox'
             required
           />
 
-          <button className='px-3 py-2 mb-10 addtocartbtn border-slate-300 bg-slate-100 text-black rounded border hover:border hover:border-black'>Update Product</button>
+          <button className='px-2 py-1 mb-10 addtocartbtn border-slate-300 bg-slate-100 text-black rounded border hover:border hover:border-black'>Update Product</button>
         </form>
       </div>
     </div>

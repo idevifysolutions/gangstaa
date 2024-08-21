@@ -164,6 +164,7 @@ export const updateStatus = async (req, res) => {
   }
 };
 
+
 export const newOrderOnline = async (req, res) => {
   try {
     const { method, phone, address } = req.body;
