@@ -8,38 +8,28 @@ const UpdateProduct = ({ onClose, productDetails }) => {
 
   const [data,setData] = useState({
     ...productDetails,
-    title : productDetails?.title,
-    description : productDetails?.description,
-    category : productDetails?.category,
-    price : productDetails?.price,
     stock : productDetails?.stock,
-    sold : productDetails?.sold,
-  })
+  });
+
+  const [updatedStock, setUpdatedStock] = useState(0);
 
 
   const handleOnChange = (e)=>{
-    const { name, value} = e.target
-
-    setData((preve)=>{
-      return{
-        ...preve,
-        [name]  : value
-      }
-    })
+    setUpdatedStock(e.target.value);
+    console.log("updated stock", updatedStock);
 }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const id = productDetails._id;
-    console.log(localStorage.getItem("token"));
 
+    const updateddata = { stock: updatedStock};
 
     try {
-      const response = await axios.put(`http://localhost:4000/api/product/${id}`,{
+      const response = await axios.put(`http://localhost:4000/api/product/updatestock/${id}`, updateddata, {
         headers: {
           token: localStorage.getItem("token"),
         },
-        body:JSON.stringify(data),
       });
 
 
@@ -64,30 +54,7 @@ const UpdateProduct = ({ onClose, productDetails }) => {
         </div>
 
         <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
-          <label htmlFor='productName'>Product Name :</label>
-          <input
-            type='text'
-            id='productName'
-            placeholder='enter product name'
-            name='title'
-            value={data.title}
-            onChange={handleOnChange}
-            className='p-2 bg-slate-100 border rounded inputbox'
-            required
-          />
-
-          <label htmlFor='productCategory'>Product Category :</label>
-          <input
-            type='text'
-            id='productCategory'
-            placeholder='enter product category'
-            name='category'
-            value={data.category}
-            onChange={handleOnChange}
-            className='p-2 bg-slate-100 border rounded inputbox'
-            required
-          />
-
+      
           <label htmlFor='stock' className='mt-3'>Product Stock :</label>
           <input
             type='text'
@@ -95,44 +62,22 @@ const UpdateProduct = ({ onClose, productDetails }) => {
             placeholder='enter available stock'
             value={data.stock}
             name='stock'
-            onChange={handleOnChange}
             className='p-2 bg-slate-100 border rounded inputbox'
             required
+            readOnly
           />
 
 
-          <label htmlFor='price' className='mt-3'>Price :</label>
+          <label htmlFor='updatedstock' className='mt-3'> Enter Updated Stock :</label>
           <input
             type='text'
-            id='price'
+            id='updatedstock'
             placeholder='enter price'
-            value={data.price}
-            name='price'
+            value={updatedStock}
+            name='updatedstock'
             onChange={handleOnChange}
             className='p-2 bg-slate-100 border rounded inputbox'
             required
-          />
-
-          <label htmlFor='sellingPrice' className='mt-3'>Product Sold :</label>
-          <input
-            type='text'
-            id='sellingPrice'
-            placeholder='enter sold products'
-            value={data.sold}
-            name='sold'
-            onChange={handleOnChange}
-            className='p-2 bg-slate-100 border rounded inputbox'
-            required
-          />
-
-          <label htmlFor='description' className='mt-3'>Description :</label>
-          <textarea
-            className='h-28 bg-slate-100 border rounded resize-none p-1 inputbox'
-            placeholder='enter product description'
-            rows={3}
-            onChange={handleOnChange}
-            name='description'
-            value={data.description}
           />
 
           <button className='px-3 py-2 mb-10 addtocartbtn border-slate-300 bg-slate-100 text-black rounded border hover:border hover:border-black'>Update Product</button>
