@@ -19,7 +19,7 @@ const HomeProductCard = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500,
+    speed: 700,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
@@ -27,7 +27,7 @@ const HomeProductCard = () => {
 
   return (
     <section className="py-10 bg-gray-100">
-      <div className="container mx-auto px-6">
+      <div className="container px-6 mx-auto">
         <h2 className="lg:text-3xl font-bold text-center mb-8 text-[1.4rem]">
           Shop by Category
         </h2>
@@ -47,33 +47,33 @@ const HomeProductCard = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-64 object-cover rounded-lg mb-4"
+                  className="object-cover w-full h-64 mb-4 rounded-lg"
                 />
                 {/* <img
                   src={product.hoverImage}
                   alt={product.name}
-                  className="absolute top-0 left-0 w-full h-64 object-cover rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  className="absolute top-0 left-0 object-cover w-full h-64 transition-opacity duration-700 rounded-lg opacity-0 hover:opacity-100"
                 /> */}
                 <Link
                   to={`/catagery/${product.categoryRoute}`}
-                  className="absolute inset-0 bg-black bg-opacity-50 text-white font-semibold opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-lg transition-opacity duration-300"
+                  className="absolute inset-0 flex items-center justify-center font-semibold text-white transition-opacity duration-700 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100"
                 >
                   {product.category}
                 </Link>
               </div>
-              {/* <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+              {/* <h3 className="mb-2 text-lg font-semibold">{product.name}</h3>
               <p className="text-gray-700">{product.price}</p> */}
             </motion.div>
           ))}
         </Slider>
 
-        <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="hidden grid-cols-1 gap-8 lg:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {" "}
           {/* Grid only visible on large screens */}
           {homeProductData.map((product) => (
             <motion.div
               key={product.id}
-              className="relative bg-white p-3 rounded-lg shadow-lg group "
+              className="relative p-3 bg-white rounded-lg shadow-lg group "
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
@@ -83,21 +83,21 @@ const HomeProductCard = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-64 object-cover rounded-lg mb-4"
+                  className="object-cover w-full h-64 mb-4 rounded-lg"
                 />
                 <img
                   src={product.hoverImage}
                   alt={product.name}
-                  className="absolute top-0 left-0 w-full h-64 object-cover rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300"
+                  className="absolute top-0 left-0 object-cover w-full h-64 transition-opacity duration-700 rounded-lg opacity-0 hover:opacity-100"
                 />
                 <Link
                   to={`/catagery/${product.categoryRoute}`}
-                  className="absolute inset-0 bg-black bg-opacity-50 text-white font-semibold text-2xl opacity-0 group-hover:opacity-100 flex items-center justify-center rounded-lg transition-opacity duration-300"
+                  className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-white transition-opacity duration-700 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100"
                 >
                   {product.category}
                 </Link>
               </div>
-              {/* <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+              {/* <h3 className="mb-2 text-lg font-semibold">{product.name}</h3>
               <p className="text-gray-700">{product.price}</p> */}
             </motion.div>
           ))}

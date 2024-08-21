@@ -123,7 +123,7 @@ const Orders = () => {
                         <td className="flex items-center justify-between gap-2 px-6 py-3 cursor-pointer">
                           <p> {order.status}</p>
                           <button
-                            className="p-2 text-white bg-black"
+                            className="p-2 text-white bg-black rounded-md"
                             onClick={() => updateStatus(order._id)}
                           >
                             Update Status
@@ -133,7 +133,7 @@ const Orders = () => {
                         <td className="px-6 py-3 cursor-pointer">
                           <div className="flex items-center justify-center">
                             <button
-                              className="p-2 text-white bg-black"
+                              className="p-2 text-white bg-black rounded-md"
                               onClick={() => handlemanageOrder(order._id)}
                             >
                               More Info
