@@ -14,6 +14,7 @@ function UserProfile() {
     });
 
     const [showPopup, setShowPopup] = useState(false);
+    const [showDeletePopup, setShowDeletePopup] = useState(false); // New state for delete confirmation
     const [isEditMode, setIsEditMode] = useState(true);
     const [errors, setErrors] = useState({});
     const [submitTimestamp, setSubmitTimestamp] = useState(null);
@@ -66,8 +67,9 @@ function UserProfile() {
             return;
         }
 
-        const currentTimestamp = new Date().toISOString();
-        setSubmitTimestamp(currentTimestamp);
+
+        setShowPopup(true); // Show popup immediately
+
 
         const formData = new FormData();
         formData.append('name', userInfo.name);
@@ -87,13 +89,15 @@ function UserProfile() {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            setShowPopup(true);
+
             setIsEditMode(false);
             setErrors({});
 
+            // Hide the popup after 2-3 seconds and switch buttons
             setTimeout(() => {
                 setShowPopup(false);
-            }, 5000);
+            }, 2000); // Adjust timing as necessary
+
         } catch (error) {
             console.error('Error updating profile:', error.message || error);
         }
@@ -109,8 +113,9 @@ function UserProfile() {
             image: null,
         });
         setErrors({});
-        setDeletionMessage('Your profile has been deleted.');
-        setShowPopup(false);
+// <<<<<<< up23
+        setShowDeletePopup(true); // Show delete confirmation message
+
     };
 
     const handleEditProfile = () => {
@@ -239,7 +244,14 @@ function UserProfile() {
                 {/* Popup Notification */}
                 {showPopup && (
                     <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-                        Your profile has been submitted successfully.
+                        Your profile will be submitted.
+                    </div>
+                )}
+
+                {/* Delete Confirmation Popup */}
+                {showDeletePopup && (
+                    <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                        Your profile will be deleted.
                     </div>
                 )}
 
