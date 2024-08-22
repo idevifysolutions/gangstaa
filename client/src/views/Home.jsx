@@ -11,10 +11,11 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../features/productCart/productCart";
 import { trendingProducts } from "../data/trendingProducts";
 import toast from "react-hot-toast";
-import axios from "axios"
+import axios from "axios";
+import OfferPage from "../components/OfferPage";
 
 const Home = () => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   let isAuth = localStorage.getItem("isAuth");
   console.log("auth", localStorage.getItem("isAuth"));
@@ -38,15 +39,15 @@ const Home = () => {
     }
   };
 
-  useEffect(()=> {
-   const getData = async ()=>{
-    const res = await axios.get("http://localhost:4000/api/product/all")
-    setProducts(res?.data?.products)
-  }
-  getData();
-}, [])
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get("http://localhost:4000/api/product/all");
+      setProducts(res?.data?.products);
+    };
+    getData();
+  }, []);
 
-  console.log(products)
+  console.log(products);
 
   return (
     <div>
@@ -74,6 +75,7 @@ const Home = () => {
       </div>
       <Slider />
       <HomeProductCard />
+      <OfferPage />
     </div>
   );
 };

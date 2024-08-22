@@ -13,8 +13,8 @@ import VerifyingOTP from "./views/VerifyingOTP";
 import AllproductPage from "./components/product/AllproductPage";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
 // import ShirtsPage from "./components/product/ShirtsPage";
-// import JeansPage from "./components/product/JeansPage";
-// import TShirtPage from "./components/product/TShirtPage";
+import JeansPage from "./components/product/JeansPage";
+import TShirtPage from "./components/product/TShirtPage";
 import Dashboard from "./views/admin/Dashboard";
 import Products from "./views/admin/Products";
 import CheckoutPage from "./views/Checkout";
@@ -83,23 +83,23 @@ const App = () => {
             }
           />  */}
 
-          {/* <Route
+          <Route
             path="/catagery/JeansPage"
             element={
               <ProtectedRoute>
                 <JeansPage />
               </ProtectedRoute>
             }
-          /> */}
+          />
 
-          {/* <Route
+          <Route
             path="/catagery/TShirtPage"
             element={
               <ProtectedRoute>
                 <TShirtPage />
               </ProtectedRoute>
             }
-          /> */}
+          />
 
           <Route
             path="/catagery/userprofile"
