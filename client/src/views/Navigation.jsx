@@ -99,7 +99,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 h-24 text-black bg-gray-50 shadow-lg">
+    <nav className="sticky top-0 z-50 h-24 text-black shadow-lg bg-gray-50">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-10 ">
         <div className="flex items-center justify-between ">
           <div className="flex items-center">
@@ -155,7 +155,7 @@ const Navigation = () => {
                     ease: "easeInOut", // Easing function for a smooth animation
                   },
                 }}
-                className="py-1 px-3 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
+                className="px-3 py-1 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
               >
                 Logout
               </motion.button>
@@ -163,7 +163,7 @@ const Navigation = () => {
               <Link to="/login">
                 <motion.div
                   whileHover="hover"
-                  className="py-1 px-3 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
+                  className="px-3 py-1 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
                 >
                   Login
                 </motion.div>
@@ -179,7 +179,7 @@ const Navigation = () => {
           animate={{ x: 0 }}
           exit={{ x: "-100%" }}
           transition={{ duration: 0.3 }}
-          className="fixed left-0 z-50 w-64 h-full text-black bg-gray-50  inset-y-20 shadow-sm"
+          className="fixed left-0 z-50 w-full h-full text-black shadow-sm lg:w-[18%] bg-gray-50 inset-y-20"
         >
           <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
             {/* User Profile button */}
@@ -293,8 +293,9 @@ const Navigation = () => {
             //     Logout
             //   </span>
             // </Link>
+
             <Link
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-44 hover:bg-gray-300 transition duration-300 ease-in-out transform "
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium transition duration-300 ease-in-out transform bg-gray-200 rounded-md mt-44 hover:bg-gray-300 "
               onClick={() => {
                 setIsOpen(false);
                 handleLogout();
@@ -307,7 +308,7 @@ const Navigation = () => {
             </Link>
           ) : (
             <Link
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-48 hover:bg-gray-300 transition duration-300 ease-in-out transform "
+              className="flex items-center px-4 py-2 mt-48 space-x-2 text-sm font-medium transition duration-300 ease-in-out transform bg-gray-200 rounded-md hover:bg-gray-300 "
               to="/login"
               onClick={() => setIsOpen(false)}
             >
