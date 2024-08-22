@@ -92,7 +92,7 @@ const HomeProductCard = () => {
                 />
                 <Link
                   to={`/catagery/${product.categoryRoute}`}
-                  className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-white transition-opacity duration-700 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100"
+                  className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-white transition-opacity duration-500 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100"
                 >
                   {product.category}
                 </Link>
