@@ -1,6 +1,8 @@
 
+
+
+
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import defaultImage from "../../data/image.jpeg"; // Adjust the path as necessary
 
 function UserProfile() {
@@ -14,25 +16,38 @@ function UserProfile() {
     });
 
     const [showPopup, setShowPopup] = useState(false);
-    const [showDeletePopup, setShowDeletePopup] = useState(false); // State for delete confirmation
+    const [showDeletePopup, setShowDeletePopup] = useState(false); 
     const [isEditMode, setIsEditMode] = useState(true);
     const [errors, setErrors] = useState({});
     const [deletionMessage, setDeletionMessage] = useState('');
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get('http://localhost:4000/api/user', {
-                    params: { email: userInfo.email }
-                });
-                setUserInfo(response.data);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
+    const handleSubmit = () => {
+        const formErrors = validateForm();
+        if (Object.keys(formErrors).length > 0) {
+            setErrors(formErrors);
+            return;
+        }
 
-        fetchUserData();
-    }, [userInfo.email]);
+        setShowPopup(true); // Show popup immediately
+
+        // Save updated user data in local storage
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        setIsEditMode(false);
+        setErrors({});
+
+        // Hide the popup after 2 seconds
+        setTimeout(() => {
+            setShowPopup(false);
+        }, 2000);
+    };
+
+    useEffect(() => {
+        // Check if user data exists in localStorage
+        const storedUserInfo = localStorage.getItem('userInfo');
+        if (storedUserInfo) {
+            setUserInfo(JSON.parse(storedUserInfo));
+        }
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -59,61 +74,7 @@ function UserProfile() {
         return newErrors;
     };
 
-    const handleSubmit = async () => {
-        const formErrors = validateForm();
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-            return;
-        }
-
-        setShowPopup(true); // Show popup immediately
-
-        const formData = new FormData();
-        formData.append('name', userInfo.name);
-        formData.append('surname', userInfo.surname);
-        formData.append('email', userInfo.email);
-        formData.append('phone', userInfo.phone);
-        formData.append('address', userInfo.address);
-
-        if (userInfo.image) {
-            formData.append('image', userInfo.image);
-        }
-
-        try {
-            await axios.post('http://localhost:4000/api/editprofile', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            setIsEditMode(false);
-            setErrors({});
-            
-            // Hide the popup after 2 seconds
-            setTimeout(() => {
-                setShowPopup(false);
-            }, 2000);
-
-        } catch (error) {
-            console.error('Error updating profile:', error.message || error);
-        }
-    };
-
-    const handleDeleteProfile = async () => {
-        try {
-            await axios.post('http://localhost:4000/api/deleteprofile', { email: userInfo.email });
-            setDeletionMessage('Your profile has been deleted.');
-
-            // Hide the delete confirmation popup after 2 seconds
-            setTimeout(() => {
-                setShowDeletePopup(false);
-            }, 2000);
-        } catch (error) {
-            console.error('Error deleting profile:', error.message || error);
-        }
-    };
-
-    const handleClearInfo = () => {
+    const clearInfo = () => {
         setUserInfo({
             name: '',
             surname: '',
@@ -124,9 +85,17 @@ function UserProfile() {
         });
         setErrors({});
         setShowPopup(false); // Hide save info popup when delete button is clicked
-        setDeletionMessage('Your profile will be deleted.');
         setShowDeletePopup(true); // Show delete confirmation message
-        handleDeleteProfile(); // Call delete profile API
+
+        // Clear local storage
+        localStorage.removeItem('userInfo');
+
+        setDeletionMessage('Your profile has been deleted.');
+
+        // Hide the delete confirmation popup after 2 seconds
+        setTimeout(() => {
+            setShowDeletePopup(false);
+        }, 2000);
     };
 
     const handleEditProfile = () => {
@@ -226,42 +195,39 @@ function UserProfile() {
                     </div>
                 </div>
 
-                <div className="mt-4 flex justify-center space-x-2 sm:space-x-4">
+                <div className="flex justify-center mt-6 space-x-4">
                     {isEditMode ? (
                         <>
                             <button
-                                onClick={handleClearInfo}
                                 className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer"
-                            >
-                                Delete Profile
-                            </button>
-                            <button
                                 onClick={handleSubmit}
-                                className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer"
                             >
                                 Save Info
+                            </button>
+                            <button
+                                className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer"
+                                onClick={clearInfo}
+                            >
+                                Delete Info
                             </button>
                         </>
                     ) : (
                         <button
+                            className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer"
                             onClick={handleEditProfile}
-                            className="p-2 text-sm sm:text-xl font-bold text-white bg-black cursor-pointer rounded"
                         >
                             Edit Profile
                         </button>
                     )}
                 </div>
 
-                {/* Popup Notification */}
                 {showPopup && (
-                    <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
-                        Your profile has been updated successfully.
+                    <div className="fixed bottom-10 right-10 bg-blue-500 text-white p-4 rounded">
+                        Profile saved successfully!
                     </div>
                 )}
-
-                {/* Delete Confirmation Popup */}
-                {showDeletePopup && (
-                    <div className="mt-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                {showDeletePopup && deletionMessage && (
+                    <div className="fixed bottom-10 right-10 bg-red-500 text-white p-4 rounded">
                         {deletionMessage}
                     </div>
                 )}
