@@ -194,7 +194,7 @@ const Navigation = () => {
               </span>
             </Link>
 
-            {isAdmin === "admin" && (
+            {isAuth && isAdmin === "admin" && (
               <Link
                 to="/admin/dashboard"
                 className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
