@@ -119,7 +119,7 @@ const Navigation = () => {
           </div>
           <div className="flex-shrink-0 text-center">
             <Link to="/" className="text-xl font-bold">
-              <img src={logo} alt="" className="h-24" />
+              <img src={logo} alt="" className="h-[105px]" />
             </Link>
           </div>
 
