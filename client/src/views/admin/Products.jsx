@@ -117,17 +117,23 @@ const Products = () => {
                       <td className="px-6 py-3 text-center">{product.stock}</td>
 
                       <td
-                        className="px-6 py-3 cursor-pointer"
-                        onClick={() => handleUpdateProduct(product._id)}
+                        className="px-6 py-3 flex items-center justify-center  "
                       >
-                        <TfiPencil className="w-6 h-auto mx-auto" />
+                        <div className="w-9 h-9 flex  cursor-pointer  items-center justify-center rounded-full hover:bg-gray-500 hover:text-white transition transform duration-300" onClick={() => handleUpdateProduct(product._id)}
+                        >
+                        <TfiPencil className="w-6 h-auto   mx-auto " />
+                        </div>
                       </td>
 
                       <td
-                        className="px-6 py-3 cursor-pointer"
-                        onClick={() => handleDeleteProduct(product._id)}
+                        className="px-6 py-3 "
+                        
                       >
+                    <div className="w-9 ml-8 h-9 cursor-pointer flex items-center justify-center rounded-full hover:bg-red-500 hover:text-white transition transform duration-300" onClick={() => handleDeleteProduct(product._id)}>
+
                         <RiDeleteBinLine className="w-6 h-auto mx-auto" />
+
+                    </div>
                       </td>
                     </tr>
                   ))}
