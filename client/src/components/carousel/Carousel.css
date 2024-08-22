@@ -1,0 +1,14 @@
+.rounded-heroimg{
+    border-radius: 100px 100px 100px 100px;
+}
+@keyframes up-down {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-15px);
+    }
+  }
+.animated {
+    animation: up-down 2s ease-in-out infinite alternate-reverse both;
+  }
