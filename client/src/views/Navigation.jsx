@@ -99,9 +99,9 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 h-20 text-black bg-white shadow-lg">
-      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className="sticky top-0 z-50 h-24 text-black bg-gray-50 shadow-lg">
+      <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-10 ">
+        <div className="flex items-center justify-between ">
           <div className="flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -119,7 +119,7 @@ const Navigation = () => {
           </div>
           <div className="flex-shrink-0 text-center">
             <Link to="/" className="text-xl font-bold">
-              <img src={logo} alt="" className="h-20" />
+              <img src={logo} alt="" className="h-24" />
             </Link>
           </div>
 
@@ -138,20 +138,34 @@ const Navigation = () => {
               </Link>
             </motion.div>
             {isAuth ? (
+              // <motion.button
+              //   onClick={handleLogout}
+              //   whileHover="hover"
+              //   className="p-2 text-xl font-bold text-white bg-black rounded-md cursor-pointer"
+              // >
+              //   LogOut
+              // </motion.button>
               <motion.button
                 onClick={handleLogout}
-                whileHover="hover"
-                className="p-2 text-xl font-bold text-white bg-black rounded-md cursor-pointer"
+                whileHover={{
+                  scale: 1, // Slightly scales up the button
+                  backgroundColor: "#313131", // Darkens the background color on hover
+                  transition: {
+                    duration: 0.2, // Smooth transition duration
+                    ease: "easeInOut", // Easing function for a smooth animation
+                  },
+                }}
+                className="py-1 px-3 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
               >
-                LogOut
+                Logout
               </motion.button>
             ) : (
               <Link to="/login">
                 <motion.div
                   whileHover="hover"
-                  className="p-2 text-xl font-bold text-white bg-black rounded-md cursor-pointer"
+                  className="py-1 px-3 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
                 >
-                  LogIn
+                  Login
                 </motion.div>
               </Link>
             )}
@@ -165,7 +179,7 @@ const Navigation = () => {
           animate={{ x: 0 }}
           exit={{ x: "-100%" }}
           transition={{ duration: 0.3 }}
-          className="fixed left-0 z-50 w-64 h-full text-black bg-white shadow-2xl inset-y-16"
+          className="fixed left-0 z-50 w-64 h-full text-black bg-gray-50  inset-y-20 shadow-sm"
         >
           <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
             {/* User Profile button */}
@@ -267,26 +281,38 @@ const Navigation = () => {
             </Link> */}
           </div>
           {isAuth ? (
+            // <Link
+            //   className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-80 hover:bg-gray-300"
+            //   onClick={() => {
+            //     setIsOpen(false);
+            //     handleLogout();
+            //   }}
+            // >
+            //   <IoMdLogOut className="w-6 h-6" />
+            //   <span className="pl-2 font-semibold text-[18px] text-gray-500">
+            //     Logout
+            //   </span>
+            // </Link>
             <Link
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-80 hover:bg-gray-300"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-44 hover:bg-gray-300 transition duration-300 ease-in-out transform "
               onClick={() => {
                 setIsOpen(false);
                 handleLogout();
               }}
             >
               <IoMdLogOut className="w-6 h-6" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+              <span className="pl-2 font-semibold text-[18px] text-gray-500 hover:font-bold ">
                 Logout
               </span>
             </Link>
           ) : (
             <Link
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-48 hover:bg-gray-300 transition duration-300 ease-in-out transform "
               to="/login"
               onClick={() => setIsOpen(false)}
             >
               <IoMdLogOut className="w-6 h-6" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500">
+              <span className="pl-2 font-semibold text-[18px] text-gray-500 hover:font-bold">
                 Login
               </span>
             </Link>
