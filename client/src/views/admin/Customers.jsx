@@ -119,7 +119,7 @@ const Customers = () => {
                   {allusers.map((user, index) => {
                     return (
 <tr
-  className={`border-b border-gray-200 ${user.email === loginuser.email ? 'bg-green-500' : 'hover:bg-gray-100'}`}
+  className={`border-b border-gray-200 ${user.email === loginuser.email ? 'bg-gray-700 text-white' : 'hover:bg-gray-100'}`}
   key={index}
 >
   <td className="px-6 py-3 text-center">
@@ -139,7 +139,7 @@ const Customers = () => {
 
                         <td className={`flex items-center justify-between gap-2 px-6 py-3 ${user.email == loginuser.email ? '' : 'hover:cursor-pointer'}`}>
                           <p className={` ${user.email == loginuser.email ? 'mt-3' : ''}`} >{user.role}</p>
-                          { user.email == loginuser.email? '':  <button
+                          { user.email == loginuser.email? <h2 className="mt-3">This is your info...</h2>:  <button
                             className="p-2 text-white bg-black rounded-md"
                             onClick={() => Updateuser(user._id)}
                           > 
