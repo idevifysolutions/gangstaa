@@ -99,7 +99,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 h-24 text-black bg-gray-50 shadow-lg">
+    <nav className="sticky top-0 z-50 h-24 text-black bg-gray-50 ">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-10 ">
         <div className="flex items-center justify-between ">
           <div className="flex items-center">
@@ -155,7 +155,7 @@ const Navigation = () => {
                     ease: "easeInOut", // Easing function for a smooth animation
                   },
                 }}
-                className="py-1 px-3 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
+                className="py-1 px-3 text-lg font-semibold text-white  bg-black rounded-md cursor-pointer"
               >
                 Logout
               </motion.button>
@@ -173,152 +173,113 @@ const Navigation = () => {
         </div>
       </div>
 
-      {isOpen && (
-        <motion.div
-          initial={{ x: "-100%" }}
-          animate={{ x: 0 }}
-          exit={{ x: "-100%" }}
-          transition={{ duration: 0.3 }}
-          className="fixed left-0 z-50 w-64 h-full text-black bg-gray-50  inset-y-20 shadow-sm"
-        >
-          <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
-            {/* User Profile button */}
-            <Link
-              to="/"
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              <FaHome className="w-5 h-5" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500">
-                Home
-              </span>
-            </Link>
-
-            {isAuth && isAdmin === "admin" && (
+      <div>
+        {" "}
+        {isOpen && (
+          <motion.div
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.3 }}
+            className="flex justify-between items-start flex-col fixed left-0 z-50 w-64 min-h-screen text-black bg-gray-50  inset-y-20 shadow-sm "
+          >
+            <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
               <Link
-                to="/admin/dashboard"
+                to="/"
                 className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
                 onClick={() => setIsOpen(false)}
               >
-                <MdAdminPanelSettings className="w-5 h-5" />
+                <FaHome className="w-5 h-5" />
                 <span className="pl-2 font-semibold text-[18px] text-gray-500">
-                  Admin
+                  Home
+                </span>
+              </Link>
+
+              {isAuth && isAdmin === "admin" && (
+                <Link
+                  to="/admin/dashboard"
+                  className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <MdAdminPanelSettings className="w-5 h-5" />
+                  <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                    Admin
+                  </span>
+                </Link>
+              )}
+              <Link
+                to="catagery/userprofile"
+                className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+                onClick={() => setIsOpen(false)}
+              >
+                <FaUserAlt className="w-5 h-5" />
+                <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                  Profile
+                </span>
+              </Link>
+
+              <Link
+                to="/catagery/myorder"
+                className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+                onClick={() => setIsOpen(false)}
+              >
+                <FaBorderAll className="w-5 h-5" />
+                <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                  Order
+                </span>
+              </Link>
+
+              <Link
+                to="/cart"
+                className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+                onClick={() => setIsOpen(false)}
+              >
+                <FaShoppingCart className="w-6 h-6" />
+                <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                  Cart
+                </span>
+              </Link>
+
+              <Link
+                to="/catagery"
+                className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+                onClick={() => setIsOpen(false)}
+              >
+                <BiSolidCategory className="w-6 h-6" />
+                <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                  Category
+                </span>
+              </Link>
+            </div>
+
+            {isAuth ? (
+              <Link
+                className="w-full flex items-center mb-28 px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md  hover:bg-gray-300 transition duration-300 ease-in-out transform  "
+                onClick={() => {
+                  setIsOpen(false);
+                  handleLogout();
+                }}
+              >
+                <IoMdLogOut className="w-6 h-6" />
+                <span className="pl-2 font-semibold text-[18px] text-gray-500 hover:font-bold ">
+                  Logout
+                </span>
+              </Link>
+            ) : (
+              <Link
+                className="w-full flex items-center mb-28 px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md  hover:bg-gray-300 transition duration-300 ease-in-out transform "
+                to="/login"
+                onClick={() => setIsOpen(false)}
+              >
+                <IoMdLogOut className="w-6 h-6" />
+                <span className="pl-2 font-semibold text-[18px] text-gray-500 hover:font-bold">
+                  Login
                 </span>
               </Link>
             )}
-            <Link
-              to="catagery/userprofile"
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              <FaUserAlt className="w-5 h-5" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500">
-                Profile
-              </span>
-            </Link>
-
-            <Link
-              to="/catagery/myorder"
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              <FaBorderAll className="w-5 h-5" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500">
-                Order
-              </span>
-            </Link>
-
-            <Link
-              to="/cart"
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              <FaShoppingCart className="w-6 h-6" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500">
-                Cart
-              </span>
-            </Link>
-
-            <Link
-              to="/catagery"
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              <BiSolidCategory className="w-6 h-6" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500">
-                Category
-              </span>
-            </Link>
-
-            {/* Category links */}
-            {/* <Link
-              to="/catagery/TShirtPage"
-              className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              {renderTextWithAnimation("T-Shirts")}
-            </Link>
-            <Link
-              to="/catagery/ShirtsPage"
-              className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              {renderTextWithAnimation("Shirts")}
-            </Link>
-            <Link
-              to="/catagery/JeansPage"
-              className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              {renderTextWithAnimation("Jeans")}
-            </Link>
-            <Link
-              to="/catagery/jackets"
-              className="block px-3 py-2 text-lg font-medium rounded-md hover:bg-gray-200"
-              onClick={() => setIsOpen(false)}
-            >
-              {renderTextWithAnimation("Jackets")}
-            </Link> */}
-          </div>
-          {isAuth ? (
-            // <Link
-            //   className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-80 hover:bg-gray-300"
-            //   onClick={() => {
-            //     setIsOpen(false);
-            //     handleLogout();
-            //   }}
-            // >
-            //   <IoMdLogOut className="w-6 h-6" />
-            //   <span className="pl-2 font-semibold text-[18px] text-gray-500">
-            //     Logout
-            //   </span>
-            // </Link>
-            <Link
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-44 hover:bg-gray-300 transition duration-300 ease-in-out transform "
-              onClick={() => {
-                setIsOpen(false);
-                handleLogout();
-              }}
-            >
-              <IoMdLogOut className="w-6 h-6" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500 hover:font-bold ">
-                Logout
-              </span>
-            </Link>
-          ) : (
-            <Link
-              className="flex items-center px-4 py-2 space-x-2 text-sm font-medium bg-gray-200 rounded-md mt-48 hover:bg-gray-300 transition duration-300 ease-in-out transform "
-              to="/login"
-              onClick={() => setIsOpen(false)}
-            >
-              <IoMdLogOut className="w-6 h-6" />
-              <span className="pl-2 font-semibold text-[18px] text-gray-500 hover:font-bold">
-                Login
-              </span>
-            </Link>
-          )}
-        </motion.div>
-      )}
+          </motion.div>
+        )}
+      </div>
     </nav>
   );
 };
