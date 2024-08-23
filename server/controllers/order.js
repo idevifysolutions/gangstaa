@@ -167,22 +167,23 @@ export const updateStatus = async (req, res) => {
 
 export const newOrderOnline = async (req, res) => {
   try {
-    const { method, phone, address } = req.body;
+    const { items, method, phone, address, subTotal } = req.body;
+    console.log("subtotal", typeof subTotal)
 
-    const cart = await Cart.find({ user: req.user._id }).populate("product");
+    // const cart = await Cart.find({ user: req.user._id }).populate("product");
 
-    let subTotal = 0;
+    // let subTotal = 0;
 
-    cart.forEach((i) => {
-      const itemSubtotal = i.product.price * i.quantity;
+    // cart.forEach((i) => {
+    //   const itemSubtotal = i.product.price * i.quantity;
 
-      subTotal += itemSubtotal;
-    });
+    //   subTotal += itemSubtotal;
+    // });
 
-    const items = await Cart.find({ user: req.user._id })
-      .select("-_id")
-      .select("-user")
-      .select("-__v");
+    // const items = await Cart.find({ user: req.user._id })
+    //   .select("-_id")
+    //   .select("-user")
+    //   .select("-__v");
 
     const orderOptions = {
       items,
@@ -194,11 +195,11 @@ export const newOrderOnline = async (req, res) => {
     };
 
     const options = {
-      amount: Number(subTotal) * 100,
+      amount: Number(subTotal),
       currency: "INR",
     };
 
-    const order = await instance.orders.create(options);
+    const order = await instance.orders.create(options)
 
     res.status(200).json({
       order,
