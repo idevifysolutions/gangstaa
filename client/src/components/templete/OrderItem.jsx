@@ -96,7 +96,7 @@ const OrderPage = () => {
 
           <div className="mt-4 text-center">
             <button
-              className="px-4 py-2 text-white transition duration-300 bg-black hover:bg-black"
+              className="px-4 py-2 text-white transition duration-300 bg-black rounded-md hover:bg-black"
               onClick={() => navigate("/catagery/myorder")}
             >
               Go Back

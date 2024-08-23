@@ -65,7 +65,7 @@ const Orders = () => {
 
                     <td className="px-6 py-3 text-left">
                       <button
-                        className="px-4 py-2 text-lg text-white bg-black"
+                        className="px-4 py-2 text-lg text-white bg-black rounded-md"
                         onClick={() => navigate(`/category/myorder/${e._id}`)}
                       >
                         View
