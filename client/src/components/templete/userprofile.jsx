@@ -1,6 +1,8 @@
-// import {UserData} from "../../context/UserContext"
+
+// import {UserData} from "../../context/UserContext
 
 // function UserProfile() {
+
 
 // const {user}  = UserData();
 
@@ -259,6 +261,7 @@ function UserProfile() {
                 <option value="female">Female</option>
                 <option value="other">Other</option>
               </select>
+
             </div>
           </div>
           <div className="flex justify-center mt-6 space-x-4">
