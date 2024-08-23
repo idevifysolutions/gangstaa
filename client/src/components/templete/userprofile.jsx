@@ -129,6 +129,15 @@ function UserProfile() {
     }
   };
 
+  const handleRemoveImage = () => {
+    setImage(""); // Remove the image
+    setUser((prevUser) => {
+      const updatedUser = { ...prevUser, image: "" };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      return updatedUser;
+    });
+  };
+
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -150,7 +159,7 @@ function UserProfile() {
     <>
       <div className="flex flex-col w-full h-auto md:flex-row md:h-screen">
         {/* Left Column */}
-        <div className="w-full p-4 text-center text-white bg-gray-500 md:w-1/4 md:p-6">
+        <div className="w-full p-4 text-center md:w-1/4 md:p-6">
           <img
             src={
               image ||
@@ -171,6 +180,12 @@ function UserProfile() {
           >
             Choose File
           </button>
+          <button
+            onClick={handleRemoveImage}
+            className="px-4 py-2 mt-4 text-sm font-semibold text-gray-800 bg-white border border-gray-300 rounded cursor-pointer hover:bg-gray-200"
+          >
+            Remove Image
+          </button>
           <h2 className="mt-4 text-lg font-semibold sm:text-xl">
             {user.role || "User"} <br /> {user.name || "Name"}
           </h2>
@@ -181,10 +196,11 @@ function UserProfile() {
 
         {/* Right Column */}
         <div className="w-full p-4 md:w-3/4 md:p-6">
-          <h2 className="mb-4 text-xl font-bold text-center sm:text-2xl">
-            Profile Settings
+          <h2 className="m-4 text-2xl font-semibold text-center sm:text-2xl">
+            Welcome To GangsTaa!
+            <h1 className="mt-4 text-4xl font-light">{user.name}</h1>
           </h2>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 p-16 mt-12 border-2 rounded-lg shadow-lg md:grid-cols-2">
             <div>
               <label>Name</label>
               <input
@@ -256,7 +272,7 @@ function UserProfile() {
             ) : (
               <button
                 onClick={handleEdit}
-                className="p-2 text-sm font-bold text-white bg-black cursor-pointer sm:text-xl"
+                className="w-full p-2 text-sm font-bold text-white bg-black rounded-md cursor-pointer lg:w-44 sm:text-xl"
               >
                 Edit Profile
               </button>

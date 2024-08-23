@@ -179,7 +179,7 @@ const Navigation = () => {
           animate={{ x: 0 }}
           exit={{ x: "-100%" }}
           transition={{ duration: 0.3 }}
-          className="fixed left-0 z-50 w-full h-full text-black shadow-sm lg:w-[18%] bg-gray-50 inset-y-20"
+          className="fixed left-0 z-50 w-full  h-full text-black shadow-sm lg:w-[18%] bg-gray-50 inset-y-20"
         >
           <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
             {/* User Profile button */}
