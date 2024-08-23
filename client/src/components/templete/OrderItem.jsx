@@ -31,7 +31,7 @@ const OrderPage = () => {
   return (
     <>
       {order && (
-        <div className="max-w-6xl p-4 mx-auto">
+        <div className="h-screen max-w-6xl p-4 mx-auto">
           <h4 className="my-4 text-3xl font-semibold text-center text-black">
             Order Details
           </h4>

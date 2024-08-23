@@ -6,32 +6,30 @@ import { ProductData } from '../../context/ProductContext';
 const UpdateProduct = ({ onClose, productDetails }) => {
   const { fetchAdminProducts } = ProductData();
 
-  const [data,setData] = useState({
+  const [data, setData] = useState({
     ...productDetails,
-    stock : productDetails?.stock,
+    stock: productDetails?.stock,
   });
 
   const [updatedStock, setUpdatedStock] = useState(0);
 
-
-  const handleOnChange = (e)=>{
+  const handleOnChange = (e) => {
     setUpdatedStock(e.target.value);
     console.log("updated stock", updatedStock);
-}
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const id = productDetails._id;
 
-    const updateddata = { stock: updatedStock};
+    const updatedData = { stock: updatedStock };
 
     try {
-      const response = await axios.put(`http://localhost:4000/api/product/updatestock/${id}`, updateddata, {
+      const response = await axios.put(`http://localhost:4000/api/product/updatestock/${id}`, updatedData, {
         headers: {
           token: localStorage.getItem("token"),
         },
       });
-
 
       if (response.data.message) {
         alert(response.data.message);
@@ -44,47 +42,61 @@ const UpdateProduct = ({ onClose, productDetails }) => {
   };
 
   return (
-    <div className='fixed w-full h-full bg-slate-200 bg-opacity-35 top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
-      <div className='bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden logincontainer'>
-        <div className='flex justify-between items-center pb-3'>
-          <h2 className='font-bold text-lg'>Update Product</h2>
-          <div className='w-fit ml-auto text-2xl hover:text-red-600 cursor-pointer' onClick={onClose}>
+    <div className='fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50'>
+      <div className='bg-white p-6 rounded-lg w-full max-w-lg h-full max-h-[80%] overflow-y-auto shadow-lg'>
+        <div className='flex justify-between items-center mb-4'>
+          <h2 className='font-bold text-xl'>Update Product</h2>
+          <button
+            className='text-2xl text-gray-600 hover:text-red-600 transition-colors'
+            onClick={onClose}
+          >
             <CgClose />
-          </div>
+          </button>
         </div>
 
-        <form className='grid p-4  overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
-      
-          <label htmlFor='stock' className='mt-3'>Product Stock :</label>
-          <input
-            type='text'
-            id='stock'
-            placeholder='enter available stock'
-            value={data.stock}
-            name='stock'
-            className=' bg-slate-100 border rounded inputbox'
-            required
-            readOnly
-          />
+        <form className='space-y-6' onSubmit={handleSubmit}>
+          <div>
+            <label htmlFor='stock' className='block text-sm font-medium text-gray-700'>
+              Current Stock
+            </label>
+            <input
+              type='text'
+              id='stock'
+              value={data.stock}
+              name='stock'
+              className='mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-600 cursor-not-allowed'
+              readOnly
+            />
+          </div>
 
+          <div>
+            <label htmlFor='updatedStock' className='block text-sm font-medium text-gray-700'>
+              Updated Stock
+            </label>
+            <input
+              type='number'
+              id='updatedStock'
+              placeholder='Enter updated stock quantity'
+              value={updatedStock}
+              name='updatedStock'
+              onChange={handleOnChange}
+              className='mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500'
+              required
+            />
+          </div>
 
-          <label htmlFor='updatedstock' className='mt-3'> Enter Updated Stock :</label>
-          <input
-            type='text'
-            id='updatedstock'
-            placeholder='enter price'
-            value={updatedStock}
-            name='updatedstock'
-            onChange={handleOnChange}
-            className=' bg-slate-100 border rounded inputbox'
-            required
-          />
-
-          <button className='px-2 py-1 mb-10 addtocartbtn border-slate-300 bg-slate-100 text-black rounded border hover:border hover:border-black'>Update Product</button>
+          <div className='flex justify-end'>
+            <button
+              type='submit'
+              className='px-4 py-2 border-2 border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-600 transition-colors'
+            >
+              Update Product
+            </button>
+          </div>
         </form>
       </div>
     </div>
   );
-}
+};
 
 export default UpdateProduct;

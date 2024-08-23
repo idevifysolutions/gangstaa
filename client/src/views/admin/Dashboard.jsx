@@ -9,15 +9,20 @@ import { HiTrendingUp, HiTrendingDown } from "react-icons/hi"
 import { BarChart, DoughnutChart } from '../../components/admin/Charts'
 import { RxHamburgerMenu } from 'react-icons/rx';
 import axios from 'axios';
+import { ProductData } from '../../context/ProductContext';
 
 const userImg =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJxA5cTf-5dh5Eusm0puHbvAhOrCRPtckzjA&usqp";
 
 
 const Dashboard = () => {
-
+     
+    const { adminProducts } = ProductData();
+ 
     const [allOrders, setAllOrders] = useState([]);
+    const [allUsers, setAllusers] = useState([]);
 
+ 
 async function fetchAllOrders() {
     try {
       const { data } = await axios.get(
@@ -37,10 +42,25 @@ async function fetchAllOrders() {
   }
 
 
+  const getAllusers = async () => {
+    try {
+      const data = axios.get("http://localhost:4000/api/user/getall", {
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      });
+      const Allusers = await data;
+      setAllusers(Allusers.data.data);
+    } catch (error) {
+      alert(error.message);
+      console.log(error);
+    }
+  };
+
+
   useEffect(() => {
        fetchAllOrders();
-       console.log("allorders from orders", allOrders);
-
+       getAllusers();
   },[])
 
 
@@ -71,31 +91,31 @@ async function fetchAllOrders() {
                 </div> */}
 
                 <section className='widget-container flex flex-wrap justify-center lg:justify-between items-stretch py-[2rem] px-[2rem]'>
-                    <WidgetItem
+                    {/* <WidgetItem
                         percent={30}
                         amount={true}
                         value={20}
                         heading="Revenue"
                         color="rgb(0, 115, 255)"
-                    />
+                    /> */}
                     <WidgetItem
                         percent={50}
                         amount={true}
-                        value={20}
+                        value={adminProducts.length}
                         heading="Products"
                         color="rgb(115, 0, 255)"
                     />
                     <WidgetItem
                         percent={50}
                         amount={true}
-                        value={20}
+                        value={allUsers.length}
                         heading="Users"
                         color="rgb(0, 115, 255)"
                     />
                     <WidgetItem
                         percent={50}
                         amount={true}
-                        value={20}
+                        value={allOrders.length}
                         heading="Orders"
                         color="rgb(255, 115, 73)"
                     />

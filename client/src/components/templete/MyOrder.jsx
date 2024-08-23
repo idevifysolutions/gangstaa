@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import EmptyOrder from "./images/empty.jpeg";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -27,10 +28,10 @@ const Orders = () => {
   }, []);
 
   return (
-    <main className="flex flex-col min-h-screen">
-      <h1 className="mt-8 mb-8 text-3xl font-bold text-center">My Orders</h1>
+    <main className="flex flex-col items-center justify-start h-screen p-4">
       {orders && orders.length > 0 ? (
-        <div className="items-center justify-center w-full h-full p-2 overflow-x-auto lg:p-8">
+        <div className="w-full p-4 overflow-x-auto bg-white rounded-lg shadow-lg">
+          <h1 className="mb-4 text-3xl font-bold text-center">My Orders</h1>
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
               <tr className="text-sm leading-normal text-gray-600 uppercase bg-gray-200">
@@ -77,7 +78,19 @@ const Orders = () => {
           </table>
         </div>
       ) : (
-        <p className="mt-4 text-gray-500">No Orders Yet</p>
+        <div className="flex flex-col items-center justify-center h-full p-4 text-center">
+          <img
+            src={EmptyOrder}
+            alt="No Orders"
+            className="w-1/2 max-w-sm mb-6"
+          />
+          <h1 className="mb-4 text-4xl font-bold text-black lg:text-6xl">
+            No Orders Yet!
+          </h1>
+          <p className="text-xl text-gray-800">
+            Your order history will appear here.
+          </p>
+        </div>
       )}
     </main>
   );

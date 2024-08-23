@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import Image1 from "./images/img1.png";
 import Image2 from "./images/img2.png";
 import Image3 from "./images/img3.png";
+import "./Carousel.css"
 
 const ImageList = [
   {
@@ -50,7 +51,7 @@ const Hero = ({ handleOrderPopup }) => {
 
   return (
     <div className="relative overflow-hidden min-h-[700px] sm:min-h-[650px] flex justify-center items-center duration-200 bg-[#7a6256]">
-      <div className="h-[700px] w-[700px] bg-primary/40 absolute -top-1/2 right-0 rounded-3xl rotate-45 -z-[8]"></div>
+      {/* <div className="h-[700px] w-[700px] bg-primary/40 absolute -top-1/2 right-0 rounded-3xl rotate-45 -z-[8]"></div> */}
       <div className="container pb-8 mr-8 lg:mr-0 sm:pb-0">
         <Slider {...settings}>
           {ImageList.map((data) => (
@@ -108,16 +109,16 @@ const Hero = ({ handleOrderPopup }) => {
                   </div>
                 </div>
                 {/* image section */}
-                <div className="order-1 sm:order-2">
+                <div className="order-1 sm:order-2  p-[30px] ">
                   <div
                     data-aos="zoom-in"
                     data-aos-once="true"
-                    className="relative z-10"
+                    className="relative z-10  "
                   >
                     <img
                       src={data.img}
                       alt=""
-                      className="w-[250px] h-[300px] sm:h-[500px] pt-4 sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto drop-shadow-lg"
+                      className="animated rounded-heroimg bg-white w-[250px] h-[300px]  sm:h-[500px] pt-4 sm:w-[450px] sm:scale-105 lg:scale-120 object-contain mx-auto drop-shadow-lg"
                     />
                   </div>
                 </div>

@@ -99,7 +99,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 h-24 text-black bg-gray-50 ">
+    <nav className="sticky top-0 z-50 h-24 text-black shadow-lg bg-gray-50">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-10 ">
         <div className="flex items-center justify-between ">
           <div className="flex items-center">
@@ -163,7 +163,7 @@ const Navigation = () => {
               <Link to="/login">
                 <motion.div
                   whileHover="hover"
-                  className="py-1 px-3 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
+                  className="px-3 py-1 text-lg font-semibold text-white bg-black rounded-md cursor-pointer"
                 >
                   Login
                 </motion.div>
@@ -194,6 +194,7 @@ const Navigation = () => {
                   Home
                 </span>
               </Link>
+
 
               {isAuth && isAdmin === "admin" && (
                 <Link
@@ -251,6 +252,7 @@ const Navigation = () => {
                 </span>
               </Link>
             </div>
+
 
             {isAuth ? (
               <Link

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import HomeProductCard from "../components/HomeProductCard";
 import TrendingNow from "../components/TrendingNow";
 import Slider from "../components/Slider/Slider";
-// import Banner from "../components/Banner/Bannercards";
-import Carouesel from "../components/carousel/Carousel";
+import Banner from "../components/Banner/Bannercards";
+// import Carouesel from "../components/carousel/Carousel";
 import Trenndign_NewDrop from "../components/Trennding_NewDrop";
 import { homeProductData } from "../data/homeProductData";
 import LoginPopUp from "../components/LoginPopup";
@@ -51,8 +51,8 @@ const Home = () => {
 
   return (
     <div>
-      {/* <Banner /> */}
-      <Carouesel />
+      <Banner />
+      {/* <Carouesel /> */}
       <Trenndign_NewDrop />
 
       <div>

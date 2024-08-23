@@ -3,10 +3,13 @@ import AdminSidebar from "../../components/admin/AdminSidebar";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import axios from "axios";
+import {UserData} from '../../context/UserContext';
 
 const Customers = () => {
   const [showsidebar, setShowsidebar] = useState(false);
   const [allusers, setAllusers] = useState([]);
+  const {user} = UserData();
+  const loginuser = user;
 
   const handleSideBar = () => {
     setShowsidebar((prev) => !prev);
@@ -87,7 +90,7 @@ const Customers = () => {
         <AdminSidebar sidebar={{ showsidebar, handleSideBar }} />
 
         <div className="h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4">
-          <div className="flex items-center justify-between w-full h-10 p-6 border shadow-md headerbar shadow-slate-400">
+          <div className="flex items-center justify-between w-full h-10 p-6 border shadow-md headerbar shadow-gray-200">
             <div
               className="block cursor-pointer lg:hidden"
               onClick={handleSideBar}
@@ -115,17 +118,18 @@ const Customers = () => {
                 <tbody className="text-sm font-light text-gray-600">
                   {allusers.map((user, index) => {
                     return (
-                      <tr
-                        className="border-b border-gray-200 hover:bg-gray-100"
-                        key={index}
-                      >
-                        <td className="px-6 py-3 text-center">
-                          <img
-                            src={`https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?rs=1&pid=ImgDetMain`}
-                            className="h-[50px] object-cover"
-                            alt={user.name}
-                          />
-                        </td>
+<tr
+  className={`border-b border-gray-200 ${user.email === loginuser.email ? 'bg-green-500' : 'hover:bg-gray-100'}`}
+  key={index}
+>
+  <td className="px-6 py-3 text-center">
+    <img
+      src={`https://th.bing.com/th/id/OIP.x7X2oAehk5M9IvGwO_K0PgHaHa?rs=1&pid=ImgDetMain`}
+      className={`h-[50px] object-cover rounded-full ${user.email === loginuser.email ? '' : 'mix-blend-multiply'}`}
+      alt={user.name}
+    />
+  </td>
+
                         <td className="px-6 py-3 text-center">{user.name}</td>
                         <td className="px-6 py-3 text-center"> Male</td>
                         <td className="px-6 py-3 text-center">
@@ -133,24 +137,24 @@ const Customers = () => {
                           {removeDomain(user.email)}
                         </td>
 
-                        <td className="flex items-center justify-between gap-2 px-6 py-3 cursor-pointer">
-                          <p>{user.role}</p>
-                          <button
+                        <td className={`flex items-center justify-between gap-2 px-6 py-3 ${user.email == loginuser.email ? '' : 'hover:cursor-pointer'}`}>
+                          <p className={` ${user.email == loginuser.email ? 'mt-3' : ''}`} >{user.role}</p>
+                          { user.email == loginuser.email? '':  <button
                             className="p-2 text-white bg-black rounded-md"
                             onClick={() => Updateuser(user._id)}
-                          >
+                          > 
                             Update Role
-                          </button>
+                          </button>  }
                         </td>
 
-                        <td className="px-6 py-3 cursor-pointer">
-                          <div
+                        <td className={`px-6 py-3  ${user.email == loginuser.email ? '' : 'hover:cursor-pointer'}`}>
+                        { user.email == loginuser.email? '':  <div
                             className="w-12 p-2 border-2 rounded-full hover:bg-red-600"
                             onClick={() => deleteOneuser(user._id)}
                           >
-                            <RiDeleteBinLine className="w-6 h-auto mx-auto" />
-                          </div>
-                        </td>
+                             <RiDeleteBinLine className="w-6 h-auto mx-auto" /> 
+                          </div> }
+                        </td> 
                       </tr>
                     );
                   })}
