@@ -181,7 +181,7 @@ const Navigation = () => {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ duration: 0.3 }}
-            className="flex justify-between items-start flex-col fixed left-0 z-50 w-64 min-h-screen text-black bg-gray-50  inset-y-20 shadow-sm "
+            className="flex justify-between items-start flex-col fixed left-0 z-50 w-full lg:w-[17%] min-h-screen text-black bg-gray-50  inset-y-20 shadow-sm "
           >
             <div className="px-2 pt-4 pb-3 space-y-1 sm:px-3">
               <Link
@@ -194,7 +194,6 @@ const Navigation = () => {
                   Home
                 </span>
               </Link>
-
 
               {isAuth && isAdmin === "admin" && (
                 <Link
