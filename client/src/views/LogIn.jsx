@@ -5,6 +5,7 @@ import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { UserData } from "../context/UserContext";
 import { useDispatch } from "react-redux";
 import { setLoggeIn } from "../features/userAuthentication/userAuthenticationSlice";
+import logo from "../assets/gangstaaLogo.png";
 
 const images = [
   "https://images.bewakoof.com/original/men-s-blue-den-printed-oversized-shirt-604442-1698919129-2.jpg",
@@ -33,7 +34,7 @@ const Login = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-screen overflow-hidden bg-white">
+    <div className="relative flex items-center justify-center h-screen overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -65,9 +66,12 @@ const Login = () => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative z-20 w-full max-w-sm p-6 bg-gray-100 rounded-md shadow-md"
+        className="relative z-20 w-full max-w-sm p-6 bg-white rounded-md shadow-md"
       >
-        <h2 className="mb-4 text-2xl font-semibold text-center text-black">
+         <div className="flex-shrink-0 text-center flex justify-center ">
+              <img src={logo} alt="" className="h-[105px]" />
+          </div>
+        <h2 className="mb-4 text-xl font-semibold text-center text-gray-600">
           Login
         </h2>
         <form onSubmit={submitHandler}>
@@ -129,9 +133,9 @@ const Login = () => {
         <div className="flex items-center justify-center pt-4 mt-4 border-t-2 border-black">
           <Link
             to="/signUp"
-            className="font-bold text-gray-800 hover:text-blue-700 hover:underline"
+            className=" text-gray-800 hover:text-blue-700 "
           >
-            Don't have an account? Register
+           <span className="text-gray-500">Don't have an account? </span> <span className="font-bold">Register</span>
           </Link>
         </div>
       </motion.div>

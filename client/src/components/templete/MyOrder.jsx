@@ -28,9 +28,9 @@ const Orders = () => {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4">
+    <main className="flex flex-col items-center justify-start h-screen p-4">
       {orders && orders.length > 0 ? (
-        <div className="w-full max-w-4xl p-4 overflow-x-auto bg-white rounded-lg shadow-lg">
+        <div className="w-full p-4 overflow-x-auto bg-white rounded-lg shadow-lg">
           <h1 className="mb-4 text-3xl font-bold text-center">My Orders</h1>
           <table className="min-w-full bg-white border border-gray-200">
             <thead>
@@ -65,7 +65,7 @@ const Orders = () => {
 
                     <td className="px-6 py-3 text-left">
                       <button
-                        className="px-4 py-2 text-lg text-white bg-black"
+                        className="px-4 py-2 text-lg text-white bg-black rounded-md"
                         onClick={() => navigate(`/category/myorder/${e._id}`)}
                       >
                         View

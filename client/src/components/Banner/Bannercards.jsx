@@ -38,7 +38,7 @@ const CarouselCard = () => {
   }, [currentIndex]);
 
   return (
-    <div className="w-full max-w-full lg:max-w-[1684px] h-[200px] sm:h-[300px] md:h-[400px] lg:h-[650px] mx-auto relative group ">
+    <div className="w-full max-w-full  h-[200px] sm:h-[300px] md:h-[400px] lg:h-[630px] mx-auto relative group ">
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
         className="w-full h-full duration-500 bg-center bg-cover"

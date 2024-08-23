@@ -66,7 +66,7 @@ const Products = () => {
         <AdminSidebar sidebar={{ showsidebar, handleSideBar }} />
 
         <div className="h-[100vh] w-full overflow-y-auto bg-white p-5 flex flex-col gap-4">
-          <div className="headerbar h-10 w-full border flex items-center justify-between shadow-md shadow-slate-400 p-6">
+          <div className="headerbar h-10 w-full border flex items-center justify-between shadow-md shadow-gray-200 p-6">
             <div
               className="lg:hidden block cursor-pointer"
               onClick={handleSideBar}

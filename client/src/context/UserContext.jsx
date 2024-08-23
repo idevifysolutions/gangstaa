@@ -11,6 +11,7 @@ const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState([]);
+  
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 

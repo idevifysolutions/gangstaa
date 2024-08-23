@@ -31,7 +31,7 @@ const OrderPage = () => {
   return (
     <>
       {order && (
-        <div className="max-w-6xl p-4 mx-auto">
+        <div className="max-w-6xl p-4 mx-auto ">
           <h4 className="my-4 text-3xl font-semibold text-center text-black">
             Order Details
           </h4>
@@ -96,7 +96,7 @@ const OrderPage = () => {
 
           <div className="mt-4 text-center">
             <button
-              className="px-4 py-2 text-white transition duration-300 bg-black hover:bg-black"
+              className="px-4 py-2 text-white transition duration-300 bg-black rounded-md hover:bg-black"
               onClick={() => navigate("/catagery/myorder")}
             >
               Go Back
