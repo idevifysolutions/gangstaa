@@ -10,8 +10,6 @@ const getLocalCartItems = ()=>{
   }
 }
 
-
-
 export const initialState = {
   loading: false,
   cartItems: getLocalCartItems(),

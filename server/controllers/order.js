@@ -195,7 +195,7 @@ export const newOrderOnline = async (req, res) => {
     };
 
     const options = {
-      amount: Number(subTotal),
+      amount: Number(subTotal) * 100,
       currency: "INR",
     };
 
@@ -244,7 +244,7 @@ export const payment = async (req, res) => {
       });
 
       for (let i of order.items) {
-        let product = await Product.findOne({ _id: i.product });
+        let product = await Product.findOne({ _id: i.productId });
 
         product.$inc("stock", -1 * i.quantity);
         product.$inc("sold", +i.quantity);
@@ -252,7 +252,7 @@ export const payment = async (req, res) => {
         await product.save();
       }
 
-      await Cart.find({ user: req.user._id }).deleteMany();
+      // await Cart.find({ user: req.user._id }).deleteMany();
 
       await sendMail(
         req.user.email,
