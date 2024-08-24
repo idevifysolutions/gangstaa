@@ -1,8 +1,6 @@
-
 // import {UserData} from "../../context/UserContext
 
 // function UserProfile() {
-
 
 // const {user}  = UserData();
 
@@ -189,7 +187,7 @@ function UserProfile() {
             Remove Image
           </button>
           <h2 className="mt-4 text-lg font-semibold sm:text-xl">
-            {user.role || "User"} <br /> {user.name || "Name"}
+            {user.name || "Name"}
           </h2>
           <p className="text-sm sm:text-base">
             {user.email || "user@example.com"}
@@ -199,7 +197,7 @@ function UserProfile() {
         {/* Right Column */}
         <div className="w-full p-4 md:w-3/4 md:p-6">
           <h2 className="m-4 text-2xl font-semibold text-center sm:text-2xl">
-            Welcome To GangsTaa!
+            Welcome To Gangstaa!
             <h1 className="mt-4 text-4xl font-light">{user.name}</h1>
           </h2>
           <div className="grid grid-cols-1 gap-4 p-16 mt-12 border-2 rounded-lg shadow-lg md:grid-cols-2">
@@ -261,21 +259,20 @@ function UserProfile() {
                 <option value="female">Female</option>
                 <option value="other">Other</option>
               </select>
-
             </div>
           </div>
           <div className="flex justify-center mt-6 space-x-4">
             {isEditing ? (
               <button
                 onClick={handleSave}
-                className="p-2 text-sm font-bold text-white bg-black cursor-pointer sm:text-xl"
+                className="w-full p-2 text-sm font-bold text-white bg-black rounded-md cursor-pointer lg:w-28 sm:text-xl"
               >
                 Save Info
               </button>
             ) : (
               <button
                 onClick={handleEdit}
-                className="w-full p-2 text-sm font-bold text-white bg-black rounded-md cursor-pointer lg:w-44 sm:text-xl"
+                className="w-full p-2 text-sm font-bold text-white bg-black rounded-md cursor-pointer lg:w-32 sm:text-xl"
               >
                 Edit Profile
               </button>
