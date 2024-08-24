@@ -93,7 +93,7 @@ const Checkout = () => {
 
       console.log("online response", order, orderOptions);
       const options = {
-        key: "rzp_test_yOMeMyaj2wlvTt",
+        key: "rzp_live_uZqf3G3ZLTSKbH",
         amount: order.amount,
         currency: "INR",
         name: "Let's Negotiate", //your business name
