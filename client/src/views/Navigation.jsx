@@ -138,17 +138,10 @@ const Navigation = () => {
               </Link>
             </motion.div>
             {isAuth ? (
-              // <motion.button
-              //   onClick={handleLogout}
-              //   whileHover="hover"
-              //   className="p-2 text-xl font-bold text-white bg-black rounded-md cursor-pointer"
-              // >
-              //   LogOut
-              // </motion.button>
               <motion.button
                 onClick={handleLogout}
                 whileHover={{
-                  scale: 1, // Slightly scales up the button
+                  scale: 1,
                   backgroundColor: "#313131", // Darkens the background color on hover
                   transition: {
                     duration: 0.2, // Smooth transition duration
@@ -251,7 +244,6 @@ const Navigation = () => {
                 </span>
               </Link>
             </div>
-
 
             {isAuth ? (
               <Link
