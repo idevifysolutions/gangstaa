@@ -95,9 +95,10 @@ const Checkout = () => {
       const options = {
         key: "rzp_live_uZqf3G3ZLTSKbH",
         amount: order.amount,
+        image: "http://localhost:5174/src/assets/gangstaaLogo.png",
         currency: "INR",
-        name: "Let's Negotiate", //your business name
-        description: "India will negotiate",
+        name: "Gangstaa", //your business name
+        description: "Clothing Brand",
         order_id: order.id,
         handler: async function (response) {
           const { razorpay_payment_id, razorpay_order_id, razorpay_signature } =
@@ -126,7 +127,7 @@ const Checkout = () => {
         },
 
         theme: {
-          color: "#9e1163",
+          color: "#b35900",
         },
       };
 
@@ -144,38 +145,62 @@ const Checkout = () => {
   }, [shippingInfo]);
 
   return (
-    <>
-      <h2 className="text-center text-2xl font-bold mb-7">Proceed to payment</h2>
-      <div className="flex flex-col gap-6 lg:flex-row md:gap-4 items-center justify-center">
-        <aside className="flex flex-col md:flex-row items-center justify-center gap-7">
-          {cartItems.map((item) => (
-            <div className="flex" key={item.productId}>
-             <div className="flex flex-col items-center">
-              <div className="w-[15rem] h-[15rem] mb-10">
-                <img className="w-full h-full" src={`${server}/${item.photo}`} alt="" />
+    <div className="mb-10">
+    <h2 className="text-center text-2xl font-bold mt-6 mb-7 text-gray-800">
+      Proceed to Payment
+    </h2>
+    <div className="flex flex-col lg:flex-row gap-10 lg:gap-8 items-start justify-center">
+      <aside className="flex flex-wrap items-center justify-center gap-10 bg-white p-6 rounded-lg shadow-lg w-[70%] overflow-hidden">
+        {cartItems.map((item) => (
+          <div className="flex" key={item.productId}>
+            <div className="flex flex-col items-center">
+              <div className="w-[15rem] h-[15rem] mb-6 border rounded-lg overflow-hidden shadow-md">
+                <img
+                  className="w-full h-full object-contain"
+                  src={`${server}/${item.photo}`}
+                  alt={item.name}
+                />
               </div>
-              <div>
+              <div className="text-center font-medium text-lg text-gray-700">
                 {item.name}
               </div>
-             </div>
             </div>
-          ))}
-          <h5 className="font-bold"> Total Payable Amount: Rs {total}</h5>
-          <p className="text-center px-11 font-bold">Delivery Address : {shippingInfo.address} {shippingInfo.city} {shippingInfo.state}</p>
-        </aside>
-        <aside className=" w-[15rem] h-[15rem] flex flex-col justify-between border-2 border-black">
+          </div>
+        ))}
 
-          <select value={method} onChange={(e) => setMethod(e.target.value)}>
-            <option>Choose Payment Method</option>
-            <option value="cod">Cash on Delivery</option>
-            <option value="online">Online Payment</option>
-          </select>
-          <button onClick={method === "cod" ? paymentCod : paymentOnline}>
-            Proceed
-          </button>
-        </aside>
-      </div>
-    </>
+        <div className="text-center mt-6 w-full">
+          <h5 className="font-bold text-xl text-gray-800">
+            Total Payable Amount: Rs {total}
+          </h5>
+          <p className="mt-2 text-gray-600">
+            Delivery Address: {shippingInfo.address}, {shippingInfo.city},{" "}
+            {shippingInfo.state}
+          </p>
+        </div>
+
+      </aside>
+      <aside className="w-[18rem] h-[20rem] p-6 flex flex-col justify-between border-2 border-gray-300 rounded-lg shadow-lg bg-gray-50 max-w-full lg:ml-8">
+        <select
+          value={method}
+          onChange={(e) => setMethod(e.target.value)}
+          className="p-3 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-gray-500"
+        >
+          <option className="text-gray-500">Choose Payment Method</option>
+          <option value="cod">Cash on Delivery</option>
+          <option value="online">Online Payment</option>
+        </select>
+        <button
+          onClick={method === "cod" ? paymentCod : paymentOnline}
+          className="mt-6 py-3 px-6 bg-gray-400 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
+        >
+          Proceed
+        </button>
+      </aside>
+    </div>
+  </div>
+  
+
+  
   );
 }
 

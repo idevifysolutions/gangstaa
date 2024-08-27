@@ -91,7 +91,7 @@ const HomeProductCard = () => {
                   className="absolute top-0 left-0 object-cover w-full h-64 transition-opacity duration-700 rounded-lg opacity-0 hover:opacity-100"
                 />
                 <Link
-                  to={`/catagery/${product.categoryRoute}`}
+                  to={`/catagery`}
                   className="absolute inset-0 flex items-center justify-center text-2xl font-semibold text-white transition-opacity duration-500 bg-black bg-opacity-50 rounded-lg opacity-0 group-hover:opacity-100"
                 >
                   {product.category}
