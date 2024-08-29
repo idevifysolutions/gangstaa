@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* index.css or global stylesheet */
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
 }
