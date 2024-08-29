@@ -70,27 +70,27 @@ const Sidebar = (props) => {
       <div
         className={`h-[100vh] w-auto bg-slate-50 ${
           showsidebar ? "block" : "hidden"
-        } lg:block  absolute lg:relative z-40`}
+        } lg:block absolute lg:relative z-40`}
       >
-        <div className="adminsidebarcontainer w-72 h-[100vh]  overflow-y-scroll hide-scrollbar">
-          <aside className="w-[100%]  p-4 z-10  bg-white">
+        <div className="adminsidebarcontainer w-72 h-[100vh] overflow-y-scroll hide-scrollbar">
+          <aside className="w-[100%] p-4 z-10 bg-white">
             <div
-              className="w-fit block  lg:hidden ml-auto text-2xl hover:text-red-600 cursor-pointer "
+              className="w-fit block lg:hidden ml-auto text-2xl hover:text-red-600 cursor-pointer"
               onClick={handleSideBar}
             >
               <CgClose />
             </div>
-
+  
             {/* Collections */}
             <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
                 <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
                   Collections
                 </h1>
-
+  
                 <div>
                   {["Shirt", "Jeans", "T-Shirt", "Jacket"].map((category) => (
-                    <div key={category}>
+                    <div key={category} className="flex items-center gap-2 my-1">
                       <input
                         type="checkbox"
                         id={category}
@@ -105,17 +105,17 @@ const Sidebar = (props) => {
                 </div>
               </div>
             </div>
-
+  
             {/* Size */}
             <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
                 <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
                   Size
                 </h1>
-
+  
                 <div>
                   {["S", "M", "L", "XL"].map((size) => (
-                    <div key={size}>
+                    <div key={size} className="flex items-center gap-2 my-1">
                       <input
                         type="checkbox"
                         id={size}
@@ -128,17 +128,17 @@ const Sidebar = (props) => {
                 </div>
               </div>
             </div>
-
+  
             {/* Colors */}
             <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
                 <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
                   Colors
                 </h1>
-
+  
                 <div>
                   {["Red", "Blue", "Green", "Yellow"].map((color) => (
-                    <div key={color}>
+                    <div key={color} className="flex items-center gap-2 my-1">
                       <input
                         type="checkbox"
                         id={color}
@@ -151,7 +151,7 @@ const Sidebar = (props) => {
                 </div>
               </div>
             </div>
-
+  
             {/* Price */}
             <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
@@ -160,7 +160,7 @@ const Sidebar = (props) => {
                 </h1>
                 <div>
                   {["500-1000", "1000-2000", "2000-3000"].map((range) => (
-                    <div key={range}>
+                    <div key={range} className="flex items-center gap-2 my-1">
                       <input
                         type="checkbox"
                         id={range}
@@ -179,7 +179,7 @@ const Sidebar = (props) => {
         </div>
       </div>
     </>
-  );
+  );  
 };
 
 export default Sidebar;
