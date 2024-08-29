@@ -42,12 +42,12 @@ const Footer = () => {
                 />
               </Link>
               <p className="hidden md:block pt-4">
-                Unleash your inner swagger with Gangstaa—where street style meets
-                high fashion. Elevate your game and own the look.
+                Unleash your inner swagger with Gangstaa—where street style
+                meets high fashion. Elevate your game and own the look.
               </p>
             </div>
           </div>
-  
+
           {/* Links Section */}
           <div className="w-full md:w-[50%] mt-6 md:mt-0 flex flex-col md:flex-row justify-center text-center">
             <div className="space-y-2 md:w-1/2">
@@ -59,7 +59,10 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/catagery/userprofile" className="hover:text-gray-400">
+                  <a
+                    href="/catagery/userprofile"
+                    className="hover:text-gray-400"
+                  >
                     Profile
                   </a>
                 </li>
@@ -108,10 +111,15 @@ const Footer = () => {
                     Privacy Policy
                   </Link>
                 </li>
+                <li>
+                  <Link to="/franchise" className="hover:text-gray-400">
+                    Franchise
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
-  
+
           {/* Address and Social Icons Section */}
           <div className="w-full md:w-[25%] mt-6 md:mt-0 md:pl-8">
             {/* Address */}
@@ -126,7 +134,7 @@ const Footer = () => {
               <p className="text-sm md:text-base">Phone: +91 8095733338</p>
               <p className="text-sm md:text-base">Email: care@wrogn.com</p>
             </div>
-  
+
             {/* Social Icons */}
             <div className="flex justify-center md:justify-start gap-4 mt-6">
               <Link
@@ -164,7 +172,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-  
+
         {/* Footer Bottom */}
         <div className="flex items-center justify-center border-t-[1px] border-slate-400 mt-6">
           <p className="text-sm my-4">
@@ -174,8 +182,6 @@ const Footer = () => {
       </footer>
     </>
   );
-  
-  
 };
 
 export default Footer;
