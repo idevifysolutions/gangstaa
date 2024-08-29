@@ -31,6 +31,7 @@ import PieCharts from "./views/admin/charts/PieCharts";
 import LineCharts from "./views/admin/charts/LineCharts";
 import Orders from "./views/admin/Orders";
 import OfferPage from "./components/OfferPage";
+import FranchisePage from "./views/FranchisePage";
 
 // import { useSelector } from "react-redux";
 // import ProtectedRoute from "./components/ProtectedRoute";
@@ -128,14 +129,31 @@ const App = () => {
             }
           />
 
+          {/* <Route
+            path="/franchise"
+            element={
+              <AdminProtectedRoute>
+                <FranchisePage />
+              </AdminProtectedRoute>
+            }
+          /> */}
+          <Route
+            path="/franchise"
+            element={
+              <ProtectedRoute>
+                <FranchisePage />
+              </ProtectedRoute>
+            }
+          />
+
           {/* Admin routes */}
 
           <Route
             path="/admin/dashboard"
             element={
-              <AdminProtectedRoute>
+              <ProtectedRoute>
                 <Dashboard />
-              </AdminProtectedRoute>
+              </ProtectedRoute>
             }
           />
 
