@@ -111,12 +111,11 @@ const FranchisePage = () => {
             </Slider>
           </div>
 
-          {/* Show More Button */}
           {!showMore && (
-            <div className="text-center mt-8">
+            <div className="text-center mt-8 ">
               <button
                 onClick={() => setShowMore(true)}
-                className="bg-black text-white py-2 px-6 rounded-md hover:bg-gray-950 transition-all duration-300"
+                className="hidden lg:block bg-black text-white py-2 px-6 rounded-md hover:bg-gray-950 transition-all duration-300"
               >
                 Show More
               </button>
