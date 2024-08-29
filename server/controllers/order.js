@@ -93,57 +93,10 @@ export const updateStatus = async (req, res) => {
     }
 
     const order = await Order.findOne({ _id: req.params.id });
+         
+    console.log("Previous status", req.body.status);
 
-    console.log(req.user);
-
-    if (order.status === "Pending") {
-      order.status = "Processing";
-      await sendMail(
-        req.user.email,
-        "Lets negotiate",
-        "Your order is in processing and it will be delivered soon"
-      );
-      await order.save();
-
-      return res.json({
-        message: "order status updated",
-      });
-    }
-
-    if (order.status === "Processing") {
-      order.status = "Shipped";
-
-      await sendMail(
-        req.user.email,
-        "Lets negotiate",
-        "Your order is Shipped and it will be delivered soon"
-      );
-
-      await order.save();
-
-      return res.json({
-        message: "order status updated",
-      });
-    }
-
-    if (order.status === "Shipped") {
-      order.status = "Out for delivery";
-
-      await sendMail(
-        req.user.email,
-        "Lets negotiate",
-        "Your order is Out for delivery and it will be delivered soon"
-      );
-
-      await order.save();
-
-      return res.json({
-        message: "order status updated",
-      });
-    }
-
-    if (order.status === "Out for delivery") {
-      order.status = "Delivered";
+      order.status = req.body.status
 
       await sendMail(
         req.user.email,
@@ -151,12 +104,14 @@ export const updateStatus = async (req, res) => {
         "Your order is Delivered Thank you for shopping"
       );
 
-      await order.save();
+      const savedorder = await order.save();
+
+      console.log("savedOrder", savedorder);
 
       return res.json({
         message: "order status updated",
       });
-    }
+    
   } catch (error) {
     res.status(500).json({
       message: error.message,

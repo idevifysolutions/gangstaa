@@ -95,7 +95,7 @@ const Checkout = () => {
       const options = {
         key: "rzp_live_uZqf3G3ZLTSKbH",
         amount: order.amount,
-        image: "http://localhost:5174/src/assets/gangstaaLogo.png",
+        image: "http://localhost:5173/src/assets/gangstaaLogo.png",
         currency: "INR",
         name: "Gangstaa", //your business name
         description: "Clothing Brand",
@@ -191,7 +191,7 @@ const Checkout = () => {
         </select>
         <button
           onClick={method === "cod" ? paymentCod : paymentOnline}
-          className="mt-6 py-3 px-6 bg-gray-400 text-white font-semibold rounded-lg hover:bg-gray-600 transition duration-300"
+          className="mt-6 py-3 px-6 bg-black text-white font-semibold rounded-lg transition duration-300"
         >
           Proceed
         </button>

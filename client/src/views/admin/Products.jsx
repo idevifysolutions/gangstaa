@@ -80,7 +80,7 @@ const Products = () => {
               className="flex items-center cursor-pointer py-1 bg-black text-white my-1 px-4 rounded-md"
               onClick={handleUploadProduct}
             >
-              Upload Product <FaPlusCircle className="ps-1 text-[20px]" />
+              Add Product <FaPlusCircle className="ps-1 text-[20px]" />
             </div>
           </div>
 
@@ -113,7 +113,7 @@ const Products = () => {
                       <td className="px-6 py-3 text-center">
                         {product.title}
                       </td>
-                      <td className="px-6 py-3 text-center">{product.price}</td>
+                      <td className="px-6 py-3 text-center">₹ {product.price}</td>
                       <td className="px-6 py-3 text-center">{product.stock}</td>
 
                       <td

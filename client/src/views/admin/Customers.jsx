@@ -4,10 +4,12 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { RxHamburgerMenu } from "react-icons/rx";
 import axios from "axios";
 import {UserData} from '../../context/UserContext';
+import Loader from "../../components/admin/Loader";
 
 const Customers = () => {
   const [showsidebar, setShowsidebar] = useState(false);
   const [allusers, setAllusers] = useState([]);
+  const [loading, setLoading] = useState(false);
   const {user} = UserData();
   const loginuser = user;
 
@@ -17,6 +19,7 @@ const Customers = () => {
 
   const getAllusers = async () => {
     try {
+      setLoading((prev) => !prev); 
       const data = axios.get("http://localhost:4000/api/user/getall", {
         headers: {
           token: localStorage.getItem("token"),
@@ -24,6 +27,7 @@ const Customers = () => {
       });
       const Allusers = await data;
       setAllusers(Allusers.data.data);
+      setLoading((prev) => !prev); 
     } catch (error) {
       alert(error.message);
       console.log(error);
@@ -86,6 +90,9 @@ const Customers = () => {
 
   return (
     <>
+    {
+       loading ? <Loader/> :
+   
       <div className="relative flex h-full">
         <AdminSidebar sidebar={{ showsidebar, handleSideBar }} />
 
@@ -164,6 +171,7 @@ const Customers = () => {
           </main>
         </div>
       </div>
+    }
     </>
   );
 };
