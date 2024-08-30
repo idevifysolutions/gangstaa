@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import axios from "axios";
@@ -6,16 +5,14 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { emptyCart } from "../features/productCart/productCart";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 const Checkout = () => {
   const [userInfoToggle, setUserInfoToggle] = useState(true);
   const [shippingToggle, setShippingToggle] = useState(false);
   const [paymentToggle, setPaymentToggle] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-
-  // const {address, phone} = location.state
-  // console.log("shippingInfo",location.state, address)
 
   const {
     shippingInfo,
@@ -26,17 +23,6 @@ const Checkout = () => {
     shippingCharges,
     total,
   } = useSelector((state) => state.cartReducer);
-
-  console.log(
-    "selector",
-    shippingInfo,
-    cartItems,
-    subtotal,
-    tax,
-    discount,
-    shippingCharges,
-    total
-  );
 
   const [formData, setFormData] = useState({
     method: "COD", // Default to COD
@@ -52,11 +38,34 @@ const Checkout = () => {
       ...formData,
       [name]: value,
     });
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.method === "COD") {
+      confirmAlert({
+        title: "Confirm Cash on Delivery",
+        message: "Are you sure you want to proceed with Cash on Delivery?",
+        buttons: [
+          {
+            label: "Yes",
+            onClick: async () => {
+              await placeOrder();
+            },
+          },
+          {
+            label: "No",
+            onClick: () => console.log("User cancelled COD."),
+          },
+        ],
+      });
+    } else {
+      await placeOrder(); // Directly place the order for online payments
+    }
+  };
+
+  const placeOrder = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -86,21 +95,15 @@ const Checkout = () => {
         }
       );
 
-      console.log(response);
-
       if (response.status === 200) {
         dispatch(emptyCart());
         toast.success("Order placed successfully!");
-        console.log("reduce stock");
       } else {
-        toast.error(`Failed to place order:`);
+        toast.error(`Failed to place order.`);
       }
     } catch (error) {
       toast.error("There was an error placing the order.");
-      console.error(
-        "Error:",
-        error.response ? error.response.data : error.message
-      );
+      console.error("Error:", error.response ? error.response.data : error.message);
     }
   };
 
@@ -212,3 +215,4 @@ const OrderSummary = ({ formData, total }) => (
 );
 
 export default Checkout;
+
