@@ -89,7 +89,7 @@ const Sidebar = (props) => {
                 </h1>
   
                 <div>
-                  {["Shirt", "Jeans", "T-Shirt", "Jacket"].map((category) => (
+                  {["Shirt","T-Shirt", "Jacket", "Denims", "Jeans","Chinos","Track pants/Shorts/Lower"].map((category) => (
                     <div key={category} className="flex items-center gap-2 my-1">
                       <input
                         type="checkbox"
@@ -114,7 +114,7 @@ const Sidebar = (props) => {
                 </h1>
   
                 <div>
-                  {["S", "M", "L", "XL"].map((size) => (
+                  {["M", "L", "XL", "2XL", "3XL", "4XL"].map((size) => (
                     <div key={size} className="flex items-center gap-2 my-1">
                       <input
                         type="checkbox"
