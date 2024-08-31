@@ -1,17 +1,20 @@
-
-
 body {
   font-family: Arial, sans-serif;
   background-color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
 .empty-container {
   height: 100vh;
-  width: 50vw;
+  width: 90%;
+  max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .empty-content {
@@ -19,87 +22,86 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 150px;
 }
 
 .shopping-bag {
-  width: 100px;
-  margin-bottom: 20px;
+  width: 60%;
+  max-width: 150px; 
+  margin-bottom: 30px;
 }
 
 .empty-header {
-  font-size: 24px;
+  font-size: 2rem;
   color: #393335;
   font-weight: 900;
+  margin-bottom: 15px;
 }
 
 .empty-par {
   color: #666;
   margin-bottom: 30px;
-  padding-top: 0.5rem;
-  padding-bottom: 1rem;
+  font-size: 1.2rem;
+  padding: 0.75rem 0;
 }
 
 .add-button {
   background-color: #3b3739;
   color: white;
   border: none;
-  padding: 15px 30px;
-  font-size: 16px;
+  padding: 15px 25px;
+  font-size: 1.2rem;
   cursor: pointer;
   border-radius: 5px;
   text-transform: uppercase;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .add-button:hover {
   background-color: #544749;
+  transform: scale(1.05);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .logo {
-    width: 40px;
-  }
-
-  .nav-steps {
-    font-size: 14px;
+  .empty-container {
+    padding: 15px;
   }
 
   .shopping-bag {
-    width: 80px;
+    width: 70%;
+    max-width: 120px;
   }
 
-  h2 {
-    font-size: 20px;
+  .empty-header {
+    font-size: 1.75rem;
+  }
+
+  .empty-par {
+    font-size: 1rem; 
   }
 
   .add-button {
-    padding: 12px 25px;
-    font-size: 14px;
+    padding: 12px 20px;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  header {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav-steps {
-    flex-direction: column;
-    gap: 5px;
-  }
-
   .shopping-bag {
-    width: 60px;
+    width: 80%;
+    max-width: 100px;
   }
 
-  h2 {
-    font-size: 18px;
+  .empty-header {
+    font-size: 1.5rem;
+  }
+
+  .empty-par {
+    font-size: 0.9rem;
   }
 
   .add-button {
-    padding: 10px 20px;
-    font-size: 12px;
+    padding: 10px 18px;
+    font-size: 0.9rem;
   }
 }

@@ -11,14 +11,14 @@ function Emptycart() {
           className="shopping-bag"
         />
         <h2 className="empty-header">Nothing in your bag yet!</h2>
-        <p className="empty-par ">
+        <p className="empty-par">
           Explore and add items to complete your shopping!
         </p>
-        <button className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary hover:scale-105">
-          <Link to="/" className="button-link">
+        <Link to="/" className="button-link">
+          <button className="add-button">
             ADD ITEMS TO CART
-          </Link>
-        </button>
+          </button>
+        </Link>
       </main>
     </div>
   );
