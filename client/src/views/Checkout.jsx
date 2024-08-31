@@ -212,9 +212,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { emptyCart } from "../features/productCart/productCart";
 import { useNavigate } from "react-router-dom";
 import { server } from "../store/store";
-
+import './Checkout.css';
 const Checkout = () => {
-  const [method, setMethod] = useState("");
+  const [method, setMethod] = useState(""); 
   const [showConfirmation, setShowConfirmation] = useState(false);
   const navigate = useNavigate();
 
@@ -415,32 +415,34 @@ const Checkout = () => {
         </aside>
       </div>
 
-      {showConfirmation && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-semibold mb-4">Confirm Cash on Delivery</h3>
-            <p>Do you want to proceed with Cash on Delivery?</p>
-            <div className="mt-4 flex justify-end gap-4">
-          
-              <button
-                className="bg-black text-white px-4 py-2 rounded-lg"
-                onClick={() => {
-                  setShowConfirmation(false);
-                  handleConfirmCOD();
-                }}
-              >
-                Yes
-              </button>
-              <button
-                className="bg-black text-white px-4 py-2 rounded-lg"
-                onClick={() => setShowConfirmation(false)}
-              >
-                No
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+     
+
+{showConfirmation && (
+  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="bg-white p-6 rounded-lg shadow-lg popup-container">
+      <h3 className="text-xl font-semibold mb-4">Confirm Cash on Delivery</h3>
+      <p>Do you want to proceed with Cash on Delivery?</p>
+      <div className="mt-4 flex justify-end gap-4">
+        <button
+          className="bg-black text-white px-4 py-2 rounded-lg"
+          onClick={() => {
+            setShowConfirmation(false);
+            handleConfirmCOD();
+          }}
+        >
+          Yes
+        </button>
+        <button
+          className="bg-black text-white px-4 py-2 rounded-lg"
+          onClick={() => setShowConfirmation(false)}
+        >
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
