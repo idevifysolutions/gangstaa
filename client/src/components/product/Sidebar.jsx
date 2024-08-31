@@ -29,7 +29,7 @@ const Sidebar = (props) => {
           params: selectedOptions,
         }
       );
-      return response.data; 
+      return response.data;
     } catch (error) {
       console.error("Error fetching products:", error);
       return [];
@@ -38,11 +38,11 @@ const Sidebar = (props) => {
 
   useEffect(() => {
     const updateProducts = async () => {
-      const newFilteredProducts = await fetchProducts(); 
-      setData(newFilteredProducts); 
+      const newFilteredProducts = await fetchProducts();
+      setData(newFilteredProducts);
     };
 
-    updateProducts(); 
+    updateProducts();
 
     console.log("selected option", selectedOptions);
   }, [selectedOptions, setData]);
@@ -80,17 +80,28 @@ const Sidebar = (props) => {
             >
               <CgClose />
             </div>
-  
+
             {/* Collections */}
             <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
                 <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
                   Collections
                 </h1>
-  
+
                 <div>
-                  {["Shirt","T-Shirt", "Jacket", "Denims", "Jeans","Chinos","Track pants/Shorts/Lower"].map((category) => (
-                    <div key={category} className="flex items-center gap-2 my-1">
+                  {[
+                    "Shirt",
+                    "T-Shirt",
+                    "Jacket",
+                    "Denims",
+                    "Jeans",
+                    "Chinos",
+                    "Track pants/Shorts/Lower",
+                  ].map((category) => (
+                    <div
+                      key={category}
+                      className="flex items-center gap-2 my-1"
+                    >
                       <input
                         type="checkbox"
                         id={category}
@@ -105,9 +116,9 @@ const Sidebar = (props) => {
                 </div>
               </div>
             </div>
-  
+
             {/* Size */}
-            <div className="flex">
+            {/* <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
                 <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
                   Size
@@ -127,15 +138,40 @@ const Sidebar = (props) => {
                   ))}
                 </div>
               </div>
+            </div> */}
+
+            {/* Size */}
+            <div className="flex">
+              <div className="item flex-1 mx-4 mt-3">
+                <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
+                  Size
+                </h1>
+
+                <div className="flex flex-wrap gap-2">
+                  {["M", "L", "XL", "2XL", "3XL", "4XL"].map((size) => (
+                    <button
+                      key={size}
+                      className={`px-2 py-1 text-sm border rounded-md ${
+                        selectedOptions.size.includes(size)
+                          ? "bg-slate-900 text-white"
+                          : "bg-white text-slate-900"
+                      }`}
+                      onClick={() => handleCheckboxChange("size", size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
-  
+
             {/* Colors */}
             <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
                 <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
                   Colors
                 </h1>
-  
+
                 <div>
                   {["Red", "Blue", "Green", "Yellow"].map((color) => (
                     <div key={color} className="flex items-center gap-2 my-1">
@@ -151,7 +187,7 @@ const Sidebar = (props) => {
                 </div>
               </div>
             </div>
-  
+
             {/* Price */}
             <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
@@ -179,7 +215,7 @@ const Sidebar = (props) => {
         </div>
       </div>
     </>
-  );  
+  );
 };
 
 export default Sidebar;
