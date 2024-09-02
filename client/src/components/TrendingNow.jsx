@@ -21,15 +21,16 @@ const TrendingNow = ({ productId, name, price, stock, photo, handler }) => {
         <p className="text-[17px] font-bold text-gray-500">{name}</p>
         <span className="text-xl font-bold">₹ {price} </span>
         <div className="w-[10rem] mt-4">
-          <button
-            className="flex items-center justify-center w-full gap-3 px-4 py-2 border-2 border-black rounded-md hover:bg-black hover:text-white transition ease-in-out delay-600"
+          {/* <button
+            className="flex items-center justify-center w-full gap-3 px-4 py-2 border-2 border-black rounded-md hover:bg-black 
+            hover:text-white transition ease-in-out delay-600"
             onClick={() =>
               handler({ productId, price, name, photo, stock, quantity: 1 })
             }
           >
             <span className="font-bold ">Add To Cart</span>
             <FaPlus />
-          </button>
+          </button> */}
         </div>
       </div>
     </>

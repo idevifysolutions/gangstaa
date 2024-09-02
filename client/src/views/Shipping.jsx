@@ -73,6 +73,8 @@ const Shipping = () => {
   });
   const { cartItems, total } = useSelector((state) => state.cartReducer);
 
+  console.log(cartItems)
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

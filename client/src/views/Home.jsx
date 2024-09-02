@@ -10,9 +10,12 @@ import { addToCart } from "../features/productCart/productCart";
 import toast from "react-hot-toast";
 import axios from "axios";
 import OfferPage from "../components/OfferPage";
+import Loader from "../components/Loader"
 
 const Home = () => {
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState()
   const dispatch = useDispatch();
   let isAuth = localStorage.getItem("isAuth");
   console.log("auth", localStorage.getItem("isAuth"));
@@ -38,13 +41,29 @@ const Home = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get("http://localhost:4000/api/product/all");
-      setProducts(res?.data?.products);
+      setIsLoading(true)
+      try {
+        const res = await axios.get("http://localhost:4000/api/product/all");
+        setProducts(res?.data?.products);
+      } catch (err) {
+        setError(err)        
+      } finally{
+        setIsLoading(false)
+      }
+
     };
     getData();
   }, []);
 
   console.log(products);
+
+  if(isLoading){
+    return <Loader/>
+  }
+
+  if(error){
+    return <div>Something went wrong ! Please try again</div>
+  }
 
   return (
     <div>
@@ -56,7 +75,8 @@ const Home = () => {
         <h2 className="text-xl font-bold text-center md:text-3xl lg:text-2xl">
           Trending Now
         </h2>
-        <div className="flex flex-wrap items-center justify-evenly ">
+       {
+        isLoading ? (<Loader/>) : ( <div className="flex flex-wrap items-center justify-evenly ">
           {products?.map((item) => (
             <TrendingNow
               key={item._id}
@@ -68,7 +88,8 @@ const Home = () => {
               handler={addToCartHandle}
             />
           ))}
-        </div>
+        </div>)
+       }
       </div>
       <Slider />
       <HomeProductCard />

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { server } from "../../store/store";
+import Loader from "../../components/Loader"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import image1 from "./images/hoodie1.jpeg";
@@ -24,6 +25,10 @@ import { addToCart } from "../../features/productCart/productCart";
 
 const Product_Details = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [isLoading, setIsLoading] = useState(false)
+  const [selectSize, setSelectSize] = useState("")
+  const [selectColor, setSelectColor] = useState("")
+  const [error, setError] = useState()
   const [details, setDetails] = useState({
     _id: "",
     category: "",
@@ -43,11 +48,12 @@ const Product_Details = () => {
   const dispatch = useDispatch();
 
   const getProductDetails = async () => {
+    setIsLoading(true)
     try {
       const res = await axios.get(
         `http://localhost:4000/api/product/${params.id}`
       );
-      // console.log(res)
+      // console.log("details", res)
       const {
         data: {
           product: {
@@ -78,24 +84,36 @@ const Product_Details = () => {
         stock,
         title,
       });
-    } catch (error) {
-      toast.error(error.message);
+    } catch (err) {
+      toast.error(err.message);
       toast.error("Invalid Product");
+      setError(err)
+    } finally {
+      setIsLoading(false)
     }
   };
   useEffect(() => {
     getProductDetails();
   }, [details._id]);
 
-  const addToCartHandle = (productId, name, price, stock, photo, quantity) => {
-    console.log(productId, name, price, stock, photo);
+  const addToCartHandle = (productId, name, price, stock, photo, size, color, quantity) => {
+    console.log(productId, name, price, stock, photo, size, color);
     if (stock < 1) return toast.error("Out Of Stock");
-    dispatch(addToCart({ productId, name, price, stock, photo, quantity }));
+    dispatch(addToCart({ productId, name, price, stock, photo,size, color, quantity }));
     toast.success("Added To Cart");
   };
 
   const image = `${server}/${details.image}`;
 
+  if (isLoading) {
+    return <Loader />
+  }
+
+  if (error) {
+    return <div>Something went wrong...</div>
+  }
+
+  console.log(selectSize, selectColor)
   return (
     <div className="relative h-full mt-7">
       <div className="flex flex-wrap items-center justify-around gap-5 sm:justify-center">
@@ -163,31 +181,29 @@ const Product_Details = () => {
           </div>
 
           <h2 className="text-3xl font-bold mt-9">Select Size</h2>
-          <ul className="flex flex-wrap mt-4 gap-7">
-            {details.size.map((item, index) => (
-              <li
-                key={index}
-                className="flex items-center justify-center w-8 h-8 p-6 text-xl font-bold border-2 border-black rounded-md"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+          <select className="flex flex-wrap mt-4 gap-7" value={selectSize} onChange={(e) => setSelectSize(e.target.value)}>
+            <option>Select a size</option>
+            {
+              details.size.map((item, index)=>(
+                <option value={item} key={index}>{item}</option>
+              ))
+            }
+
+          </select>
 
           <h2 className="text-3xl font-bold mt-9">Select Color</h2>
-          <ul className="flex flex-wrap mt-4 gap-7">
-            {details.colors.map((item, index) => (
-              <li
-                key={index}
-                className="flex items-center justify-center w-8 h-8 px-12 py-6 text-xl font-bold border-2 border-black rounded-md"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
+          <select className="flex flex-wrap mt-4 gap-7" value={selectColor} onChange={(e)=>setSelectColor(e.target.value)}>
+            <option>Select a color</option>
+            {
+              details.colors.map((item, index) => (
+                <option key={index} value={item}>{item}</option>
+              ))
+            }
+          </select>
           <div className="flex gap-5 my-4">
             <button
-              className="px-4 py-2 m-2 text-xl text-white duration-200 bg-black rounded-md bg-gradient-to-r from-primary to-secondary hover:scale-105"
+              className="px-4 py-2 m-2 text-xl text-white duration-200 
+              bg-black rounded-md bg-gradient-to-r from-primary to-secondary hover:scale-105"
               onClick={() =>
                 addToCartHandle(
                   details._id,
@@ -195,6 +211,8 @@ const Product_Details = () => {
                   details.price,
                   details.stock,
                   details.image,
+                  selectSize,
+                  selectColor,
                   details.quantity
                 )
               }
