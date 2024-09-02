@@ -10,8 +10,7 @@ const Orders = () => {
   const [manageOrder, setManageOrder] = useState(false);
   const [allOrders, setAllOrders] = useState([]);
   const [oneOrderInfo, setOneOrderInfo] = useState();
-  const [status, setStatus] = useState("");
-  const [isOpen, setIsOpen] = useState(null); // Track the open state of dropdown by index
+    const [isOpen, setIsOpen] = useState(null); // Track the open state of dropdown by index
   const [loading, setLoading] = useState(false);
 
   const toggleDropdown = (index) => {
@@ -70,6 +69,7 @@ const Orders = () => {
 
         alert(data.message);
         fetchAllOrders(); // Re-fetch orders after update
+
         toggleDropdown(index);
       } catch (error) {
         alert(error.response.data.message);
@@ -99,8 +99,10 @@ const Orders = () => {
             </div>
            
           </div>
-
-          <main className="flex-grow">
+             
+          {
+            allOrders.length > 0? 
+            <main className="flex-grow">
             <div className="items-center justify-center w-full h-full overflow-x-auto">
               <table className="min-w-full bg-white border border-gray-200">
                 <thead>
@@ -113,14 +115,17 @@ const Orders = () => {
                     <th className="px-6 py-3 text-center">More Info</th>
                   </tr>
                 </thead>
-                <tbody className="text-sm font-light text-gray-600">
+
+                
+                  <tbody className="text-sm font-light text-gray-600">
                   {allOrders.map((order, index) => (
+
                     <tr
                       className="border-b border-gray-200 hover:bg-gray-100"
                       key={index}
                     >
                       <td className="px-6 py-3 text-center">
-                        {order.user.name}
+                        {order?.user?.name}
                       </td>
 
                       <td className="px-6 py-3 text-center">₹ {order.subTotal}</td>
@@ -171,6 +176,7 @@ const Orders = () => {
                               </div>
                             </div>
                           )}
+
                         </div>
                       </td>
 
@@ -186,10 +192,18 @@ const Orders = () => {
                       </td>
                     </tr>
                   ))}
-                </tbody>
+                </tbody> 
+
+                
+
+
               </table>
             </div>
-          </main>
+          </main>  : <div>No Orders Found</div>
+          }   
+          
+
+
         </div>
       </div>
     }

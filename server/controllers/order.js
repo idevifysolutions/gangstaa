@@ -31,7 +31,6 @@ export const newOrderCod = async (req, res) => {
     });
 
     reduceStock(items);
-
     res.status(200).json({
       message: "Order placed successfully",
       order,
