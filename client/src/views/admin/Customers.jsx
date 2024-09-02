@@ -146,12 +146,17 @@ const Customers = () => {
 
                         <td className={`flex items-center justify-between gap-2 px-6 py-3 ${user.email == loginuser.email ? '' : 'hover:cursor-pointer'}`}>
                           <p className={` ${user.email == loginuser.email ? 'mt-3' : ''}`} >{user.role}</p>
-                          { user.email == loginuser.email? <h2 className="mt-3">This is your info...</h2>:  <button
+
+                          { user.email == loginuser.email? <h2 className="mt-3 w-36  sm:w-[100%]">This is your info...</h2>: 
+                          
+                           <button
                             className="p-2 text-white bg-black rounded-md"
                             onClick={() => Updateuser(user._id)}
                           > 
                             Update Role
-                          </button>  }
+                          </button> 
+                          
+                          }
                         </td>
 
                         <td className={`px-6 py-3  ${user.email == loginuser.email ? '' : 'hover:cursor-pointer'}`}>

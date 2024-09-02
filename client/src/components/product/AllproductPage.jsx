@@ -60,10 +60,10 @@ const AllproductPage = () => {
           <RxHamburgerMenu className='text-2xl' />
         </div>
 
-          <div className="text-xl font-semibold"> All Products</div>
+          <div className=" text-base sm:text-xl font-semibold"> All Products</div>
 
            <div className="">
-              <select className=" border p-2 " onChange={handleOnChangeSortBy}>
+              <select className=" border p-0 w-28  sm:w-[100%]  sm:p-2 " onChange={handleOnChangeSortBy}>
                 <option>Select Sort</option>
                 <option value="asc">Price (Low to High)</option>
                 <option value="dsc">Price (High to Low)</option>
