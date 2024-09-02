@@ -215,6 +215,7 @@ import { server } from "../store/store";
 
 const Checkout = () => {
   const [method, setMethod] = useState("");
+  const [isLoading, setIsLoading] = useState(false)
   const [showConfirmation, setShowConfirmation] = useState(false);
   const navigate = useNavigate();
 
@@ -228,9 +229,12 @@ const Checkout = () => {
     total,
   } = useSelector((state) => state.cartReducer);
 
+  console.log(cartItems)
+
   const dispatch = useDispatch();
 
   const handleConfirmCOD = async () => {
+    setIsLoading(true)
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -260,13 +264,15 @@ const Checkout = () => {
         dispatch(emptyCart());
         toast.success("Order placed successfully!");
         console.log("reduce stock");
-        navigate("/order/success");
+        navigate("/catagery/myorder");
       } else {
         toast.error(`Failed to place order: ${response.data.message}`);
       }
     } catch (error) {
       toast.error("There was an error placing the order.");
       console.error("Error:", error.response ? error.response.data : error.message);
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -359,7 +365,7 @@ const Checkout = () => {
   };
 
   useEffect(() => {
-    if (shippingInfo.address === "") return navigate("/cart");
+    if (shippingInfo.address === "") return navigate("/catagery/myorder");
   }, [shippingInfo]);
 
   return (
@@ -410,7 +416,7 @@ const Checkout = () => {
             onClick={handlePayment}
             className="mt-6 py-3 px-6 bg-black text-white font-semibold rounded-lg transition duration-300"
           >
-            Proceed
+           {isLoading ? "processing" : "proceed"}
           </button>
         </aside>
       </div>

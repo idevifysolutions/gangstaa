@@ -35,6 +35,8 @@ export const productAddedToCartSlice = createSlice({
     addToCart: (state, action) => {
       state.loading = true
 
+      console.log("reducer", action.payload)
+
       const index = state.cartItems.findIndex((i) => i.productId === action.payload.productId)
 
       if (index !== -1) state.cartItems[index] = action.payload
