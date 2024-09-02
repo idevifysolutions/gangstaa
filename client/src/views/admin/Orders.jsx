@@ -120,7 +120,7 @@ const Orders = () => {
                       key={index}
                     >
                       <td className="px-6 py-3 text-center">
-                        {order.user.name}
+                        {order?.user?.name}
                       </td>
 
                       <td className="px-6 py-3 text-center">₹ {order.subTotal}</td>

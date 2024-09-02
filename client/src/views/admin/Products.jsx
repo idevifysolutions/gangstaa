@@ -18,6 +18,7 @@ const Products = () => {
   const [product, setProduct] = useState(null);
   const [productId, setProductId] = useState(null);
 
+
   const handleUploadProduct = () => {
     setUploadProduct((prev) => !prev);
   };
@@ -73,11 +74,11 @@ const Products = () => {
             >
               <RxHamburgerMenu className="text-2xl" />
             </div>
-            <div className="font-bold flex-grow text-xl text-center lg:text-left py-3">
+            <div className="font-bold sm:ml-0 ml-5 flex-grow text-xl text-center lg:text-left py-3">
               Products
             </div>
             <div
-              className="flex items-center cursor-pointer py-1 bg-black text-white my-1 px-4 rounded-md"
+              className="flex items-center sm:ml-0 ml-5 cursor-pointer py-0 sm:py-1 bg-black text-white my-1 px-4 rounded-md"
               onClick={handleUploadProduct}
             >
               Add Product <FaPlusCircle className="ps-1 text-[20px]" />

@@ -78,7 +78,7 @@ const Trending_Products = () => {
         </div>
 
         {newDrop && (
-          <div className="w-[96%] h-[550px] lg:w-[90%] lg:h-fit lg:gap-4 xl:w-[95%] xl:h-[69vh] xl:gap-5 md:gap-2 md:w-[98%] mx-auto flex lg:flex md:flex gap-5 md:overflow-hidden overflow-x-scroll hide-scrollbar">
+          <div className="w-[96%] h-[500px] lg:w-[90%] lg:h-fit lg:gap-4 xl:w-[95%] xl:h-[69vh] xl:gap-5 md:gap-2 md:w-[98%] mx-auto flex lg:flex md:flex gap-5 md:overflow-hidden overflow-x-scroll hide-scrollbar">
             {newDropProducts.map((product, index) => {
               return (
                 <div
@@ -207,7 +207,7 @@ const Trending_Products = () => {
         <div className="flex gap-5 mx-auto my-10 w-fit h-fit mb-14">
           <div className="newdrops ">
             <button
-              className="px-4 py-2 m-2 text-xl text-black duration-200 bg-white border-2 border-black bg-gradient-to-r from-primary to-secondary hover:scale-105"
+              className="px-4 py-2 -mt-20 md:m-2 text-xl text-black duration-200 bg-white border-2 border-black bg-gradient-to-r from-primary to-secondary hover:scale-105"
               onClick={handleViewAllClick}
             >
               View all

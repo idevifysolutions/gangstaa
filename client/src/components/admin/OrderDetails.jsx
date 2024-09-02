@@ -6,7 +6,7 @@ const OrderDetails = ({ onClose, orderInfo }) => {
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'>
-      <div className='bg-white p-4 rounded-lg w-full max-w-3xl h-full max-h-[80%] overflow-hidden shadow-lg'>
+      <div className='bg-white p-4 rounded-lg w-full max-w-3xl h-full md:max-h-[80%] md:overflow-hidden shadow-lg'>
         <div className='flex justify-between items-center pb-3 border-b'>
           <h2 className='font-bold text-xl'>Order Details</h2>
           <button className='text-2xl hover:text-red-600 cursor-pointer' onClick={onClose}>
@@ -20,7 +20,7 @@ const OrderDetails = ({ onClose, orderInfo }) => {
             <div className='text-center text-xl font-semibold pb-2 border-b mb-4'>
               Order Items
             </div>
-            <div className='overflow-y-auto max-h-[70vh]'>
+            <div className='md:max-h-[70vh] overflow-y-auto'>
               {order.items.map((item, index) => (
                 <div key={index} className='flex items-center mb-2 p-2 border rounded-lg'>
                  <img src={`http://localhost:4000/${item.photo}`} className='w-[80px] h-[80px] object-cover'  />               
@@ -59,6 +59,21 @@ const OrderDetails = ({ onClose, orderInfo }) => {
           </div>
         </div>
       </div>
+
+      {/* Mobile-specific styles */}
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .main {
+            height: 100vh;
+            flex-direction: column;
+          }
+          .main > div {
+            width: 100%;
+            max-height: calc(50vh - 2rem);
+            overflow-y: auto;
+          }
+        }
+      `}</style>
     </div>
   );
 };
