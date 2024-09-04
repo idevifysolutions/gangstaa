@@ -32,7 +32,7 @@ const Footer = () => {
       <footer className="bg-black text-white py-8 w-full">
         <div className="w-[90%] mx-auto flex flex-col md:flex-row md:justify-between">
           {/* Logo and Company Information */}
-          <div className="w-full md:w-[25%] md:pr-8">
+          <div className="w-full md:w-[25%] md:pr-8 mb-6 md:mb-0">
             <div className="flex flex-col items-center md:items-start text-center md:text-left">
               <Link to="/">
                 <img
@@ -48,82 +48,87 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Links Section */}
-          <div className="w-full md:w-[50%] mt-6 md:mt-0 flex flex-col md:flex-row justify-center text-center">
-            <div className="space-y-2 md:w-1/2">
-              <h3 className="text-lg font-bold mb-3">Company</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="/" className="hover:text-gray-400">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="/catagery/userprofile"
-                    className="hover:text-gray-400"
-                  >
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <a href="/catagery/myorder" className="hover:text-gray-400">
-                    Order
-                  </a>
-                </li>
-                <li>
-                  <a href="/cart" className="hover:text-gray-400">
-                    Cart
-                  </a>
-                </li>
-                <li>
-                  <a href="/catagery" className="hover:text-gray-400">
-                    Category
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="space-y-2 md:w-1/2">
-              <h3 className="text-lg font-bold mb-3">Support</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link to="/franchise" className="hover:text-gray-400">
-                    Franchise
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Contact Us
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    FAQs
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Shipping
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Returns
-                  </Link>
-                </li>
-                <li>
-                  <Link to="#" className="hover:text-gray-400">
-                    Privacy Policy
-                  </Link>
-                </li>
-              </ul>
+          {/* Centered Links Section */}
+          <div className="w-full md:w-[50%] flex flex-col items-center">
+            <div className="space-y-2 md:w-full flex flex-col md:flex-row justify-center text-center md:items-start">
+              {/* Company Section */}
+              <div className="md:w-1/2 flex flex-col items-center">
+                <h3 className="text-lg font-bold mb-3">Company</h3>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <a href="/" className="hover:text-gray-400">
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/catagery/userprofile"
+                      className="hover:text-gray-400"
+                    >
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/catagery/myorder" className="hover:text-gray-400">
+                      Order
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/cart" className="hover:text-gray-400">
+                      Cart
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/catagery" className="hover:text-gray-400">
+                      Category
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Support Section */}
+              <div className="md:w-1/2 flex flex-col items-center mt-6 md:mt-0">
+                <h3 className="text-lg font-bold mb-3">Support</h3>
+                <ul className="space-y-2 text-sm">
+                  <li>
+                    <Link to="/franchise" className="hover:text-gray-400">
+                      Franchise
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="hover:text-gray-400">
+                      Contact Us
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="hover:text-gray-400">
+                      FAQs
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="hover:text-gray-400">
+                      Shipping
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="hover:text-gray-400">
+                      Returns
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="#" className="hover:text-gray-400">
+                      Privacy Policy
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
           {/* Address and Social Icons Section */}
-          <div className="w-full md:w-[25%] mt-6 md:mt-0 md:pl-8">
+          <div className="w-full md:w-[25%] md:pl-8 flex flex-col items-center md:items-start text-center md:text-left mt-6 md:mt-0">
             {/* Address */}
-            <div className="text-center md:text-left">
+            <div>
               <h2 className="text-lg font-semibold mb-3">Address</h2>
               <p className="text-sm md:text-base">
                 1st 2nd 3rd 4th Floors, 509, PID No 81-1-509,
