@@ -118,36 +118,14 @@ const Sidebar = (props) => {
             </div>
 
             {/* Size */}
-            {/* <div className="flex">
-              <div className="item flex-1 mx-4 mt-3">
-                <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
-                  Size
-                </h1>
-  
-                <div>
-                  {["M", "L", "XL", "2XL", "3XL", "4XL"].map((size) => (
-                    <div key={size} className="flex items-center gap-2 my-1">
-                      <input
-                        type="checkbox"
-                        id={size}
-                        checked={selectedOptions.size.includes(size)}
-                        onChange={() => handleCheckboxChange("size", size)}
-                      />
-                      <label htmlFor={size}>{size}</label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div> */}
-
-            {/* Size */}
             <div className="flex">
               <div className="item flex-1 mx-4 mt-3">
                 <h1 className="font-thin uppercase opacity-80 my-2 tracking-wider text-slate-900 text-[16px]">
                   Size
                 </h1>
 
-                <div className="flex flex-wrap gap-2">
+                {/* Group for sizes like M to 4XL */}
+                <div className="flex flex-wrap gap-2 mb-4">
                   {["M", "L", "XL", "2XL", "3XL", "4XL"].map((size) => (
                     <button
                       key={size}
@@ -161,6 +139,25 @@ const Sidebar = (props) => {
                       {size}
                     </button>
                   ))}
+                </div>
+
+                {/* Group for numeric sizes 28 to 44 */}
+                <div className="flex flex-wrap gap-2">
+                  {["28", "30", "32", "34", "36", "38", "40", "42", "44"].map(
+                    (size) => (
+                      <button
+                        key={size}
+                        className={`px-2 py-1 text-sm border rounded-md ${
+                          selectedOptions.size.includes(size)
+                            ? "bg-slate-900 text-white"
+                            : "bg-white text-slate-900"
+                        }`}
+                        onClick={() => handleCheckboxChange("size", size)}
+                      >
+                        {size}
+                      </button>
+                    )
+                  )}
                 </div>
               </div>
             </div>
