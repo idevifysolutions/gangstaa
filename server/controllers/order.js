@@ -121,7 +121,7 @@ export const updateStatus = async (req, res) => {
 
 export const newOrderOnline = async (req, res) => {
   try {
-    const { items, method, phone, address, subTotal } = req.body;
+    const { items, method, phone, shippingInfo, subTotal } = req.body;
     console.log("subtotal", typeof subTotal)
 
     // const cart = await Cart.find({ user: req.user._id }).populate("product");
@@ -144,7 +144,7 @@ export const newOrderOnline = async (req, res) => {
       method,
       user: req.user._id,
       phone,
-      address,
+      shippingInfo,
       subTotal,
     };
 

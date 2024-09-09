@@ -127,7 +127,7 @@ const Checkout = () => {
 
           try {
             const { data } = await axios.post(
-              "http://localhost:4000/api/order/new/payment",
+              "http://localhost:4000/api/payment",
               {
                 razorpay_payment_id,
                 razorpay_order_id,
@@ -141,8 +141,10 @@ const Checkout = () => {
               }
             );
             toast.success(data.message);
+            console.log("payment data", data);
           } catch (error) {
             toast.error(error.response.data.message);
+            console.log(error.response.data.message)
           }
         },
 
