@@ -65,7 +65,25 @@ export const productAddedToCartSlice = createSlice({
       state.shippingInfo = action.payload
     },
 
-    emptyCart: () => initialState
+    emptyCart: () => {
+      return {
+        loading: false,
+        cartItems: [],
+        subtotal: 0,
+        tax: 0,
+        shippingCharges: 0,
+        discount: 0,
+        total: 0,
+        shippingInfo: {
+          address: "",
+          city: "",
+          state: "",
+          country: "",
+          pinCode: "",
+          phone: ""
+        }
+      };
+    }
   },
 });
 

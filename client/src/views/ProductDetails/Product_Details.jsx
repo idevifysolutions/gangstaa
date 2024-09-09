@@ -70,7 +70,7 @@ const Product_Details = () => {
           },
         },
       } = res;
-      // console.log("data", _id,category, colors, description, image, price, size, sold, stock, title)
+      console.log("data", _id,category, colors, description, image, price, size, sold, stock, title)
       setDetails({
         ...details,
         _id,
@@ -99,6 +99,7 @@ const Product_Details = () => {
   const addToCartHandle = (productId, name, price, stock, photo, size, color, quantity) => {
     console.log(productId, name, price, stock, photo, size, color);
     if (stock < 1) return toast.error("Out Of Stock");
+    if(!size || !color || size === "Select a size" || color === "Select a color") return toast.error("Please select size and color")
     dispatch(addToCart({ productId, name, price, stock, photo,size, color, quantity }));
     toast.success("Added To Cart");
   };
@@ -110,7 +111,7 @@ const Product_Details = () => {
   }
 
   if (error) {
-    return <div>Something went wrong...</div>
+    return <div className="h-[80vh] w-full flex mt-5 justify-center text-5xl font-bold">Something went wrong...</div>
   }
 
   console.log(selectSize, selectColor)
@@ -180,7 +181,7 @@ const Product_Details = () => {
             <strong className="mt-10 text-xl">100% cotton</strong>
           </div>
 
-          <h2 className="text-3xl font-bold mt-9">Select Size</h2>
+          <h2 className="text-3xl font-bold mt-9"> Sizes</h2>
           <select className="flex flex-wrap mt-4 gap-7" value={selectSize} onChange={(e) => setSelectSize(e.target.value)}>
             <option>Select a size</option>
             {
@@ -191,7 +192,7 @@ const Product_Details = () => {
 
           </select>
 
-          <h2 className="text-3xl font-bold mt-9">Select Color</h2>
+          <h2 className="text-3xl font-bold mt-9">Colors</h2>
           <select className="flex flex-wrap mt-4 gap-7" value={selectColor} onChange={(e)=>setSelectColor(e.target.value)}>
             <option>Select a color</option>
             {
