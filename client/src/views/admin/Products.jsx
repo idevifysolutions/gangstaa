@@ -26,7 +26,7 @@ const Products = () => {
   const fetchSingleProduct = async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/product/${id}`
+        `${import.meta.env.VITE_SERVER}/api/product/${id}`
       );
       setProduct(response.data.product);
     } catch (error) {
@@ -47,7 +47,7 @@ const Products = () => {
   const handleDeleteProduct = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/product/${id}`,
+        `${import.meta.env.VITE_SERVER}/api/product/${id}`,
         {
           headers: {
             token: localStorage.getItem("token"),
@@ -106,7 +106,7 @@ const Products = () => {
                     >
                       <td className="px-6 py-3 text-center">
                         <img
-                          src={`http://localhost:4000/${product.image}`}
+                          src={`${import.meta.env.VITE_SERVER}/${product.image}`}
                           className="h-[50px] object-cover"
                           alt={product.title}
                         />

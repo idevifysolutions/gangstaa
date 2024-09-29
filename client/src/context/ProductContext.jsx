@@ -20,7 +20,7 @@ export const ProductContextProvider = ({ children }) => {
   async function fetchProducts() {
     try {
       const { data } = await axios.get(
-        `http://localhost:4000/api/product/all?search=${search}&category=${category}&price=${price}&page=${page}`
+        `${import.meta.env.VITE_SERVER}/api/product/all?search=${search}&category=${category}&price=${price}&page=${page}`
       );
       setProducts(data.products);
       setTopProducts(data.mostSelling);
@@ -36,7 +36,7 @@ export const ProductContextProvider = ({ children }) => {
   async function fetchAdminProducts() {
     try {
       const { data } = await axios.get(
-        `http://localhost:4000/api/product/admin/all`
+        `${import.meta.env.VITE_SERVER}/api/product/admin/all`
       );
       setAdminProducts(data.products);
       setLoading(false);

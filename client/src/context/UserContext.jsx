@@ -18,7 +18,7 @@ export const UserContextProvider = ({ children }) => {
   async function userLogin(email, password, navigate) {
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/api/user/login`,
+        `${import.meta.env.VITE_SERVER}/api/user/login`,
         {
           email,
           password,
@@ -47,7 +47,7 @@ export const UserContextProvider = ({ children }) => {
   async function registerUser(name, email, password, navigate) {
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/api/user/register`,
+        `${import.meta.env.VITE_SERVER}/api/user/register`,
         {
           name,
           email,
@@ -69,7 +69,7 @@ export const UserContextProvider = ({ children }) => {
     const activationToken = localStorage.getItem("activationToken");
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/api/user/verify`,
+        `${import.meta.env.VITE_SERVER}/api/user/verify`,
         {
           activationToken,
           otp,
@@ -88,7 +88,7 @@ export const UserContextProvider = ({ children }) => {
 
   async function fetchUser() {
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/user/me`, {
+      const { data } = await axios.get(`${import.meta.env.VITE_SERVER}/api/user/me`, {
         headers: {
           token: localStorage.getItem("token"),
         },

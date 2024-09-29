@@ -15,7 +15,7 @@ export const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   async function fetchCart() {
     try {
-      const { data } = await axios.get(`http://localhost:4000/api/cart/all`, {
+      const { data } = await axios.get(`${import.meta.env.VITE_SERVER}/api/cart/all`, {
         headers: {
           token,
         },
@@ -33,7 +33,7 @@ export const CartContextProvider = ({ children }) => {
     setLoading(true);
     try {
       const { data } = await axios.post(
-        `http://localhost:4000/api/cart/new`,
+        `${import.meta.env.VITE_SERVER}/api/cart/new`,
         { product },
         {
           headers: {
@@ -54,7 +54,7 @@ export const CartContextProvider = ({ children }) => {
   async function updateCart(action, id) {
     try {
       const { data } = await axios.put(
-        `http://localhost:4000/api/cart?action=${action}`,
+        `${import.meta.env.VITE_SERVER}/api/cart?action=${action}`,
         { id },
         {
           headers: {
@@ -72,7 +72,7 @@ export const CartContextProvider = ({ children }) => {
   async function removeFromCart(id) {
     try {
       const { data } = await axios.delete(
-        `http://localhost:4000/api/cart/${id}`,
+        `${import.meta.env.VITE_SERVER}/api/cart/${id}`,
         {
           headers: {
             token,

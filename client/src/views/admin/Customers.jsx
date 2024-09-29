@@ -20,7 +20,7 @@ const Customers = () => {
   const getAllusers = async () => {
     try {
       setLoading((prev) => !prev); 
-      const data = axios.get("http://localhost:4000/api/user/getall", {
+      const data = axios.get(`${import.meta.env.VITE_SERVER}/api/user/getall`, {
         headers: {
           token: localStorage.getItem("token"),
         },
@@ -41,7 +41,7 @@ const Customers = () => {
   const deleteOneuser = async (id) => {
     try {
       const response = axios.delete(
-        `http://localhost:4000/api/user/deleteone/${id}`,
+        `${import.meta.env.VITE_SERVER}/api/user/deleteone/${id}`,
         {
           headers: {
             token: localStorage.getItem("token"),
@@ -63,7 +63,7 @@ const Customers = () => {
     if (confirm("you wnat to update users role")) {
       try {
         const response = axios.put(
-          `http://localhost:4000/api/user/updateRole/${id}`,
+          `${import.meta.env.VITE_SERVER}/api/user/updateRole/${id}`,
           {},
           {
             headers: {

@@ -38,7 +38,7 @@ const Checkout = () => {
       }
 
       const response = await axios.post(
-        "http://localhost:4000/api/order/new/cod",
+        `${import.meta.env.VITE_SERVER}/api/order/new/cod`,
         {
           items: cartItems,
           method,
@@ -98,7 +98,7 @@ const Checkout = () => {
       const {
         data: { order, orderOptions },
       } = await axios.post(
-        "http://localhost:4000/api/order/new/online",
+        `${import.meta.env.VITE_SERVER}/api/order/new/online`,
         {
           items: cartItems,
           method,
@@ -127,7 +127,7 @@ const Checkout = () => {
 
           try {
             const response = await axios.post(
-              "http://localhost:4000/api/payment",
+              `${import.meta.env.VITE_SERVER}/api/payment`,
               {
                 razorpay_payment_id,
                 razorpay_order_id,

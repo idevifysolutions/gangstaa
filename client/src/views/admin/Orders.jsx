@@ -22,7 +22,7 @@ const Orders = () => {
     try {
       setLoading((prev) => !prev); 
       const { data } = await axios.get(
-        `http://localhost:4000/api/order/admin/all`,
+        `${import.meta.env.VITE_SERVER}/api/order/admin/all`,
         {
           headers: {
             token: localStorage.getItem("token"),
@@ -59,7 +59,7 @@ const Orders = () => {
     if (confirm("Are you sure you want to update the status of this order?")) {
       try {
         const { data } = await axios.put(
-          `http://localhost:4000/api/order/${id}`,
+          `${import.meta.env.VITE_SERVER}/api/order/${id}`,
           { status: newStatus },
           {
             headers: {

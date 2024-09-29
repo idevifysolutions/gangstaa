@@ -25,7 +25,7 @@ const UpdateProduct = ({ onClose, productDetails }) => {
     const updatedData = { stock: updatedStock };
 
     try {
-      const response = await axios.put(`http://localhost:4000/api/product/updatestock/${id}`, updatedData, {
+      const response = await axios.put(`${import.meta.env.VITE_SERVER}/api/product/updatestock/${id}`, updatedData, {
         headers: {
           token: localStorage.getItem("token"),
         },

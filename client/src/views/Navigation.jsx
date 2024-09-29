@@ -308,7 +308,7 @@ const Navigation = () => {
   const token = localStorage.getItem("token");
 
   const getAllUser = async () => {
-    const response = await axios.get("http://localhost:4000/api/user/me", {
+    const response = await axios.get(`${import.meta.env.VITE_SERVER}/api/user/me`, {
       headers: {
         token,
       },

@@ -23,7 +23,7 @@ const OrderDetails = ({ onClose, orderInfo }) => {
             <div className='md:max-h-[70vh] overflow-y-auto'>
               {order.items.map((item, index) => (
                 <div key={index} className='flex items-center mb-2 p-2 border rounded-lg'>
-                 <img src={`http://localhost:4000/${item.photo}`} className='w-[80px] h-[80px] object-cover'  />               
+                 <img src={`${import.meta.env.VITE_SERVER}/${item.photo}`} className='w-[80px] h-[80px] object-cover'  />               
                   <div className='ml-4'>
                     <p className='font-semibold'>{item.name}</p>
                     <p className='text-sm text-gray-600'>{item.price} * {item.quantity}</p>

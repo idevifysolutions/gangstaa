@@ -9,7 +9,7 @@ const Orders = () => {
 
   async function fetchOrders() {
     try {
-      const { data } = await axios.get("http://localhost:4000/api/order/all", {
+      const { data } = await axios.get(`${import.meta.env.VITE_SERVER}/api/order/all`, {
         headers: {
           token: localStorage.getItem("token"),
         },

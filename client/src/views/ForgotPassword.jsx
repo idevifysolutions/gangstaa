@@ -25,7 +25,7 @@ const ForgotPassword = () => {
     }
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/user/forgot",
+        `${import.meta.env.VITE_SERVER}/api/user/forgot`,
         { newPassword }
       );
       console.log(response.data);

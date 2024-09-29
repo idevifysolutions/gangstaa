@@ -81,7 +81,7 @@ const AllproductPage = () => {
           >
            <Link to={`/product/${product._id}`}>
            <img
-              src={`http://localhost:4000/${product.image}`}
+              src={`${import.meta.env.VITE_SERVER}/${product.image}`}
               alt={product.title}
               className="object-cover w-full h-48 mb-4 rounded-md"
             />

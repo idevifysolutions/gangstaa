@@ -12,7 +12,7 @@ const AdminProtectedRoute = ({ children }) => {
 
   const getAllUser = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/user/me", {
+      const response = await axios.get(`${import.meta.env.VITE_SERVER}/api/user/me`, {
         headers: {
           token,
         },

@@ -24,7 +24,7 @@ const Sidebar = (props) => {
   const fetchProducts = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/products/filterProducts",
+        `${import.meta.env.VITE_SERVER}/api/products/filterProducts`,
         {
           params: selectedOptions,
         }

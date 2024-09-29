@@ -26,7 +26,7 @@ const Dashboard = () => {
 async function fetchAllOrders() {
     try {
       const { data } = await axios.get(
-        `http://localhost:4000/api/order/admin/all`, 
+        `${import.meta.env.VITE_SERVER}/api/order/admin/all`, 
         {
           headers: {
             token: localStorage.getItem("token"),
@@ -44,7 +44,7 @@ async function fetchAllOrders() {
 
   const getAllusers = async () => {
     try {
-      const data = axios.get("http://localhost:4000/api/user/getall", {
+      const data = axios.get(`${import.meta.env.VITE_SERVER}/api/user/getall`, {
         headers: {
           token: localStorage.getItem("token"),
         },

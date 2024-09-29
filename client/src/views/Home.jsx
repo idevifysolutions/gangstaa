@@ -43,7 +43,7 @@ const Home = () => {
     const getData = async () => {
       setIsLoading(true)
       try {
-        const res = await axios.get("http://localhost:4000/api/product/all");
+        const res = await axios.get(`${import.meta.env.VITE_SERVER}/api/product/all`);
         setProducts(res?.data?.products);
       } catch (err) {
         setError(err)        

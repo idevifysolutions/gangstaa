@@ -51,7 +51,7 @@ const Product_Details = () => {
     setIsLoading(true)
     try {
       const res = await axios.get(
-        `http://localhost:4000/api/product/${params.id}`
+        `${import.meta.env.VITE_SERVER}/api/product/${params.id}`
       );
       // console.log("details", res)
       const {

@@ -68,7 +68,7 @@ const UploadProduct = ({onClose}) => {
     }
 
     try {
-      const { data } = await axios.post(`http://localhost:4000/api/product/new`, formData, {
+      const { data } = await axios.post(`${import.meta.env.VITE_SERVER}/api/product/new`, formData, {
         headers: {
           token: localStorage.getItem("token"),
         },

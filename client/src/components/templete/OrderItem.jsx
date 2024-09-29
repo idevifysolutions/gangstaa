@@ -11,7 +11,7 @@ const OrderPage = () => {
   async function fetchOrder() {
     try {
       const { data } = await axios.get(
-        `http://localhost:4000/api/order/${params.id}`,
+        `${import.meta.env.VITE_SERVER}/api/order/${params.id}`,
         {
           headers: {
             token: localStorage.getItem("token"),
