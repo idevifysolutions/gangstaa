@@ -19,9 +19,9 @@ app.use(bodyParser.json());
 const __dirname = path.resolve();
 const port = process.env.PORT || 3000;
 
-// app.get("/", (req, res) => {
-//     res.send("Server is working");
-// });
+app.get("/", (req, res) => {
+    res.send("Server is working");
+});
 
 // Importing routes
 import userRoutes from "./routes/user.js";
@@ -65,13 +65,13 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // const userRoutes = require('./routes/user');
 app.use('/api/user', userRoutes);
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
   
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'))
-    });
-  }
+//     app.get('*', (req, res) => {
+//       res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'))
+//     });
+//   }
 
 // app.use("/api", MyOrder);
 // This will help us to fetch images from server URL
