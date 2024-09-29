@@ -66,7 +66,7 @@ const Checkout = () => {
     } catch (error) {
       toast.error("There was an error placing the order.");
       console.error("Error:", error.response ? error.response.data : error.message);
-    }finally{
+    } finally {
       setIsLoading(false)
     }
   };
@@ -126,8 +126,8 @@ const Checkout = () => {
           const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = response;
 
           try {
-            const { data } = await axios.post(
-              "http://localhost:4000/api/order/new/payment",
+            const response = await axios.post(
+              "http://localhost:4000/api/payment",
               {
                 razorpay_payment_id,
                 razorpay_order_id,
@@ -140,9 +140,16 @@ const Checkout = () => {
                 },
               }
             );
-            toast.success(data.message);
+            if (response.status === 201 || response.data.message === "Order Placed Successfully") {
+              dispatch(emptyCart());
+              toast.success(response.data.message);
+              console.log("reduce stock");
+              console.log("payment data", response);
+              navigate("/catagery/myorder");
+            }
           } catch (error) {
             toast.error(error.response.data.message);
+            console.log(error.response.data.message)
           }
         },
 
@@ -211,38 +218,38 @@ const Checkout = () => {
             onClick={handlePayment}
             className="mt-6 py-3 px-6 bg-black text-white font-semibold rounded-lg transition duration-300"
           >
-           {isLoading ? "processing" : "proceed"}
+            {isLoading ? "processing" : "proceed"}
           </button>
         </aside>
       </div>
 
-     
 
-{showConfirmation && (
-  <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-    <div className="bg-white p-6 rounded-lg shadow-lg popup-container">
-      <h3 className="text-xl font-semibold mb-4">Confirm Cash on Delivery</h3>
-      <p>Do you want to proceed with Cash on Delivery?</p>
-      <div className="mt-4 flex justify-end gap-4">
-        <button
-          className="bg-black text-white px-4 py-2 rounded-lg"
-          onClick={() => {
-            setShowConfirmation(false);
-            handleConfirmCOD();
-          }}
-        >
-          Yes
-        </button>
-        <button
-          className="bg-black text-white px-4 py-2 rounded-lg"
-          onClick={() => setShowConfirmation(false)}
-        >
-          No
-        </button>
-      </div>
-    </div>
-  </div>
-)}
+
+      {showConfirmation && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg popup-container">
+            <h3 className="text-xl font-semibold mb-4">Confirm Cash on Delivery</h3>
+            <p>Do you want to proceed with Cash on Delivery?</p>
+            <div className="mt-4 flex justify-end gap-4">
+              <button
+                className="bg-black text-white px-4 py-2 rounded-lg"
+                onClick={() => {
+                  setShowConfirmation(false);
+                  handleConfirmCOD();
+                }}
+              >
+                Yes
+              </button>
+              <button
+                className="bg-black text-white px-4 py-2 rounded-lg"
+                onClick={() => setShowConfirmation(false)}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

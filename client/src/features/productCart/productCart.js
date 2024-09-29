@@ -54,8 +54,10 @@ export const productAddedToCartSlice = createSlice({
     calculatePrice: (state) => {
       const subtotal = state.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
       state.subtotal = subtotal;
-      state.shippingCharges = state.subtotal > 1000 ? 0 : 200;
-      state.tax = Math.round(state.subtotal * 0.18);
+      state.shippingCharges = 0
+      // state.subtotal > 1000 ? 0 : 200;
+      state.tax = 0;
+      // Math.round(state.subtotal * 0.18);
       state.total = state.subtotal + state.tax + state.shippingCharges;
     },
 
@@ -63,7 +65,25 @@ export const productAddedToCartSlice = createSlice({
       state.shippingInfo = action.payload
     },
 
-    emptyCart: () => initialState
+    emptyCart: () => {
+      return {
+        loading: false,
+        cartItems: [],
+        subtotal: 0,
+        tax: 0,
+        shippingCharges: 0,
+        discount: 0,
+        total: 0,
+        shippingInfo: {
+          address: "",
+          city: "",
+          state: "",
+          country: "",
+          pinCode: "",
+          phone: ""
+        }
+      };
+    }
   },
 });
 
