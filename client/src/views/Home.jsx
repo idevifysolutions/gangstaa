@@ -61,9 +61,9 @@ const Home = () => {
     return <Loader/>
   }
 
-  if(error){
-    return <div>Something went wrong ! Please try again</div>
-  }
+  // if(error){
+  //   return <div>Something went wrong ! Please try again</div>
+  // }
 
   return (
     <div>
