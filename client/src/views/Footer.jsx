@@ -96,7 +96,7 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="hover:text-gray-400">
+                    <Link to="/contact" className="hover:text-gray-400">
                       Contact Us
                     </Link>
                   </li>
@@ -105,7 +105,7 @@ const Footer = () => {
                       FAQs
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="#" className="hover:text-gray-400">
                       Shipping
                     </Link>
@@ -114,7 +114,7 @@ const Footer = () => {
                     <Link to="#" className="hover:text-gray-400">
                       Returns
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link to="#" className="hover:text-gray-400">
                       Privacy Policy
@@ -181,9 +181,21 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="flex items-center justify-center border-t-[1px] border-slate-400 mt-6">
           <p className="text-sm my-4">
-            &copy; 2024 Your Company. All rights reserved.
+            &copy; 2024 Gangstaa Studio. All rights reserved.
           </p>
         </div>
+        <div className="flex items-center justify-center ">
+          <p className="text-sm">Powered By </p>
+        </div>
+        <a
+          href="https://idevifysolutions.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="flex items-center justify-center">
+            <p className="text-sm my-2">Idevify Solutions Pvt Ltd</p>
+          </div>
+        </a>
       </footer>
     </>
   );
