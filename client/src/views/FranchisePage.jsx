@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaArrowDown } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-scroll";
 import Slider from "react-slick";
 
@@ -119,88 +120,44 @@ const FranchisePage = () => {
             Our Franchise Partners
           </motion.h2>
 
-          {/* Desktop View: Grid Display */}
-          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {franchiseModels.slice(0, showMore ? 6 : 4).map((model, index) => (
+          {/* Desktop View: Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {franchiseModels.slice(0, showMore ? 6 : 3).map((model, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-white p-6 shadow-lg rounded-lg"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white p-6 rounded-lg shadow-md"
               >
-                <h2 className="my-2 text-2xl font-bold text-gray-700">
-                  {model.city}
-                </h2>
-
                 <h3 className="text-xl font-semibold text-gray-800 mb-2">
                   {model.name}
                 </h3>
-                <p className="text-gray-600">{model.description}</p>
-
-                <p className="mt-4 text-gray-700">
-                  <strong>Address:</strong> {model.address}
+                <p className="text-gray-600 mb-4">{model.description}</p>
+                <p className="text-gray-500">
+                  <strong>Address: </strong>
+                  {model.address}, {model.city}
                 </p>
-
                 <div className="mt-4">
                   <iframe
                     src={model.embeddedMapLink}
                     width="100%"
                     height="200"
-                    frameBorder="0"
                     allowFullScreen=""
-                    aria-hidden="false"
-                    tabIndex="0"
+                    loading="lazy"
+                    title={`Location of ${model.name}`}
                   ></iframe>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Mobile View: Carousel Display */}
-          <Slider {...carouselSettings} className="md:hidden">
-            {franchiseModels.map((model, index) => (
-              <div key={index} className="p-4">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="bg-white p-6 shadow-lg rounded-lg"
-                >
-                  <h2 className="my-2 text-2xl font-bold text-gray-700">
-                    {model.city}
-                  </h2>
-
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                    {model.name}
-                  </h3>
-                  <p className="text-gray-600">{model.description}</p>
-                  <p className="mt-4 text-gray-700">
-                    <strong>Address:</strong> {model.address}
-                  </p>
-
-                  <div className="mt-4">
-                    <iframe
-                      src={model.embeddedMapLink}
-                      width="100%"
-                      height="200"
-                      frameBorder="0"
-                      allowFullScreen=""
-                      aria-hidden="false"
-                      tabIndex="0"
-                    ></iframe>
-                  </div>
-                </motion.div>
-              </div>
-            ))}
-          </Slider>
-
           {/* Show More Button */}
           {!showMore && (
             <div className="text-center mt-8">
               <button
                 onClick={() => setShowMore(true)}
-                className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800 transition duration-300"
+                className="bg-black text-white font-semibold py-2 px-4 rounded"
               >
                 Show More
               </button>
@@ -208,7 +165,6 @@ const FranchisePage = () => {
           )}
         </div>
       </section>
-
       {/* Contact Form Section */}
       <section id="contact-form" className="py-12 bg-gray-300">
         <div className="container mx-auto px-4">
@@ -222,6 +178,15 @@ const FranchisePage = () => {
           </motion.h2>
 
           {/* Add contact form here */}
+        </div>
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={() => setShowMore(true)}
+            className="bg-black text-white font-semibold py-4 px-4 rounded flex items-center justify-center space-x-2"
+          >
+            <FaWhatsapp className="text-white text-2xl" />
+            <span>Contact Us</span>
+          </button>
         </div>
       </section>
     </div>
