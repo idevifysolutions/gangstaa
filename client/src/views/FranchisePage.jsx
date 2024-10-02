@@ -180,13 +180,16 @@ const FranchisePage = () => {
           {/* Add contact form here */}
         </div>
         <div className="flex justify-center mt-8">
-          <button
-            onClick={() => setShowMore(true)}
-            className="bg-black text-white font-semibold py-4 px-4 rounded flex items-center justify-center space-x-2"
+          <a
+            href="https://wa.me/9373700515"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <FaWhatsapp className="text-white text-2xl" />
-            <span>Contact Us</span>
-          </button>
+            <button className="bg-black text-white font-semibold py-4 px-4 rounded flex items-center justify-center space-x-2">
+              <FaWhatsapp className="text-white text-2xl" />
+              <span>Contact Us</span>
+            </button>
+          </a>
         </div>
       </section>
     </div>
