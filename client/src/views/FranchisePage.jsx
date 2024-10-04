@@ -1,14 +1,10 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaArrowDown } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-scroll";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 
 const FranchisePage = () => {
-  const [showMore, setShowMore] = useState(false);
-
-  // Real franchise model data with Indian names and embedded map links
   const franchiseModels = [
     {
       name: "Aman Sharma",
@@ -122,7 +118,7 @@ const FranchisePage = () => {
 
           {/* Desktop View: Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {franchiseModels.slice(0, showMore ? 6 : 3).map((model, index) => (
+            {franchiseModels.map((model, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -151,18 +147,6 @@ const FranchisePage = () => {
               </motion.div>
             ))}
           </div>
-
-          {/* Show More Button */}
-          {!showMore && (
-            <div className="text-center mt-8">
-              <button
-                onClick={() => setShowMore(true)}
-                className="bg-black text-white font-semibold py-2 px-4 rounded"
-              >
-                Show More
-              </button>
-            </div>
-          )}
         </div>
       </section>
       {/* Contact Form Section */}
