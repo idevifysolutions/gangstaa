@@ -73,7 +73,7 @@ const Shipping = () => {
   });
   const { cartItems, total } = useSelector((state) => state.cartReducer);
 
-  console.log(cartItems)
+  console.log(cartItems);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -171,7 +171,7 @@ const Shipping = () => {
             type="submit"
             className="w-full text-white py-3 rounded-lg text-lg font-semibold bg-black transition"
           >
-            Pay Now
+            Proceed
           </button>
         </form>
       </motion.div>

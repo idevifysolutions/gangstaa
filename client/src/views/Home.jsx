@@ -29,7 +29,7 @@ const Home = () => {
     stock,
     quantity,
   }) => {
-    if (isAuth == null) {
+    if (isAuth === null) {
       // console.log(isAuth);
       // return <LoginPopUp />;
       return toast.error("Login Required");
