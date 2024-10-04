@@ -68,14 +68,7 @@ const App = () => {
           <Route path="/OfferPage" element={<OfferPage />} />
           <Route path="/FAQPage" element={<FAQPage />} />
 
-          <Route
-            path="/catagery"
-            element={
-              <ProtectedRoute>
-                <AllproductPage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/catagery" element={<AllproductPage />} />
 
           {/* <Route
             path="/catagery/MyOrder"
@@ -139,23 +132,16 @@ const App = () => {
               </AdminProtectedRoute>
             }
           /> */}
-          <Route
-            path="/franchise"
-            element={
-              <ProtectedRoute>
-                <FranchisePage />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/franchise" element={<FranchisePage />} />
 
           {/* Admin routes */}
 
           <Route
             path="/admin/dashboard"
             element={
-              <ProtectedRoute>
+              <AdminProtectedRoute>
                 <Dashboard />
-              </ProtectedRoute>
+              </AdminProtectedRoute>
             }
           />
 

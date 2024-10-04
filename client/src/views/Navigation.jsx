@@ -308,11 +308,14 @@ const Navigation = () => {
   const token = localStorage.getItem("token");
 
   const getAllUser = async () => {
-    const response = await axios.get(`${import.meta.env.VITE_SERVER}/api/user/me`, {
-      headers: {
-        token,
-      },
-    });
+    const response = await axios.get(
+      `${import.meta.env.VITE_SERVER}/api/user/me`,
+      {
+        headers: {
+          token,
+        },
+      }
+    );
 
     setIsAdmin(response.data.user.role);
   };
@@ -410,7 +413,7 @@ const Navigation = () => {
               <Link to="/cart">
                 <p className="relative flex items-center">
                   <FaShoppingCart className="w-6 h-6" />
-                  {cartItems.length > 0 && (
+                  {isAuth && cartItems.length > 0 && (
                     <span className="absolute right-0 flex items-center justify-center w-5 h-5 text-xs text-white bg-red-500 rounded-full bottom-5">
                       {cartItems.length}
                     </span>
@@ -526,18 +529,17 @@ const Navigation = () => {
               </Link>
 
               {/* Franchise Page Link */}
-              {isAuth && (
-                <Link
-                  to="/franchise"
-                  className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <MdAddBusiness className="w-6 h-6" />
-                  <span className="pl-2 font-semibold text-[18px] text-gray-500">
-                    Franchise
-                  </span>
-                </Link>
-              )}
+
+              <Link
+                to="/franchise"
+                className="flex items-center px-4 py-2 space-x-2 text-sm font-medium rounded-md hover:bg-gray-200"
+                onClick={() => setIsOpen(false)}
+              >
+                <MdAddBusiness className="w-6 h-6" />
+                <span className="pl-2 font-semibold text-[18px] text-gray-500">
+                  Franchise
+                </span>
+              </Link>
             </div>
 
             {isAuth ? (
