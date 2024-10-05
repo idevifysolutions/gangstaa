@@ -79,6 +79,33 @@ const FranchisePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="bg-black text-center py-4"
+      >
+        <div>
+          <h2 className="text-2xl font-bold text-white">
+            Special Franchise Offer - Limited Time Only!
+          </h2>
+          <p className="text-lg text-white mt-2">
+            Join our clothing franchise with a reduced setup fee. Apply today to
+            become a part of our rapidly growing network.
+          </p>
+        </div>
+
+        <div className="flex gap-5  m-auto justify-center items-center">
+          <p className="text-xl text-white mt-8">Franchise cost - 15 lakh</p>
+          <p className="text-xl text-white mt-8">
+            For 1st 10 customers- 12.5 lakh
+          </p>
+        </div>
+
+        <p className="text-2xl font-semibold m-2 text-white">
+          Interior, Stock, Franchise fee all inclusive above amount
+        </p>
+      </motion.div>
       {/* Company Info Section */}
       <section className="text-center py-12 bg-white">
         <motion.div

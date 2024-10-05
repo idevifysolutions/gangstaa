@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FadeLoader } from "react-spinners";
 
 const Loader = () => {
   return (
@@ -10,8 +11,10 @@ const Loader = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="flex flex-col items-center">
-        <div className="w-16 h-32 border-4 border-t-4 border-black border-solid rounded-full animate-spin"></div>
-        <p className="text-white mt-4 text-2xl">Loading...</p>
+        {/* <div className="w-16 h-32 border-4 border-t-4 border-black border-solid rounded-full animate-spin"></div> */}
+        <p className="text-white mt-4 text-2xl">
+          <FadeLoader />
+        </p>
       </div>
     </motion.div>
   );
