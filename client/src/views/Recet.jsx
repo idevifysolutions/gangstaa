@@ -4,6 +4,7 @@ import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+// Array of images for background animation
 const images = [
   "https://images.bewakoof.com/original/men-s-blue-den-printed-oversized-shirt-604442-1698919129-2.jpg",
   "https://thehouseofrare.com/cdn/shop/files/HERO_7c109915-b917-440a-a14a-5fe90a7571ef_765x.jpg?v=1710235193",
@@ -11,13 +12,14 @@ const images = [
   "https://images.bewakoof.com/t1080/men-s-blue-den-graphic-printed-oversized-shirt-604442-1721131088-1.jpg",
 ];
 
-const ForgotPassword = () => {
+const Recet = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
 
+  // Handle form submission for password update
   const handleUpdatePassword = async () => {
     if (newPassword !== confirmPassword) {
       alert("Passwords do not match");
@@ -25,22 +27,22 @@ const ForgotPassword = () => {
     }
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_SERVER}/api/user/forgot`,
+        `${import.meta.env.VITE_SERVER}/api/user/reset?token=${params.token}`,
         { newPassword }
       );
       console.log(response.data);
       navigate("/login");
-      // Handle successful password update
     } catch (error) {
       console.error(error);
-      // Handle error
     }
   };
 
+  // Toggle visibility for new password field
   const toggleNewPasswordVisibility = () => {
     setShowNewPassword((prevShowNewPassword) => !prevShowNewPassword);
   };
 
+  // Toggle visibility for confirm password field
   const toggleConfirmPasswordVisibility = () => {
     setShowConfirmPassword(
       (prevShowConfirmPassword) => !prevShowConfirmPassword
@@ -76,7 +78,11 @@ const ForgotPassword = () => {
           ))}
         </motion.div>
       </motion.div>
+      
+      {/* Dark Overlay */}
       <div className="absolute inset-0 z-10 bg-black opacity-50"></div>
+
+      {/* Reset Password Form */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -86,6 +92,7 @@ const ForgotPassword = () => {
         <h2 className="mb-4 text-2xl font-semibold text-center text-black">
           Reset Password
         </h2>
+        {/* New Password Field */}
         <div className="mb-4">
           <label className="block mb-2 text-black" htmlFor="newPassword">
             New Password
@@ -108,6 +115,8 @@ const ForgotPassword = () => {
             </div>
           </div>
         </div>
+
+        {/* Confirm Password Field */}
         <div className="mb-4">
           <label className="block mb-2 text-black" htmlFor="confirmPassword">
             Confirm Password
@@ -130,9 +139,11 @@ const ForgotPassword = () => {
             </div>
           </div>
         </div>
+
+        {/* Update Password Button */}
         <button
           onClick={handleUpdatePassword}
-          className="w-full px-4 py-2 text-xl text-white duration-200 bg-black bg-gradient-to-r from-primary to-secondary "
+          className="w-full px-4 py-2 text-xl text-white transition duration-200 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-md hover:from-indigo-700 hover:to-purple-700 focus:outline-none"
         >
           Update Password
         </button>
@@ -141,4 +152,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default Recet;
