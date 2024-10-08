@@ -99,7 +99,7 @@ export const sendForgotMail = async (subject, data) => {
       max-width: 600px;
     }
     h1 {
-      color: #5a2d82;
+      color: #111111;
     }
     p {
       color: #666666;
@@ -108,7 +108,7 @@ export const sendForgotMail = async (subject, data) => {
       display: inline-block;
       padding: 15px 25px;
       margin: 20px 0;
-      background-color: #5a2d82;
+      background-color: #111111;
       color: white;
       text-decoration: none;
       border-radius: 4px;
@@ -133,8 +133,8 @@ export const sendForgotMail = async (subject, data) => {
     <a href="${process.env.frontendurl}/reset-password/${data.token}" class="button">Reset Password</a>
     <p>If you did not request this, please ignore this email.</p>
     <div class="footer">
-      <p>Thank you,<br>Your Website Team</p>
-      <p><a href="https://yourwebsite.com">yourwebsite.com</a></p>
+      <p>Thank you,<br>Gangstaa Studio  Team</p>
+      <p><a href="https://gangstaastudio.com/">gangstaastudio.com/</a></p>
     </div>
   </div>
 </body>

@@ -8,7 +8,7 @@ import Footer from "./views/Footer";
 import Product_Details from "./views/ProductDetails/Product_Details";
 import LogIn from "./views/LogIn";
 import SignUp from "./views/SignUp";
-import ForgotPassword from "./views/ForgotPassword";
+import ForgotPassword from "./views/ForgotPass";
 import VerifyingOTP from "./views/VerifyingOTP";
 import AllproductPage from "./components/product/AllproductPage";
 import AdminProtectedRoute from "./components/AdminProtectedRoute";
@@ -23,7 +23,7 @@ import Shipping from "./views/Shipping";
 import Userprofile from "./components/templete/userprofile";
 import MyOrder from "./components/templete/MyOrder";
 import OrderItem from "./components/templete/OrderItem";
-
+import Recet from "./views/Recet";
 import Customers from "./views/admin/Customers";
 import Error from "./components/Errormsg/Error";
 import BarCharts from "./views/admin/charts/BarCharts";
@@ -48,7 +48,7 @@ const App = () => {
           <Route path="/aboutus" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/product/:id" element={<Product_Details />} />
-
+          <Route path="/reset-password/:token" element={<Recet />} />
           <Route
             path="/cart"
             element={
